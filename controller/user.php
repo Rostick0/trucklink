@@ -9,7 +9,7 @@ class UserController {
         $telephone = protectionData($telephone);
         $additional_telephone = protectionData($additional_telephone);
         $about = protectionData($about);
-        $activity_id = protectionData($activity_id);
+        $activity_id = (int) ($activity_id);
         $organization = protectionData($organization);
 
         $password = password_hash($password, PASSWORD_DEFAULT);
@@ -37,11 +37,15 @@ class UserController {
             ];
         }
 
-        // if (!empty($errors)) {
-        //     return $errors;
-        // }
+        if (!empty($errors)) {
+            return $errors;
+        }
 
         $id = User::create($email, $name, $telephone, $additional_telephone, $about, $activity_id, $organization);
+
+        if (!$id) {
+            return;
+        }
 
         $session_token = md5(time());
 
@@ -89,15 +93,15 @@ if (isset($_POST['registration_button'])) {
     $messengers = [
         [
             "name" => "viber",
-            "telephone" => $viber
+            "telephone" => protectionData($viber)
         ],
         [
             "name" => "whatsapp",
-            "telephone" => $whatsapp
+            "telephone" => protectionData($whatsapp)
         ],
         [
             "name" => "telegram",
-            "telephone" => $telegram
+            "telephone" => protectionData($telegram)
         ]
     ];
 

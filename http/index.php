@@ -21,6 +21,10 @@ $pages = [
     [
         "url" => "/cargo_full",
         "path" => "cargo_full.php"
+    ],
+    [
+        "url" => "/transport",
+        "path" => "transport.php"
     ]
 ];
 

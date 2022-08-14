@@ -1,4 +1,7 @@
 const BACKEND_URL = `http://backend/http`;
+const PATH_CONTENT = './source';
+const PATH_IMAGE = `${PATH_CONTENT}/img`
+const PATH_CONTENT_JS = `${PATH_CONTENT}/js/script.js`;
 
 const monthShort = [
     'янв',
@@ -18,7 +21,7 @@ const monthShort = [
 function throttle(func, ms) {
     let locked = false;
 
-    return function() {
+    return function () {
         if (locked) return
 
         const context = this;
@@ -38,10 +41,10 @@ function removeClass(elem, classCss) {
         elem.classList.remove(classCss);
     }
 }
- 
+
 function normalizeDate(date) {
     let result = date.slice(5);
-    result = result.slice(result.length - 2) + ' ' + monthShort[+result.slice(0, 2)-1];
+    result = result.slice(result.length - 2) + ' ' + monthShort[+result.slice(0, 2) - 1];
     return result;
 }
 
@@ -78,7 +81,11 @@ function select(selects) {
                 })
             }, 500);
         }
-    
+
+        // select.addEventListener("focusin", () => console.log(5), true);
+
+        // select.addEventListener("focusout", () => console.log(5), true)
+
         select.addEventListener('click', e => {
             if (e.target == selectInput) {
                 return;
@@ -91,14 +98,14 @@ function select(selects) {
             selectShow.classList.toggle('_active');
             arrow.classList.toggle('_active');
             selectList.classList.toggle('_show-flex');
-    
+
             if (!selectList.classList.contains('_show-flex')) {
                 selectList.classList.add('_hide');
             } else {
                 selectList.classList.remove('_hide');
             }
         })
-    
+
         select.querySelectorAll('._select__item').forEach(item => {
             item.addEventListener('click', e => {
                 selectShow.value = item.textContent.trim();
@@ -118,32 +125,90 @@ function select(selects) {
 
 select(selects);
 
-async function getApplications(listHtml, type) {
-    const list = listHtml;
+function asyncFilter(e, filter) {
+    e.preventDefault();
 
-    return await fetch(`${BACKEND_URL}/${type}`)
+    const filterFrom = filter.from;
+    const filterTo = filter.to;
+    const filterTransport_upload = filter.transport_upload.value;
+    const filterDateStart = filter.date_start.value;
+    const filterDateEnd = filter.date_end.value;
+    const filterPriceMin = filter.price_min.value;
+    const filterPriceMax = filter.price_max.value;
+    const filterVolumeMin = filter.volume_min.value;
+    const filterVolumeMax = filter.volume_max.value;
+    const filterMassMin = filter.mass_min.value;
+    const filterMassMax = filter.mass_max.value;
+
+    let filterFromCheked = filterFrom[[...filterFrom].findIndex(elem => elem.checked)];
+    let filterToCheked = filterTo[[...filterTo].findIndex(elem => elem.checked)];
+    filterFromCheked = filterFromCheked ? filterFromCheked.value : null;
+    filterToCheked = filterToCheked ? filterToCheked.value : null;
+
+    let queryParams = [
+        filterFromCheked ? `from=${filterFromCheked}` : null,
+        filterToCheked ? `to=${filterFromCheked}` : null,
+        filterTransport_upload ? `transport_upload=${filterFromCheked}` : null,
+        filterDateStart ? `date_start=${filterFromCheked}` : null,
+        filterDateEnd ? `date_end=${filterFromCheked}` : null,
+        filterPriceMin ? `price_min=${filterFromCheked}` : null,
+        filterPriceMax ? `price_max=${filterFromCheked}` : null,
+        filterVolumeMin ? `volume_min=${filterFromCheked}` : null,
+        filterVolumeMax ? `volume_max=${filterFromCheked}` : null,
+        filterMassMin ? `mass_min=${filterFromCheked}` : null,
+        filterMassMax ? `mass_max=${filterFromCheked}` : null
+    ];
+
+    queryParams = queryParams.filter(query => query != null);
+
+    queryParams = '?' + queryParams.join('&');
+
+    console.log(queryParams);
+
+    return queryParams;
+}
+
+function checkInputValue(elem) {
+    return elem ? elem.value : null;
+}
+
+async function getApplications(listHtml, type, queryParams = null) {
+    const list = listHtml;
+    list.innerHTML = "";
+
+    console.log(`${BACKEND_URL}/${type}/${queryParams}`)
+
+    fetch(`${BACKEND_URL}/${type}/${queryParams}`)
     .then(res => res.json())
-    .then(res => {
-        res.forEach(elem => {
-            list.innerHTML += `
+    .then(res => console.log(res))
+
+    return await fetch(`${BACKEND_URL}/${type}/${queryParams}`)
+        .then(res => res.json())
+        .then(res => {
+            if (!res) {
+                list.innerHTML = `<div class="text-center mt-1">Не найдено</div>`;
+            }
+            res.forEach(elem => {
+                list.innerHTML += `
                 <li class="service__item">
                     <div class="service__status status-recently"></div>
                     <div class="service__date">
                         ${normalizeDate(elem?.date_start)} - ${normalizeDate(elem?.date_end)}
                     </div>
                     <div class="service__way">
-                        <span class="service__way_item">
-                            <img src="img/flag_ukraine.png" alt="">
+                        <div class="service__way_item">
+                            <img src="${PATH_IMAGE}/${showFlag(elem?.from?.country)}" alt="">
                             <span>
-                                ${elem?.from?.country}, ${elem?.from?.city}
+                                ${elem?.from?.city}
                             </span>
-                        </span>
-                        <span class="service__way_item">
-                            <img src="img/flag_belarus.png" alt="">
+                        </div>
+                        <div class="service__way_item">
+                            
+                            <img src="${PATH_IMAGE}/${showFlag(elem?.from?.country)}" alt="">
                             <span>
-                            ${elem?.to?.country}, ${elem?.to?.city}
+                                ${elem?.to?.city}
                             </span>
-                        </span>
+                        </div>
                     </div>
                     <div class="service__payment">
                         Запрос цены
@@ -163,22 +228,130 @@ async function getApplications(listHtml, type) {
                     </a>
                 </li>
                 `;
+            })
         })
-    })
-    .catch(() => {
-        list.innerHTML = `<div class="text-center mt-1">Не найдено</div>`;
-    })
+        .catch(() => {
+            list.innerHTML = `<div class="text-center mt-1">Не найдено</div>`;
+        })
+}
+
+function showFlag(country) {
+    if (country == 'Россия') {
+        return 'flag_russia.png';
+    }
+
+    if (country == 'Казахстан') {
+        return 'flag_kazakhstan.png';
+    }
+
+    if (country == 'Белорусия') {
+        return 'flag_belarus.png';
+    }
+
+    if (country == 'Украина') {
+        return 'flag_ukraine.png';
+    }
 }
 
 let cargoList = document.querySelector('.cargo__list');
 let tranposrtList = document.querySelector('.transport__list');
 
+const filterButton = document.querySelector('.filter__button');
+
 if (cargoList) {
+    filterButton.onclick = e => {
+        e.preventDefault();
+    
+        const filter = document.querySelector('.filter');
+        const filterFrom = filter.from;
+        const filterTo = filter.to;
+        const filterTransport_upload = checkInputValue(filter.transport_upload);
+        const filterDateStart = checkInputValue(filter.date_start);
+        const filterDateEnd = checkInputValue(filter.date_end);
+        const filterUploadType = checkInputValue(filter.upload_type);
+        const filterPriceMin = checkInputValue(filter.price_min);
+        const filterPriceMax = checkInputValue(filter.price_max);
+        const filterVolumeMin = checkInputValue(filter.volume_min);
+        const filterVolumeMax = checkInputValue(filter.volume_max);
+        const filterMassMin = checkInputValue(filter.mass_min);
+        const filterMassMax = checkInputValue(filter.mass_max);
+    
+        let filterFromCheked = filterFrom[[...filterFrom].findIndex(elem => elem.checked)];
+        let filterToCheked = filterTo[[...filterTo].findIndex(elem => elem.checked)];
+        filterFromCheked = checkInputValue(filterFromCheked);
+        filterToCheked = checkInputValue(filterToCheked);
+    
+        let queryParams = [
+            filterFromCheked ? `from=${filterFromCheked}` : null,
+            filterToCheked ? `to=${filterToCheked}` : null,
+            filterTransport_upload ? `transport_upload=${filterTransport_upload}` : null,
+            filterDateStart ? `date_start=${filterDateStart}` : null,
+            filterDateEnd ? `date_end=${filterDateEnd}` : null,
+            filterUploadType ? `upload_type=${filterUploadType}` : null,
+            filterPriceMin ? `price_min=${filterPriceMin}` : null,
+            filterPriceMax ? `price_max=${filterPriceMax}` : null,
+            filterVolumeMin ? `volume_min=${filterVolumeMin}` : null,
+            filterVolumeMax ? `volume_max=${filterVolumeMax}` : null,
+            filterMassMin ? `mass_min=${filterMassMin}` : null,
+            filterMassMax ? `mass_max=${filterMassMax}` : null
+        ];
+    
+        queryParams = queryParams.filter(query => query != null);
+    
+        queryParams = '?' + queryParams.join('&');
+    
+        return getApplications(cargoList, 'cargo', queryParams);
+    };
+
     getApplications(cargoList, 'cargo');
 }
 
 if (tranposrtList) {
-    getApplications(tranposrtList, 'transport');
+    filterButton.onclick = e => {
+        e.preventDefault();
+    
+        const filter = document.querySelector('.filter');
+        const filterFrom = filter.from;
+        const filterTo = filter.to;
+        const filterTransport_upload = checkInputValue(filter.transport_upload);
+        const filterDateStart = checkInputValue(filter.date_start);
+        const filterDateEnd = checkInputValue(filter.date_end);
+        const filterUploadType = checkInputValue(filter.upload_type);
+        const filterPriceMin = checkInputValue(filter.price_min);
+        const filterPriceMax = checkInputValue(filter.price_max);
+        const filterVolumeMin = checkInputValue(filter.volume_min);
+        const filterVolumeMax = checkInputValue(filter.volume_max);
+        const filterMassMin = checkInputValue(filter.mass_min);
+        const filterMassMax = checkInputValue(filter.mass_max);
+    
+        let filterFromCheked = filterFrom[[...filterFrom].findIndex(elem => elem.checked)];
+        let filterToCheked = filterTo[[...filterTo].findIndex(elem => elem.checked)];
+        filterFromCheked = checkInputValue(filterFromCheked);
+        filterToCheked = checkInputValue(filterToCheked);
+    
+        let queryParams = [
+            filterFromCheked ? `from=${filterFromCheked}` : null,
+            filterToCheked ? `to=${filterToCheked}` : null,
+            filterTransport_upload ? `transport_upload=${filterTransport_upload}` : null,
+            filterDateStart ? `date_start=${filterDateStart}` : null,
+            filterDateEnd ? `date_end=${filterDateEnd}` : null,
+            filterUploadType ? `upload_type=${filterUploadType}` : null,
+            filterPriceMin ? `price_min=${filterPriceMin}` : null,
+            filterPriceMax ? `price_max=${filterPriceMax}` : null,
+            filterVolumeMin ? `volume_min=${filterVolumeMin}` : null,
+            filterVolumeMax ? `volume_max=${filterVolumeMax}` : null,
+            filterMassMin ? `mass_min=${filterMassMin}` : null,
+            filterMassMax ? `mass_max=${filterMassMax}` : null
+        ];
+    
+        queryParams = queryParams.filter(query => query != null);
+    
+        queryParams = '?' + queryParams.join('&');
+    
+        return getApplications(tranposrtList, 'transport', queryParams);
+    };
+
+    getApplications(tranposrtList, 'transport')
 }
 
 const searchCargo = document.querySelector('.search-cargo');
@@ -197,6 +370,52 @@ if (searchCargo && searchTransport && catalogIndex) {
         ApplicationListIndex.innerHTML = "";
         getApplications(ApplicationListIndex, 'cargo');
 
+        filterButton.onclick = e => {
+            e.preventDefault();
+        
+            const filter = document.querySelector('.filter');
+            const filterFrom = filter.from;
+            const filterTo = filter.to;
+            const filterTransport_upload = checkInputValue(filter.transport_upload);
+            const filterDateStart = checkInputValue(filter.date_start);
+            const filterDateEnd = checkInputValue(filter.date_end);
+            const filterUploadType = checkInputValue(filter.upload_type);
+            const filterPriceMin = checkInputValue(filter.price_min);
+            const filterPriceMax = checkInputValue(filter.price_max);
+            const filterVolumeMin = checkInputValue(filter.volume_min);
+            const filterVolumeMax = checkInputValue(filter.volume_max);
+            const filterMassMin = checkInputValue(filter.mass_min);
+            const filterMassMax = checkInputValue(filter.mass_max);
+        
+            let filterFromCheked = filterFrom[[...filterFrom].findIndex(elem => elem.checked)];
+            let filterToCheked = filterTo[[...filterTo].findIndex(elem => elem.checked)];
+            filterFromCheked = checkInputValue(filterFromCheked);
+            filterToCheked = checkInputValue(filterToCheked);
+        
+            let queryParams = [
+                filterFromCheked ? `from=${filterFromCheked}` : null,
+                filterToCheked ? `to=${filterToCheked}` : null,
+                filterTransport_upload ? `transport_upload=${filterTransport_upload}` : null,
+                filterDateStart ? `date_start=${filterDateStart}` : null,
+                filterDateEnd ? `date_end=${filterDateEnd}` : null,
+                filterUploadType ? `upload_type=${filterUploadType}` : null,
+                filterPriceMin ? `price_min=${filterPriceMin}` : null,
+                filterPriceMax ? `price_max=${filterPriceMax}` : null,
+                filterVolumeMin ? `volume_min=${filterVolumeMin}` : null,
+                filterVolumeMax ? `volume_max=${filterVolumeMax}` : null,
+                filterMassMin ? `mass_min=${filterMassMin}` : null,
+                filterMassMax ? `mass_max=${filterMassMax}` : null
+            ];
+        
+            queryParams = queryParams.filter(query => query != null);
+        
+            queryParams = '?' + queryParams.join('&');
+        
+            return getApplications(cargoList, 'cargo', queryParams);
+        };
+    
+        getApplications(cargoList, 'cargo');
+
         removeClass(searchTransport, '_active');
     })
 
@@ -205,6 +424,51 @@ if (searchCargo && searchTransport && catalogIndex) {
 
         indexPageTitle.textContent = "Недавно добавленный транспорт";
         ApplicationListIndex.innerHTML = "";
+
+        filterButton.onclick = e => {
+            e.preventDefault();
+        
+            const filter = document.querySelector('.filter');
+            const filterFrom = filter.from;
+            const filterTo = filter.to;
+            const filterTransport_upload = checkInputValue(filter.transport_upload);
+            const filterDateStart = checkInputValue(filter.date_start);
+            const filterDateEnd = checkInputValue(filter.date_end);
+            const filterUploadType = checkInputValue(filter.upload_type);
+            const filterPriceMin = checkInputValue(filter.price_min);
+            const filterPriceMax = checkInputValue(filter.price_max);
+            const filterVolumeMin = checkInputValue(filter.volume_min);
+            const filterVolumeMax = checkInputValue(filter.volume_max);
+            const filterMassMin = checkInputValue(filter.mass_min);
+            const filterMassMax = checkInputValue(filter.mass_max);
+        
+            let filterFromCheked = filterFrom[[...filterFrom].findIndex(elem => elem.checked)];
+            let filterToCheked = filterTo[[...filterTo].findIndex(elem => elem.checked)];
+            filterFromCheked = checkInputValue(filterFromCheked);
+            filterToCheked = checkInputValue(filterToCheked);
+        
+            let queryParams = [
+                filterFromCheked ? `from=${filterFromCheked}` : null,
+                filterToCheked ? `to=${filterToCheked}` : null,
+                filterTransport_upload ? `transport_upload=${filterTransport_upload}` : null,
+                filterDateStart ? `date_start=${filterDateStart}` : null,
+                filterDateEnd ? `date_end=${filterDateEnd}` : null,
+                filterUploadType ? `upload_type=${filterUploadType}` : null,
+                filterPriceMin ? `price_min=${filterPriceMin}` : null,
+                filterPriceMax ? `price_max=${filterPriceMax}` : null,
+                filterVolumeMin ? `volume_min=${filterVolumeMin}` : null,
+                filterVolumeMax ? `volume_max=${filterVolumeMax}` : null,
+                filterMassMin ? `mass_min=${filterMassMin}` : null,
+                filterMassMax ? `mass_max=${filterMassMax}` : null
+            ];
+        
+            queryParams = queryParams.filter(query => query != null);
+        
+            queryParams = '?' + queryParams.join('&');
+        
+            return getApplications(ApplicationListIndex, 'transport', queryParams);
+        };
+
         getApplications(ApplicationListIndex, 'transport');
 
         removeClass(searchCargo, '_active');
@@ -214,7 +478,7 @@ if (searchCargo && searchTransport && catalogIndex) {
 const modal = document.querySelector('.modal');
 
 // if (modal) {
-    
+
 // }
 
 const headerBurgerFixed = document.querySelector('.header__burger-fixed');
@@ -228,10 +492,12 @@ function headerBurger(headerBurgerFixed, headerBrgerActive, headerBurgerClose) {
 
     headerBrgerActive.addEventListener('click', () => {
         headerBurgerFixed.classList.add('_active');
+        document.body.style.overflowY = 'hidden';
     })
 
     headerBurgerClose.addEventListener('click', () => {
         removeClass(headerBurgerFixed, '_active');
+        document.body.style.overflowY = 'auto';
     })
 
     headerBurgerFixed.addEventListener('click', e => {
@@ -240,6 +506,7 @@ function headerBurger(headerBurgerFixed, headerBrgerActive, headerBurgerClose) {
         }
 
         removeClass(headerBurgerFixed, '_active');
+        document.body.style.overflowY = 'auto';
     })
 }
 
@@ -254,7 +521,7 @@ class Calendar {
         this.calendarYearRight = calendarHtml.querySelector('.calendar__year_right');
         this.calendarMonthLeft = calendarHtml.querySelector('.calendar__month_left');
         this.calendarMonthRight = calendarHtml.querySelector('.calendar__month_right');
-        this.daysHtml = calendarHtml.querySelectorAll('.calendar__day_item'); 
+        this.daysHtml = calendarHtml.querySelectorAll('.calendar__day_item');
         this.inputHtml = inputHtml;
         this.buttonShow = buttonShow;
         this.day = new Date().getDate();
@@ -313,7 +580,7 @@ class Calendar {
         }
 
         this.day = day;
-        this.inputHtml.value = `${this.year}-${this.month+1}-${day}`;
+        this.inputHtml.value = `${this.year}-${this.month + 1}-${day}`;
         // console.log(`${this.year}-${this.month+1}-${day}`);
         return this.render();
     }
@@ -340,7 +607,7 @@ class Calendar {
                 day += 7;
             }
 
-            this.daysHtml[i].textContent = new Date(this.year, this.month, i-day+2).getDate();
+            this.daysHtml[i].textContent = new Date(this.year, this.month, i - day + 2).getDate();
 
             removeClass(this.daysHtml[i], '_disabled');
 
@@ -358,7 +625,7 @@ class Calendar {
                 firstOne = false;
             }
 
-            if (this.daysHtml[i-1] && +this.daysHtml[i-1].textContent > +this.daysHtml[i].textContent && !firstOne) {
+            if (this.daysHtml[i - 1] && +this.daysHtml[i - 1].textContent > +this.daysHtml[i].textContent && !firstOne) {
                 disabled = true;
             }
 
@@ -377,7 +644,7 @@ class Calendar {
             }
         });
     }
-    
+
     start() {
         this.render();
 
@@ -390,13 +657,16 @@ class Calendar {
     }
 }
 
-if (document.querySelector('.calendar')) {
-    const calendarStart = new Calendar(document.querySelector('.calendar'), document.querySelector('.date_start__input'), document.querySelector('.input-form__calendar'));
+const calendarFirst = document.querySelector('.calendar');
+const calendarSecond = document.querySelectorAll('.calendar')[1];
+
+if (calendarFirst) {
+    const calendarStart = new Calendar(calendarFirst, document.querySelector('.date_start__input'), document.querySelector('.input-form__calendar'));
     calendarStart.start();
 }
 
-if (document.querySelectorAll('.calendar')[1]) {
-    const calendarEnd = new Calendar(document.querySelectorAll('.calendar')[1], document.querySelector('.date_end__input'), document.querySelectorAll('.input-form__calendar')[1]);
+if (calendarSecond) {
+    const calendarEnd = new Calendar(calendarSecond, document.querySelector('.date_end__input'), document.querySelectorAll('.input-form__calendar')[1]);
     calendarEnd.start();
 }
 
@@ -414,11 +684,59 @@ if (loginButton) {
         return loginButton.disabled = !(inputAcceptableLength(login, 5) && inputAcceptableLength(password, 5))
     }
 
-    login.oninput = function() {
+    login.oninput = function () {
         setDisabledButton();
     }
 
-    password.oninput = function() {
+    password.oninput = function () {
         setDisabledButton();
     }
 }
+
+document.body.addEventListener('click', e => {
+    if (selects) {
+        selects.forEach(select => {
+            const selectShow = select.querySelector('._select__show');
+            const selectArrow = select.querySelector('._select__arrow');
+            const selectList = select.querySelector('._select__list');
+
+            if (e.target == selectShow) {
+                return;
+            }
+
+            if (e.target == selectArrow) {
+                return;
+            }
+
+            if (selectShow.classList.contains('_active')) {
+                selectShow.classList.remove('_active');
+                selectArrow.classList.remove('_active');
+            }
+
+            if (selectList.classList.contains('_show-flex')) {
+                selectList.classList.remove('_show-flex');
+                selectList.classList.add('_hide');
+            }
+        })
+    }
+
+    // if (calendarFirst && calendarSecond) {
+    //     const сalendarForm = document.querySelectorAll('.calendar-form');
+
+    //     сalendarForm.forEach(form => {
+    //         const calendar = form.querySelector('.calendar');
+    //         const buttonCalendar = form.querySelector('.input-form__calendar.button-dark');
+    //         const buttonSvg = buttonCalendar.querySelector('svg');
+
+    //         console.log(e.target)
+
+    //         if (e.target == buttonCalendar || e.target == buttonSvg) {
+    //             return;
+    //         }
+
+    //         if (calendar.classList.contains('display-block')) {
+    //             calendar.classList.remove('display-block');
+    //         }
+    //     })
+    // }
+}, false)

@@ -49,7 +49,7 @@ $citiesAll = City::getWithCountry();
                                         <label class="label__for-input_mobile" for="from">
                                             Откуда
                                         </label>
-                                        <div class="_select">
+                                        <div class="_select z-index-20">
                                             <div class="_select__block">
                                                 <input type="text" class="_select__show input" placeholder="Адрес" id="from" disabled>
                                                 <svg class="_select__arrow" width="13" height="8" viewBox="0 0 13 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -65,7 +65,7 @@ $citiesAll = City::getWithCountry();
                                                     echo '
                                                         <li class="_select__item">
                                                         <label for="city_from_' . $value['city_id'] . '">
-                                                            ' . $value['country'] . ', ' . $value['name'] . '
+                                                            ' . $value['country'] . ', ' . $value['city'] . '
                                                             <input name="from" type="radio" id="city_from_' . $value['city_id'] . '" value="' . $value['city_id'] . '" hidden>
                                                         </label>
                                                         </li>
@@ -77,7 +77,7 @@ $citiesAll = City::getWithCountry();
                                         <label class="label__for-input_mobile" for="to">
                                             Куда
                                         </label>
-                                        <div class="_select">
+                                        <div class="_select z-index-16">
                                             <div class="_select__block">
                                                 <input type="text" class="_select__show input" placeholder="Адрес" id="to" disabled>
                                                 <svg class="_select__arrow" width="13" height="8" viewBox="0 0 13 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -93,7 +93,7 @@ $citiesAll = City::getWithCountry();
                                                     echo '
                                                         <li class="_select__item">
                                                         <label for="city_to_' . $value['city_id'] . '">
-                                                            ' . $value['country'] . ', ' . $value['name'] . '
+                                                            ' . $value['country'] . ', ' . $value['city'] . '
                                                             <input name="to" type="radio" id="city_to_' . $value['city_id'] . '" value="' . $value['city_id'] . '" hidden>
                                                         </label>
                                                         </li>
@@ -108,7 +108,7 @@ $citiesAll = City::getWithCountry();
                                     <div class="information-basic__input-form input-form">
                                         <label class="label__for-input" for="">Дата загрузки</label>
                                         <div class="filter__small-inputs">
-                                            <div class="input-from__calendar-form">
+                                            <div class="calendar-form">
                                                 <input type="text" class="input date_start__input" placeholder="От" name="date_start">
                                                 <div class="input-form__calendar button-dark">
                                                     <svg width="34" height="37" viewBox="0 0 34 37" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -215,7 +215,7 @@ $citiesAll = City::getWithCountry();
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <div class="input-from__calendar-form">
+                                            <div class="calendar-form">
                                                 <input type="text" class="input date_end__input" placeholder="До" name="date_end">
                                                 <div class="input-form__calendar button-dark">
                                                     <svg width="34" height="37" viewBox="0 0 34 37" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -329,7 +329,7 @@ $citiesAll = City::getWithCountry();
                                     <label class="label__for-input" for="transport_upload">
                                         Тип транспорта
                                     </label>
-                                    <div class="_select">
+                                    <div class="_select z-index-12">
                                         <div class="_select__block">
                                             <input type="text" class="_select__show input" id="transport_upload" placeholder="Выберите из списка" disabled>
                                             <svg class="_select__arrow" width="13" height="8" viewBox="0 0 13 8" fill="none" xmlns="http://www.w3.org/2000/svg">

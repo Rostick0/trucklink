@@ -5,7 +5,6 @@ $limit = parseIntGet('limit');
 $from = parseIntGet('from');
 $to = parseIntGet('to');
 $transport_upload = parseIntGet('transport_upload');
-$upload_type = parseIntGet('upload_type');
 $date_start = parseStrGet('date_start');
 $date_end = parseStrGet('date_end');
 $price_min = parseIntGet('price_min');
@@ -25,10 +24,6 @@ if ($to) {
 
 if ($transport_upload) {
     $transport_upload = "AND `transport_upload`.`transport_upload_id` = '$transport_upload'";
-}
-
-if ($upload_type) {
-    $upload_type = "AND `application`.`upload_type_id` = '$upload_type'";
 }
 
 if ($date_start) {
@@ -65,13 +60,13 @@ if ($mass_max) {
 
 $where_params = "$from $to $date_start $date_end $transport_upload $price_min $price_max $volume_min $volume_max $mass_min $mass_max";
 
-$cargos = Application::getHttp(1, $offset, $limit, $where_params);
+$transports = Application::getHttp(2, $offset, $limit, $where_params);
 $result = [];
 
-foreach ($cargos as $cargo) {
-    $cargo['from'] = City::getWithCountryOne($cargo['from']);
-    $cargo['to'] = City::getWithCountryOne($cargo['to']);
-    $result[] = $cargo;
+foreach ($transports as $transport) {
+    $transport['from'] = City::getWithCountryOne($transport['from']);
+    $transport['to'] = City::getWithCountryOne($transport['to']);
+    $result[] = $transport;
 }
 
 echo json_encode($result);

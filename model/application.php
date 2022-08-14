@@ -14,7 +14,7 @@ class Application {
         return $cargo->fetch_assoc();
     }
 
-    static public function getHttp($type = 1, $offset = null, $limit = null) {
+    static public function getHttp($type = 1, $offset = null, $limit = null, $where_params = null) {
         // 1 - cargo, 2 - transport
         global $mysqli;
 
@@ -26,7 +26,11 @@ class Application {
             $offset = "AND `application_id` > '$offset'";
         }
     
-        $cargo = $mysqli->query("SELECT `application`.`application_id`, `application`.`date_start`, `application`.`date_end`, `application`.`from`, `application`.`to`, `transport_upload`.`name` as `transport` FROM `application`, `transport_upload` WHERE `application`.`transport_upload_id` = `transport_upload`.`transport_upload_id` AND `application_type_id` = '$type' $offset $limit");
+        $cargo = $mysqli->query("SELECT 
+        `application`.`application_id`, `application`.`date_start`, `application`.`date_end`, `application`.`from`, `application`.`to`, `transport_upload`.`name` as `transport` 
+        FROM `application`, `transport_upload`,`application_info`
+        WHERE `application`.`transport_upload_id` = `transport_upload`.`transport_upload_id` AND `application_info`.`application_id` = `application`.`application_id`
+        AND `application_type_id` = '$type' $offset $where_params ORDER BY `application`.`application_id` DESC $limit");
         return $cargo;
     }
 
