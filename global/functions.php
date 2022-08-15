@@ -16,8 +16,4 @@ function parseStrGet($value) {
     return $_GET[$value] ? protectionData($_GET[$value]) : NULL;
 }
 
-function parseBooleanGet($value) {
-    return $_GET[$value] ? (boolean) $_GET[$value] : NULL;
-}
-
 ?>

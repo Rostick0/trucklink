@@ -42,11 +42,25 @@ function removeClass(elem, classCss) {
     }
 }
 
-function normalizeDate(date) {
+function normalizeDate(date, haveYear = false) {
     let result = date.slice(5);
     result = result.slice(result.length - 2) + ' ' + monthShort[+result.slice(0, 2) - 1];
+    
+    if (haveYear) {
+        result = ' ' + date.substr(date.length - 4);
+    }
+
     return result;
 }
+
+function normalizeDateSql(date) {
+    let result = date.split(' ');
+    result = `${result[2]}-${monthShort.indexOf(result[1])+1}-${result[0]}`;
+
+    return result;
+}
+
+
 
 const selects = document.querySelectorAll('._select');
 
@@ -185,7 +199,7 @@ async function getApplications(listHtml, type, queryParams = null) {
     return await fetch(`${BACKEND_URL}/${type}/${queryParams}`)
         .then(res => res.json())
         .then(res => {
-            if (!res) {
+            if (!res[0]) {
                 list.innerHTML = `<div class="text-center mt-1">Не найдено</div>`;
             }
             res.forEach(elem => {
@@ -285,8 +299,8 @@ if (cargoList) {
             filterFromCheked ? `from=${filterFromCheked}` : null,
             filterToCheked ? `to=${filterToCheked}` : null,
             filterTransport_upload ? `transport_upload=${filterTransport_upload}` : null,
-            filterDateStart ? `date_start=${filterDateStart}` : null,
-            filterDateEnd ? `date_end=${filterDateEnd}` : null,
+            filterDateStart ? `date_start=${normalizeDateSql(filterDateStart)}` : null,
+            filterDateEnd ? `date_end=${normalizeDateSql(filterDateEnd)}` : null,
             filterUploadType ? `upload_type=${filterUploadType}` : null,
             filterPriceMin ? `price_min=${filterPriceMin}` : null,
             filterPriceMax ? `price_max=${filterPriceMax}` : null,
@@ -556,6 +570,7 @@ class Calendar {
             this.month -= 1;
 
             if (this.month < 0) {
+                this.year -= 1
                 this.month = 11;
             }
 
@@ -567,6 +582,7 @@ class Calendar {
         this.calendarMonthRight.addEventListener('click', () => {
             this.month += 1;
             if (this.month > 11) {
+                this.year += 1
                 this.month = 0;
             }
 
@@ -580,8 +596,8 @@ class Calendar {
         }
 
         this.day = day;
-        this.inputHtml.value = `${this.year}-${this.month + 1}-${day}`;
-        // console.log(`${this.year}-${this.month+1}-${day}`);
+        this.inputHtml.value = `${day} ${monthShort[this.month]} ${this.year}`;
+        removeClass(this.calendarHtml, 'display-block');
         return this.render();
     }
 

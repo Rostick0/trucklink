@@ -1,6 +1,10 @@
 <?
 
 function getSession($session_token) {
+    if (!$session_token) {
+        return;
+    }
+
     $session = Model::get('authorization', 'session_token', "$session_token");
 
     if ($session) {
@@ -10,7 +14,4 @@ function getSession($session_token) {
 
 session_start();
 
-// if (!$_SESSION['user']['id']) {
-//     getSession($_COOKIE["session_token"]);
-// }
 ?>

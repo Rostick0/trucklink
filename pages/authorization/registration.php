@@ -24,19 +24,43 @@
                         <label class="label__for-input" for="user_email">
                             Email адрес *
                         </label>
-                        <input class="registration__input input" type="email" placeholder="Введите почтовый ящик" id="user_email" name="user_email">
+                        <?
+                            if ($_SESSION['error_email']) {
+                                echo '<input class="registration__input input error-input" type="email" placeholder="Введите почтовый ящик" id="user_email" name="user_email">
+                                        <div class="error">' . $_SESSION['error_email'] . '</div>';
+                                $_SESSION['error_email'] = null;
+                            } else {
+                                echo '<input class="registration__input input" type="email" placeholder="Введите почтовый ящик" id="user_email" name="user_email">';
+                            }
+                        ?>
                     </div>
                     <div class="registration__input-form input-form">
                         <label class="label__for-input" for="user_telephone">
                             Телефон *
                         </label>
-                        <input class="registration__input input" type="tel" placeholder="Введите телефон" id="user_telephone" name="user_telephone">
+                        <?
+                            if ($_SESSION['error_telephone']) {
+                                echo '<input class="registration__input input error-input" type="tel" placeholder="Введите телефон" id="user_telephone" name="user_telephone">
+                                        <div class="error">' . $_SESSION['error_telephone'] . '</div>';
+                                $_SESSION['error_telephone'] = null;
+                            } else {
+                                echo '<input class="registration__input input" type="tel" placeholder="Введите телефон" id="user_telephone" name="user_telephone">';
+                            }
+                        ?>
                     </div>
                     <div class="registration__input-form input-form">
                         <label class="label__for-input" for="user_login">
                             Логин *
                         </label>
-                        <input class="registration__input input" type="text" placeholder="Придумайте логин" id="user_login" name="user_login">
+                        <?
+                            if ($_SESSION['error_login']) {
+                                echo '<input class="registration__input input error-input" type="text" placeholder="Придумайте логин" id="user_login" name="user_login">
+                                        <div class="error">' . $_SESSION['error_login'] . '</div>';
+                                $_SESSION['error_login'] = null;
+                            } else {
+                                echo '<input class="registration__input input" type="text" placeholder="Придумайте логин" id="user_login" name="user_login">';
+                            }
+                        ?>
                     </div>
                     <div class="registration__input-form input-form">
                         <label class="label__for-input" for="user_name">
@@ -48,7 +72,15 @@
                         <label class="label__for-input" for="user_password">
                             Пароль *
                         </label>
-                        <input class="registration__input input" type="password" placeholder="Придумайте пароль" id="user_password" name="user_password">
+                        <?
+                            if ($_SESSION['error_password']) {
+                                echo '<input class="registration__input input error-input" type="password" placeholder="Придумайте пароль" id="user_password" name="user_password">
+                                        <div class="error">' . $_SESSION['error_password'] . '</div>';
+                                $_SESSION['error_password'] = null;
+                            } else {
+                                echo '<input class="registration__input input" type="password" placeholder="Придумайте пароль" id="user_password" name="user_password">';
+                            }
+                        ?>
                     </div>
                     <div class="registration__input-form input-form">
                         <label class="label__for-input" for="user_password_confirm">

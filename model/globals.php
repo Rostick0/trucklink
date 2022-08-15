@@ -1,7 +1,7 @@
 <?
 
 class Model {
-    static public function count($table, $column, $value) {
+    static public function count($table, $column = null, $value = null) {
         global $mysqli;
 
         if ($column && $value) {

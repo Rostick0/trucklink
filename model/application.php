@@ -22,16 +22,16 @@ class Application {
             $limit = "LIMIT $limit";
         }
 
-        if ($offset) {
-            $offset = "AND `application_id` > '$offset'";
+        if ($offset && $limit) {
+            $limit .= " OFFSET $offset";
         }
     
-        $cargo = $mysqli->query("SELECT 
+        $query = $mysqli->query("SELECT 
         `application`.`application_id`, `application`.`date_start`, `application`.`date_end`, `application`.`from`, `application`.`to`, `transport_upload`.`name` as `transport` 
         FROM `application`, `transport_upload`,`application_info`
         WHERE `application`.`transport_upload_id` = `transport_upload`.`transport_upload_id` AND `application_info`.`application_id` = `application`.`application_id`
-        AND `application_type_id` = '$type' $offset $where_params ORDER BY `application`.`application_id` DESC $limit");
-        return $cargo;
+        AND `application_type_id` = '$type' $where_params ORDER BY `application`.`application_id` DESC $limit");
+        return $query;
     }
 
     static public function create($price, $from, $to, $transport_upload_id, $upload_type_id, $application_type_id, $is_any_direction, $date_start, $date_end, $user_id, $volume, $weight, $length, $width, $height, $description) {

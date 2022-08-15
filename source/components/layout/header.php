@@ -55,17 +55,17 @@ function renderHeader($title) {
                             </div>
                             <ul class="header__burger-fixed_menu menu__list">
                                 <li class="menu__item">
-                                    <a class="menu__link _active" href="">
+                                    <a class="menu__link ' . ($_SERVER["REQUEST_URI"] == "/" ? '_active' : null) . '" href="/">
                                         Главная
                                     </a>
                                 </li>
                                 <li class="menu__item">
-                                    <a class="menu__link" href="">
+                                    <a class="menu__link ' . ($_SERVER["REQUEST_URI"] == "/cargo" ? '_active' : null) . '" href="cargo">
                                         Грузы
                                     </a>
                                 </li>
                                 <li class="menu__item">
-                                    <a class="menu__link" href="">
+                                    <a class="menu__link ' . ($_SERVER["REQUEST_URI"] == "/transport" ? '_active' : null) . '" href="transport">
                                         Транспорт
                                     </a>
                                 </li>
@@ -80,7 +80,7 @@ function renderHeader($title) {
                                     </a>
                                 </li>
                                 <li class="menu__item">
-                                    <a class="menu__link" href="">
+                                    <a class="menu__link ' . ($_SERVER["REQUEST_URI"] == "/support" ? '_active' : null) . '" href="support">
                                         Поддержка
                                     </a>
                                 </li>
@@ -122,4 +122,5 @@ function renderHeader($title) {
             </div>
         </header>';
 }
+
 ?>

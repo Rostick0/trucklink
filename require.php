@@ -4,8 +4,12 @@ require_once './controller/session.php';
 
 require_once './include/connect.php';
 
-require_once './controller/globals.php';
 require_once './model/globals.php';
+
+require_once './global/vars.php';
+require_once './global/functions.php';
+
+require_once './router/router.php';
 
 require_once './model/user_activity.php';
 require_once './controller/user_activity.php';
@@ -30,20 +34,17 @@ require_once './model/authorization_session.php';
 
 require_once './model/application.php';
 require_once './controller/application.php';
-require_once './controller/application_search.php';
 
 require_once './source/components/layout/header.php';
 require_once './source/components/layout/footer.php';
 require_once './source/components/UI/navigation_top.php';
 
-require_once './router/router.php';
+require_once './hooks/session.php';
 
 if ($_GET['http']) {
     require_once "./http/index.php";
 } else {
     require_once './pages/require_page.php';
 }
-
-//getSession('5b4d9a417f4cb25f0a8eb6bcc106aac7');
 
 ?>

@@ -18,6 +18,10 @@ class Router
 
         require_once "./$type/index.php";
     }
+
+    function location($url) {
+        return header("Location: ./$url");
+    }
 }
 
 ?>

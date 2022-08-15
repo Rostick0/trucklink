@@ -25,6 +25,10 @@ $pages = [
     [
         "url" => "/transport",
         "path" => "transport.php"
+    ],
+    [
+        "url" => "/count",
+        "path" => "count.php"
     ]
 ];
 

@@ -5,52 +5,52 @@ class AuthorizationController {
         $login = protectionData($login);
         $password = protectionData($password);
 
-        $errors = [];
+        $error = false;
 
         $authorization = Model::get('authorization', 'login', $login);
 
         if (!$authorization) {
-            $errors[] = [
-                'type' => 'login',
-                'error' => 'Данного аккаунта не существует'
-            ];
+            $_SESSION['error_login'] = "Данного аккаунта не существует";
+
+            $error = true;
         }
 
         $password_hash = $authorization['password'];
 
-        if (password_verify($password, $password_hash)) {
-            $errors[] = [
-                'type' => 'password',
-                'error' => 'Неправильный пароль'
-            ];
+        if (!password_verify($password, $password_hash)) {
+            $_SESSION['error_password'] = "Неправильный пароль";
+
+            $error = true;
         }
 
-        if ($_SESSION['authorization_lock'] > 3) {
+        if ($_SESSION['authorization_lock'] > 5) {
             if (!$_SESSION['authorization_lock_time']) {
-                $_SESSION['authorization_lock_time'] = $_SERVER['REQUEST_TIME'] + 600; 
+                $_SESSION['authorization_lock_time'] = $_SERVER['REQUEST_TIME'] + 300;
             }
             
             if ($_SESSION['authorization_lock_time'] > $_SERVER['REQUEST_TIME']) {
-                $errors[] = [
-                    'type' => 'lock',
-                    'error' => 'Неправильный пароль'
-                ];
+                $_SESSION['error_login'] = "Попробуйте войти через 5 минут";
+
+                $error = true;
             }
         }
 
-        if (!empty($errors)) {
+        if ($error) {
             $_SESSION['authorization_lock'] += 1;
-            $_SESSION['authorization'] = $errors;
             return;
         }
 
-        $_SESSION['authorization'] = null;
-
-        $session_token = $authorization['session_token'];
+        $_SESSION['error_login'] = null;
+        $_SESSION['error_password'] = null;
 
         $_SESSION['user']['id'] = $authorization['user_id'];
 
+        AuthorizationSession::create($_SERVER['REMOTE_HOST'], $_SERVER['HTTP_USER_AGENT'], $authorization['user_id']);
+
+        Router::location("profile?id={$authorization['user_id']}");
+
         if ($is_remembered) {
+            $session_token = $authorization['session_token'];
             setcookie("session_token", $session_token, time()+ 60 * 60 * 24 * 30);
         }
     }

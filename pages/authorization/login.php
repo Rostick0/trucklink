@@ -24,10 +24,10 @@
                                     Логин
                                 </label>
                                 <?
-                                    if ($_SESSION['authorization'][0]['type'] === 'login') {
+                                    if ($_SESSION['error_login']) {
                                         echo '<input class="login__input input error-input" type="text" placeholder="Введеите логин" id="login" name="login">
-                                                <div class="error">' . $_SESSION['authorization'][0]['error'] . '</div>';
-                                        $_SESSION['authorization'] = null;
+                                                <div class="error">' . $_SESSION['error_login'] . '</div>';
+                                                $_SESSION['error_login'] = null;
                                     } else {
                                         echo '<input class="login__input input" type="text" placeholder="Введеите логин" id="login" name="login">';
                                     }
@@ -38,10 +38,10 @@
                                     Пароль
                                 </label>
                                 <?
-                                    if ($_SESSION['authorization'][0]['type'] === 'password') {
+                                    if ($_SESSION['error_password']) {
                                         echo '<input class="login__input input error-input" type="password" placeholder="Введеите пароль" id="password" name="password">
-                                                <div class="error">' . $_SESSION['authorization'][0]['error'] . '</div>';
-                                        $_SESSION['authorization'] = null;
+                                                <div class="error">' . $_SESSION['error_password'] . '</div>';
+                                        $_SESSION['error_password'] = null;
                                     } else {
                                         echo '<input class="login__input input" type="password" placeholder="Введеите пароль" id="password" name="password">';
                                     }

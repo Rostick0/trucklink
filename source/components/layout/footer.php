@@ -20,12 +20,12 @@ function renderFooter() {
                                     </a>
                                 </li>
                                 <li class="footer__navigation_item">
-                                    <a class="footer__navigation_href" href="">
+                                    <a class="footer__navigation_href" href="cargo">
                                         Грузы
                                     </a>
                                 </li>
                                 <li class="footer__navigation_item">
-                                    <a class="footer__navigation_href" href="">
+                                    <a class="footer__navigation_href" href="transport">
                                         Транспорт
                                     </a>
                                 </li>
@@ -40,9 +40,11 @@ function renderFooter() {
                                     </a>
                                 </li>
                             </ul>
-                            <button class="footer__feedback_button button-yellow">
-                                Связаться с нами
-                            </button>
+                            <a href="support">
+                                <button class="footer__feedback_button button-yellow">
+                                    Связаться с нами
+                                </button>
+                            </a>
                         </div>
                     </div>
                 </div>

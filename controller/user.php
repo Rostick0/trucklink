@@ -1,9 +1,10 @@
 <?
 
 class UserController {
-    public static function create($login, $password, $email, $name, $telephone, $additional_telephone, $about, $activity_id, $organization, $messengers, $img) {
+    public static function create($login, $password, $email, $name, $telephone, $additional_telephone, $about, $activity_id, $organization, $messengers, $img, $password_confirm) {
         $login = protectionData($login);
         $password = protectionData($password);
+        $password_confirm = protectionData($password_confirm);
         $email = protectionData($email);
         $name = protectionData($name);
         $telephone = protectionData($telephone);
@@ -12,34 +13,41 @@ class UserController {
         $activity_id = (int) ($activity_id);
         $organization = protectionData($organization);
 
-        $password = password_hash($password, PASSWORD_DEFAULT);
-
-        $errors = [];
+        $error = false;
 
         if (strlen($login) < 3) {
-            $errors[] = [
-                'type' => 'login',
-                'error' => 'Логин меньше 3 символов'
-            ];
+            $_SESSION['error_login'] = "Логин меньше 3 символов";
+            $error = true;
+        } else if (Model::count('authorization', 'login', $login) != 0) {
+            $_SESSION['error_login'] = "Логин уже существует";
+            $error = true;
         }
 
         if (strlen($password) < 5) {
-            $errors[] = [
-                'type' => 'login',
-                'error' => 'Пароль меньше 5 символов'
-            ];
+            $_SESSION['error_password'] = "Пароль меньше 5 символов";
+            $error = true;
         }
 
-        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errors[] = [
-                'type' => 'login',
-                'error' => 'Пароль меньше 5 символов'
-            ];
+        if ($password != $password_confirm) {
+            $_SESSION['error_password'] = "Пароли не совпадают";
+            $error = true;
         }
 
-        if (!empty($errors)) {
-            return $errors;
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['error_email'] = "Неправильная почта";
+            $error = true;
         }
+
+        // if (!preg_match("", $telephone)) {
+        //     $_SESSION['error_telephone'] = "Неправильный телефон";
+        //     $error = true;
+        // }
+
+        if ($error) {
+            return $error;
+        }
+
+        $password = password_hash($password, PASSWORD_DEFAULT);
 
         $id = User::create($email, $name, $telephone, $additional_telephone, $about, $activity_id, $organization);
 
@@ -61,6 +69,8 @@ class UserController {
 
         $_SESSION['user']['id'] = $id;
 
+        AuthorizationSession::create($_SERVER['REMOTE_HOST'], $_SERVER['HTTP_USER_AGENT'], $id);
+
         setcookie("session_token", $session_token, time()+ 60 * 60 * 24 * 30);
         
         if (!$messengers) {
@@ -68,8 +78,12 @@ class UserController {
         }
 
         foreach ($messengers as $messenger) {
-            UserMessenger::create($messenger['name'], $messenger['telephone'], $id);
+            if ($messenger['telephone']) {
+                UserMessenger::create($messenger['name'], $messenger['telephone'], $id);
+            }
         }
+
+        Router::location("profile?id=$id");
     }
 }
 
@@ -79,6 +93,7 @@ if (isset($_POST['registration_button'])) {
     $login = $_REQUEST['user_login'];
     $name = $_REQUEST['user_name'];
     $password = $_REQUEST['user_password'];
+    $password_confirm = $_REQUEST['user_password_confirm'];
     $about = $_REQUEST['user_about'];
     $organization = $_REQUEST['user_organization'];
     $telephone_second = $_REQUEST['user_telephone_second'];
@@ -105,6 +120,6 @@ if (isset($_POST['registration_button'])) {
         ]
     ];
 
-    UserController::create($login, $password, $email, $name, $telephone, $telephone_second, $about, $activity, $organization, $messengers, $certificate);
+    UserController::create($login, $password, $email, $name, $telephone, $telephone_second, $about, $activity, $organization, $messengers, $certificate, $password_confirm);
 }
 ?>
