@@ -45,7 +45,7 @@ if ($cargo['application_type_id'] == 2) {
                                             </span>
                                         </li>
                                         <li class="hint__item">
-                                            <div class="hint__status recently-24h"></div>
+                                            <div class="hint__status status-24h"></div>
                                             <span>
                                                 Добавлены более 24ч назад
                                             </span>
@@ -76,13 +76,13 @@ if ($cargo['application_type_id'] == 2) {
                                     Откуда - куда
                                 </li>
                                 <li class="table__service_name">
-                                    Оплата
+                                    Тип загрузки
                                 </li>
                                 <li class="table__service_name">
                                     Транспорт
                                 </li>
                                 <li class="table__service_name">
-                                    Тип груза
+                                    Подробнее
                                 </li>
                                 <li class="table__service_name">
                                     Контакты

@@ -50,7 +50,7 @@ $citiesAll = City::getWithCountry();
                                         </span>
                                     </li>
                                     <li class="hint__item">
-                                        <div class="hint__status recently-24h"></div>
+                                        <div class="hint__status status-24h"></div>
                                         <span>
                                             Добавлены более 24ч назад
                                         </span>

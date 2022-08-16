@@ -10,17 +10,9 @@
             <label class="label__for-input_mobile" for="from">
                 Откуда
             </label>
-            <div class="_select z-index-20">
-                <div class="_select__block">
-                    <input type="text" class="_select__show input" placeholder="Город отправки" id="from" disabled>
-                    <svg class="_select__arrow" width="13" height="8" viewBox="0 0 13 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 1L6.49997 6L0.999999 1" stroke="#2A2929" stroke-width="2" stroke-linecap="round" />
-                    </svg>
-                </div>
-                <ul class="_select__list">
-                    <div class="_select__item">
-                        <input class="_select__input input" type="text">
-                    </div>
+            <div class="_select-search z-index-20">
+                <input type="text" class="_select-input input" placeholder="Город отправки" id="from">
+                <ul class="_select-search__list _select__list border-0">
                     <?
                     foreach (City::getWithCountry() as $value) {
                         echo '
@@ -37,17 +29,9 @@
             <label class="label__for-input_mobile" for="to">
                 Куда
             </label>
-            <div class="_select z-index-16">
-                <div class="_select__block">
-                    <input type="text" class="_select__show input" placeholder="Город прибытыя" id="to" disabled>
-                    <svg class="_select__arrow" width="13" height="8" viewBox="0 0 13 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 1L6.49997 6L0.999999 1" stroke="#2A2929" stroke-width="2" stroke-linecap="round" />
-                    </svg>
-                </div>
-                <ul class="_select__list">
-                    <div class="_select__item">
-                        <input class="_select__input input" type="text">
-                    </div>
+            <div class="_select-search z-index-16">
+                <input type="text" class="_select-input input" placeholder="Город прибытыя" id="to">
+                <ul class="_select-search__list _select__list border-0">
                     <?
                     foreach (City::getWithCountry() as $value) {
                         echo '

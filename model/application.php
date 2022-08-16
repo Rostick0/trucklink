@@ -27,10 +27,13 @@ class Application {
         }
     
         $query = $mysqli->query("SELECT 
-        `application`.`application_id`, `application`.`date_start`, `application`.`date_end`, `application`.`from`, `application`.`to`, `transport_upload`.`name` as `transport` 
-        FROM `application`, `transport_upload`,`application_info`
-        WHERE `application`.`transport_upload_id` = `transport_upload`.`transport_upload_id` AND `application_info`.`application_id` = `application`.`application_id`
-        AND `application_type_id` = '$type' $where_params ORDER BY `application`.`application_id` DESC $limit");
+        `application`.`application_id`, `application`.`date_created`, `application`.`date_start`, `application`.`date_end`, `application`.`from`, `application`.`to`, `transport_upload`.`name` as `transport`, `upload_type`.`name` as `upload_type`
+        FROM `application`, `transport_upload`,`application_info`,`upload_type`
+        WHERE `application`.`transport_upload_id` = `transport_upload`.`transport_upload_id`
+        AND `application_info`.`application_id` = `application`.`application_id`
+        AND `upload_type`.`upload_type_id` = `application`.`upload_type_id`
+        AND `application_type_id` = '$type' $where_params
+        ORDER BY `application`.`application_id` DESC $limit");
         return $query;
     }
 

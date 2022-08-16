@@ -5,20 +5,22 @@ class ApplicationController {
         Application::create($price, $from, $to, $transport_upload_id, $upload_type_id, $application_type_id, $is_any_direction, $date_start, $date_end, $user_id, $volume, $weight, $length, $width, $height, $description);
     }
 
-    static public function getHttp($type, $offset = null, $limit = null) {
-        $application = Application::getHttp($type, $offset, $limit);
-    }
+    // static public function getHttp($type, $offset = null, $limit = null) {
+    //     $application = Application::getHttp($type, $offset, $limit);
+    // }
 }
 
 if (isset($_REQUEST['create_cargo'])) {
     $price = (int) ($_REQUEST['price']);
     $from = protectionData($_REQUEST['from']);
     $to = protectionData($_REQUEST['to']);
-    $date_start = protectionData($_REQUEST['date_start']);
-    $date_end = protectionData($_REQUEST['date_end']);
+    $date_start = normalizeDateSql(protectionData($_REQUEST['date_start']));
+    var_dump($_REQUEST);
+    $date_end = normalizeDateSql(protectionData($_REQUEST['date_end']));
     $transport_upload_id = (int) ($_REQUEST['transport_upload']);
     $upload_type_id = (int) ($_REQUEST['upload_type']);
     $is_any_direction = (boolean) ($_REQUEST['is_any_direction']);
+    $is_any_direction = $is_any_direction ? 1 : 0;
     $volume = (int) ($_REQUEST['volume']);
     $weight = (int) ($_REQUEST['weight']);
     $length = (int) ($_REQUEST['length']);
@@ -33,11 +35,12 @@ if (isset($_REQUEST['create_transport'])) {
     $price = (int) ($_REQUEST['price']);
     $from = protectionData($_REQUEST['from']);
     $to = protectionData($_REQUEST['to']);
-    $date_start = protectionData($_REQUEST['date_start']);
-    $date_end = protectionData($_REQUEST['date_end']);
+    $date_start = normalizeDateSql(protectionData($_REQUEST['date_start']));
+    $date_end = normalizeDateSql(protectionData($_REQUEST['date_end']));
     $transport_upload_id = (int) ($_REQUEST['transport_upload']);
     $upload_type_id = (int) ($_REQUEST['upload_type']);
     $is_any_direction = (boolean) ($_REQUEST['is_any_direction']);
+    $is_any_direction = $is_any_direction ? 1 : 0;
     $volume = (int) ($_REQUEST['volume']);
     $weight = (int) ($_REQUEST['weight']);
     $length = (int) ($_REQUEST['length']);
