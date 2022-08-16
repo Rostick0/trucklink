@@ -124,12 +124,6 @@ if (selectSearch) {
             valueInput = valueInput.toLowerCase();
             removeClass(selectSearchList, 'border-0');
 
-            selectInput.onblur = function() {
-                selectItem.forEach(elem => elem.style.display = '');
-                selectSearchList.classList.add('border-0');
-                removeClass(selectInput, '_active');
-            }
-
             selectItem.forEach(elem => {
                 let text = elem.textContent;
                 text = text.trim();
@@ -159,10 +153,16 @@ if (selectSearch) {
                     selectItem.forEach(elem => elem.style.display = '');
                     selectSearchList.classList.add('border-0');
                     removeClass(selectInput, '_active');
-
-                    console.log(elem)
                 })
             })
+
+            selectInput.onblur = function() {
+                setTimeout(() => {
+                    selectItem.forEach(elem => elem.style.display = '');
+                    selectSearchList.classList.add('border-0');
+                    removeClass(selectInput, '_active');
+                })
+            }
         }, 500);
     })
 }
