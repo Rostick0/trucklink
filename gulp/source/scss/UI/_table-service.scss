@@ -1,0 +1,98 @@
+.table__service {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.25rem;
+    $grid_template_columns: 0.17fr 0.70fr 1.55fr 0.7fr 0.6fr 0.75fr 0.75fr;
+
+    margin-bottom: 3rem;
+
+    .table__service_names {
+        color: #878787;
+
+        display: grid;
+        grid-template-columns: $grid_template_columns;
+
+        font-size: 1.125rem;
+    }
+
+    .table__service_name {
+        &:nth-child(6) {
+            margin-left: 1rem;
+        }
+    }
+
+    .service__item {
+        background: var(--default-block-background);
+
+        border-radius: 0.625rem;
+
+        display: grid;
+        grid-template-columns: $grid_template_columns;
+        grid-gap: 0.625rem;
+
+        transition: $transition_default;
+
+        &:hover {
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        & > * {
+            align-self: center;
+        }
+
+        & > *:nth-child(6) {
+            margin-left: 1rem;
+            margin-right: -2rem;
+        }
+
+        a {
+            width: 100%;
+
+            & > * {
+                width: 100%;
+            }
+        }
+    }
+
+    .service__status {
+        margin-left: 1.4rem;
+    }
+
+    .service__way {
+        display: inline-flex;
+        align-items: center;
+        justify-self: flex-start;
+        column-gap: 0.875rem;
+
+        position: relative;
+
+        &::before {
+            background: $blue_dark;
+
+            content: "";
+
+            display: inline-block;
+
+            order: 2;
+
+            width: 1.25rem;
+            height: 2px;
+        }
+    }
+
+    .service__way_item {
+        display: inline-flex;
+        align-items: center;
+        column-gap: 0.5rem;
+
+        order: 1;
+
+        &:last-child {
+            order: 3;
+        }
+    }
+
+    .service__button {
+        height: 50px;
+    }
+}

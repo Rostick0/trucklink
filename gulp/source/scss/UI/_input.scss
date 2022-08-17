@@ -1,0 +1,91 @@
+.input {
+    background: none;
+
+    border: 1px solid var(--default-input-border);
+    border-radius: 0.375rem;
+
+    color: var(--default-color) ;
+
+    font-family: "Inter";
+    font-size: 1.06rem;
+    font-weight: 400;
+
+    transition: $transition_default;
+
+    padding: 0.95rem 1.5rem;
+
+    width: 100%;
+
+    &::placeholder {
+        color: var(--default-input-placeholder);
+    }
+
+    &:hover,
+    &:focus {
+        border: 1px solid var(--default-focus);
+    }
+
+    &._error {
+        border: 1px solid $red;
+    }
+}
+
+.input-form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.625rem;
+
+    sup {
+        font-size: 0.75rem;
+    }
+
+    .calendar-form {
+        display: flex;
+        align-items: center;
+        column-gap: 0.625rem;
+
+        position: relative;
+    }
+
+    .input-form__calendar {
+        position: absolute;
+        right: 1rem;
+
+        width: 1.06rem;
+
+        svg {
+            width: 2.125rem;
+        }
+    }
+
+    .date_start__input {
+        text-align: left;
+
+        padding-right: 2rem;
+
+        &:disabled {
+            background: none
+        }
+    }
+
+    .date_end__input {
+        @extend .date_start__input;
+    }
+}
+
+.input-file {
+    height: 100%;
+
+    .input-file__button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        column-gap: 0.625rem;
+
+        height: 100%;
+    }
+
+    span {
+        font-size: 1rem;
+    }
+}

@@ -1,3 +1,13 @@
+const urlQuery = new Proxy(new URLSearchParams(window.location.search), {
+    get: (searchParams, prop) => searchParams.get(prop),
+});
+
+const BACKEND_URL = `http://backend/http`;
+const PATH_CONTENT = './source';
+const PATH_IMAGE = `${PATH_CONTENT}/img`
+const PATH_CONTENT_JS = `${PATH_CONTENT}/js/script.js`;
+const LIMIT_OFFSET_APPLICATION = `&limit=10&offset=${pageApplicationOffset()}`;
+
 const monthShort = [
     'янв',
     'фев',
@@ -59,16 +69,6 @@ function normalizeDateSql(date) {
     return result;
 }
 
-const urlQuery = new Proxy(new URLSearchParams(window.location.search), {
-    get: (searchParams, prop) => searchParams.get(prop),
-});
-
-const BACKEND_URL = `http://backend/http`;
-const PATH_CONTENT = './source';
-const PATH_IMAGE = `${PATH_CONTENT}/img`
-const PATH_CONTENT_JS = `${PATH_CONTENT}/js/script.js`;
-const LIMIT_OFFSET_APPLICATION = `&limit=10&offset=${pageApplicationOffset()}`;
-
 
 
 
@@ -89,7 +89,6 @@ function select(selects) {
                 return;
             }
 
-            selectShow.classList.toggle('_active');
             arrow.classList.toggle('_active');
             selectList.classList.toggle('_show-flex');
 
@@ -122,17 +121,15 @@ if (selectSearch) {
             let valueInput = selectInput.value;
             valueInput = valueInput.trim();
             valueInput = valueInput.toLowerCase();
-            removeClass(selectSearchList, 'border-0');
 
             selectItem.forEach(elem => {
                 let text = elem.textContent;
                 text = text.trim();
                 text = text.toLowerCase();
 
-                if (valueInput.length < 3) {
+                if (valueInput.length < 1) {
                     elem.style.display = '';
                     removeClass(selectInput, '_active');
-                    selectSearchList.classList.add('border-0');
                     return;
                 }
 
@@ -151,7 +148,6 @@ if (selectSearch) {
 
                     selectInput.value = elem.textContent.trim();
                     selectItem.forEach(elem => elem.style.display = '');
-                    selectSearchList.classList.add('border-0');
                     removeClass(selectInput, '_active');
                 })
             })
@@ -161,7 +157,7 @@ if (selectSearch) {
                     selectItem.forEach(elem => elem.style.display = '');
                     selectSearchList.classList.add('border-0');
                     removeClass(selectInput, '_active');
-                })
+                }, 100)
             }
         }, 500);
     })

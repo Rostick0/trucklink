@@ -1,0 +1,49 @@
+.modal {
+    background: rgba(0, 0, 0, 0.4);
+
+    display: none;
+
+    position: fixed;
+    left: 0;
+    top: 0;
+    
+    width: 100%;
+    height: 100%;
+
+    z-index: 100;
+
+    .modal__inner {
+        display: inline-flex;
+        align-items: center;
+        flex-direction: column;
+        row-gap: 2.25rem;
+
+        padding: 4.69rem 5.75rem;
+
+        position: absolute;
+        left: 50%;
+        top: 50%;
+
+        transform: translate(-50%, -50%);
+
+        max-width: 45.75rem;
+    }
+
+    .modal__text {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        row-gap: 1.5rem;
+
+        text-align: center;
+    }
+
+    .modal__title {
+        font-size: 2.25rem;
+        font-weight: 600;
+    }
+
+    .modal__button {
+        padding: 1.47rem 3.375rem;
+    }
+}

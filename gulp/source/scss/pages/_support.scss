@@ -1,0 +1,55 @@
+.support {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.5rem;
+
+    padding: 3.25rem 4rem 4rem;
+
+    .support__page-title {
+        color: $grey_dark;
+    }
+
+    .support__top {
+        display: grid;
+        grid-template-columns: 0.78fr 0.78fr 1.42fr;
+        grid-gap: 1.75rem;
+    }
+
+    .support__important {
+        align-self: center;
+    }
+
+    .support__textarea {
+        height: 24.75rem;
+    }
+
+    .support__bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .support__bottom_left {
+        display: flex;
+        align-items: center;
+        column-gap: 1.5rem;
+    }
+
+    .support__button-submit {
+        padding: 0 3.25rem;
+
+        height: 4.375rem;   
+    }
+
+    .input-file__button {
+        padding: 0 3.25rem;
+
+        height: 4.375rem;
+    }
+
+    .support__agreement {
+        color: $grey_dark;
+
+        font-size: 1rem;
+    }
+}

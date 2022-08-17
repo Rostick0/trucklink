@@ -1,0 +1,39 @@
+.navigation-bottom {
+    display: flex;
+    align-items: center;
+    grid-gap: 0.625rem;
+}
+
+.navigation-bottom_item {
+    .navigation-bottom_href._next_page {
+        background: none;
+
+        color: $blue_dark;
+
+        width: auto;
+        height: auto;
+    }
+}
+
+.navigation-bottom_href {
+    border-radius: 0.5rem;
+
+    color: $blue_dark;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: $transition_default;
+
+    width: 3.25rem;
+    min-width: 3.25rem;
+    height: 3.25rem;
+
+    &:hover,
+    &._active {
+        background: $blue_dark;
+
+        color: #FFFFFF;
+    }
+}

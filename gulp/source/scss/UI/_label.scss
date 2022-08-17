@@ -1,0 +1,9 @@
+.label__for-input {
+    color: $grey_dark;
+
+    font-weight: 500;
+}
+
+.laber__for-textarea {
+    @extend .label__for-input;
+}

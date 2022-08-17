@@ -1,0 +1,37 @@
+.hints {
+    display: flex;
+    align-items: center;
+    column-gap: 3rem;
+
+    .hint__item {
+        display: flex;
+        align-items: center;
+        column-gap: 1rem;
+    }
+}
+
+.hint__status {
+    border-radius: 50%;
+
+    width: 0.75rem;
+    min-width: 0.75rem;
+    height: 0.75rem;
+}
+
+.status-recently {
+    @extend .hint__status;
+
+    background: linear-gradient(180deg, #0C9248 0%, #24F792 100%);
+}
+
+.status-24h {
+    @extend .hint__status;
+
+    background: linear-gradient(360deg, #FFD600 0%, #FFA41D 100%);
+}
+
+.status-48h {
+    @extend .hint__status;
+
+    background: linear-gradient(0deg, #F72424 0%, #BA1313 100%);
+}

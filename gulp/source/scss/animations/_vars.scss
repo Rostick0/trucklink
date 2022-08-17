@@ -1,0 +1,13 @@
+._hide {
+    animation: hide 500ms forwards;
+}
+
+._show {
+    animation: show 500ms forwards;
+    display: block;
+}
+
+._show-flex {
+    animation: show 500ms forwards;
+    display: flex;
+}

@@ -1,0 +1,164 @@
+.filter {
+    border-radius: 0.625rem;
+
+    display: grid;
+    grid-template-columns: 21.5% 21.5% 21.5% 0.75fr 1.5fr;
+    grid-gap: 1.875rem 3.75rem;
+
+    padding: 2.125rem 4rem 2.75rem;
+
+    & > * {
+        align-self: end;
+    }
+}
+
+.filter__to_from {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column: 1/3;
+    grid-gap: 0.625rem 3.75rem;
+
+    .filter__to_from__inputs {
+        position: relative;
+
+        display: inherit;
+        grid-template-columns: inherit;
+        grid-column: 1/3;
+        grid-gap: inherit;
+
+        &::before {
+            background: $blue_dark;
+    
+            content: "";
+    
+            display: inline-block;
+    
+            position: absolute;
+            align-self: center;
+            left: 50%;
+            transform: translateX(-50%);
+    
+            width: 2.2rem;
+            height: 2px;
+        }
+    }
+
+    .label__for-input_mobile {
+        display: none;
+    }
+}
+
+.filter__date {
+    grid-column: 4/6;
+}
+
+.filter__min-max {
+    display: grid;
+    grid-gap: inherit;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column: 2/span 3;
+}
+
+.filter__small-inputs {
+    display: flex;
+    align-items: flex-end;
+    grid-gap: 3.75rem;
+
+    position: relative;
+
+    &::before {
+        background: $blue_dark;
+
+        content: "";
+
+        display: inline-block;
+
+        position: absolute;
+        align-self: center;
+        left: 50%;
+        transform: translateX(-50%);
+
+        width: 2.2rem;
+        height: 2px;
+    }
+
+    input {
+        text-align: center;
+    }
+}
+
+.filter__button {
+    height: $height_button;
+}
+
+
+
+
+@media (max-width: 1440px) {
+    .filter {
+        grid-gap: 1rem 2.25rem;
+    }
+
+    .filter__small-inputs {
+        grid-gap: 1.75rem;
+
+        &::before {
+            width: 1rem;
+        }
+    }
+}
+
+
+
+
+@media (max-width: 1024px) {
+    .filter {
+        grid-template-columns: 1fr;
+        grid-gap: 0.625rem;
+
+        padding: 5%;
+
+        * {
+            grid-column: auto;
+        }
+
+        .filter__to_from__inputs {
+            &::before {
+                content: none;
+            }
+        }
+
+        .filter__to_from {
+            display: block;
+        }
+
+        .label__for-input_computer {
+            display: none;
+        }
+
+        .filter__to_from__inputs {
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+
+        .label__for-input_mobile {
+            display: block;
+        }
+
+        .filter__min-max {
+            grid-template-columns: repeat(2, 1fr);
+
+            *:first-child {
+                grid-column: 1/3;
+            }
+        }
+
+        .filter__small-inputs {
+            grid-gap: 0.625rem;
+
+            &::before {
+                content: none;
+            }
+        }
+    }
+}

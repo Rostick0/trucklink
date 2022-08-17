@@ -1,0 +1,91 @@
+$black: #2A2929;
+$blue: #0B79FE;
+$blue_dark: #2D2D41;
+$yellow: #FFC93A;
+$grey: #EBE8FE;
+$grey_dark: #6A6A6A;
+$red: #E54A4A;
+$white_line: #FAFAFA;
+
+$transition_default: 200ms;
+$transition_middle: 500ms;
+
+$height_button: 3.125rem;
+
+
+:root {
+    --default-body-background: #FAFAFA;
+    --default-block-background: #FFFFFF;
+    --default-color: #2d2d41;
+    --default-links: var(--default-color);
+    --default-button-first: #FFC93A;
+    --default-button-first-hover: #F9B709;
+    --default-button-first-active: #A48534;
+    --default-button-first-color: #FFFFFF;
+    --default-button-second: #2D2D41;
+    --default-button-second-hover: #1D1D4B;
+    --default-button-second-active: #03030A;
+    --default-button-second-color: #FFFFFF;
+    --default-button-disabled: #DFDFDF;
+    --default-button-disabled-color: #939393;
+    --default-input-placeholder: #DBDBDB;
+    --default-input-border:  #c1c1c1;
+    --default-focus: #6A6A6A;
+    --default-no-active-button: #F1F1F1;
+    --default-no-active-color: #B8B8B8;
+    --default-disabled-color: rgba(43, 41, 41, 0.4);
+    --default-social-color: #C2C2C2;
+    --default-user-id: #0b79fe;
+    --default-background-calendar: #EBE8FE;
+    --default-color-error: #E54A4A;
+}
+
+.block-default {
+    background: var(--default-block-background);
+
+    border-radius: 0.625rem;
+}
+
+.display-block {
+    display: block !important;
+}
+
+.error {
+    color: var(--default-color-error) !important;
+
+    font-size: 0.875rem;
+}
+
+.error-input {
+    border-color: var(--default-color-error) !important;
+
+    color: var(--default-color-error) !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-1 {
+    margin-top: 1rem;
+}
+
+.mt-3 {
+    margin-top: 3rem;
+}
+
+.z-index-12 {
+    z-index: 12 !important;
+}
+
+.z-index-16 {
+    z-index: 16 !important;
+}
+
+.z-index-20 {
+    z-index: 20 !important;
+}
+
+.border-0 {
+    border: none !important;
+}

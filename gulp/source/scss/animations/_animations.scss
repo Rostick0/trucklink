@@ -1,0 +1,52 @@
+@keyframes fast-hide {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+    100% {
+        display: none;
+        opacity: 0;
+    }
+}
+
+@keyframes hide {
+    0% {
+        display: block;
+        opacity: 1;
+    }
+    90% {
+        display: block;
+        opacity: 0;
+    }
+    100% {
+        display: none;
+        opacity: 0;
+    }
+}
+
+@keyframes show {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+    10% {
+        display: auto;
+        opacity: 0;
+    }
+    100% {
+        display: auto;
+        opacity: 1;
+    }
+}
+
+@keyframes background-burger {
+    0% {
+        background: none;
+    }
+    50% {
+        background: none;
+    }
+    100% {
+        background: rgba(0, 0, 0, 0.4);
+    }
+}

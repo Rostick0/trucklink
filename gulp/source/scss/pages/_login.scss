@@ -1,0 +1,80 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+
+    padding: 4.5rem 8.5rem 8.5rem;
+    margin: 0 auto;
+
+    width: 71.5rem;
+
+    .login__page-title {
+        text-align: center;
+
+        margin-bottom: 4px;
+    }
+
+    .login__inputs {
+        display: flex;
+        grid-gap: 1.875rem;
+
+        width: 100%;
+
+        & > * {
+            flex: 1 0 auto;
+        }
+    }
+
+    .login__bottom {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        grid-gap: 1.875rem;
+        justify-content: space-between;
+    }
+
+    .login__button {
+        flex: 1 0 100%;
+        height: 4.375rem;
+    }
+
+    .login__links {
+        display: flex;
+        column-gap: 1.875rem;
+    }
+
+    .login__href {
+        color: var(--default-color);
+
+        transition: $transition_default;
+    }
+
+    @media (max-width: 1024px) {
+        row-gap: 0.75rem;
+
+        padding: 5%;
+
+        width: auto;
+
+        .login__inputs {
+            flex-direction: column;
+            grid-gap: 0.625rem;
+        }
+
+        .login__bottom {
+            align-items: flex-start;
+            grid-gap: 0.625rem;
+        }
+
+        .login__button {
+            order: 2;
+
+            width: 100%;
+            height: 4.375rem;
+        }
+
+        .login__links {
+            order: 3;
+        }
+    }
+}

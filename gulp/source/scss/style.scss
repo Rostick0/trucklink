@@ -1,0 +1,67 @@
+@import './null';
+@import './fonts';
+@import './vars';
+@import './layout/index.scss';
+@import './UI/index.scss';
+@import './pages/index.scss';
+@import './animations/index.scss';
+
+html, body {
+    background: var(--default-body-background);
+
+    color: var(--default-color);
+
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 16px;
+
+    height: 100%;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+
+    min-height: 100%;
+}
+
+.container {
+    padding: 0 2.5%;
+    margin: 0 auto;
+
+    max-width: 1920px;
+}
+
+
+.main {
+    font-size: 1.0625rem;
+
+    flex: 1 0 auto;
+}
+
+.small-info {
+    color: $blue_dark;
+}
+
+
+@media (max-width: 1680px) {
+    html, body {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 1440px) {
+    html, body {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 1200px) {
+    html, body {
+        font-size: 11px;
+    }
+}
+
+
+
+

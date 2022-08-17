@@ -12,13 +12,13 @@
             </label>
             <div class="_select-search z-index-20">
                 <input type="text" class="_select-input input" placeholder="Город отправки" id="from">
-                <ul class="_select-search__list _select__list border-0">
+                <ul class="_select-search__list _select__list">
                     <?
                     foreach (City::getWithCountry() as $value) {
                         echo '
                             <li class="_select__item">
                                 <label for="city_from_' . $value['city_id'] . '">
-                                    ' . $value['country'] . ', ' . $value['city'] . '
+                                    ' . $value['city'] . ', ' . $value['country'] . '
                                     <input name="from" id="city_from_' . $value['city_id'] . '" value="' . $value['city_id'] . '" type="radio" hidden>
                                 </label>
                             </li> ';
@@ -31,13 +31,13 @@
             </label>
             <div class="_select-search z-index-16">
                 <input type="text" class="_select-input input" placeholder="Город прибытыя" id="to">
-                <ul class="_select-search__list _select__list border-0">
+                <ul class="_select-search__list _select__list">
                     <?
                     foreach (City::getWithCountry() as $value) {
                         echo '
                             <li class="_select__item">
                                 <label for="city_to_' . $value['city_id'] . '">
-                                    ' . $value['country'] . ', ' . $value['city'] . '
+                                    ' . $value['city'] . ', ' . $value['country'] . '
                                     <input name="to" id="city_to_' . $value['city_id'] . '" value="' . $value['city_id'] . '" type="radio" hidden>
                                 </label>
                             </li>';

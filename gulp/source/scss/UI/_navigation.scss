@@ -1,0 +1,140 @@
+.navigation {
+    display: flex;
+    
+    padding: 1.56rem;
+    margin-bottom: 3rem;
+
+    .navigation__list {
+        display: grid;
+        grid-gap: 1.875rem;
+        grid-template-columns: repeat(4, 1fr);
+
+        flex: 1;
+    }
+
+    .navigation__item {
+        border-radius: 8px;
+
+        display: flex;
+        align-items: center;
+
+        padding: 1.31rem 1.44rem;
+
+        width: 100%;
+
+        .navigation__icon {
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 3.625rem;
+            min-width: 3.625rem;
+            height: 3.625rem;
+
+            svg {
+                width: 2.25rem;
+            }
+
+            &:nth-child(3) {
+                svg {
+                    width: 2.13rem;
+                }
+            }
+        }
+
+        .navigation__subtitle {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        &._green {
+            background: linear-gradient(147.96deg, #EEFEE8 19.25%, #D9FFCC 89.03%);
+
+            .navigation__icon {
+                background: linear-gradient(180deg, #24C86D 0%, #24F792 100%);
+            }
+
+            .navigation__subtitle {
+                color: #32DC43;
+            }
+        }
+
+        &._yellow {
+            background: linear-gradient(150.55deg, #FFF8E5 18.04%, #FFEAB3 102.95%);
+
+            .navigation__icon {
+                background: linear-gradient(360deg, #FFD600 0%, #FFA41D 100%);
+            }
+
+            .navigation__subtitle {
+                color: #FFA61B;
+            }
+        }
+    }
+
+    .navigation__href {
+        display: flex;
+        align-items: center;
+
+        column-gap: 1.56rem;
+    }
+
+    .navigation__text {
+        display: flex;
+        flex-direction: column;
+        row-gap: 0.44rem;
+    }
+
+    .navgitaion__title {
+        color: var(--default-color);
+
+        font-size: 1.25rem;
+        font-weight: 700;
+    }
+}
+
+
+
+@media (max-width: 1440px) {
+    .navigation {
+        .navigation__list {
+            grid-gap: 0.875rem;
+        }
+
+        .navigation__item {
+            padding: 1rem;
+
+            .navigation__icon {
+                border-radius: 50%;
+    
+                display: flex;
+                align-items: center;
+                justify-content: center;
+    
+                width: 2.91rem;
+                min-width: 2.91rem;
+                height: 2.91rem;
+    
+                svg {
+                    width: 1.75rem;
+                }
+    
+                &:nth-child(3) {
+                    svg {
+                        width: 1.66rem;
+                    }
+                }
+            }
+        }
+
+        .navigation__href {
+            column-gap: 0.75rem;
+        }
+
+        .navigation__subtitle {
+            font-size: 0.85rem;
+        }
+    }
+}

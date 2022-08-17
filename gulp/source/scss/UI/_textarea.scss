@@ -1,0 +1,9 @@
+@import './input';
+
+.textarea {
+    @extend .input;
+}
+
+.textarea-form {
+    @extend .input-form;
+}

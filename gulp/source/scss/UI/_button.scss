@@ -1,0 +1,126 @@
+.button {
+    border-radius: 0.5rem;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: "Inter";
+    font-size: 1.06rem;
+    font-weight: 600;
+
+    transition: $transition_default;
+
+    &:disabled {
+        background: var(--default-no-active-button) !important;
+
+        cursor: not-allowed !important;
+
+        color: var(--default-input-border) !important;
+    }
+}
+
+.button-yellow {
+    @extend .button; 
+    
+    background: var(--default-button-first);
+
+    color: var(--default-button-first-color);
+
+    &:hover {
+        background: var(--default-button-first-hover);
+    }
+
+    &:active {
+        background: var(--default-button-first-active);
+    }
+}
+
+.button-dark {
+    @extend .button;
+
+    background: var(--default-button-second);
+
+    color: var(--default-button-second-color);
+
+    &:hover {
+        background: var(--default-button-second-hover);
+    }
+
+    &:active {
+        background: var(--default-button-second-active);
+    }
+}
+
+.button-grey {
+    @extend .button;
+
+    background: #EAEAFF;
+
+    color: $blue_dark;
+
+    &:hover {
+
+    }
+
+    &:active {
+
+    }
+}
+
+.button-contact {
+    @extend .button;
+
+    color: #FFFFFF;
+
+    column-gap: 0.625rem;
+    
+    font-size: 1.25rem;
+    font-weight: 600;
+
+    padding: 0 0.75rem;
+
+    height: 4.375rem;
+}
+
+.button__telephone {
+    background: #73DE4D;
+
+    svg {
+        width: 2.625rem;
+    }
+}
+
+.button__viber {
+    background: #6F3FAA;
+
+    svg {
+        width: 1.75rem;
+    }
+}
+
+.button__telegram {
+    background: #36ACF2;
+
+    svg {
+        width: 1.7rem;
+    }
+}
+
+.button__whatsapp {
+    background: #1BD741;
+
+    svg {
+        width: 1.75rem;
+    }
+}
+
+.button__site {
+    background: #2D2D41;
+
+    svg {
+        width: 1.7rem;
+    }
+}
