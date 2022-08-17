@@ -1,10 +1,11 @@
 const {src, dest, series} = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
 const csso = require('gulp-csso');
+const htmlmin = require('gulp-htmlmin');
 const autoprefixer = require('gulp-autoprefixer');
 const babel = require('gulp-babel');
 const uglify = require('gulp-uglify');
-const { init, watch, reload } = require('browser-sync').create();
+const { watch, reload } = require('browser-sync').create();
 
 function scss() {
     return src('gulp/source/scss/style.scss')
@@ -51,9 +52,18 @@ function serve() {
 }
 
 function building() {
-    return src(['*', '!gulp', '!.gitignore', '!package.json', '!package-lock.json', '!node_modules', '!gulpfile.js'])
+    return src(['*/**',  '*', '.htaccess', '**/.htaccess','!gulp', '!.gitignore', '!package.json', '!package-lock.json', '!dist/**', '!node_modules/**', '!gulp/**', '!gulpfile.js'])
             .pipe(dest('dist/'));
 }
 
-exports.build = series(scss, fonts, js, img);
+function php() {
+    return src('dist/**/**.php')
+            .pipe(htmlmin({
+                collapseWhitespace: true,
+                ignoreCustomFragments: [ /<%[\s\S]*?%>/, /<\?[=|php]?[\s\S]*?\?>/ ]
+            }))
+            .pipe(dest('dist/'))        
+}
+
+exports.build = series(scss, fonts, js, img, building, php);
 exports.serve = series(scss, fonts, js, img, serve);

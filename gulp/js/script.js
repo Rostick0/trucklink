@@ -3,7 +3,7 @@ const urlQuery = new Proxy(new URLSearchParams(window.location.search), {
 });
 
 const BACKEND_URL = `http://backend/http`;
-const PATH_CONTENT = './source';
+const PATH_CONTENT = './source/static';
 const PATH_IMAGE = `${PATH_CONTENT}/img`
 const PATH_CONTENT_JS = `${PATH_CONTENT}/js/script.js`;
 const LIMIT_OFFSET_APPLICATION = `&limit=10&offset=${pageApplicationOffset()}`;
