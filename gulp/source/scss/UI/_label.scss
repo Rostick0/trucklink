@@ -4,6 +4,14 @@
     font-weight: 500;
 }
 
+.label__for-input_computer {
+    @extend .label__for-input;
+}
+
+.label__for-input_mobile {
+    @extend .label__for-input;
+}
+
 .laber__for-textarea {
     @extend .label__for-input;
 }

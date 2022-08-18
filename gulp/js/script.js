@@ -114,7 +114,6 @@ const selectSearch = document.querySelectorAll('._select-search');
 if (selectSearch) {
     selectSearch.forEach(select => {
         const selectInput = select.querySelector('._select-input');
-        const selectSearchList = select.querySelector('._select-search__list')
         const selectItem = select.querySelectorAll('._select__item');
 
         selectInput.oninput = throttle(() => {
@@ -155,7 +154,6 @@ if (selectSearch) {
             selectInput.onblur = function() {
                 setTimeout(() => {
                     selectItem.forEach(elem => elem.style.display = '');
-                    selectSearchList.classList.add('border-0');
                     removeClass(selectInput, '_active');
                 }, 100)
             }
@@ -192,11 +190,11 @@ async function getApplications(listHtml, type, queryParams = null) {
         .then(res => res.json())
         .then(res => {
             if (!res[0]) {
-                list.innerHTML = `<div class="text-center mt-1">Не найдено</div>`;
+                return list.insertAdjacentHTML('beforeend', `<div class="text-center mt-1">Не найдено</div>`);
             }
             res.forEach(elem => {
-                list.innerHTML += `
-                <li class="service__item">
+                list.insertAdjacentHTML('beforeend',
+                `<li class="service__item">
                     <div class="service__status
                     ${applicationStatusColor(roundingMilliseconds(new Date() - new Date(elem?.date_created)))}
                     ">
@@ -213,7 +211,7 @@ async function getApplications(listHtml, type, queryParams = null) {
                         </div>
                         <div class="service__way_item">
                             
-                            <img src="${PATH_IMAGE}/${showFlag(elem?.from?.country)}" alt="">
+                            <img src="${PATH_IMAGE}/${showFlag(elem?.to?.country)}" alt="">
                             <span>
                                 ${elem?.to?.city}
                             </span>
@@ -236,11 +234,11 @@ async function getApplications(listHtml, type, queryParams = null) {
                     </button>
                     </a>
                 </li>
-                `;
+                `);
             })
         })
         .catch(() => {
-            list.innerHTML = `<div class="text-center mt-1">Не найдено</div>`;
+            list.insertAdjacentHTML('beforeend', `<div class="text-center mt-1">Не найдено</div>`);
         })
     }
 
@@ -249,11 +247,11 @@ async function getApplications(listHtml, type, queryParams = null) {
         .then(res => res.json())
         .then(res => {
             if (!res[0]) {
-                list.innerHTML = `<div class="text-center mt-1">Не найдено</div>`;
+                list.insertAdjacentHTML('beforeend', `<div class="text-center mt-1">Не найдено</div>`);
             }
             res.forEach(elem => {
-                list.innerHTML += `
-                <li class="service__item">
+                list.insertAdjacentHTML('beforeend', 
+                `<li class="service__item">
                     <div class="service__status
                     ${applicationStatusColor(roundingMilliseconds(new Date() - new Date(elem?.date_created)))}
                     ">
@@ -270,7 +268,7 @@ async function getApplications(listHtml, type, queryParams = null) {
                         </div>
                         <div class="service__way_item">
                             
-                            <img src="${PATH_IMAGE}/${showFlag(elem?.from?.country)}" alt="">
+                            <img src="${PATH_IMAGE}/${showFlag(elem?.to?.country)}" alt="">
                             <span>
                                 ${elem?.to?.city}
                             </span>
@@ -293,17 +291,21 @@ async function getApplications(listHtml, type, queryParams = null) {
                     </button>
                     </a>
                 </li>
-                `;
+                `);
             })
         })
         .catch(() => {
-            list.innerHTML = `<div class="text-center mt-1">Не найдено</div>`;
+            list.insertAdjacentHTML('beforeend', `<div class="text-center mt-1">Не найдено</div>`);
         })
     }
 }
 
 function setQueryParamsUrl(params) {
     return '?' + params.join('&');
+}
+
+function inputAcceptableLength(input, length) {
+    return input.value.trim().length > length;
 }
 
 function showFlag(country) {
@@ -398,8 +400,38 @@ function pageApplicationOffset() {
 
     return 10;
 }
-
+const catalogFilter = document.querySelector('.catalog__filter');
 const filterButton = document.querySelector('.filter__button');
+const filterResetButton = document.querySelector('.filter__reset-button');
+
+if (catalogFilter) {
+    const inputs = catalogFilter.querySelectorAll('input[type="text"], input[type="number"]');
+    const dateStartInput = catalogFilter.querySelector('.date_start__input');
+    const dateEndInput = catalogFilter.querySelector('.date_end__input');
+
+    catalogFilter.onclick = () => {
+        if (inputAcceptableLength(dateStartInput, 0)) {
+            filterButton.disabled = false;
+            return;
+        }
+
+        if (inputAcceptableLength(dateEndInput, 0)) {
+            filterButton.disabled = false;
+            return;
+        }
+    }
+
+    catalogFilter.oninput = throttle(() => {
+        filterButton.disabled = ![...inputs].some(input => {
+            return inputAcceptableLength(input, 0);
+        });
+    }, 100)
+
+    filterResetButton.onclick = () => {
+        inputs.forEach(input => input.value = '');
+        filterButton.disabled = true;
+    }
+}
 
 function searchActiveButton(e) {
     e.preventDefault();
@@ -481,13 +513,14 @@ const catalogIndex = document.querySelector('.catalog__index');
 const ApplicationListIndex = document.querySelector('#application__list_index');
 
 if (searchCargo && searchTransport && catalogIndex) {
-    const indexPageTitle = catalogIndex.querySelector('.index__page-title');
+    const indexPageTitle = catalogIndex.querySelector('.index__page-title__selected');
+    const tableServiceNameFourth = catalogIndex.querySelector('.table__service_name:nth-child(4)');
 
     searchCargo.addEventListener('click', () => {
         searchCargo.classList.add('_active');
 
-        indexPageTitle.textContent = "Недавно добавленный груз";
-        ApplicationListIndex.innerHTML = "";
+        indexPageTitle.textContent = "груз";
+        tableServiceNameFourth.textContent = "Оплата";
 
         filterButton.onclick = e => {
             e.preventDefault();
@@ -541,8 +574,8 @@ if (searchCargo && searchTransport && catalogIndex) {
     searchTransport.addEventListener('click', () => {
         searchTransport.classList.add('_active');
 
-        indexPageTitle.textContent = "Недавно добавленный транспорт";
-        ApplicationListIndex.innerHTML = "";
+        indexPageTitle.textContent = "транспорт";
+        tableServiceNameFourth.textContent = "Тип загрузки";
 
         filterButton.onclick = e => {
             e.preventDefault();
@@ -754,7 +787,10 @@ class Calendar {
                 this.daysHtml[i].classList.add('_disabled');
             }
 
-            this.daysHtml[i].onclick = () => this.setInput(this.daysHtml[i].textContent, !this.daysHtml[i].classList.contains('_disabled'));
+            this.daysHtml[i].onclick = () => {
+                this.setInput(this.daysHtml[i].textContent, !this.daysHtml[i].classList.contains('_disabled'));
+                this.hideCalendars();
+            }
         }
     }
 
@@ -782,36 +818,74 @@ const calendarFirst = document.querySelector('.calendar');
 const calendarSecond = document.querySelectorAll('.calendar')[1];
 
 if (calendarFirst) {
-    const calendarStart = new Calendar(calendarFirst, document.querySelector('.date_start__input'), document.querySelector('.input-form__calendar'));
+    const calendarStart = new Calendar(calendarFirst, document.querySelector('.date_start__input'), document.querySelector('.calendar-from__active'));
     calendarStart.start();
 }
 
 if (calendarSecond) {
-    const calendarEnd = new Calendar(calendarSecond, document.querySelector('.date_end__input'), document.querySelectorAll('.input-form__calendar')[1]);
+    const calendarEnd = new Calendar(calendarSecond, document.querySelector('.date_end__input'), document.querySelectorAll('.calendar-from__active')[1]);
     calendarEnd.start();
 }
 
-const loginButton = document.querySelector(".login__button");
+const login = document.querySelector('.login');
 
-function inputAcceptableLength(input, length) {
-    return input.value.length >= length;
+if (login) {
+    const loginInput = login.querySelector('#login');
+    const passwordInput = login.querySelector('#password');
+
+    const loginButton = login.querySelector('.login__button');
+
+    login.oninput = throttle(() => {
+        if (!inputAcceptableLength(loginInput, 2)) {
+            return loginButton.disabled = true;
+        }
+
+        if (!inputAcceptableLength(passwordInput, 4)) {
+            return loginButton.disabled = true;
+        }
+
+        return loginButton.disabled = false;
+    }, 100);
 }
 
-if (loginButton) {
-    let login = document.querySelector('#login');
-    let password = document.querySelector('#password');
+const registration = document.querySelector('.registration');
 
-    function setDisabledButton() {
-        return loginButton.disabled = !(inputAcceptableLength(login, 5) && inputAcceptableLength(password, 5))
-    }
+if (registration) {
+    const emailInput = registration.querySelector('#user_email');
+    const telephoneInput = registration.querySelector('#user_telephone');
+    const loginInput = registration.querySelector('#user_login');
+    const nameInput = registration.querySelector('#user_name');
+    const passwordInput = registration.querySelector('#user_password');
+    const passwordConfirmInput = registration.querySelector('#user_password_confirm');
+    const registrationButton = registration.querySelector('.registration__button');
 
-    login.oninput = function () {
-        setDisabledButton();
-    }
+    registration.oninput = throttle(() => {
+        if (!inputAcceptableLength(emailInput, 3)) {
+            return registrationButton.disabled = true;
+        }
 
-    password.oninput = function () {
-        setDisabledButton();
-    }
+        if (!inputAcceptableLength(telephoneInput, 3)) {
+            return registrationButton.disabled = true;
+        }
+
+        if (!inputAcceptableLength(loginInput, 3)) {
+            return registrationButton.disabled = true;
+        }
+
+        if (!inputAcceptableLength(nameInput, 3)) {
+            return registrationButton.disabled = true;
+        }
+
+        if (!inputAcceptableLength(passwordInput, 4)) {
+            return registrationButton.disabled = true;
+        }
+
+        if (passwordInput.value != passwordConfirmInput.value) {
+            return registrationButton.disabled = true;
+        }
+
+        return registrationButton.disabled = false;
+    }, 100);
 }
 
 document.body.addEventListener('click', e => {

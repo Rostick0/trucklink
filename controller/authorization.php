@@ -2,9 +2,6 @@
 
 class AuthorizationController {
     public static function get($login, $password, $is_remembered) {
-        $login = protectionData($login);
-        $password = protectionData($password);
-
         $error = false;
 
         $authorization = Model::get('authorization', 'login', $login);
@@ -57,10 +54,9 @@ class AuthorizationController {
 }
 
 if (isset($_REQUEST['login_button'])) {
-    var_dump($_REQUEST);
-    $login = $_REQUEST['login'];
-    $password = $_REQUEST['password'];
-    $is_remembered = $_REQUEST['is_remembered'];
+    $login =  protectionData($_REQUEST['login']);
+    $password = protectionData($_REQUEST['password']);
+    $is_remembered = (boolean) $_REQUEST['is_remembered'];
 
     AuthorizationController::get($login, $password, $is_remembered);
 }

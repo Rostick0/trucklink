@@ -1,0 +1,23 @@
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--default-no-active-color) none;
+}
+
+/* для Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+    height: 12px;
+    width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+    background: none;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: var(--default-no-active-color);
+    border-radius: 0.33rem;
+
+    &:active {
+        background: var(--default-focus);
+    }
+}

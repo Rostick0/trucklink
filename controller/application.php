@@ -4,10 +4,6 @@ class ApplicationController {
     static public function create($price, $from, $to, $transport_upload_id, $upload_type_id, $application_type_id, $is_any_direction, $date_start, $date_end, $user_id, $volume, $weight, $length, $width, $height, $description) {
         Application::create($price, $from, $to, $transport_upload_id, $upload_type_id, $application_type_id, $is_any_direction, $date_start, $date_end, $user_id, $volume, $weight, $length, $width, $height, $description);
     }
-
-    // static public function getHttp($type, $offset = null, $limit = null) {
-    //     $application = Application::getHttp($type, $offset, $limit);
-    // }
 }
 
 if (isset($_REQUEST['create_cargo'])) {
@@ -15,7 +11,6 @@ if (isset($_REQUEST['create_cargo'])) {
     $from = protectionData($_REQUEST['from']);
     $to = protectionData($_REQUEST['to']);
     $date_start = normalizeDateSql(protectionData($_REQUEST['date_start']));
-    var_dump($_REQUEST);
     $date_end = normalizeDateSql(protectionData($_REQUEST['date_end']));
     $transport_upload_id = (int) ($_REQUEST['transport_upload']);
     $upload_type_id = (int) ($_REQUEST['upload_type']);

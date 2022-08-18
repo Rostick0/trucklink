@@ -11,7 +11,7 @@ $transition_default: 200ms;
 $transition_middle: 500ms;
 
 $height_button: 3.125rem;
-
+$height_input: $height_button;
 
 :root {
     --default-body-background: #FAFAFA;
@@ -30,6 +30,7 @@ $height_button: 3.125rem;
     --default-button-disabled-color: #939393;
     --default-input-placeholder: #DBDBDB;
     --default-input-border:  #c1c1c1;
+    --default-input-color: #2A2929;
     --default-focus: #6A6A6A;
     --default-no-active-button: #F1F1F1;
     --default-no-active-color: #B8B8B8;

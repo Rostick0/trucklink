@@ -175,7 +175,7 @@
                         </div>
                     </label>
                 </div>
-                <button class="registration__button button-yellow" name="registration_button">
+                <button class="registration__button button-yellow" name="registration_button" disabled>
                     Регистрация
                 </button>
             </form>

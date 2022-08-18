@@ -14,18 +14,10 @@ class Application {
         return $cargo->fetch_assoc();
     }
 
-    static public function getHttp($type = 1, $offset = null, $limit = null, $where_params = null) {
+    static public function getHttp($type = 1, $where_params = null) {
         // 1 - cargo, 2 - transport
         global $mysqli;
 
-        if ($limit) {
-            $limit = "LIMIT $limit";
-        }
-
-        if ($offset && $limit) {
-            $limit .= " OFFSET $offset";
-        }
-    
         $query = $mysqli->query("SELECT 
         `application`.`application_id`, `application`.`date_created`, `application`.`date_start`, `application`.`date_end`, `application`.`from`, `application`.`to`, `transport_upload`.`name` as `transport`, `upload_type`.`name` as `upload_type`
         FROM `application`, `transport_upload`,`application_info`,`upload_type`
@@ -33,7 +25,7 @@ class Application {
         AND `application_info`.`application_id` = `application`.`application_id`
         AND `upload_type`.`upload_type_id` = `application`.`upload_type_id`
         AND `application_type_id` = '$type' $where_params
-        ORDER BY `application`.`application_id` DESC $limit");
+        ");
         return $query;
     }
 

@@ -20,7 +20,7 @@ class Router
     }
 
     function location($url) {
-        return header("Location: ./$url");
+        return header("Location: ./$url ");
     }
 }
 

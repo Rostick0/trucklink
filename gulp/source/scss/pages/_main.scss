@@ -2,6 +2,14 @@
     .index__page-title {
         margin-top: 3rem;
         margin-bottom: 2rem;
+
+        span {
+            color: var(--default-no-active-color);
+        }
+
+        .index__page-title__selected {
+            color: var(--default-input-color);
+        }
     }
 
     .index__filter_buttons {

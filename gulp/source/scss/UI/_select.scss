@@ -38,8 +38,16 @@
     }
     
     ._select__item {
+        &:nth-child(2n+1) {
+            background: var(--default-no-active-button);
+        }
+
+        transition: $transition_default;
+
         & > * {
             cursor: pointer;
+
+            color: var(--default-input-color);
 
             display: inline-block;
 
@@ -51,10 +59,6 @@
             height: 100%;
 
             &:hover {
-                background: var(--default-no-active-button);
-            }
-
-            &:active {
                 background: var(--default-color);
 
                 color: var(--default-block-background);

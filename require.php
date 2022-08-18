@@ -14,6 +14,8 @@ require_once './router/router.php';
 require_once './model/user_activity.php';
 require_once './controller/user_activity.php';
 
+require_once './model/authorization_session.php';
+
 require_once './model/authorization.php';
 require_once './controller/authorization.php';
 
@@ -34,6 +36,8 @@ require_once './model/authorization_session.php';
 
 require_once './model/application.php';
 require_once './controller/application.php';
+
+require_once './controller/application_search.php';
 
 require_once './source/components/layout/header.php';
 require_once './source/components/layout/footer.php';

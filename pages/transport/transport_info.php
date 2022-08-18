@@ -10,6 +10,7 @@ $messengers = Model::getAll('user_messenger', 'user_id', $cargo['user_id']);
 
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,6 +18,7 @@ $messengers = Model::getAll('user_messenger', 'user_id', $cargo['user_id']);
     <? require_once './source/components/style.php' ?>
     <title>Заявка на транспорт #<?= $cargo['application_id'] ?></title>
 </head>
+
 <body>
     <div class="wrapper">
         <?= renderHeader("Заявка на транспорт #{$cargo['application_id']}") ?>
@@ -24,40 +26,152 @@ $messengers = Model::getAll('user_messenger', 'user_id', $cargo['user_id']);
             <div class="container">
                 <div class="main__container">
                     <?= renderNavigationTop() ?>
+                    <div class="transport-grid">
+                        <div class="page-title">
+                            Информация о транспорте
+                        </div>
+                        <div class="page-title">
+                            Контакты
+                        </div>
+                        <div class="transport block-default">
+                            <div class="transport__item">
+                                <div class="transport__item_title middle-title">
+                                    Заявка на транспорт
+                                </div>
+                                <div class="transport__item_info">
+                                    <ul class="tranport__additional_info additional_info">
+                                        <li class="additional_info__item">
+                                            ID Заявки: <?= $cargo['application_id'] ?>
+                                        </li>
+                                        <li class="additional_info__item">
+                                            <?= normalizeDateTime($cargo['date_created'], true); ?>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="transport__item">
+                                <div class="transport__item_title middle-title">
+                                    Откуда — Куда
+                                </div>
+                                <div class="transport__item_info">
+                                    <div class="transport__location">
+                                        <div class="transport__city">
+                                            <?= showFlag($to['country']) ?> <?= $from['country'] . ", " . $from['city'] ?>
+                                        </div>
+                                        <span>
+                                            —
+                                        </span>
+                                        <div class="transport__city">
+                                            <?= showFlag($to['country']) ?> <?= $to['country'] . ", " . $to['city'] ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="transport__item">
+                                <div class="transport__item_title middle-title">
+                                    Дата загрузки
+                                </div>
+                                <div class="transport__item_info">
+                                    <?= normalizeDate($cargo['date_start']) ?> — <?= normalizeDate($cargo['date_end']) ?>
+                                </div>
+                            </div>
+                            <div class="transport__item">
+                                <div class="transport__item_title middle-title">
+                                    Тип транспорта
+                                </div>
+                                <div class="transport__item_info">
+                                    <?= $transport_upload['name'] ?>
+                                </div>
+                            </div>
+                            <div class="transport__item">
+                                <div class="transport__item_title middle-title">
+                                    Вид загрузки
+                                </div>
+                                <div class="transport__item_info">
+                                    <?= $upload_type['name'] ?>
+                                </div>
+                            </div>
+                            <div class="transport__item">
+                                <div class="transport__item_title middle-title">
+                                    Оплата
+                                </div>
+                                <div class="transport__item_info">
+                                    по запросу
+                                </div>
+                            </div>
+                            <div class="transport__item">
+                                <div class="transport__item_title middle-title">
+                                    Дополнительная информация
+                                </div>
+                                <div class="transport__item_info">
+                                    <ul class="tranport__additional_info additional_info">
+                                        <li class="additional_info__item">
+                                            объем: <?= $cargo['volume'] ?>м<sup>3</sup>
+                                        </li>
+                                        <li class="additional_info__item">
+                                            масса: <?= $cargo['weight'] ?><sup>т</sup>
+                                        </li>
+                                        <li class="additional_info__item">
+                                            высота: <?= $cargo['height'] ?><sup>м</sup>
+                                        </li>
+                                        <li class="additional_info__item">
+                                            ширина: <?= $cargo['width'] ?><sup>м</sup>
+                                        </li>
+                                        <li class="additional_info__item">
+                                            длинна: <?= $cargo['length'] ?><sup>м</sup>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="transport__item">
+                                <div class="transport__item_title middle-title">
+                                    Комментарий
+                                </div>
+                                <div class="transport__item_info">
+                                    <?= $cargo['description'] ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="transport__client client block-default">
+                            <div class="client__inner">
+                                <div class="client__info">
+                                    <div class="client__text">
+                                        <div class="client__activity">
+                                            <?= $user_activity['name'] ?>
+                                        </div>
+                                        <a class="client__href" href="profile?id=<?= $user['user_id'] ?>">
+                                            Посмотреть профиль
+                                        </a>
+                                    </div>
+                                    <div class="client__image">
+                                        <img class="client__img" src="./source/static/img/user_image.png" alt="">
+                                    </div>
+                                </div>
+                                <ul class="client__contacts">
+                                    <li class="client__contact">
+                                        <a class="client__contact_href" href="">
+                                            <button class="client__contact_button client__contact_number button">
+                                                +7(949)XXX-XX-XX
+                                                <span class="client__contact_button_hint">
+                                                    нажмите, чтобы узнать
+                                                </span>
+                                            </button>
+                                        </a>
+                                    </li>
+                                    <li class="client__contact">
+                                        <a class="client__contact_href" href="">
+                                            <button class="client__contact_button button-dark">
+                                                Написать сообщение
+                                            </button>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
 
-                    <div class="transport">
+                    <!-- <div class="transport">
                         <div class="transport__card block-default">
-                            <div class="transport__top">
-                                <div class="transport__page-title page-title">
-                                    Заявка на транспорт #<?= $cargo['application_id'] ?>
-                                </div>
-                                <div class="transport__top_bottom">
-                                    <div class="transport__id">
-                                        (ID Заявки: <?= $cargo['application_id'] ?>)
-                                    </div>
-                                    <date class="transport__date">
-                                        Добавлено: <?= $cargo['date_created'] ?>
-                                    </date>
-                                </div>
-                            </div>
-                            <div class="transport__from-where">
-                                <div class="transport__from">
-                                    <div class="trasport__small-title small-title">
-                                        Откуда:
-                                    </div>
-                                    <div class="trasport__small-info small-info">
-                                        <?= $from['country'] . ", " . $from['city'] ?>
-                                    </div>
-                                </div>
-                                <div class="transport__where">
-                                    <div class="trasport__small-title small-title">
-                                        Куда:
-                                    </div>
-                                    <div class="trasport__small-info small-info">
-                                        <?= $to['country'] . ", " . $to['city'] ?>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="transport__table">
                                 <div class="transport__table_left">
                                     <div class="small-title">
@@ -69,101 +183,6 @@ $messengers = Model::getAll('user_messenger', 'user_id', $cargo['user_id']);
                                     <div class="small-title">
                                         Любое направление:
                                     </div>
-                                    <div class="small-info">
-                                        <?
-                                            if ($cargo['is_any_direction']) {
-                                                echo 'Да';
-                                            } else {
-                                                echo '-';
-                                            }
-                                        ?>
-                                    </div>
-                                    <div class="small-title">
-                                        Тип транспорта:
-                                    </div>
-                                    <div class="small-info">
-                                        <?= $transport_upload['name'] ?>
-                                    </div>
-                                </div>
-                                <div class="transport__table_rigth">
-                                    <div class="transport__table_rigth_left">
-                                        <div class="small-title">
-                                            Загрузка:
-                                        </div>
-                                        <div class="small-info">
-                                            <? if ($upload_type['name']) {
-                                                echo $upload_type['name'];
-                                            } else {
-                                                echo '-';
-                                            }
-                                            ?>
-                                        </div>
-                                        <div class="small-title">
-                                            Высота м:
-                                        </div>
-                                        <div class="small-info">
-                                            <? if ($cargo['height']) {
-                                                echo $cargo['height'];
-                                            } else {
-                                                echo '-';
-                                            }
-                                            ?>
-                                        </div>
-                                        <div class="small-title">
-                                            Масса т:
-                                        </div>
-                                        <div class="small-info">
-                                            <? if ($cargo['weight']) {
-                                                echo $cargo['weight'];
-                                            } else {
-                                                echo '-';
-                                            }
-                                            ?>
-                                        </div>
-                                    </div>
-                                    <div class="transport__table_rigth_rigth">
-                                        <div class="small-title">
-                                            Длина м:
-                                        </div>
-                                        <div class="small-info">
-                                            <? if ($cargo['length']) {
-                                                echo $cargo['length'];
-                                            } else {
-                                                echo '-';
-                                            }
-                                        ?>
-                                        </div>
-                                        <div class="small-title">
-                                            Ширина м:
-                                        </div>
-                                        <div class="small-info">
-                                            <? if ($cargo['width']) {
-                                                echo $cargo['width'];
-                                            } else {
-                                                echo '-';
-                                            }
-                                            ?>
-                                        </div>
-                                        <div class="small-title">
-                                            Объём м3:
-                                        </div>
-                                        <div class="small-info">
-                                            <? if ($cargo['volume']) {
-                                                echo $cargo['volume'];
-                                            } else {
-                                                echo '-';
-                                            }
-                                            ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="transport__description">
-                                <div class="transport__description_middle-title middle-title">
-                                    Описание
-                                </div>
-                                <div class="transport__description_text">
-                                    <?= $cargo['description'] ?>
                                 </div>
                             </div>
                         </div>
@@ -187,8 +206,8 @@ $messengers = Model::getAll('user_messenger', 'user_id', $cargo['user_id']);
                                 </div>
                                 <ul class="user__contast_list contacts__list">
                                     <?
-                                        if ($user['telephone']) {
-                                            echo '<li class="contact__item">
+                                    if ($user['telephone']) {
+                                        echo '<li class="contact__item">
                                             <a class="button__telephone button-contact" href="tel:' . $user['telephone'] . '">
                                                 <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M9.98293 9.28381L11.7481 8.19046C13.4102 7.16096 15.578 7.52412 16.8139 9.03908L18.7217 11.3778C19.7751 12.6691 19.8896 14.4877 19.0065 15.9009L17.4402 18.4076C17.4209 18.4385 17.4073 18.4728 17.4003 18.5087C17.3015 19.0136 17.9521 20.1176 19.4756 21.6411C21.1927 23.3583 22.3146 23.9192 22.6999 23.6823L25.2164 22.1098C26.6292 21.2269 28.4473 21.3411 29.7385 22.3938L32.0666 24.2917C33.578 25.5239 33.9445 27.6842 32.9239 29.3458L31.8344 31.1198C31.0648 32.3728 29.7305 33.1697 28.2624 33.2532C23.9669 33.4976 19.4434 31.1978 14.6812 26.4355C9.91424 21.6686 7.61457 17.1409 7.86419 12.8416C7.94897 11.3814 8.73948 10.054 9.98293 9.28381ZM10.9289 10.8111C10.1829 11.2732 9.70854 12.0696 9.65767 12.9458C9.44259 16.6502 11.5132 20.7269 15.9515 25.1652C20.3856 29.5993 24.4588 31.6702 28.1603 31.4596C29.0412 31.4095 29.8418 30.9314 30.3035 30.1796L31.3931 28.4056C31.9426 27.5109 31.7453 26.3476 30.9315 25.6842L28.6034 23.7862C27.9081 23.2194 26.9291 23.1579 26.1684 23.6333L23.6465 25.2091C22.2477 26.0697 20.4793 25.1855 18.2053 22.9114C16.2802 20.9864 15.3829 19.4637 15.6372 18.1638C15.6864 17.9126 15.7811 17.6725 15.9167 17.4555L17.483 14.9489C17.9585 14.188 17.8969 13.2087 17.3296 12.5134L15.4218 10.1747C14.7564 9.35892 13.589 9.16338 12.6941 9.71772L10.9289 10.8111Z" fill="white"/>
@@ -198,12 +217,12 @@ $messengers = Model::getAll('user_messenger', 'user_id', $cargo['user_id']);
                                                 </span>                                        
                                             </a>
                                         </li>';
-                                        }
+                                    }
                                     ?>
                                     <?
-                                        foreach ($messengers as $messenger) {
-                                            if ($messenger['name'] === 'viber') {
-                                                echo '<li class="contact__item">
+                                    foreach ($messengers as $messenger) {
+                                        if ($messenger['name'] === 'viber') {
+                                            echo '<li class="contact__item">
                                                         <a class="button__viber button-contact" href="tel:' . $messenger['telephone'] . '">
                                                             <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                 <path d="M26.4262 6.85139L26.4182 6.81917C25.7661 4.18287 22.8261 1.35409 20.1262 0.76559L20.0958 0.759299C15.7289 -0.0737376 11.3011 -0.0737376 6.93514 0.759299L6.90377 0.76559C4.20484 1.35409 1.26481 4.18306 0.61186 6.81917L0.604614 6.85139C-0.201538 10.5329 -0.201538 14.2666 0.604614 17.9482L0.61186 17.9804C1.23707 20.5041 3.95802 23.203 6.55714 23.9452V26.888C6.55714 27.9532 7.85512 28.4763 8.5932 27.7076L11.5748 24.6084C12.2216 24.6445 12.8686 24.6647 13.5154 24.6647C15.7136 24.6647 17.9128 24.4568 20.0957 24.0404L20.1262 24.0341C22.826 23.4456 25.766 20.6166 26.4181 17.9805L26.4261 17.9483C27.2322 14.2666 27.2322 10.5331 26.4262 6.85139ZM24.0665 17.4144C23.6311 19.1343 21.399 21.2725 19.6254 21.6676C17.3035 22.1092 14.9631 22.2978 12.6251 22.2331C12.5786 22.2318 12.5339 22.2499 12.5016 22.2833C12.1697 22.6238 10.3246 24.5181 10.3246 24.5181L8.00909 26.8946C7.83977 27.0712 7.54233 26.9509 7.54233 26.7074V21.8323C7.54233 21.7518 7.48484 21.6834 7.40571 21.6678C7.40523 21.6676 7.40485 21.6676 7.40438 21.6675C5.63077 21.2724 3.39936 19.1342 2.9632 17.4143C2.23761 14.0865 2.23761 10.713 2.9632 7.38527C3.39936 5.66533 5.63077 3.52716 7.40438 3.13209C11.4595 2.36083 15.5711 2.36083 19.6255 3.13209C21.3999 3.52716 23.6312 5.66533 24.0666 7.38527C24.793 10.7131 24.793 14.0866 24.0665 17.4144Z" fill="white"/>
@@ -222,10 +241,10 @@ $messengers = Model::getAll('user_messenger', 'user_id', $cargo['user_id']);
                                                             </span>                                        
                                                         </a>
                                                     </li>';
-                                            }
+                                        }
 
-                                            if ($messenger['name'] === 'telegram') {
-                                                echo '<li class="contact__item">
+                                        if ($messenger['name'] === 'telegram') {
+                                            echo '<li class="contact__item">
                                                     <a class="button__telegram button-contact" href="tel:' . $messenger['telephone'] . '">
                                                         <svg width="27" height="23" viewBox="0 0 27 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M1.85611 9.90135C9.10385 6.65552 13.9368 4.51567 16.355 3.4818C23.2594 0.529891 24.6941 0.0171128 25.6292 0.000180536C25.8349 -0.00354352 26.2947 0.0488489 26.5926 0.297298C26.8441 0.507084 26.9133 0.790474 26.9464 0.989374C26.9795 1.18827 27.0208 1.64137 26.988 1.99541C26.6138 6.03635 24.9949 15.8426 24.1713 20.3686C23.8228 22.2836 23.1365 22.9258 22.4722 22.9886C21.0284 23.1252 19.9321 22.0078 18.5337 21.0656C16.3455 19.5912 15.1094 18.6734 12.9854 17.2347C10.5307 15.572 12.122 14.6581 13.5209 13.1646C13.887 12.7738 20.2483 6.82622 20.3714 6.28669C20.3868 6.21921 20.4011 5.96768 20.2557 5.83487C20.1103 5.70205 19.8958 5.74747 19.7409 5.78359C19.5215 5.83479 16.0259 8.20974 9.25407 12.9084C8.26184 13.6088 7.36312 13.95 6.55789 13.9321C5.6702 13.9124 3.96262 13.4162 2.69322 12.9921C1.13624 12.4718 -0.101214 12.1968 0.006541 11.3133C0.0626662 10.8531 0.679189 10.3824 1.85611 9.90135Z" fill="white"/>
@@ -235,10 +254,10 @@ $messengers = Model::getAll('user_messenger', 'user_id', $cargo['user_id']);
                                                         </span>                                        
                                                     </a>
                                                 </li>';
-                                            }
+                                        }
 
-                                            if ($messenger['name'] === 'whatsapp') {
-                                                echo '<li class="contact__item">
+                                        if ($messenger['name'] === 'whatsapp') {
+                                            echo '<li class="contact__item">
                                                     <a class="button__whatsapp button-contact" href="tel:' . $messenger['telephone'] . '">
                                                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M0 27.4803L1.92248 20.6523C0.686212 18.552 0.0353093 16.1624 0.0353093 13.7076C0.0353093 6.14921 6.18452 0 13.7429 0C21.3013 0 27.4505 6.14921 27.4505 13.7076C27.4505 21.266 21.3013 27.4153 13.7429 27.4153C11.3878 27.4153 9.08163 26.8124 7.04151 25.6677L0 27.4803ZM7.4015 23.1739L7.82108 23.4301C9.59982 24.516 11.6476 25.09 13.7429 25.09C20.0192 25.09 25.1252 19.9839 25.1252 13.7076C25.1252 7.43138 20.0192 2.32527 13.7429 2.32527C7.46669 2.32527 2.36058 7.43138 2.36058 13.7076C2.36058 15.8945 2.98211 18.0182 4.15784 19.849L4.4404 20.289L3.33331 24.2211L7.4015 23.1739Z" fill="white"/>
@@ -249,8 +268,8 @@ $messengers = Model::getAll('user_messenger', 'user_id', $cargo['user_id']);
                                                         </span>                                        
                                                     </a>
                                                 </li>';
-                                            }
                                         }
+                                    }
                                     ?>
                                     
                                     <li class="contact__item">
@@ -266,7 +285,7 @@ $messengers = Model::getAll('user_messenger', 'user_id', $cargo['user_id']);
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </main>
@@ -274,4 +293,5 @@ $messengers = Model::getAll('user_messenger', 'user_id', $cargo['user_id']);
     </div>
     <? require_once './source/components/script.php' ?>
 </body>
+
 </html>

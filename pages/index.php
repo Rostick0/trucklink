@@ -38,7 +38,10 @@ $citiesAll = City::getWithCountry();
                         <div class="catalog catalog__index">
                             <div class="catalog__title">
                                 <div class="page-title index__page-title">
-                                    Недавно добавленный груз
+                                    <span>Недавно добавленный: </span>
+                                    <span class="index__page-title__selected">
+                                        груз
+                                    </span>
                                 </div>
                             </div>
                             <div class="catalog__hints">

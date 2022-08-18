@@ -2,17 +2,6 @@
 
 class UserController {
     public static function create($login, $password, $email, $name, $telephone, $additional_telephone, $about, $activity_id, $organization, $messengers, $img, $password_confirm) {
-        $login = protectionData($login);
-        $password = protectionData($password);
-        $password_confirm = protectionData($password_confirm);
-        $email = protectionData($email);
-        $name = protectionData($name);
-        $telephone = protectionData($telephone);
-        $additional_telephone = protectionData($additional_telephone);
-        $about = protectionData($about);
-        $activity_id = (int) ($activity_id);
-        $organization = protectionData($organization);
-
         $error = false;
 
         if (strlen($login) < 3) {
@@ -88,35 +77,35 @@ class UserController {
 }
 
 if (isset($_POST['registration_button'])) {
-    $email = $_REQUEST['user_email'];
-    $telephone = $_REQUEST['user_telephone'];
-    $login = $_REQUEST['user_login'];
-    $name = $_REQUEST['user_name'];
-    $password = $_REQUEST['user_password'];
+    $email = protectionData($_REQUEST['user_email']);
+    $telephone = protectionData($_REQUEST['user_telephone']);
+    $login = protectionData($_REQUEST['user_login']);
+    $name = protectionData($_REQUEST['user_name']);
+    $password = protectionData($_REQUEST['user_password']);
     $password_confirm = $_REQUEST['user_password_confirm'];
-    $about = $_REQUEST['user_about'];
-    $organization = $_REQUEST['user_organization'];
-    $telephone_second = $_REQUEST['user_telephone_second'];
-    $activity = $_REQUEST['user_activity'];
+    $about = protectionData($_REQUEST['user_about']);
+    $organization = protectionData($_REQUEST['user_organization']);
+    $telephone_second = protectionData($_REQUEST['user_telephone_second']);
+    $activity = (int) $_REQUEST['user_activity'];
 
-    $viber = $_REQUEST['user_viber'];
-    $whatsapp = $_REQUEST['user_whatsapp'];
-    $telegram = $_REQUEST['user_telegram'];
+    $viber = protectionData($_REQUEST['user_viber']);
+    $whatsapp = protectionData($_REQUEST['user_whatsapp']);
+    $telegram = protectionData($_REQUEST['user_telegram']);
 
     $certificate = $_FILES['user_certificate'];
 
     $messengers = [
         [
             "name" => "viber",
-            "telephone" => protectionData($viber)
+            "telephone" => $viber
         ],
         [
             "name" => "whatsapp",
-            "telephone" => protectionData($whatsapp)
+            "telephone" => $whatsapp
         ],
         [
             "name" => "telegram",
-            "telephone" => protectionData($telegram)
+            "telephone" => $telegram
         ]
     ];
 
