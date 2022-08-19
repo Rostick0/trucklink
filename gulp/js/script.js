@@ -50,7 +50,7 @@ function removeClass(elem, classCss) {
 function normalizeDate(date, haveYear = false) {
     let result = date.slice(5);
     result = result.slice(result.length - 2) + ' ' + monthShort[+result.slice(0, 2) - 1];
-    
+
     if (haveYear) {
         result = ' ' + date.substr(date.length - 4);
     }
@@ -64,7 +64,7 @@ function roundingMilliseconds(milliseconds) {
 
 function normalizeDateSql(date) {
     let result = date.split(' ');
-    result = `${result[2]}-${monthShort.indexOf(result[1])+1}-${result[0]}`;
+    result = `${result[2]}-${monthShort.indexOf(result[1]) + 1}-${result[0]}`;
 
     return result;
 }
@@ -151,7 +151,7 @@ if (selectSearch) {
                 })
             })
 
-            selectInput.onblur = function() {
+            selectInput.onblur = function () {
                 setTimeout(() => {
                     selectItem.forEach(elem => elem.style.display = '');
                     removeClass(selectInput, '_active');
@@ -182,19 +182,19 @@ async function getApplications(listHtml, type, queryParams = null) {
     list.innerHTML = "";
 
     fetch(`${BACKEND_URL}/${type}/${queryParams}`)
-    .then(res => res.json())
-    .then(res => console.log(res))
+        .then(res => res.json())
+        .then(res => console.log(res))
 
     if (type == 'cargo') {
         return await fetch(`${BACKEND_URL}/${type}/${queryParams}`)
-        .then(res => res.json())
-        .then(res => {
-            if (!res[0]) {
-                return list.insertAdjacentHTML('beforeend', `<div class="text-center mt-1">Не найдено</div>`);
-            }
-            res.forEach(elem => {
-                list.insertAdjacentHTML('beforeend',
-                `<li class="service__item">
+            .then(res => res.json())
+            .then(res => {
+                if (!res[0]) {
+                    return list.insertAdjacentHTML('beforeend', `<div class="text-center mt-1">Не найдено</div>`);
+                }
+                res.forEach(elem => {
+                    list.insertAdjacentHTML('beforeend',
+                        `<li class="service__item">
                     <div class="service__status
                     ${applicationStatusColor(roundingMilliseconds(new Date() - new Date(elem?.date_created)))}
                     ">
@@ -235,23 +235,23 @@ async function getApplications(listHtml, type, queryParams = null) {
                     </a>
                 </li>
                 `);
+                })
             })
-        })
-        .catch(() => {
-            list.insertAdjacentHTML('beforeend', `<div class="text-center mt-1">Не найдено</div>`);
-        })
+            .catch(() => {
+                list.insertAdjacentHTML('beforeend', `<div class="text-center mt-1">Не найдено</div>`);
+            })
     }
 
     if (type == 'transport') {
         return await fetch(`${BACKEND_URL}/${type}/${queryParams}`)
-        .then(res => res.json())
-        .then(res => {
-            if (!res[0]) {
-                list.insertAdjacentHTML('beforeend', `<div class="text-center mt-1">Не найдено</div>`);
-            }
-            res.forEach(elem => {
-                list.insertAdjacentHTML('beforeend', 
-                `<li class="service__item">
+            .then(res => res.json())
+            .then(res => {
+                if (!res[0]) {
+                    list.insertAdjacentHTML('beforeend', `<div class="text-center mt-1">Не найдено</div>`);
+                }
+                res.forEach(elem => {
+                    list.insertAdjacentHTML('beforeend',
+                        `<li class="service__item">
                     <div class="service__status
                     ${applicationStatusColor(roundingMilliseconds(new Date() - new Date(elem?.date_created)))}
                     ">
@@ -292,11 +292,11 @@ async function getApplications(listHtml, type, queryParams = null) {
                     </a>
                 </li>
                 `);
+                })
             })
-        })
-        .catch(() => {
-            list.insertAdjacentHTML('beforeend', `<div class="text-center mt-1">Не найдено</div>`);
-        })
+            .catch(() => {
+                list.insertAdjacentHTML('beforeend', `<div class="text-center mt-1">Не найдено</div>`);
+            })
     }
 }
 
@@ -334,9 +334,9 @@ async function getCountElems(type) {
     let result = null
 
     const response = await fetch(`${BACKEND_URL}/count/?type=${type}`)
-    .then(res => res.json())
-    .then(res => result = res)
-    .catch(err => console.log(err))
+        .then(res => res.json())
+        .then(res => result = res)
+        .catch(err => console.log(err))
 
     return await result;
 }
@@ -344,7 +344,7 @@ async function getCountElems(type) {
 function renderNavigtaionBottom(elem, type) {
     let page = parseInt(urlQuery.p ? urlQuery.p : 1);
 
-    let counter = Math.floor(page/10) * 10;
+    let counter = Math.floor(page / 10) * 10;
 
     elem.innerHTML = "";
 
@@ -363,7 +363,7 @@ function renderNavigtaionBottom(elem, type) {
             if (i >= (+counter + 10)) {
                 elem.innerHTML += `
                     <li class="navigation-bottom_item">
-                        <a class="navigation-bottom_href _next_page" href="?p=${Math.floor(page/10 + 1)*10}">
+                        <a class="navigation-bottom_href _next_page" href="?p=${Math.floor(page / 10 + 1) * 10}">
                             Следующая страница
                         </a>
                     </li>
@@ -435,7 +435,7 @@ if (catalogFilter) {
 
 function searchActiveButton(e) {
     e.preventDefault();
-    
+
     const filter = document.querySelector('.filter');
     const filterFrom = filter.from;
     const filterTo = filter.to;
@@ -481,13 +481,13 @@ function searchActiveButton(e) {
 
 function renderCargoList() {
     filterButton.onclick = searchActiveButton;
-    
+
     getApplications(cargoList, 'cargo', LIMIT_OFFSET_APPLICATION);
 }
 
 function renderTransportList() {
     filterButton.onclick = searchActiveButton;
-    
+
     getApplications(tranposrtList, 'transport', LIMIT_OFFSET_APPLICATION);
 }
 
@@ -524,7 +524,7 @@ if (searchCargo && searchTransport && catalogIndex) {
 
         filterButton.onclick = e => {
             e.preventDefault();
-        
+
             const filter = document.querySelector('.filter');
             const filterFrom = filter.from;
             const filterTo = filter.to;
@@ -538,12 +538,12 @@ if (searchCargo && searchTransport && catalogIndex) {
             const filterVolumeMax = checkInputValue(filter.volume_max);
             const filterMassMin = checkInputValue(filter.mass_min);
             const filterMassMax = checkInputValue(filter.mass_max);
-        
+
             let filterFromCheked = filterFrom[[...filterFrom].findIndex(elem => elem.checked)];
             let filterToCheked = filterTo[[...filterTo].findIndex(elem => elem.checked)];
             filterFromCheked = checkInputValue(filterFromCheked);
             filterToCheked = checkInputValue(filterToCheked);
-        
+
             let queryParams = [
                 filterFromCheked ? `from=${filterFromCheked}` : null,
                 filterToCheked ? `to=${filterToCheked}` : null,
@@ -558,14 +558,14 @@ if (searchCargo && searchTransport && catalogIndex) {
                 filterMassMin ? `mass_min=${filterMassMin}` : null,
                 filterMassMax ? `mass_max=${filterMassMax}` : null
             ];
-        
+
             queryParams = queryParams.filter(query => query != null);
-        
+
             queryParams = '?' + queryParams.join('&');
-        
+
             return getApplications(cargoList, 'cargo', queryParams);
         };
-    
+
         renderCargoList();
 
         removeClass(searchTransport, '_active');
@@ -579,7 +579,7 @@ if (searchCargo && searchTransport && catalogIndex) {
 
         filterButton.onclick = e => {
             e.preventDefault();
-        
+
             const filter = document.querySelector('.filter');
             const filterFrom = filter.from;
             const filterTo = filter.to;
@@ -593,12 +593,12 @@ if (searchCargo && searchTransport && catalogIndex) {
             const filterVolumeMax = checkInputValue(filter.volume_max);
             const filterMassMin = checkInputValue(filter.mass_min);
             const filterMassMax = checkInputValue(filter.mass_max);
-        
+
             let filterFromCheked = filterFrom[[...filterFrom].findIndex(elem => elem.checked)];
             let filterToCheked = filterTo[[...filterTo].findIndex(elem => elem.checked)];
             filterFromCheked = checkInputValue(filterFromCheked);
             filterToCheked = checkInputValue(filterToCheked);
-        
+
             let queryParams = [
                 filterFromCheked ? `from=${filterFromCheked}` : null,
                 filterToCheked ? `to=${filterToCheked}` : null,
@@ -613,11 +613,11 @@ if (searchCargo && searchTransport && catalogIndex) {
                 filterMassMin ? `mass_min=${filterMassMin}` : null,
                 filterMassMax ? `mass_max=${filterMassMax}` : null
             ];
-        
+
             queryParams = queryParams.filter(query => query != null);
-        
+
             queryParams = '?' + queryParams.join('&');
-        
+
             return getApplications(ApplicationListIndex, 'transport', queryParams);
         };
 

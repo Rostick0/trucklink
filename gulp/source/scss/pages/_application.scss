@@ -1,4 +1,4 @@
-.transport-grid {
+.application-grid {
     display: grid;
     grid-template-columns: 1.4fr 0.6fr;
     grid-gap: 1.5rem 2rem;
@@ -8,13 +8,12 @@
     .client {
         align-self: flex-start;
 
-        position: relative;
+        position: sticky;
+        top: 0;
     }
 
     .client__inner {
         padding: 1.875rem 2rem 2.75rem;
-        
-        
     }
 
     .client__info {
@@ -75,18 +74,18 @@
     }
 }
 
-.transport {
+.application {
     display: flex;
     flex-direction: column;
     grid-gap: 3.375rem;
 
     padding: 2.25rem 2.5rem 3rem;
 
-    .transport__item_title {
+    .application__item_title {
         color: var(--default-input-color);
     }
     
-    .transport__item {
+    .application__item {
         color: var(--default-focus);
 
         display: flex;
@@ -94,18 +93,18 @@
         row-gap: 0.625rem;
     }
 
-    .transport__item_info {
+    .application__item_info {
         font-size: 1.125rem;
         font-weight: 500;
     }
 
-    .transport__city {
+    .application__city {
         display: flex;
         align-items: center;
         column-gap: 0.6rem;
     }
 
-    .transport__location {
+    .application__location {
         display: flex;
         align-items: center;
         column-gap: 0.9rem;

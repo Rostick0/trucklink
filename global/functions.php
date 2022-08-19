@@ -70,4 +70,12 @@ function showFlag($country) {
     }
 }
 
+function hideTelephone($telephone) {
+    $telephone_begin = mb_substr($telephone, 0, 4);
+    $telephone_end = mb_substr($telephone, 4);
+    $telephone_end = preg_replace('/\d/', 'X', $telephone_end);
+
+    return $telephone_begin . $telephone_end;
+}
+
 ?>
