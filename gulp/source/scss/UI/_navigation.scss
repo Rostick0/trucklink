@@ -23,6 +23,7 @@
         width: 100%;
 
         .navigation__icon {
+            border: 2px solid var(--navigation-icon-border);
             border-radius: 50%;
 
             display: flex;
@@ -50,26 +51,26 @@
         }
 
         &._green {
-            background: linear-gradient(147.96deg, #EEFEE8 19.25%, #D9FFCC 89.03%);
+            background: var(--navigation-background-first);
 
             .navigation__icon {
-                background: linear-gradient(180deg, #24C86D 0%, #24F792 100%);
+                background: var(--navigation-icon-first);
             }
 
             .navigation__subtitle {
-                color: #32DC43;
+                color: var(--navigation-subtitle-color-first);
             }
         }
 
         &._yellow {
-            background: linear-gradient(150.55deg, #FFF8E5 18.04%, #FFEAB3 102.95%);
+            background: var(--navigation-background-second);
 
             .navigation__icon {
-                background: linear-gradient(360deg, #FFD600 0%, #FFA41D 100%);
+                background: var(--navigation-icon-second);
             }
 
             .navigation__subtitle {
-                color: #FFA61B;
+                color: var(--navigation-subtitle-color-second);
             }
         }
     }

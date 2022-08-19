@@ -1,8 +1,8 @@
 .logo {
-    background: #FFFBE3;
+    background: var(--icon);
     border-radius: 2rem 0;
 
-    color: #000000;
+    color: var(--default-dark-color);
 
     font-size: 1.75rem;
     font-weight: 700;

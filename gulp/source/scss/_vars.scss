@@ -31,6 +31,7 @@ $height_input: $height_button;
     --default-input-placeholder: #DBDBDB;
     --default-input-border:  #c1c1c1;
     --default-input-color: #2A2929;
+    --default-dark-color: var(--default-input-color);
     --default-focus: #6A6A6A;
     --default-no-active-button: #F1F1F1;
     --default-no-active-color: #B8B8B8;
@@ -39,35 +40,54 @@ $height_input: $height_button;
     --default-user-id: #0b79fe;
     --default-background-calendar: #EBE8FE;
     --default-color-error: #E54A4A;
+    --header-icon: #ebe8fe;
+    --icon: #fffbe3;
+    --navigation-background-first: linear-gradient(147.96deg,#eefee8 19.25%,#d9ffcc 89.03%);
+    --navigation-background-second: linear-gradient(150.55deg,#fff8e5 18.04%,#ffeab3 102.95%);
+    --navigation-icon-first: linear-gradient(180deg, #24C86D 0%, #24F792 100%);
+    --navigation-icon-second: linear-gradient(360deg, #FFD600 0%, #FFA41D 100%);
+    --navigation-icon-border: none;
+    --navigation-subtitle-color-first: #32DC43;
+    --navigation-subtitle-color-second: #FFA61B;
 }
 
 body {
     &._dark {
-        --default-body-background: black;
-        --default-block-background: #FFFFFF;
-        --default-color: #2d2d41;
-        --default-links: var(--default-color);
-        --default-button-first: #FFC93A;
-        --default-button-first-hover: #F9B709;
-        --default-button-first-active: #A48534;
+        --default-body-background: #131A24;
+        --default-block-background: #17212B;
+        --default-color: #EFF1FF;
+        --default-links: #1A68AA;
+        --default-button-first: #090D13;
+        --default-button-first-hover: #090D13;
+        --default-button-first-active: #090D13;
         --default-button-first-color: #FFFFFF;
-        --default-button-second: #2D2D41;
-        --default-button-second-hover: #1D1D4B;
-        --default-button-second-active: #03030A;
+        --default-button-second: #1A68AA;
+        --default-button-second-hover: #1A68AA;
+        --default-button-second-active: #1A68AA;
         --default-button-second-color: #FFFFFF;
         --default-button-disabled: #DFDFDF;
         --default-button-disabled-color: #939393;
-        --default-input-placeholder: #DBDBDB;
-        --default-input-border:  #c1c1c1;
-        --default-input-color: #2A2929;
+        --default-input-placeholder: #6E7B8B;
+        --default-input-border:  #6E7B8B;
+        --default-input-color: #6E7B8B;
+        --default-dark-color: var(--default-color);
         --default-focus: #6A6A6A;
         --default-no-active-button: #F1F1F1;
         --default-no-active-color: #B8B8B8;
         --default-disabled-color: rgba(43, 41, 41, 0.4);
         --default-social-color: #C2C2C2;
         --default-user-id: #0b79fe;
-        --default-background-calendar: #EBE8FE;
+        --default-background-calendar: #131A24;
         --default-color-error: #E54A4A;
+        --header-icon: #1A68AA;
+        --icon: #090D13;
+        --navigation-background-first: linear-gradient(147.96deg, #04070C 19.25%, #131A24 89.03%);
+        --navigation-background-second: var(--navigation-background-first);
+        --navigation-icon-first: none;
+        --navigation-icon-second: none;
+        --navigation-icon-border: #1C2A3D;
+        --navigation-subtitle-color-first: #35A3FF;
+        --navigation-subtitle-color-second: #FFA61B;
     }
 }
 

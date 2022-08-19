@@ -115,3 +115,5 @@ function renderHeader($title)
             </div>
         </header>';
 }
+
+?>

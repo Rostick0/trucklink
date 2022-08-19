@@ -1,6 +1,6 @@
 * {
     scrollbar-width: thin;
-    scrollbar-color: var(--default-no-active-color) none;
+    scrollbar-color: var(--default-no-active-color) var(--default-body-background);
 }
 
 /* для Chrome/Edge/Safari */
@@ -10,7 +10,7 @@
 }
 
 *::-webkit-scrollbar-track {
-    background: none;
+    background: var(--default-body-background);
 }
 
 *::-webkit-scrollbar-thumb {
