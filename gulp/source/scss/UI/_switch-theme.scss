@@ -1,0 +1,40 @@
+.switch-theme {
+    display: flex;
+    align-items: center;
+    column-gap: 0.75rem;
+
+    .switch-theme__switch {
+        border: 0.125rem solid var(--default-color);
+        border-radius: 3.25rem;
+
+        display: flex;
+        align-items: center;
+
+        padding: 0.25rem;
+
+        width: 2.75rem;
+        height: 1.5rem;
+
+        &._active {
+            .switch-theme__circle {
+                transform: translateX(100%);
+            }
+        }
+    }
+
+    .switch-theme__circle {
+        background: var(--default-color);
+
+        border-radius: 50%;
+
+        transition: $transition_middle;
+
+        width: 1rem;
+        height: 1rem;
+    }
+
+    .switch-theme__icon {
+        display: flex;
+        align-items: center;
+    }
+}

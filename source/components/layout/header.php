@@ -1,6 +1,7 @@
 <?
 
-function renderHeaderAuthorization() {
+function renderHeaderAuthorization()
+{
     if ($_SESSION['user']['id']) {
         return '
             <div class="header__rigth header__authorization">
@@ -27,7 +28,8 @@ function renderHeaderAuthorization() {
         </div>';
 }
 
-function renderHeader($title) {
+function renderHeader($title)
+{
     return '<header class="header">
     <div class="container">
         <div class="header__container">
@@ -75,19 +77,27 @@ function renderHeader($title) {
                                     </a>
                                 </li>
                             </ul>
-                            <div class="header__burger-fixed__bottom">
-                                <ul class="header__burger-fixed__socials">
+                            <ul class="header__burger-fixed__socials">
+                                <li class="header__burger-fixed__social">
+                                    <a href="malito:info@trucklink.pro">
+                                        info@trucklink.pro                                                  
+                                    </a>
+                                </li>
                                     <li class="header__burger-fixed__social">
-                                        <a href="malito:info@trucklink.pro">
-                                            info@trucklink.pro                                                  
-                                        </a>
-                                    </li>
-                                    <li class="header__burger-fixed__social">
-                                        <a href="">
-                                            Написать в Telegram                                                                                                    
-                                        </a>
-                                    </li>
-                                </ul>
+                                    <a href="">
+                                        Написать в Telegram                                                                                                    
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="header__burger_switch-theme switch-theme">
+                                <div class="switch-theme__switch">
+                                    <div class="switch-theme__circle"></div>
+                                </div>
+                                <div class="switch-theme__icon">
+                                    <svg width="1.375rem" height="1.375rem" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16.5 16.5L18 18L16.5 16.5ZM19 11H21H19ZM5.5 5.5L4 4L5.5 5.5ZM16.5 5.5L18 4L16.5 5.5ZM5.5 16.5L4 18L5.5 16.5ZM1 11H3H1ZM11 1V3V1ZM11 19V21V19ZM15 11C15 13.2091 13.2091 15 11 15C8.79086 15 7 13.2091 7 11C7 8.79086 8.79086 7 11 7C13.2091 7 15 8.79086 15 11Z" stroke="#FFA61B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>                                
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -105,5 +115,3 @@ function renderHeader($title) {
             </div>
         </header>';
 }
-
-?>

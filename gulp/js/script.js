@@ -8,6 +8,26 @@ const PATH_IMAGE = `${PATH_CONTENT}/img`
 const PATH_CONTENT_JS = `${PATH_CONTENT}/js/script.js`;
 const LIMIT_OFFSET_APPLICATION = `&limit=10&offset=${pageApplicationOffset()}`;
 
+const switchThemeSwitch = document.querySelector('.switch-theme__switch');
+
+if (switchThemeSwitch) {
+    if (localStorage.getItem('theme') === '_dark') {
+        switchThemeSwitch.classList.toggle('_active');
+        document.body.classList.toggle('_dark');
+    }
+
+    switchThemeSwitch.onclick = () => {
+        switchThemeSwitch.classList.toggle('_active');
+        document.body.classList.toggle('_dark');
+
+        if (localStorage.getItem('theme') === '_dark') {
+            localStorage.setItem('theme', '');
+        } else {
+            localStorage.setItem('theme', '_dark');
+        }
+    }
+}
+
 const monthShort = [
     'янв',
     'фев',

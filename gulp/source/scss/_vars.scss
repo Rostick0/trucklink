@@ -41,6 +41,36 @@ $height_input: $height_button;
     --default-color-error: #E54A4A;
 }
 
+body {
+    &._dark {
+        --default-body-background: black;
+        --default-block-background: #FFFFFF;
+        --default-color: #2d2d41;
+        --default-links: var(--default-color);
+        --default-button-first: #FFC93A;
+        --default-button-first-hover: #F9B709;
+        --default-button-first-active: #A48534;
+        --default-button-first-color: #FFFFFF;
+        --default-button-second: #2D2D41;
+        --default-button-second-hover: #1D1D4B;
+        --default-button-second-active: #03030A;
+        --default-button-second-color: #FFFFFF;
+        --default-button-disabled: #DFDFDF;
+        --default-button-disabled-color: #939393;
+        --default-input-placeholder: #DBDBDB;
+        --default-input-border:  #c1c1c1;
+        --default-input-color: #2A2929;
+        --default-focus: #6A6A6A;
+        --default-no-active-button: #F1F1F1;
+        --default-no-active-color: #B8B8B8;
+        --default-disabled-color: rgba(43, 41, 41, 0.4);
+        --default-social-color: #C2C2C2;
+        --default-user-id: #0b79fe;
+        --default-background-calendar: #EBE8FE;
+        --default-color-error: #E54A4A;
+    }
+}
+
 .block-default {
     background: var(--default-block-background);
 

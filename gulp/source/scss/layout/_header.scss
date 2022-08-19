@@ -145,24 +145,18 @@
         }
     }
 
-    .header__burger-fixed__bottom {
+    .header__burger-fixed__socials {
         color: var(--default-social-color);
 
         display: flex;
-        align-items: center;
-        column-gap: 0.875rem;
+        column-gap: 0.625rem;
+        flex-direction: column;
 
         font-size: 1.5rem;
 
         flex: 0 0 auto;
 
         padding: 2.25rem 0 2.75rem;
-    }
-
-    .header__burger-fixed__socials {
-        display: flex;
-        flex-direction: column;
-        column-gap: 0.625rem;
     }
 
     .header__burger-fixed__social {
