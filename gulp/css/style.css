@@ -94,6 +94,10 @@ textarea {
   --default-button-second-hover: #1D1D4B;
   --default-button-second-active: #03030A;
   --default-button-second-color: #FFFFFF;
+  --default-button-third: #EAEAFF;
+  --default-button-third-hover: #EAEAFF;
+  --default-button-third-active: #EAEAFF;
+  --default-button-third-color: var(--default-color);
   --default-button-disabled: #DFDFDF;
   --default-button-disabled-color: #939393;
   --default-input-placeholder: #DBDBDB;
@@ -117,6 +121,10 @@ textarea {
   --navigation-icon-border: none;
   --navigation-subtitle-color-first: #32DC43;
   --navigation-subtitle-color-second: #FFA61B;
+  --scroll: var(--default-no-active-color);
+  --scroll-active: var(--default-focus);
+  --calendar-date-disabled-background: #F1F1F1;
+  --calendar-date-disabled-color: #B8B8B8;
 }
 
 body._dark {
@@ -132,15 +140,19 @@ body._dark {
   --default-button-second-hover: #1A68AA;
   --default-button-second-active: #1A68AA;
   --default-button-second-color: #FFFFFF;
-  --default-button-disabled: #DFDFDF;
-  --default-button-disabled-color: #939393;
+  --default-button-third: var(--default-button-first);
+  --default-button-third-hover: var(--default-button-first-hover);
+  --default-button-third-active: var(--default-button-first-active);
+  --default-button-third-color: var(--default-button-first-color);
+  --default-button-disabled: #131A24;
+  --default-button-disabled-color: #FFFFFF;
+  --default-no-active-button: #131A24;
+  --default-no-active-color: #FFFFFF;
   --default-input-placeholder: #6E7B8B;
   --default-input-border: #6E7B8B;
   --default-input-color: #6E7B8B;
   --default-dark-color: var(--default-color);
   --default-focus: #6A6A6A;
-  --default-no-active-button: #F1F1F1;
-  --default-no-active-color: #B8B8B8;
   --default-disabled-color: rgba(43, 41, 41, 0.4);
   --default-social-color: #C2C2C2;
   --default-user-id: #0b79fe;
@@ -155,6 +167,14 @@ body._dark {
   --navigation-icon-border: #1C2A3D;
   --navigation-subtitle-color-first: #35A3FF;
   --navigation-subtitle-color-second: #FFA61B;
+  --scroll: #090D13;
+  --scroll-active: #000000;
+}
+body._dark .header__burger-fixed__social a {
+  color: #FFFFFF !important;
+}
+body._dark .index__filter_button {
+  color: #FFFFFF;
 }
 
 .block-default {
@@ -565,9 +585,16 @@ body._dark {
 }
 
 .button-grey {
-  background: #EAEAFF;
-  color: #2D2D41;
+  background: var(--default-button-third);
+  color: var(--default-button-third-color);
 }
+.button-grey:hover {
+  background: var(--default-button-third-hover);
+}
+.button-grey:active {
+  background: var(--default-button-third-active);
+}
+
 .button-contact {
   color: #FFFFFF;
   -webkit-column-gap: 0.625rem;
@@ -819,7 +846,7 @@ body._dark {
   width: 2.13rem;
 }
 .navigation .navigation__item .navigation__subtitle {
-  font-weight: 600;
+  font-weight: 400;
   font-size: 1rem;
 }
 .navigation .navigation__item._green {
@@ -1169,6 +1196,10 @@ a {
 .filter > * {
   -ms-flex-item-align: end;
   align-self: end;
+}
+
+.catalog__filter {
+  border-top-left-radius: 0;
 }
 
 .filter__to_from, .information-basic__to_from {
@@ -1638,9 +1669,9 @@ a {
   color: var(--default-button-second-color);
 }
 .calendar .calendar__day_item._disabled {
-  background: var(--default-no-active-button) !important;
+  background: var(--calendar-date-disabled-background) !important;
   cursor: auto;
-  color: var(--default-no-active-color) !important;
+  color: var(--calendar-date-disabled-color) !important;
 }
 
 .navigation-bottom {
@@ -1686,7 +1717,7 @@ a {
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--default-no-active-color) var(--default-body-background);
+  scrollbar-color: var(--scroll) var(--default-body-background);
 }
 
 /* для Chrome/Edge/Safari */
@@ -1700,11 +1731,11 @@ a {
 }
 
 *::-webkit-scrollbar-thumb {
-  background: var(--default-no-active-color);
+  background: var(--scroll);
   border-radius: 0.33rem;
 }
 *::-webkit-scrollbar-thumb:active {
-  background: var(--default-focus);
+  background: var(--scroll-active);
 }
 
 .switch-theme {

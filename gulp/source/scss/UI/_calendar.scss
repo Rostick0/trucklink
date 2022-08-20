@@ -129,11 +129,11 @@
         }
 
         &._disabled {
-            background: var(--default-no-active-button) !important;
+            background: var(--calendar-date-disabled-background) !important;
 
             cursor: auto;
 
-            color: var(--default-no-active-color) !important;
+            color: var(--calendar-date-disabled-color) !important;
         }
     }
 }

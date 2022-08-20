@@ -1,6 +1,6 @@
 * {
     scrollbar-width: thin;
-    scrollbar-color: var(--default-no-active-color) var(--default-body-background);
+    scrollbar-color: var(--scroll) var(--default-body-background);
 }
 
 /* для Chrome/Edge/Safari */
@@ -14,10 +14,10 @@
 }
 
 *::-webkit-scrollbar-thumb {
-    background: var(--default-no-active-color);
+    background: var(--scroll);
     border-radius: 0.33rem;
 
     &:active {
-        background: var(--default-focus);
+        background: var(--scroll-active);
     }
 }

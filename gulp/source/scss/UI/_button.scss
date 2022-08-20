@@ -57,16 +57,16 @@
 .button-grey {
     @extend .button;
 
-    background: #EAEAFF;
+    background: var(--default-button-third);
 
-    color: $blue_dark;
+    color: var(--default-button-third-color);
 
     &:hover {
-
+        background: var(--default-button-third-hover);
     }
 
     &:active {
-
+        background: var(--default-button-third-active);
     }
 }
 

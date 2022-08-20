@@ -85,7 +85,7 @@ function renderHeader($title)
                                 </li>
                                     <li class="header__burger-fixed__social">
                                     <a href="">
-                                        Написать в Telegram                                                                                                    
+                                        написать в Telegram                                                                                                    
                                     </a>
                                 </li>
                             </ul>

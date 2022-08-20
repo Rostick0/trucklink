@@ -5,10 +5,31 @@ const urlQuery = new Proxy(new URLSearchParams(window.location.search), {
 const BACKEND_URL = `http://backend/http`;
 const PATH_CONTENT = './source/static';
 const PATH_IMAGE = `${PATH_CONTENT}/img`
-const PATH_CONTENT_JS = `${PATH_CONTENT}/js/script.js`;
+const PATH_CONTENT_JS = `${PATH_CONTENT}/js`;
 const LIMIT_OFFSET_APPLICATION = `&limit=10&offset=${pageApplicationOffset()}`;
 
 const switchThemeSwitch = document.querySelector('.switch-theme__switch');
+
+function smoothTransitionTheme() {
+    const style = window.document.styleSheets[0];
+
+    const css = `* {
+        -webkit-transition: 500ms !important;
+        -o-transition: 500ms !important;
+        transition: 500ms !important;
+    }`.trim();
+
+    if (style.cssRules[style.cssRules.length - 1].selectorText == '*') {
+        return
+    }
+
+    style.insertRule(css, style.cssRules.length);
+    const index = style.cssRules.length - 1;
+
+    setTimeout(() => {
+        style.deleteRule(index);
+    }, 500);
+}
 
 if (switchThemeSwitch) {
     if (localStorage.getItem('theme') === '_dark') {
@@ -17,6 +38,8 @@ if (switchThemeSwitch) {
     }
 
     switchThemeSwitch.onclick = () => {
+        smoothTransitionTheme();
+
         switchThemeSwitch.classList.toggle('_active');
         document.body.classList.toggle('_dark');
 
