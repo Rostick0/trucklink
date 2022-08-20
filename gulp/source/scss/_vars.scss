@@ -80,7 +80,7 @@ body {
         --default-button-disabled: #131A24;
         --default-button-disabled-color: #FFFFFF;
         --default-no-active-button: #131A24;
-        --default-no-active-color: #FFFFFF;
+        --default-no-active-color: #6E7B8B;
         --default-input-placeholder: #6E7B8B;
         --default-input-border:  #6E7B8B;
         --default-input-color: #6E7B8B;
@@ -103,7 +103,16 @@ body {
         --scroll: #090D13;
         --scroll-active: #000000;
 
+        scrollbar-width: thin;
+        scrollbar-color: var(--scroll) var(--default-body-background);
+
         .header__burger-fixed__social {
+            &:first-child {
+                a {
+                    color: #FFC93A !important;
+                }
+            }
+
             a {
                 color: #FFFFFF !important;
             }
@@ -111,6 +120,10 @@ body {
 
         .index__filter_button {
             color: #FFFFFF;
+        }
+
+        .index__page-title__selected {
+            color: #FFFFFF !important;
         }
     }
 }
@@ -163,4 +176,14 @@ body {
 
 .border-0 {
     border: none !important;
+}
+
+._hidden-scroll {
+    overflow-y: hidden;
+
+    padding-right: 8px;
+
+    @media (max-width: 1024px) {
+        padding-right: 0;
+    }
 }

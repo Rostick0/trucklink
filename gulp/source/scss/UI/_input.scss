@@ -46,8 +46,10 @@
 
         width: 1.06rem;
 
-        svg {
-            width: 2.125rem;
+        path {
+            fill: var(--default-button-second);
+
+            transition: $transition_default;
         }
     }
 

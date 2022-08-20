@@ -32,7 +32,11 @@ class Application {
     static public function create($price, $from, $to, $transport_upload_id, $upload_type_id, $application_type_id, $is_any_direction, $date_start, $date_end, $user_id, $volume, $weight, $length, $width, $height, $description) {
         global $mysqli;
 
-        $query = $mysqli->query("INSERT INTO `application`(`price`, `from`, `to`,`transport_upload_id`, `upload_type_id`,`application_type_id`, `is_any_direction`, `date_start`, `date_end`, `user_id`) VALUES ('$price','$from','$to','$transport_upload_id','$upload_type_id','$application_type_id','$is_any_direction','$date_start','$date_end', '$user_id')");
+        if ($price) {
+            $query = $mysqli->query("INSERT INTO `application`(`price`, `from`, `to`,`transport_upload_id`, `upload_type_id`,`application_type_id`, `is_any_direction`, `date_start`, `date_end`, `user_id`) VALUES ('$price','$from','$to','$transport_upload_id','$upload_type_id','$application_type_id','$is_any_direction','$date_start','$date_end', '$user_id')");
+        } else {
+            $query = $mysqli->query("INSERT INTO `application`(`price`, `from`, `to`,`transport_upload_id`, `upload_type_id`,`application_type_id`, `is_any_direction`, `date_start`, `date_end`, `user_id`) VALUES (NULL,'$from','$to','$transport_upload_id','$upload_type_id','$application_type_id','$is_any_direction','$date_start','$date_end', '$user_id')");
+        }
 
         if ($query) {
             $id = mysqli_insert_id($mysqli);

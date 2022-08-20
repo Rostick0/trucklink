@@ -16,17 +16,23 @@
     row-gap: 2.125rem;
 
     .information-basic {
-        padding: 2.5rem 11rem 3.125rem 4rem;
+        padding: 2.5rem 3.125rem 4rem;
     }
 
     .information-basic__to_from {
-        grid-column: 2/5;
+        grid-column: 1/8;
 
         z-index: 120;
     }
 
+    .information-basic__price {
+        display: flex;
+        column-gap: 2rem;
+        grid-column: 8/11;
+    }
+
     .information-basic__date {
-        grid-column: auto;
+        grid-column: 1/4;
     }
 
     .information-basic__to_from__inputs {
@@ -37,6 +43,13 @@
         }
     }
 
+    .information-basic__two-selects {
+        display: grid;
+        grid-gap: inherit;
+        grid-template-columns: 1fr 1fr;
+        grid-column: 4/11;
+    }
+
     .information__title {
         color: var(--default-focus);
 
@@ -45,7 +58,7 @@
 
     .information-basic_form {
         display: grid;
-        grid-template-columns: 26.5% 23% 23% auto;
+        grid-template-columns: repeat(10, 1fr);
         grid-gap: 2.5rem 2.25rem;
     }
 

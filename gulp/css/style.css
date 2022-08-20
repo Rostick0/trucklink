@@ -147,7 +147,7 @@ body._dark {
   --default-button-disabled: #131A24;
   --default-button-disabled-color: #FFFFFF;
   --default-no-active-button: #131A24;
-  --default-no-active-color: #FFFFFF;
+  --default-no-active-color: #6E7B8B;
   --default-input-placeholder: #6E7B8B;
   --default-input-border: #6E7B8B;
   --default-input-color: #6E7B8B;
@@ -169,12 +169,20 @@ body._dark {
   --navigation-subtitle-color-second: #FFA61B;
   --scroll: #090D13;
   --scroll-active: #000000;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll) var(--default-body-background);
+}
+body._dark .header__burger-fixed__social:first-child a {
+  color: #FFC93A !important;
 }
 body._dark .header__burger-fixed__social a {
   color: #FFFFFF !important;
 }
 body._dark .index__filter_button {
   color: #FFFFFF;
+}
+body._dark .index__page-title__selected {
+  color: #FFFFFF !important;
 }
 
 .block-default {
@@ -222,6 +230,16 @@ body._dark .index__filter_button {
 
 .border-0 {
   border: none !important;
+}
+
+._hidden-scroll {
+  overflow-y: hidden;
+  padding-right: 8px;
+}
+@media (max-width: 1024px) {
+  ._hidden-scroll {
+    padding-right: 0;
+  }
 }
 
 .header .header__container {
@@ -696,8 +714,11 @@ body._dark .index__filter_button {
   right: 1rem;
   width: 1.06rem;
 }
-.input-form .input-form__calendar svg, .textarea-form .input-form__calendar svg {
-  width: 2.125rem;
+.input-form .input-form__calendar path, .textarea-form .input-form__calendar path {
+  fill: var(--default-button-second);
+  -webkit-transition: 200ms;
+  -o-transition: 200ms;
+  transition: 200ms;
 }
 .input-form .date_start__input, .textarea-form .date_start__input, .input-form .date_end__input, .textarea-form .date_end__input {
   text-align: left;
@@ -757,15 +778,15 @@ body._dark .index__filter_button {
   -webkit-transition: 200ms;
   -o-transition: 200ms;
   transition: 200ms;
-  width: 2rem;
-  min-width: 2rem;
-  height: 2rem;
+  width: 1.25rem;
+  min-width: 1.25rem;
+  height: 1.25rem;
 }
 .checkbox .checkbox__text .checkbox__checked {
   position: absolute;
-  left: 0.5rem;
+  left: 3%;
   opacity: 0;
-  width: 1.125rem;
+  width: 0.85rem;
 }
 .checkbox .checkbox__input:checked + .checkbox__text::before {
   background: var(--default-color);
@@ -790,7 +811,7 @@ body._dark .index__filter_button {
 }
 .checkbox._right .checkbox__checked {
   left: auto;
-  right: 0.5rem;
+  right: 3%;
 }
 .checkbox._right .checkbox__input:checked + .checkbox__text::after {
   background: var(--default-color);
@@ -820,7 +841,7 @@ body._dark .index__filter_button {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  padding: 1.31rem 1.44rem;
+  padding: 1rem 1.5rem;
   width: 100%;
 }
 .navigation .navigation__item .navigation__icon {
@@ -886,12 +907,12 @@ body._dark .index__filter_button {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  row-gap: 0.44rem;
+  row-gap: 0.1875rem;
 }
 .navigation .navgitaion__title {
   color: var(--default-color);
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: 1.125rem;
+  font-weight: 500;
 }
 
 @media (max-width: 1440px) {
@@ -986,8 +1007,11 @@ body._dark .index__filter_button {
   right: 1rem;
   width: 1.06rem;
 }
-.input-form .input-form__calendar svg, .textarea-form .input-form__calendar svg {
-  width: 2.125rem;
+.input-form .input-form__calendar path, .textarea-form .input-form__calendar path {
+  fill: var(--default-button-second);
+  -webkit-transition: 200ms;
+  -o-transition: 200ms;
+  transition: 200ms;
 }
 .input-form .date_start__input, .textarea-form .date_start__input, .input-form .date_end__input, .textarea-form .date_end__input {
   text-align: left;
@@ -1783,6 +1807,11 @@ a {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .login {
@@ -2236,14 +2265,23 @@ a {
   row-gap: 2.125rem;
 }
 .information .information-basic {
-  padding: 2.5rem 11rem 3.125rem 4rem;
+  padding: 2.5rem 3.125rem 4rem;
 }
 .information .information-basic__to_from {
-  grid-column: 2/5;
+  grid-column: 1/8;
   z-index: 120;
 }
+.information .information-basic__price {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-column-gap: 2rem;
+  -moz-column-gap: 2rem;
+  column-gap: 2rem;
+  grid-column: 8/11;
+}
 .information .information-basic__date {
-  grid-column: auto;
+  grid-column: 1/4;
 }
 .information .information-basic__to_from__inputs {
   grid-gap: 2.25rem;
@@ -2251,13 +2289,19 @@ a {
 .information .information-basic__to_from__inputs::before {
   width: 1.25rem;
 }
+.information .information-basic__two-selects {
+  display: grid;
+  grid-gap: inherit;
+  grid-template-columns: 1fr 1fr;
+  grid-column: 4/11;
+}
 .information .information__title {
   color: var(--default-focus);
   margin-bottom: 2.25rem;
 }
 .information .information-basic_form {
   display: grid;
-  grid-template-columns: 26.5% 23% 23% auto;
+  grid-template-columns: repeat(10, 1fr);
   grid-gap: 2.5rem 2.25rem;
 }
 .information .information-basic__checkbox {

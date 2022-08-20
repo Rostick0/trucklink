@@ -1,13 +1,18 @@
 <?
 
 class ApplicationController {
-    static public function create($price, $from, $to, $transport_upload_id, $upload_type_id, $application_type_id, $is_any_direction, $date_start, $date_end, $user_id, $volume, $weight, $length, $width, $height, $description) {
+    static public function create($price, $from, $to, $transport_upload_id, $upload_type_id, $application_type_id, $is_any_direction, $date_start, $date_end, $user_id, $volume, $weight, $length, $width, $height, $description, $has_price) {
+        if ($has_price) {
+            $price = null;
+        }
+
         Application::create($price, $from, $to, $transport_upload_id, $upload_type_id, $application_type_id, $is_any_direction, $date_start, $date_end, $user_id, $volume, $weight, $length, $width, $height, $description);
     }
 }
 
 if (isset($_REQUEST['create_cargo'])) {
     $price = (int) ($_REQUEST['price']);
+    $has_price = (boolean) $_REQUEST['has_price'];
     $from = protectionData($_REQUEST['from']);
     $to = protectionData($_REQUEST['to']);
     $date_start = normalizeDateSql(protectionData($_REQUEST['date_start']));
@@ -23,11 +28,12 @@ if (isset($_REQUEST['create_cargo'])) {
     $height = (int) ($_REQUEST['height']);
     $description = protectionData($_REQUEST['description']);
 
-    ApplicationController::create($price, $from, $to, $transport_upload_id, $upload_type_id, 1, $is_any_direction, $date_start, $date_end, 17, $volume, $weight, $length, $width, $height, $description);
+    ApplicationController::create($price, $from, $to, $transport_upload_id, $upload_type_id, 1, $is_any_direction, $date_start, $date_end, 17, $volume, $weight, $length, $width, $height, $description, $has_price);
 }
 
 if (isset($_REQUEST['create_transport'])) {
     $price = (int) ($_REQUEST['price']);
+    $has_price = (boolean) $_REQUEST['has_price'];
     $from = protectionData($_REQUEST['from']);
     $to = protectionData($_REQUEST['to']);
     $date_start = normalizeDateSql(protectionData($_REQUEST['date_start']));
@@ -43,7 +49,7 @@ if (isset($_REQUEST['create_transport'])) {
     $height = (int) ($_REQUEST['height']);
     $description = protectionData($_REQUEST['description']);
 
-    ApplicationController::create($price, $from, $to, $transport_upload_id, $upload_type_id, 2, $is_any_direction, $date_start, $date_end, 17, $volume, $weight, $length, $width, $height, $description);
+    ApplicationController::create($price, $from, $to, $transport_upload_id, $upload_type_id, 2, $is_any_direction, $date_start, $date_end, 17, $volume, $weight, $length, $width, $height, $description, $has_price);
 }
 
 ?>

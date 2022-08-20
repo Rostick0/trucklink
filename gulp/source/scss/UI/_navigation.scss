@@ -18,7 +18,7 @@
         display: flex;
         align-items: center;
 
-        padding: 1.31rem 1.44rem;
+        padding: 1rem 1.5rem;
 
         width: 100%;
 
@@ -85,14 +85,14 @@
     .navigation__text {
         display: flex;
         flex-direction: column;
-        row-gap: 0.44rem;
+        row-gap: 0.1875rem;
     }
 
     .navgitaion__title {
         color: var(--default-color);
 
-        font-size: 1.25rem;
-        font-weight: 700;
+        font-size: 1.125rem;
+        font-weight: 500;
     }
 }
 

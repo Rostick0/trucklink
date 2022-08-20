@@ -3,14 +3,6 @@
         Основная информация
     </div>
     <div class="information-basic_form">
-        <div class="information-basic__price">
-            <div class="information-basic__input-form input-form">
-                <label class="label__for-input" for="price">
-                    Цена
-                </label>
-                <input type="number" class="input" placeholder="Введите сумму" name="price" id="price">
-            </div>
-        </div>
         <div class="information-basic__to_from">
             <label class="label__for-input_computer" for="from">
                 Откуда
@@ -57,6 +49,27 @@
                         ?>
                     </ul>
                 </div>
+            </div>
+        </div>
+        <div class="information-basic__price">
+            <div class="information-basic__input-form input-form">
+                <label class="label__for-input" for="price">
+                    Цена
+                </label>
+                <input type="number" class="input" placeholder="Введите сумму" name="price" id="price">
+            </div>
+            <div class="information-basic__checkbox">
+                <label class="checkbox" for="id">
+                    <input class="checkbox__input" type="checkbox" name="has_price" id="id">
+                    <span class="checkbox__text">
+                        <span>
+                            Запрос цены
+                        </span>
+                        <svg class="checkbox__checked" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 6.05L6.96774 11L16 2" stroke="white" stroke-width="3" stroke-linecap="round" />
+                        </svg>
+                    </span>
+                </label>
             </div>
         </div>
         <div class="information-basic__date">
@@ -280,66 +293,55 @@
                 </div>
             </div>
         </div>
-        <div class="information-basic__input-form input-form">
-            <label class="label__for-input" for="transport_upload">
-                Тип транспорта
-            </label>
-            <div class="_select z-index-12">
-                <div class="_select__block">
-                    <input type="text" class="_select__show input" id="transport_upload" placeholder="Выберите из списка" disabled>
-                    <svg class="_select__arrow" width="13" height="8" viewBox="0 0 13 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 1L6.49997 6L0.999999 1" stroke="#2A2929" stroke-width="2" stroke-linecap="round" />
-                    </svg>
+        <div class="information-basic__two-selects">
+            <div class="information-basic__input-form input-form">
+                <label class="label__for-input" for="transport_upload">
+                    Тип транспорта
+                </label>
+                <div class="_select z-index-12">
+                    <div class="_select__block">
+                        <input type="text" class="_select__show input" id="transport_upload" placeholder="Выберите из списка" disabled>
+                        <svg class="_select__arrow" width="13" height="8" viewBox="0 0 13 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 1L6.49997 6L0.999999 1" stroke="#2A2929" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <ul class="_select__list">
+                        <? foreach (TransportUpload::get() as $value) {
+                            echo '<li class="_select__item">
+                                    <label for="transport_upload_' . $value['transport_upload_id'] . '">
+                                        ' . $value['name'] . '
+                                        <input name="transport_upload" type="radio" id="transport_upload_' . $value['transport_upload_id'] . '" value="' . $value['transport_upload_id'] . '" hidden>
+                                    </label>
+                                </li>';
+                        }
+                        ?>
+                    </ul>
                 </div>
-                <ul class="_select__list">
-                    <? foreach (TransportUpload::get() as $value) {
-                        echo '<li class="_select__item">
-                                                        <label for="transport_upload_' . $value['transport_upload_id'] . '">
-                                                            ' . $value['name'] . '
-                                                            <input name="transport_upload" type="radio" id="transport_upload_' . $value['transport_upload_id'] . '" value="' . $value['transport_upload_id'] . '" hidden>
-                                                        </label>
-                                                    </li>';
-                    }
-                    ?>
-                </ul>
             </div>
-        </div>
-        <div class="information-basic__input-form input-form">
-            <label class="label__for-input" for="upload_type">
-                Загрузка
-            </label>
-            <div class="_select">
-                <div class="_select__block">
-                    <input type="text" class="_select__show input" id="upload_type" placeholder="Выберите из списка" disabled>
-                    <svg class="_select__arrow" width="13" height="8" viewBox="0 0 13 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 1L6.49997 6L0.999999 1" stroke="#2A2929" stroke-width="2" stroke-linecap="round" />
-                    </svg>
+            <div class="information-basic__input-form input-form">
+                <label class="label__for-input" for="upload_type">
+                    Загрузка
+                </label>
+                <div class="_select">
+                    <div class="_select__block">
+                        <input type="text" class="_select__show input" id="upload_type" placeholder="Выберите из списка" disabled>
+                        <svg class="_select__arrow" width="13" height="8" viewBox="0 0 13 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 1L6.49997 6L0.999999 1" stroke="#2A2929" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <ul class="_select__list">
+                        <? foreach (Model::get('upload_type') as $value) {
+                            echo '<li class="_select__item">
+                                    <label for="upload_type_' . $value['upload_type_id'] . '">
+                                        ' . $value['name'] . '
+                                        <input name="upload_type" type="radio" id="upload_type_' . $value['upload_type_id'] . '" value="' . $value['upload_type_id'] . '" hidden>
+                                    </label>
+                                </li>';
+                        }
+                        ?>
+                    </ul>
                 </div>
-                <ul class="_select__list">
-                    <? foreach (Model::get('upload_type') as $value) {
-                        echo '<li class="_select__item">
-                                                            <label for="upload_type_' . $value['upload_type_id'] . '">
-                                                                ' . $value['name'] . '
-                                                                <input name="upload_type" type="radio" id="upload_type_' . $value['upload_type_id'] . '" value="' . $value['upload_type_id'] . '" hidden>
-                                                            </label>
-                                                        </li>';
-                    }
-                    ?>
-                </ul>
             </div>
-        </div>
-        <div class="information-basic__checkbox">
-            <label class="checkbox _right" for="id">
-                <input class="checkbox__input" type="checkbox" name="is_any_direction" id="id">
-                <span class="checkbox__text">
-                    <span>
-                        Любое направление
-                    </span>
-                    <svg class="checkbox__checked" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2 6.05L6.96774 11L16 2" stroke="white" stroke-width="3" stroke-linecap="round" />
-                    </svg>
-                </span>
-            </label>
         </div>
     </div>
 </div>
