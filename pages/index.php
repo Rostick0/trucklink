@@ -73,7 +73,7 @@ $citiesAll = City::getWithCountry();
                                         Дата
                                     </li>
                                     <li class="table__service_name">
-                                        Откуда - куда
+                                        Откуда - Куда
                                     </li>
                                     <li class="table__service_name">
                                         Оплата

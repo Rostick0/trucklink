@@ -28,6 +28,10 @@
             opacity: 0;
 
             width: 0.85rem;
+
+            * {
+                stroke: var(--default-block-background);
+            }
         }
     }
 

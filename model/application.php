@@ -19,7 +19,7 @@ class Application {
         global $mysqli;
 
         $query = $mysqli->query("SELECT 
-        `application`.`application_id`, `application`.`date_created`, `application`.`date_start`, `application`.`date_end`, `application`.`from`, `application`.`to`, `transport_upload`.`name` as `transport`, `upload_type`.`name` as `upload_type`
+        `application`.`application_id`, `application`.`price`, `application`.`date_created`, `application`.`date_start`, `application`.`date_end`, `application`.`from`, `application`.`to`, `transport_upload`.`name` as `transport`, `upload_type`.`name` as `upload_type`
         FROM `application`, `transport_upload`,`application_info`,`upload_type`
         WHERE `application`.`transport_upload_id` = `transport_upload`.`transport_upload_id`
         AND `application_info`.`application_id` = `application`.`application_id`
@@ -29,7 +29,7 @@ class Application {
         return $query;
     }
 
-    static public function create($price, $from, $to, $transport_upload_id, $upload_type_id, $application_type_id, $is_any_direction, $date_start, $date_end, $user_id, $volume, $weight, $length, $width, $height, $description) {
+    static public function create($price, $from, $to, $transport_upload_id, $upload_type_id, $application_type_id, $is_any_direction, $date_start, $date_end, $user_id, $volume, $weight, $length, $width, $height, $description, $type) {
         global $mysqli;
 
         if ($price) {
@@ -40,7 +40,7 @@ class Application {
 
         if ($query) {
             $id = mysqli_insert_id($mysqli);
-            $mysqli->query("INSERT INTO `application_info` (`volume`, `weight`, `length`, `width`, `height`, `description`, `application_id`) VALUES ('$volume', '$weight', '$length', '$width', '$height', '$description', '$id')");
+            $mysqli->query("INSERT INTO `application_info` (`volume`, `weight`, `length`, `width`, `height`, `description`, `type`, `application_id`) VALUES ('$volume', '$weight', '$length', '$width', '$height', '$description', '$type', '$id')");
         } else {
             var_dump($mysqli->error);
         }

@@ -125,6 +125,8 @@ textarea {
   --scroll-active: var(--default-focus);
   --calendar-date-disabled-background: #F1F1F1;
   --calendar-date-disabled-color: #B8B8B8;
+  --logo-background-elem: #3E3E5B;
+  --logo-color: #2D2D41;
 }
 
 body._dark {
@@ -171,6 +173,8 @@ body._dark {
   --scroll-active: #000000;
   scrollbar-width: thin;
   scrollbar-color: var(--scroll) var(--default-body-background);
+  --logo-background-elem: #1A68AA;
+  --logo-color: #FFFFFF;
 }
 body._dark .header__burger-fixed__social:first-child a {
   color: #FFC93A !important;
@@ -178,11 +182,12 @@ body._dark .header__burger-fixed__social:first-child a {
 body._dark .header__burger-fixed__social a {
   color: #FFFFFF !important;
 }
-body._dark .index__filter_button {
-  color: #FFFFFF;
-}
 body._dark .index__page-title__selected {
   color: #FFFFFF !important;
+}
+body._dark .index__filter_button {
+  background: #04070c;
+  color: #253442;
 }
 
 .block-default {
@@ -283,8 +288,8 @@ body._dark .index__page-title__selected {
   -ms-flex-direction: column;
   flex-direction: column;
   row-gap: 0.25rem;
-  width: 4.375rem;
-  height: 4.375rem;
+  width: 3.125rem;
+  height: 3.125rem;
 }
 .header .header__burger_active .header__burger_icon_lines {
   width: 2.125rem;
@@ -499,8 +504,8 @@ body._dark .index__page-title__selected {
   column-gap: 1.56rem;
 }
 .footer .footer__subtitle {
-  font-weight: 500;
-  font-size: 1.25rem;
+  font-weight: 400;
+  font-size: 1.1rem;
   color: #878787;
 }
 .footer .footer__rigth {
@@ -567,9 +572,12 @@ body._dark .index__page-title__selected {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
+  -webkit-column-gap: 0.625rem;
+  -moz-column-gap: 0.625rem;
+  column-gap: 0.625rem;
   font-family: "Inter";
   font-size: 1.06rem;
-  font-weight: 600;
+  font-weight: 500;
   -webkit-transition: 200ms;
   -o-transition: 200ms;
   transition: 200ms;
@@ -579,10 +587,16 @@ body._dark .index__page-title__selected {
   cursor: not-allowed !important;
   color: var(--default-input-border) !important;
 }
+.button:disabled svg path, .button-contact:disabled svg path, .button-grey:disabled svg path, .button-dark:disabled svg path, .button-yellow:disabled svg path {
+  fill: var(--default-input-border) !important;
+}
 
 .button-yellow {
   background: var(--default-button-first);
   color: var(--default-button-first-color);
+}
+.button-yellow svg path {
+  fill: var(--default-button-first-color) !important;
 }
 .button-yellow:hover {
   background: var(--default-button-first-hover);
@@ -595,6 +609,9 @@ body._dark .index__page-title__selected {
   background: var(--default-button-second);
   color: var(--default-button-second-color);
 }
+.button-dark svg path {
+  fill: var(--default-button-second-color) !important;
+}
 .button-dark:hover {
   background: var(--default-button-second-hover);
 }
@@ -605,6 +622,9 @@ body._dark .index__page-title__selected {
 .button-grey {
   background: var(--default-button-third);
   color: var(--default-button-third-color);
+}
+.button-grey svg path {
+  fill: var(--default-button-third-color) !important;
 }
 .button-grey:hover {
   background: var(--default-button-third-hover);
@@ -787,6 +807,9 @@ body._dark .index__page-title__selected {
   left: 3%;
   opacity: 0;
   width: 0.85rem;
+}
+.checkbox .checkbox__text .checkbox__checked * {
+  stroke: var(--default-block-background);
 }
 .checkbox .checkbox__input:checked + .checkbox__text::before {
   background: var(--default-color);
@@ -1168,7 +1191,7 @@ a {
   position: relative;
 }
 .table__service .service__way::before {
-  background: #2D2D41;
+  background: var(--default-color);
   content: "";
   display: inline-block;
   -webkit-box-ordinal-group: 3;
@@ -1176,6 +1199,11 @@ a {
   order: 2;
   width: 1.25rem;
   height: 2px;
+}
+.table__service .service__way_flag {
+  width: 1.25rem;
+  min-width: 1.25rem;
+  height: 1.25rem;
 }
 .table__service .service__way_item {
   display: -webkit-inline-box;
@@ -1198,15 +1226,6 @@ a {
 }
 .table__service .service__button {
   height: 50px;
-}
-
-.logo {
-  background: var(--icon);
-  border-radius: 2rem 0;
-  color: var(--default-dark-color);
-  font-size: 1.75rem;
-  font-weight: 700;
-  padding: 0.7rem 1.5rem;
 }
 
 .filter {
@@ -2317,7 +2336,7 @@ a {
 }
 .information .information-additional__inputs {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5, 0.45fr) 1.2fr;
   grid-gap: 3.125rem;
   margin-bottom: 2.5rem;
 }

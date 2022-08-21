@@ -73,7 +73,7 @@ if ($cargo['application_type_id'] == 2) {
                                     Дата
                                 </li>
                                 <li class="table__service_name">
-                                    Откуда - куда
+                                    Откуда - Куда
                                 </li>
                                 <li class="table__service_name">
                                     Тип загрузки

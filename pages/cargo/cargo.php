@@ -73,7 +73,7 @@ if ($cargo && $cargo['application_type_id'] == 1) {
                                     Дата
                                 </li>
                                 <li class="table__service_name">
-                                    Откуда - куда
+                                    Откуда - Куда
                                 </li>
                                 <li class="table__service_name">
                                     Подробнее
@@ -89,71 +89,9 @@ if ($cargo && $cargo['application_type_id'] == 1) {
                                 </li>
                             </ul>
                             <ul class="table__service services cargo__list">
-                                <!-- <li class="service__item">
-                                    <div class="service__status status-recently"></div>
-                                    <div class="service__date">
-                                        15 апр - 23 апр
-                                    </div>
-                                    <div class="service__way">
-                                        <span class="service__way_item">
-                                            <img src="img/flag_ukraine.png" alt="">
-                                            <span>
-                                                Донецк
-                                            </span>
-                                        </span>
-                                        <span class="service__way_item">
-                                            <img src="img/flag_belarus.png" alt="">
-                                            <span>
-                                                Минск
-                                            </span>
-                                        </span>
-                                    </div>
-                                    <div class="service__payment">
-                                        Запрос цены
-                                    </div>
-                                    <div class="service__transport">
-                                        Тент
-                                    </div>
-                                    <button class="service__button button-grey">
-                                        Посмотреть
-                                    </button>
-                                    <button class="service__button button-dark">
-                                        Связаться
-                                    </button>
-                                </li> -->
                             </ul>
                             <ul class="navigation-bottom">
-                                    <li class="navigation-bottom_item">
-                                        <a class="navigation-bottom_href _active" href="">
-                                            1
-                                        </a>
-                                    </li>
-                                    <li class="navigation-bottom_item">
-                                        <a class="navigation-bottom_href" href="">
-                                            2
-                                        </a>
-                                    </li>
-                                    <li class="navigation-bottom_item">
-                                        <a class="navigation-bottom_href" href="">
-                                            3
-                                        </a>
-                                    </li>
-                                    <li class="navigation-bottom_item">
-                                        <a class="navigation-bottom_href" href="">
-                                            4
-                                        </a>
-                                    </li>
-                                    <li class="navigation-bottom_item">
-                                        <a class="navigation-bottom_href" href="">
-                                            ...
-                                        </a>
-                                    </li>
-                                    <li class="navigation-bottom_item">
-                                        <a class="navigation-bottom_href" href="">
-                                            Следующая страница
-                                        </a>
-                                    </li>
-                                </ul>
+                            </ul>
                         </div>
                     </div>
                 </div>

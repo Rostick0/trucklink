@@ -96,7 +96,7 @@ $messengers = Model::getAll('user_messenger', 'user_id', $cargo['user_id']);
                                     Оплата
                                 </div>
                                 <div class="application__item_info">
-                                    по запросу
+                                    <?= $cargo['price'] ? $cargo['price'] . ' руб' : 'по запросу' ?>
                                 </div>
                             </div>
                             <div class="application__item">

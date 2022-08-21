@@ -257,21 +257,21 @@ async function getApplications(listHtml, type, queryParams = null) {
                     </div>
                     <div class="service__way">
                         <div class="service__way_item">
-                            <img src="${PATH_IMAGE}/${showFlag(elem?.from?.country)}" alt="">
+                            <img class="service__way_flag" src="${PATH_IMAGE}/${showFlag(elem?.from?.country)}" alt="${elem?.from?.country}">
                             <span>
                                 ${elem?.from?.city}
                             </span>
                         </div>
                         <div class="service__way_item">
                             
-                            <img src="${PATH_IMAGE}/${showFlag(elem?.to?.country)}" alt="">
+                            <img class="service__way_flag" src="${PATH_IMAGE}/${showFlag(elem?.to?.country)}" alt="${elem?.to?.country}">
                             <span>
                                 ${elem?.to?.city}
                             </span>
                         </div>
                     </div>
                     <div class="service__payment">
-                        Запрос цены
+                        ${elem?.price ? elem?.price + ' ₽' : "Запрос цены"}
                     </div>
                     <div class="service__transport">
                         ${elem?.transport}
@@ -314,14 +314,14 @@ async function getApplications(listHtml, type, queryParams = null) {
                     </div>
                     <div class="service__way">
                         <div class="service__way_item">
-                            <img src="${PATH_IMAGE}/${showFlag(elem?.from?.country)}" alt="">
+                            <img class="service__way_flag" src="${PATH_IMAGE}/${showFlag(elem?.from?.country)}" alt="${elem?.from?.country}">
                             <span>
                                 ${elem?.from?.city}
                             </span>
                         </div>
                         <div class="service__way_item">
                             
-                            <img src="${PATH_IMAGE}/${showFlag(elem?.to?.country)}" alt="">
+                            <img class="service__way_flag" src="${PATH_IMAGE}/${showFlag(elem?.to?.country)}" alt="${elem?.to?.country}">
                             <span>
                                 ${elem?.to?.city}
                             </span>
@@ -814,7 +814,9 @@ class Calendar {
                 day += 7;
             }
 
-            this.daysHtml[i].textContent = new Date(this.year, this.month, i - day + 2).getDate();
+            let date = new Date(this.year, this.month, i - day + 2)
+
+            this.daysHtml[i].textContent = date.getDate();
 
             removeClass(this.daysHtml[i], '_disabled');
 
@@ -827,6 +829,8 @@ class Calendar {
             if (+this.daysHtml[i].textContent === 1) {
                 disabled = false;
             }
+
+            this.lockBeforeAndAfter(this.daysHtml[i], date);
 
             if (!disabled && firstOne && +this.daysHtml[i].textContent > 1) {
                 firstOne = false;
@@ -845,6 +849,30 @@ class Calendar {
                 this.hideCalendars();
             }
         }
+    }
+
+    lockBeforeAndAfter(dayHtml, date) {
+        if (this.inputHtml == dateStartInput) {
+            if (!dateEndInput.value) {
+                return;
+            }
+
+            if (new Date(normalizeDateSql(dateEndInput.value)) >= date) {
+                return;
+            }
+
+            return dayHtml.classList.add('_disabled');
+        }
+
+        if (!dateStartInput.value) {
+            return;
+        }
+
+        if (new Date(normalizeDateSql(dateStartInput.value)) <= date) {
+            return;
+        }
+
+        return dayHtml.classList.add('_disabled');
     }
 
     hideCalendars() {
@@ -869,15 +897,33 @@ class Calendar {
 
 const calendarFirst = document.querySelector('.calendar');
 const calendarSecond = document.querySelectorAll('.calendar')[1];
+const dateStartInput = document.querySelector('.date_start__input');
+const dateEndInput = document.querySelector('.date_end__input');
 
 if (calendarFirst) {
-    const calendarStart = new Calendar(calendarFirst, document.querySelector('.date_start__input'), document.querySelector('.calendar-from__active'));
+    const calendarStart = new Calendar(calendarFirst, dateStartInput, document.querySelector('.calendar-from__active'));
     calendarStart.start();
+
+    dateStartInput.onclick = () => {
+        if (!dateEndInput.value) {
+            return;
+        }
+
+        calendarStart.render();
+    }
 }
 
 if (calendarSecond) {
-    const calendarEnd = new Calendar(calendarSecond, document.querySelector('.date_end__input'), document.querySelectorAll('.calendar-from__active')[1]);
+    const calendarEnd = new Calendar(calendarSecond, dateEndInput, document.querySelectorAll('.calendar-from__active')[1]);
     calendarEnd.start();
+    
+    dateEndInput.onclick = () => {
+        if (!dateStartInput.value) {
+            return;
+        }
+
+        calendarEnd.render();
+    }
 }
 
 const login = document.querySelector('.login');
@@ -939,6 +985,17 @@ if (registration) {
 
         return registrationButton.disabled = false;
     }, 100);
+}
+
+const information = document.querySelector('.information');
+
+if (information) {
+    const price = document.querySelector('#price');
+    const hasPrice = document.querySelector('#has_price');
+
+    hasPrice.onchange = () => {
+        price.disabled = !price.disabled
+    }
 }
 
 document.body.addEventListener('click', e => {

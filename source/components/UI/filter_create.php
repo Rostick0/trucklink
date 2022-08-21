@@ -59,8 +59,8 @@
                 <input type="number" class="input" placeholder="Введите сумму" name="price" id="price">
             </div>
             <div class="information-basic__checkbox">
-                <label class="checkbox" for="id">
-                    <input class="checkbox__input" type="checkbox" name="has_price" id="id">
+                <label class="checkbox" for="has_price">
+                    <input class="checkbox__input" type="checkbox" name="has_price" id="has_price">
                     <span class="checkbox__text">
                         <span>
                             Запрос цены
@@ -379,6 +379,12 @@
                 Высота <sup>м</sup>
             </label>
             <input type="number" class="input" placeholder="Введите высоту" name="height">
+        </div>
+        <div class="information-additional__input-form input-form">
+            <label class="label__for-input" for="">
+                Тип груза
+            </label>
+            <input type="text" class="input" placeholder="Например “кирпич”" name="type">
         </div>
     </div>
     <div class="information-additional__textarea-form textarea-form">

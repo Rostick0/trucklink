@@ -44,8 +44,10 @@ $height_input: $height_button;
     --default-user-id: #0b79fe;
     --default-background-calendar: #EBE8FE;
     --default-color-error: #E54A4A;
+
     --header-icon: #ebe8fe;
     --icon: #fffbe3;
+
     --navigation-background-first: linear-gradient(147.96deg,#eefee8 19.25%,#d9ffcc 89.03%);
     --navigation-background-second: linear-gradient(150.55deg,#fff8e5 18.04%,#ffeab3 102.95%);
     --navigation-icon-first: linear-gradient(180deg, #24C86D 0%, #24F792 100%);
@@ -53,10 +55,15 @@ $height_input: $height_button;
     --navigation-icon-border: none;
     --navigation-subtitle-color-first: #32DC43;
     --navigation-subtitle-color-second: #FFA61B;
+
     --scroll: var(--default-no-active-color);
     --scroll-active: var(--default-focus);
+
     --calendar-date-disabled-background: #F1F1F1;
     --calendar-date-disabled-color: #B8B8B8;
+
+    --logo-background-elem: #3E3E5B;
+    --logo-color: #2D2D41;
 }
 
 body {
@@ -91,8 +98,10 @@ body {
         --default-user-id: #0b79fe;
         --default-background-calendar: #131A24;
         --default-color-error: #E54A4A;
+
         --header-icon: #1A68AA;
         --icon: #090D13;
+
         --navigation-background-first: linear-gradient(147.96deg, #04070C 19.25%, #131A24 89.03%);
         --navigation-background-second: var(--navigation-background-first);
         --navigation-icon-first: none;
@@ -100,11 +109,15 @@ body {
         --navigation-icon-border: #1C2A3D;
         --navigation-subtitle-color-first: #35A3FF;
         --navigation-subtitle-color-second: #FFA61B;
+
         --scroll: #090D13;
         --scroll-active: #000000;
 
         scrollbar-width: thin;
         scrollbar-color: var(--scroll) var(--default-body-background);
+
+        --logo-background-elem: #1A68AA;
+        --logo-color: #FFFFFF;
 
         .header__burger-fixed__social {
             &:first-child {
@@ -118,12 +131,14 @@ body {
             }
         }
 
-        .index__filter_button {
-            color: #FFFFFF;
-        }
-
         .index__page-title__selected {
             color: #FFFFFF !important;
+        }
+
+        .index__filter_button {
+            background: #04070c;
+
+            color: #253442;
         }
     }
 }

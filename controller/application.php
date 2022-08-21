@@ -1,12 +1,12 @@
 <?
 
 class ApplicationController {
-    static public function create($price, $from, $to, $transport_upload_id, $upload_type_id, $application_type_id, $is_any_direction, $date_start, $date_end, $user_id, $volume, $weight, $length, $width, $height, $description, $has_price) {
+    static public function create($price, $from, $to, $transport_upload_id, $upload_type_id, $application_type_id, $is_any_direction, $date_start, $date_end, $user_id, $volume, $weight, $length, $width, $height, $description, $type, $has_price) {
         if ($has_price) {
             $price = null;
         }
 
-        Application::create($price, $from, $to, $transport_upload_id, $upload_type_id, $application_type_id, $is_any_direction, $date_start, $date_end, $user_id, $volume, $weight, $length, $width, $height, $description);
+        Application::create($price, $from, $to, $transport_upload_id, $upload_type_id, $application_type_id, $is_any_direction, $date_start, $date_end, $user_id, $volume, $weight, $length, $width, $height, $description, $type);
     }
 }
 
@@ -27,8 +27,9 @@ if (isset($_REQUEST['create_cargo'])) {
     $width = (int) ($_REQUEST['width']);
     $height = (int) ($_REQUEST['height']);
     $description = protectionData($_REQUEST['description']);
+    $type = protectionData($_REQUEST['type']);
 
-    ApplicationController::create($price, $from, $to, $transport_upload_id, $upload_type_id, 1, $is_any_direction, $date_start, $date_end, 17, $volume, $weight, $length, $width, $height, $description, $has_price);
+    ApplicationController::create($price, $from, $to, $transport_upload_id, $upload_type_id, 1, $is_any_direction, $date_start, $date_end, 17, $volume, $weight, $length, $width, $height, $description, $type, $has_price);
 }
 
 if (isset($_REQUEST['create_transport'])) {
@@ -48,8 +49,9 @@ if (isset($_REQUEST['create_transport'])) {
     $width = (int) ($_REQUEST['width']);
     $height = (int) ($_REQUEST['height']);
     $description = protectionData($_REQUEST['description']);
+    $type = protectionData($_REQUEST['type']);
 
-    ApplicationController::create($price, $from, $to, $transport_upload_id, $upload_type_id, 2, $is_any_direction, $date_start, $date_end, 17, $volume, $weight, $length, $width, $height, $description, $has_price);
+    ApplicationController::create($price, $from, $to, $transport_upload_id, $upload_type_id, 2, $is_any_direction, $date_start, $date_end, 17, $volume, $weight, $length, $width, $height, $description, $type, $has_price);
 }
 
 ?>
