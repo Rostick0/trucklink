@@ -32,7 +32,12 @@ class User {
 
         return $mysqli->error;
     }
-    //public static function update();
+    
+    public static function setAvatar($user_id, $avatar) {
+        global $mysqli;
+
+        return $mysqli->query("UPDATE `user` SET `avatar`='$avatar' WHERE `user_id` = '$user_id'");
+    }
     //public static function delete();
 }
 

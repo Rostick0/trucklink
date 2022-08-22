@@ -74,6 +74,16 @@ class UserController {
 
         Router::location("profile?id=$id");
     }
+
+    public static function setAvatar($user_id, $avatar) {
+        if (mb_substr($avatar['type'], 0, 6) === 'image/') {
+            $avatar = time() . random_int(100, 900) . '.png';
+
+            if (User::setAvatar($user_id, $avatar)) {
+                move_uploaded_file($avatar['tmp_name'], './source/upload/' . $avatar);
+            }
+        }
+    }
 }
 
 if (isset($_POST['registration_button'])) {
