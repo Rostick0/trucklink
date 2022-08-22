@@ -257,14 +257,14 @@ async function getApplications(listHtml, type, queryParams = null) {
                     </div>
                     <div class="service__way">
                         <div class="service__way_item">
-                            <img class="service__way_flag" src="${PATH_IMAGE}/${showFlag(elem?.from?.country)}" alt="${elem?.from?.country}">
+                            <img class="flag-img" src="${PATH_IMAGE}/${showFlag(elem?.from?.country)}" alt="${elem?.from?.country}">
                             <span>
                                 ${elem?.from?.city}
                             </span>
                         </div>
                         <div class="service__way_item">
                             
-                            <img class="service__way_flag" src="${PATH_IMAGE}/${showFlag(elem?.to?.country)}" alt="${elem?.to?.country}">
+                            <img class="flag-img" src="${PATH_IMAGE}/${showFlag(elem?.to?.country)}" alt="${elem?.to?.country}">
                             <span>
                                 ${elem?.to?.city}
                             </span>
@@ -314,14 +314,14 @@ async function getApplications(listHtml, type, queryParams = null) {
                     </div>
                     <div class="service__way">
                         <div class="service__way_item">
-                            <img class="service__way_flag" src="${PATH_IMAGE}/${showFlag(elem?.from?.country)}" alt="${elem?.from?.country}">
+                            <img class="flag-img" src="${PATH_IMAGE}/${showFlag(elem?.from?.country)}" alt="${elem?.from?.country}">
                             <span>
                                 ${elem?.from?.city}
                             </span>
                         </div>
                         <div class="service__way_item">
                             
-                            <img class="service__way_flag" src="${PATH_IMAGE}/${showFlag(elem?.to?.country)}" alt="${elem?.to?.country}">
+                            <img class="flag-img" src="${PATH_IMAGE}/${showFlag(elem?.to?.country)}" alt="${elem?.to?.country}">
                             <span>
                                 ${elem?.to?.city}
                             </span>
@@ -402,15 +402,21 @@ function renderNavigtaionBottom(elem, type) {
     elem.innerHTML = "";
 
     getCountElems(type).then(res => {
-        let count = Math.floor(res.count / 10) * 10;
+        let count = Math.floor(res.count / 10 + 1);
 
         if (!count) {
             return;
         }
 
+
+
         for (let i = 1 * counter; i <= count; i++) {
             if (i === 0) {
                 continue;
+            }
+
+            if (i === 1) {
+                break;
             }
 
             if (i >= (+counter + 10)) {
@@ -447,12 +453,13 @@ function renderNavigtaionBottom(elem, type) {
 function pageApplicationOffset() {
     let page = urlQuery.p ? urlQuery.p : 1;
 
-    if (page === 1 || page < 0) {
+    if (page < 0) {
         return 0;
     }
 
-    return 10;
+    return 10 * (page - 1);
 }
+
 const catalogFilter = document.querySelector('.catalog__filter');
 const filterButton = document.querySelector('.filter__button');
 const filterResetButton = document.querySelector('.filter__reset-button');
@@ -630,6 +637,9 @@ if (searchCargo && searchTransport && catalogIndex) {
         indexPageTitle.textContent = "транспорт";
         tableServiceNameFourth.textContent = "Тип загрузки";
 
+        //urlQuery.type = "tranposrt";
+        console.log(urlQuery)
+
         filterButton.onclick = e => {
             e.preventDefault();
 
@@ -720,10 +730,7 @@ headerBurger(headerBurgerFixed, headerBrgerActive, headerBurgerClose);
 class Calendar {
     constructor(calendarHtml, inputHtml, buttonShow) {
         this.calendarHtml = calendarHtml;
-        this.yearHtml = calendarHtml.querySelector('.calendar__year_text');
         this.monthHtml = calendarHtml.querySelector('.calendar__month_text');
-        this.calendarYearLeft = calendarHtml.querySelector('.calendar__year_left')
-        this.calendarYearRight = calendarHtml.querySelector('.calendar__year_right');
         this.calendarMonthLeft = calendarHtml.querySelector('.calendar__month_left');
         this.calendarMonthRight = calendarHtml.querySelector('.calendar__month_right');
         this.daysHtml = calendarHtml.querySelectorAll('.calendar__day_item');
@@ -736,24 +743,9 @@ class Calendar {
     }
 
     render() {
-        this.yearHtml.textContent = this.year;
         this.monthHtml.textContent = this.months[this.month];
 
         this.days();
-    }
-
-    decrementYear() {
-        this.calendarYearLeft.addEventListener('click', () => {
-            this.year -= 1;
-            this.render();
-        });
-    }
-
-    incrementYear() {
-        this.calendarYearRight.addEventListener('click', () => {
-            this.year += 1;
-            this.render();
-        });
     }
 
     decrementMonth() {
@@ -886,8 +878,6 @@ class Calendar {
     start() {
         this.render();
 
-        this.decrementYear();
-        this.incrementYear();
         this.decrementMonth();
         this.incrementMonth();
 

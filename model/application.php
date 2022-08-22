@@ -7,7 +7,7 @@ class Application {
         return $mysqli->query("SELECT * FROM `application` JOIN `application_info` ON `application`.`application_id` = `application_info`.`application_info_id` WHERE `application`.`application_id` > $application_id LIMIT $limit");
     }
 
-    static public function getCargoOne($application_id) {
+    static public function getApplicationOne($application_id) {
         global $mysqli;
 
         $cargo = $mysqli->query("SELECT * FROM `application` JOIN `application_info` ON `application`.`application_id` = `application_info`.`application_info_id` WHERE `application`.`application_id` = $application_id");
@@ -44,6 +44,10 @@ class Application {
         } else {
             var_dump($mysqli->error);
         }
+    }
+
+    static public function edit() {
+        
     }
 }
 

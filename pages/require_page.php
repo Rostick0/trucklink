@@ -32,12 +32,12 @@ $pages = [
         "path" => "cargo/cargo_create.php"
     ],
     [
-        "url" => "/transport_create",
-        "path" => "transport/transport_create.php"
-    ],
-    [
         "url" => "/transport",
         "path" => "transport/transport.php"
+    ],
+    [
+        "url" => "/transport_create",
+        "path" => "transport/transport_create.php"
     ],
     [
         "url" => "/users",
@@ -45,7 +45,15 @@ $pages = [
     ],
     [
         "url" => "/profile",
-        "path" => "profile.php"
+        "path" => "account/profile.php"
+    ],
+    [
+        "url" => "/my_application",
+        "path" => "account/my_application.php"
+    ],
+    [
+        "url" => "/application_edit",
+        "path" => "account/application_edit.php"
     ],
     [
         "url" => "/php",

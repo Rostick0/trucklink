@@ -1,3 +1,9 @@
+<?
+if ($_SESSION['user']['id']) {
+    Router::location("profile?id=" . $_SESSION['user']['id'] . "");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -25,11 +31,11 @@
                                 </label>
                                 <?
                                     if ($_SESSION['error_login']) {
-                                        echo '<input class="login__input input error-input" type="text" placeholder="Введеите логин" id="login" name="login">
+                                        echo '<input class="login__input input error-input" type="text" placeholder="Введите логин" id="login" name="login">
                                                 <div class="error">' . $_SESSION['error_login'] . '</div>';
                                                 $_SESSION['error_login'] = null;
                                     } else {
-                                        echo '<input class="login__input input" type="text" placeholder="Введеите логин" id="login" name="login">';
+                                        echo '<input class="login__input input" type="text" placeholder="Введите логин" id="login" name="login">';
                                     }
                                 ?>
                             </div>

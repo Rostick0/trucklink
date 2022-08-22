@@ -30,10 +30,14 @@ $height_input: $height_button;
     --default-button-third-hover: #EAEAFF;
     --default-button-third-active: #EAEAFF;
     --default-button-third-color: var(--default-color);
+    --default-button-fourth: #EFEFEF;
+    --default-button-fourth-hover: #EFEFEF;
+    --default-button-fourth-active: #EFEFEF;
+    --default-button-fourth-color: #3e3e5b;
     --default-button-disabled: #DFDFDF;
     --default-button-disabled-color: #939393;
     --default-input-placeholder: #DBDBDB;
-    --default-input-border:  #c1c1c1;
+    --default-input-border: #c1c1c1;
     --default-input-color: #2A2929;
     --default-dark-color: var(--default-input-color);
     --default-focus: #6A6A6A;
@@ -48,8 +52,8 @@ $height_input: $height_button;
     --header-icon: #ebe8fe;
     --icon: #fffbe3;
 
-    --navigation-background-first: linear-gradient(147.96deg,#eefee8 19.25%,#d9ffcc 89.03%);
-    --navigation-background-second: linear-gradient(150.55deg,#fff8e5 18.04%,#ffeab3 102.95%);
+    --navigation-background-first: linear-gradient(147.96deg, #eefee8 19.25%, #d9ffcc 89.03%);
+    --navigation-background-second: linear-gradient(150.55deg, #fff8e5 18.04%, #ffeab3 102.95%);
     --navigation-icon-first: linear-gradient(180deg, #24C86D 0%, #24F792 100%);
     --navigation-icon-second: linear-gradient(360deg, #FFD600 0%, #FFA41D 100%);
     --navigation-icon-border: none;
@@ -64,6 +68,12 @@ $height_input: $height_button;
 
     --logo-background-elem: #3E3E5B;
     --logo-color: #2D2D41;
+
+    --cargo-item: #6A6A6A;
+
+    --image-add: #D8D8D8;
+    --image-add-hover: #D8D8D8;
+    --image-add-active: #D8D8D8;
 }
 
 body {
@@ -84,12 +94,16 @@ body {
         --default-button-third-hover: var(--default-button-first-hover);
         --default-button-third-active: var(--default-button-first-active);
         --default-button-third-color: var(--default-button-first-color);
+        --default-button-fourth: #090D13;
+        --default-button-fourth-hover: #090D13;
+        --default-button-fourth-active: #090D13;
+        --default-button-fourth-color: #FFFFFF;
         --default-button-disabled: #131A24;
         --default-button-disabled-color: #FFFFFF;
         --default-no-active-button: #131A24;
         --default-no-active-color: #6E7B8B;
         --default-input-placeholder: #6E7B8B;
-        --default-input-border:  #6E7B8B;
+        --default-input-border: #6E7B8B;
         --default-input-color: #6E7B8B;
         --default-dark-color: var(--default-color);
         --default-focus: #6A6A6A;
@@ -118,6 +132,12 @@ body {
 
         --logo-background-elem: #1A68AA;
         --logo-color: #FFFFFF;
+
+        --cargo-item: #FFFFFF;
+
+        --image-add: #D8D8D8;
+        --image-add-hover: #D8D8D8;
+        --image-add-active: #D8D8D8;
 
         .header__burger-fixed__social {
             &:first-child {

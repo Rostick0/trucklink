@@ -83,30 +83,13 @@
                         </svg>
                     </div>
                     <div class="calendar">
-                        <div class="calendar__year">
-                            <div class="calendar__arrow_left calendar__year_left">
-                                <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M7 12L2 6.49997L7 1" stroke="#2D2D41" stroke-width="2" stroke-linecap="round" />
-                                </svg>
-                            </div>
-                            <div class="calendar__year_text calendar__text">
-                                2022
-                            </div>
-                            <div class="calendar__arrow_right calendar__year_right">
-                                <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M1 12L6 6.49997L1 1" stroke="#2D2D41" stroke-width="2" stroke-linecap="round" />
-                                </svg>
-                            </div>
-                        </div>
                         <div class="calendar__month">
                             <div class="calendar__arrow_left calendar__month_left">
                                 <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M7 12L2 6.49997L7 1" stroke="#2D2D41" stroke-width="2" stroke-linecap="round" />
                                 </svg>
                             </div>
-                            <div class="calendar__month_text calendar__text">
-                                Август
-                            </div>
+                            <div class="calendar__month_text calendar__text"></div>
                             <div class="calendar__arrow_right calendar__month_right">
                                 <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M1 12L6 6.49997L1 1" stroke="#2D2D41" stroke-width="2" stroke-linecap="round" />
@@ -190,30 +173,13 @@
                         </svg>
                     </div>
                     <div class="calendar">
-                        <div class="calendar__year">
-                            <div class="calendar__arrow_left calendar__year_left">
-                                <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M7 12L2 6.49997L7 1" stroke="#2D2D41" stroke-width="2" stroke-linecap="round" />
-                                </svg>
-                            </div>
-                            <div class="calendar__year_text calendar__text">
-                                2022
-                            </div>
-                            <div class="calendar__arrow_right calendar__year_right">
-                                <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M1 12L6 6.49997L1 1" stroke="#2D2D41" stroke-width="2" stroke-linecap="round" />
-                                </svg>
-                            </div>
-                        </div>
                         <div class="calendar__month">
                             <div class="calendar__arrow_left calendar__month_left">
                                 <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M7 12L2 6.49997L7 1" stroke="#2D2D41" stroke-width="2" stroke-linecap="round" />
                                 </svg>
                             </div>
-                            <div class="calendar__month_text calendar__text">
-                                Август
-                            </div>
+                            <div class="calendar__month_text calendar__text"></div>
                             <div class="calendar__arrow_right calendar__month_right">
                                 <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M1 12L6 6.49997L1 1" stroke="#2D2D41" stroke-width="2" stroke-linecap="round" />

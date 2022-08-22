@@ -51,7 +51,11 @@ if (isset($_REQUEST['create_transport'])) {
     $description = protectionData($_REQUEST['description']);
     $type = protectionData($_REQUEST['type']);
 
-    ApplicationController::create($price, $from, $to, $transport_upload_id, $upload_type_id, 2, $is_any_direction, $date_start, $date_end, 17, $volume, $weight, $length, $width, $height, $description, $type, $has_price);
+    ApplicationController::create($price, $from, $to, $transport_upload_id, $upload_type_id, 2, $is_any_direction, $date_start, $date_end, $_SESSION['user']['id'], $volume, $weight, $length, $width, $height, $description, $type, $has_price);
+}
+
+if (isset($_REQUEST['edit_application'])) {
+    
 }
 
 ?>

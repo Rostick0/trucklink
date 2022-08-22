@@ -1,3 +1,9 @@
+<?
+if ($_SESSION['user']['id']) {
+    Router::location("profile?id=" . $_SESSION['user']['id'] . "");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>

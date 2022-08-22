@@ -55,13 +55,23 @@
     }
 
     .client__contact_number {
-        color: #3E3E5B;
+        background: var(--default-button-fourth);
+
+        color: var(--default-button-fourth-color);
 
         display: flex;
         align-items: center;
         flex-direction: column;
 
         font-size: 1.375rem;
+
+        &:hover {
+            background: var(--default-button-first-hover);
+        }
+
+        &:active {
+            background: var(--default-button-first-active);
+        }
     }
     
     .client__contact_button_hint {
@@ -86,7 +96,7 @@
     }
     
     .application__item {
-        color: var(--default-focus);
+        color: var(--cargo-item);
 
         display: flex;
         flex-direction: column;

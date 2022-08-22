@@ -98,6 +98,10 @@ textarea {
   --default-button-third-hover: #EAEAFF;
   --default-button-third-active: #EAEAFF;
   --default-button-third-color: var(--default-color);
+  --default-button-fourth: #EFEFEF;
+  --default-button-fourth-hover: #EFEFEF;
+  --default-button-fourth-active: #EFEFEF;
+  --default-button-fourth-color: #3e3e5b;
   --default-button-disabled: #DFDFDF;
   --default-button-disabled-color: #939393;
   --default-input-placeholder: #DBDBDB;
@@ -114,8 +118,8 @@ textarea {
   --default-color-error: #E54A4A;
   --header-icon: #ebe8fe;
   --icon: #fffbe3;
-  --navigation-background-first: linear-gradient(147.96deg,#eefee8 19.25%,#d9ffcc 89.03%);
-  --navigation-background-second: linear-gradient(150.55deg,#fff8e5 18.04%,#ffeab3 102.95%);
+  --navigation-background-first: linear-gradient(147.96deg, #eefee8 19.25%, #d9ffcc 89.03%);
+  --navigation-background-second: linear-gradient(150.55deg, #fff8e5 18.04%, #ffeab3 102.95%);
   --navigation-icon-first: linear-gradient(180deg, #24C86D 0%, #24F792 100%);
   --navigation-icon-second: linear-gradient(360deg, #FFD600 0%, #FFA41D 100%);
   --navigation-icon-border: none;
@@ -127,6 +131,10 @@ textarea {
   --calendar-date-disabled-color: #B8B8B8;
   --logo-background-elem: #3E3E5B;
   --logo-color: #2D2D41;
+  --cargo-item: #6A6A6A;
+  --image-add: #D8D8D8;
+  --image-add-hover: #D8D8D8;
+  --image-add-active: #D8D8D8;
 }
 
 body._dark {
@@ -146,6 +154,10 @@ body._dark {
   --default-button-third-hover: var(--default-button-first-hover);
   --default-button-third-active: var(--default-button-first-active);
   --default-button-third-color: var(--default-button-first-color);
+  --default-button-fourth: #090D13;
+  --default-button-fourth-hover: #090D13;
+  --default-button-fourth-active: #090D13;
+  --default-button-fourth-color: #FFFFFF;
   --default-button-disabled: #131A24;
   --default-button-disabled-color: #FFFFFF;
   --default-no-active-button: #131A24;
@@ -175,6 +187,10 @@ body._dark {
   scrollbar-color: var(--scroll) var(--default-body-background);
   --logo-background-elem: #1A68AA;
   --logo-color: #FFFFFF;
+  --cargo-item: #FFFFFF;
+  --image-add: #D8D8D8;
+  --image-add-hover: #D8D8D8;
+  --image-add-active: #D8D8D8;
 }
 body._dark .header__burger-fixed__social:first-child a {
   color: #FFC93A !important;
@@ -1412,21 +1428,6 @@ a {
   background: none;
   padding-right: 2.4rem;
 }
-._select ._select__show::-webkit-input-placeholder, ._select-search ._select__show::-webkit-input-placeholder {
-  color: var(--default-color);
-}
-._select ._select__show::-moz-placeholder, ._select-search ._select__show::-moz-placeholder {
-  color: var(--default-color);
-}
-._select ._select__show:-ms-input-placeholder, ._select-search ._select__show:-ms-input-placeholder {
-  color: var(--default-color);
-}
-._select ._select__show::-ms-input-placeholder, ._select-search ._select__show::-ms-input-placeholder {
-  color: var(--default-color);
-}
-._select ._select__show::placeholder, ._select-search ._select__show::placeholder {
-  color: var(--default-color);
-}
 ._select ._select__arrow, ._select-search ._select__arrow {
   position: absolute;
   right: 1.4rem;
@@ -1629,7 +1630,7 @@ a {
   left: 5%;
   z-index: 100;
 }
-.calendar .calendar__year, .calendar .calendar__month {
+.calendar .calendar__month {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1642,7 +1643,7 @@ a {
   -ms-flex-pack: justify;
   justify-content: space-between;
 }
-.calendar .calendar__year .calendar__arrow_left, .calendar .calendar__month .calendar__arrow_left, .calendar .calendar__year .calendar__arrow_right, .calendar .calendar__month .calendar__arrow_right {
+.calendar .calendar__month .calendar__arrow_left, .calendar .calendar__month .calendar__arrow_right {
   border-top-left-radius: 0.25rem;
   color: var(--default-color);
   cursor: pointer;
@@ -1658,11 +1659,11 @@ a {
   width: 2rem;
   height: 2rem;
 }
-.calendar .calendar__year .calendar__arrow_right, .calendar .calendar__month .calendar__arrow_right {
+.calendar .calendar__month .calendar__arrow_right {
   border-top-left-radius: 0;
   border-top-right-radius: 0.25rem;
 }
-.calendar .calendar__year::after, .calendar .calendar__month::after {
+.calendar .calendar__month::after {
   background: var(--default-background-calendar);
   content: "";
   margin-top: 0.19rem;
@@ -1671,9 +1672,6 @@ a {
   -ms-flex: 1 0 100%;
   flex: 1 0 100%;
   height: 2px;
-}
-.calendar .calendar__month .calendar__arrow_left, .calendar .calendar__month .calendar__arrow_right {
-  border-radius: 0;
 }
 .calendar .calendar__weekday, .calendar .calendar__day {
   display: grid;
@@ -1829,6 +1827,11 @@ a {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.flag-img {
   width: 1.25rem;
   height: 1.25rem;
 }
@@ -2128,7 +2131,8 @@ a {
   row-gap: 1.125rem;
 }
 .application-grid .client__contact_number {
-  color: #3E3E5B;
+  background: var(--default-button-fourth);
+  color: var(--default-button-fourth-color);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2140,6 +2144,12 @@ a {
   -ms-flex-direction: column;
   flex-direction: column;
   font-size: 1.375rem;
+}
+.application-grid .client__contact_number:hover {
+  background: var(--default-button-first-hover);
+}
+.application-grid .client__contact_number:active {
+  background: var(--default-button-first-active);
 }
 .application-grid .client__contact_button_hint {
   font-size: 0.875rem;
@@ -2164,7 +2174,7 @@ a {
   color: var(--default-input-color);
 }
 .application .application__item {
-  color: var(--default-focus);
+  color: var(--cargo-item);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2371,7 +2381,7 @@ a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  grid-gap: 0.75rem;
+  grid-gap: 1.5rem;
 }
 .profile .profile__inner_left {
   display: -webkit-box;
@@ -2577,6 +2587,78 @@ a {
     -ms-flex-direction: column;
     flex-direction: column;
   }
+}
+
+.my-application {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.my-application .account__page-title {
+  margin-bottom: 1.5rem 1.875rem;
+}
+.my-application .account-card__inner {
+  text-align: center;
+  padding: 1.75rem;
+}
+.my-application .account-card__image {
+  background: var(--default-body-background);
+  border-radius: 0.1875rem;
+  margin-bottom: 1.875rem;
+}
+.my-application .account-card__image-add {
+  color: var(--image-add);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+.my-application .account-card__image-add:hover {
+  color: var(--image-add-hover);
+}
+.my-application .account-card__image-add:active {
+  color: var(--image-add-active);
+}
+.my-application .account-card__image-add_plus {
+  font-size: 6.25rem;
+}
+.my-application .account-card__organization {
+  color: var(--default-input-color);
+  font-size: 1.5rem;
+  margin-bottom: 0.31rem;
+}
+.my-application .account-card__activity {
+  color: var(--default-no-active-color);
+  margin-bottom: 1.5rem;
+}
+.my-application .account-card__image {
+  display: inline-block;
+  width: 21.625rem;
+  height: 19.5rem;
+}
+.my-application .account-card__buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  row-gap: 0.81rem;
+}
+.my-application .account-card__button {
+  height: 50px;
 }
 
 .users {
@@ -2820,7 +2902,7 @@ html, body {
   font-family: "Inter";
   font-weight: 400;
   font-size: 16px;
-  min-height: 100%;
+  min-height: 100vh;
 }
 
 .wrapper {

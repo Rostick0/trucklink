@@ -1,7 +1,7 @@
 <?
 
 $id = (int) $_GET['id'];
-$cargo = Application::getCargoOne($id);
+$cargo = Application::getApplicationOne($id);
 
 if ($cargo['application_type_id'] == 2) {
     require_once './pages/transport/transport_info.php';
@@ -57,11 +57,6 @@ if ($cargo['application_type_id'] == 2) {
                                             </span>
                                         </li>
                                     </ul>
-                                    <a href="/cargo_create">
-                                        <button class="catalog__button_add button-yellow">
-                                            Добавить транспорт
-                                        </button>
-                                    </a>
                                 </div>
                                 <?
                                     require_once './source/components/UI/filter_catalog.php'
