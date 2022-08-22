@@ -166,7 +166,7 @@ body._dark {
   --default-input-border: #6E7B8B;
   --default-input-color: #6E7B8B;
   --default-dark-color: var(--default-color);
-  --default-focus: #6A6A6A;
+  --default-focus: #6E7B8B;
   --default-disabled-color: rgba(43, 41, 41, 0.4);
   --default-social-color: #C2C2C2;
   --default-user-id: #0b79fe;
@@ -251,6 +251,10 @@ body._dark .index__filter_button {
 
 .border-0 {
   border: none !important;
+}
+
+.boder-top-left-0 {
+  border-top-left-radius: 0 !important;
 }
 
 ._hidden-scroll {
@@ -1257,10 +1261,6 @@ a {
   align-self: end;
 }
 
-.catalog__filter {
-  border-top-left-radius: 0;
-}
-
 .filter__to_from, .information-basic__to_from {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -1275,7 +1275,7 @@ a {
   grid-gap: inherit;
 }
 .filter__to_from .filter__to_from__inputs::before, .filter__to_from .information-basic__to_from__inputs::before, .information-basic__to_from .filter__to_from__inputs::before, .information-basic__to_from .information-basic__to_from__inputs::before {
-  background: #2D2D41;
+  background: var(--default-focus);
   content: "";
   display: inline-block;
   position: absolute;
@@ -1314,7 +1314,7 @@ a {
   position: relative;
 }
 .filter__small-inputs::before {
-  background: #2D2D41;
+  background: var(--default-focus);
   content: "";
   display: inline-block;
   position: absolute;
@@ -2589,13 +2589,17 @@ a {
   }
 }
 
+.account__page-title {
+  margin-bottom: 1.5rem;
+}
+
 .my-application {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-}
-.my-application .account__page-title {
-  margin-bottom: 1.5rem 1.875rem;
+  -webkit-column-gap: 2rem;
+  -moz-column-gap: 2rem;
+  column-gap: 2rem;
 }
 .my-application .account-card__inner {
   text-align: center;
@@ -2659,6 +2663,10 @@ a {
 }
 .my-application .account-card__button {
   height: 50px;
+}
+.my-application .my-application__list {
+  overflow-y: auto;
+  height: calc(200px + 3.75rem);
 }
 
 .users {

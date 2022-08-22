@@ -11,6 +11,16 @@ foreach ($cargos as $cargo) {
     $result[] = $cargo;
 }
 
+if (empty($result)) {
+    http_response_code(404);
+
+    echo json_encode([
+        "message" => "Не найдено"
+    ]);
+
+    die();
+}
+
 echo json_encode($result);
 
 ?>

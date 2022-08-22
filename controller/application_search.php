@@ -17,6 +17,8 @@ class ApplicationSearchController
         $volume_max = parseIntGet('volume_max');
         $mass_min = parseIntGet('mass_min');
         $mass_max = parseIntGet('mass_max');
+        $my_application = $_GET['my_application'] ? true : "";
+        $session_user_id = $_SESSION['user']['id'];
 
         if ($from) {
             $from = "AND `from` = '$from'";
@@ -62,6 +64,12 @@ class ApplicationSearchController
             $mass_max = "AND `application_info`.`mass` <= '$mass_max'";
         }
 
+        if ($my_application && $session_user_id) {
+            $my_application = "AND `application`.`user_id` = {$_SESSION['user']['id']}";
+        } else {
+            $my_application = "";
+        }
+
         if ($limit) {
             $limit = "LIMIT $limit";
         }
@@ -70,7 +78,7 @@ class ApplicationSearchController
             $limit .= " OFFSET $offset";
         }
 
-        return trim("$from $to $date_start $date_end $transport_upload $price_min $price_max $volume_min $volume_max $mass_min $mass_max ORDER BY `application`.`application_id` DESC $limit");
+        return trim("$from $to $date_start $date_end $transport_upload $price_min $price_max $volume_min $volume_max $mass_min $mass_max $my_application ORDER BY `application`.`application_id` DESC $limit");
     }
 }
 

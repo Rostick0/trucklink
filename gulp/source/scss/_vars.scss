@@ -106,7 +106,7 @@ body {
         --default-input-border: #6E7B8B;
         --default-input-color: #6E7B8B;
         --default-dark-color: var(--default-color);
-        --default-focus: #6A6A6A;
+        --default-focus: #6E7B8B;
         --default-disabled-color: rgba(43, 41, 41, 0.4);
         --default-social-color: #C2C2C2;
         --default-user-id: #0b79fe;
@@ -211,6 +211,10 @@ body {
 
 .border-0 {
     border: none !important;
+}
+
+.boder-top-left-0 {
+    border-top-left-radius: 0 !important;
 }
 
 ._hidden-scroll {

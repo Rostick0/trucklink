@@ -28,16 +28,16 @@ $pages = [
         "path" => "cargo/cargo.php"
     ],
     [
-        "url" => "/cargo_create",
-        "path" => "cargo/cargo_create.php"
+        "url" => "/add-cargo",
+        "path" => "cargo/add-cargo.php"
     ],
     [
         "url" => "/transport",
         "path" => "transport/transport.php"
     ],
     [
-        "url" => "/transport_create",
-        "path" => "transport/transport_create.php"
+        "url" => "/add-transport",
+        "path" => "transport/add-transport.php"
     ],
     [
         "url" => "/users",

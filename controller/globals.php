@@ -17,7 +17,7 @@ function parseStrGet($value) {
 }
 
 function parseBooleanGet($value) {
-    return $_GET[$value] ? (boolean) $_GET[$value] : NULL;
+    return $_GET[$value];
 }
 
 ?>

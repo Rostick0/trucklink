@@ -62,7 +62,7 @@ $user = Model::get('user', 'user_id', $_SESSION['user']['id']);
                                     <div class="account__page-title page-title">
                                         Мои грузы
                                     </div>
-                                    <ul class="my-application__list cargo__list">
+                                    <ul class="table__service my-application__list my_cargo__list">
                                         
                                     </ul>
                                 </div>
@@ -70,6 +70,9 @@ $user = Model::get('user', 'user_id', $_SESSION['user']['id']);
                                     <div class="account__page-title page-title">
                                         Мой транспорт
                                     </div>
+                                    <ul class="table__service my-application__list my_transport__list">
+                                        
+                                    </ul>
                                 </div>
                             </div>
                         </d>

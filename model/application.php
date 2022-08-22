@@ -49,6 +49,21 @@ class Application {
     static public function edit() {
         
     }
+
+    static public function count($application_type_id, $user_id = null) {
+        global $mysqli;
+
+        if ($user_id) {
+            $user_id = " AND `user_id` = '$user_id'";
+        } else {
+            $user_id = "";
+        }
+
+        $count = $mysqli->query("SELECT COUNT(*) FROM `application` WHERE `application_type_id` = '$application_type_id' $user_id");
+
+        $count = $count->fetch_assoc();
+        return $count["COUNT(*)"];
+    }
 }
 
 ?>

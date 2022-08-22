@@ -1,9 +1,10 @@
+.account__page-title {
+    margin-bottom: 1.5rem;
+}
+
 .my-application {
     display: flex;
-
-    .account__page-title {
-        margin-bottom: 1.5rem 1.875rem;
-    }
+    column-gap: 2rem;
 
     .account-card__inner {
         text-align: center;
@@ -72,5 +73,11 @@
 
     .account-card__button {
         height: 50px;
+    }
+
+    .my-application__list {
+        overflow-y: auto;
+
+        height: calc(50px * 4 + 1.25rem * 3);
     }
 }

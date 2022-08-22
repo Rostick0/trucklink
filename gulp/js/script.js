@@ -36,7 +36,7 @@ const svgs = {
     sun: `<svg width="1.375rem" height="1.375rem" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.5 16.5 18 18l-1.5-1.5zM19 11h2-2zM5.5 5.5 4 4l1.5 1.5zm11 0L18 4l-1.5 1.5zm-11 11L4 18l1.5-1.5zM1 11h2-2zM11 1v2-2zm0 18v2-2zm4-8a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" stroke="#FFA61B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`
 }
 
-if (switchThemeSwitch) {    
+if (switchThemeSwitch) {
     const switchThemeIcon = document.querySelector('.switch-theme__icon');
 
     if (localStorage.getItem('theme') === '_dark') {
@@ -230,13 +230,12 @@ function applicationStatusColor(seconds) {
     return 'status-24h';
 }
 
-async function getApplications(listHtml, type, queryParams = null) {
+async function getApplications(listHtml, type, queryParams = null, clear = true) {
     const list = listHtml;
-    list.innerHTML = "";
 
-    fetch(`${BACKEND_URL}/${type}/${queryParams}`)
-        .then(res => res.json())
-        .then(res => console.log(res))
+    if (clear) {
+        list.innerHTML = "";
+    }
 
     if (type == 'cargo') {
         return await fetch(`${BACKEND_URL}/${type}/${queryParams}`)
@@ -245,50 +244,7 @@ async function getApplications(listHtml, type, queryParams = null) {
                 if (!res[0]) {
                     return list.insertAdjacentHTML('beforeend', `<div class="text-center mt-1">Не найдено</div>`);
                 }
-                res.forEach(elem => {
-                    list.insertAdjacentHTML('beforeend',
-                        `<li class="service__item">
-                    <div class="service__status
-                    ${applicationStatusColor(roundingMilliseconds(new Date() - new Date(elem?.date_created)))}
-                    ">
-                    </div>
-                    <div class="service__date">
-                        ${normalizeDate(elem?.date_start)} - ${normalizeDate(elem?.date_end)}
-                    </div>
-                    <div class="service__way">
-                        <div class="service__way_item">
-                            <img class="flag-img" src="${PATH_IMAGE}/${showFlag(elem?.from?.country)}" alt="${elem?.from?.country}">
-                            <span>
-                                ${elem?.from?.city}
-                            </span>
-                        </div>
-                        <div class="service__way_item">
-                            
-                            <img class="flag-img" src="${PATH_IMAGE}/${showFlag(elem?.to?.country)}" alt="${elem?.to?.country}">
-                            <span>
-                                ${elem?.to?.city}
-                            </span>
-                        </div>
-                    </div>
-                    <div class="service__payment">
-                        ${elem?.price ? elem?.price + ' ₽' : "Запрос цены"}
-                    </div>
-                    <div class="service__transport">
-                        ${elem?.transport}
-                    </div>
-                    <a href="${type}?id=${elem?.application_id}">
-                    <button class="service__button button-grey">
-                        Посмотреть
-                    </button>
-                    </a>
-                    <a href="${type}?id=${elem?.application_id}">
-                    <button class="service__button button-dark">
-                        Связаться
-                    </button>
-                    </a>
-                </li>
-                `);
-                })
+                res.forEach(elem => applicationHtml(list, elem, true))
             })
             .catch(() => {
                 list.insertAdjacentHTML('beforeend', `<div class="text-center mt-1">Не найдено</div>`);
@@ -302,55 +258,59 @@ async function getApplications(listHtml, type, queryParams = null) {
                 if (!res[0]) {
                     list.insertAdjacentHTML('beforeend', `<div class="text-center mt-1">Не найдено</div>`);
                 }
-                res.forEach(elem => {
-                    list.insertAdjacentHTML('beforeend',
-                        `<li class="service__item">
-                    <div class="service__status
-                    ${applicationStatusColor(roundingMilliseconds(new Date() - new Date(elem?.date_created)))}
-                    ">
-                    </div>
-                    <div class="service__date">
-                        ${normalizeDate(elem?.date_start)} - ${normalizeDate(elem?.date_end)}
-                    </div>
-                    <div class="service__way">
-                        <div class="service__way_item">
-                            <img class="flag-img" src="${PATH_IMAGE}/${showFlag(elem?.from?.country)}" alt="${elem?.from?.country}">
-                            <span>
-                                ${elem?.from?.city}
-                            </span>
-                        </div>
-                        <div class="service__way_item">
-                            
-                            <img class="flag-img" src="${PATH_IMAGE}/${showFlag(elem?.to?.country)}" alt="${elem?.to?.country}">
-                            <span>
-                                ${elem?.to?.city}
-                            </span>
-                        </div>
-                    </div>
-                    <div class="service__payment">
-                        ${elem?.upload_type}
-                    </div>
-                    <div class="service__transport">
-                        ${elem?.transport}
-                    </div>
-                    <a href="${type}?id=${elem?.application_id}">
-                    <button class="service__button button-grey">
-                        Посмотреть
-                    </button>
-                    </a>
-                    <a href="${type}?id=${elem?.application_id}">
-                    <button class="service__button button-dark">
-                        Связаться
-                    </button>
-                    </a>
-                </li>
-                `);
-                })
+                res.forEach(elem => applicationHtml(list, elem))
             })
             .catch(() => {
                 list.insertAdjacentHTML('beforeend', `<div class="text-center mt-1">Не найдено</div>`);
             })
     }
+}
+
+function applicationHtml(list, elem, isCargo = null, isEdit = null) {
+    return list.insertAdjacentHTML('beforeend',
+        `<li class="service__item">
+            <div class="service__status
+            ${applicationStatusColor(roundingMilliseconds(new Date() - new Date(elem?.date_created)))}
+            ">
+            </div>
+             <div class="service__date">
+                 ${normalizeDate(elem?.date_start)} - ${normalizeDate(elem?.date_end)}
+            </div>
+            <div class="service__way">
+                <div class="service__way_item">
+                    <img class="flag-img" src="${PATH_IMAGE}/${showFlag(elem?.from?.country)}" alt="${elem?.from?.country}">
+                    <span>
+                        ${elem?.from?.city}
+                    </span>
+                </div>
+                <div class="service__way_item">
+                    <img class="flag-img" src="${PATH_IMAGE}/${showFlag(elem?.to?.country)}" alt="${elem?.to?.country}">
+                    <span>
+                        ${elem?.to?.city}
+                    </span>
+                </div>
+            </div>
+            <div class="service__payment">
+                ${isCargo ? (elem?.price ? elem?.price + ' ₽' : "Запрос цены") : elem?.upload_type}
+            </div>
+            <div class="service__transport">
+                ${elem?.transport}
+            </div>
+            ${isEdit ?
+            ``
+            :
+            `<a href="${isCargo ? 'cargo' : 'transport'}?id=${elem?.application_id}">
+                    <button class="service__button button-grey">
+                        Посмотреть
+                    </button>
+                </a>
+                <a href="${isCargo ? 'cargo' : 'transport'}?id=${elem?.application_id}">
+                    <button class="service__button button-dark">
+                        Связаться
+                    </button>
+                </a>`
+        }
+        </li>`);
 }
 
 function setQueryParamsUrl(params) {
@@ -395,6 +355,10 @@ async function getCountElems(type) {
 }
 
 function renderNavigtaionBottom(elem, type) {
+    if (!elem) {
+        return;
+    }
+
     let page = parseInt(urlQuery.p ? urlQuery.p : 1);
 
     let counter = Math.floor(page / 10) * 10;
@@ -534,19 +498,25 @@ function searchActiveButton(e) {
 
     queryParams = setQueryParamsUrl(queryParams) + LIMIT_OFFSET_APPLICATION;
 
-    // queryParams = '?' + queryParams.join('&') + LIMIT_OFFSET_APPLICATION;
-
     return getApplications(cargoList, 'cargo', queryParams);
 }
 
+function setFilterButton() {
+    if (!filterButton) {
+        return;
+    }
+
+    return filterButton.onclick = searchActiveButton;
+}
+
 function renderCargoList() {
-    filterButton.onclick = searchActiveButton;
+    setFilterButton();
 
     getApplications(cargoList, 'cargo', LIMIT_OFFSET_APPLICATION);
 }
 
 function renderTransportList() {
-    filterButton.onclick = searchActiveButton;
+    setFilterButton();
 
     getApplications(tranposrtList, 'transport', LIMIT_OFFSET_APPLICATION);
 }
@@ -906,7 +876,7 @@ if (calendarFirst) {
 if (calendarSecond) {
     const calendarEnd = new Calendar(calendarSecond, dateEndInput, document.querySelectorAll('.calendar-from__active')[1]);
     calendarEnd.start();
-    
+
     dateEndInput.onclick = () => {
         if (!dateStartInput.value) {
             return;
@@ -983,9 +953,71 @@ if (information) {
     const price = document.querySelector('#price');
     const hasPrice = document.querySelector('#has_price');
 
-    hasPrice.onchange = () => {
-        price.disabled = !price.disabled
+    function disabledPrice() {
+        if (hasPrice.checked) {
+            return price.disabled = true;
+        }
     }
+
+    disabledPrice();
+
+    hasPrice.onchange = () => {
+        disabledPrice();
+
+        return price.disabled = false;
+    }
+}
+
+const myApplicationList = document.querySelector('.my-application__list');
+const myApplicationListSecond = document.querySelectorAll('.my-application__list')[1];
+const myCargoList = document.querySelector('.my_cargo__list');
+const myTransportList = document.querySelector('.my_transport__list');
+
+if (myApplicationList) {
+    fetch(`${BACKEND_URL}/count?type=transport&my_application=true`)
+        .then(res => res.json())
+        .then(res => {
+            let count = 0;
+            myApplicationList.addEventListener('scroll', throttle(async function () {
+                if (res.count < count) {
+                    return;
+                }
+
+                if (this.scrollHeight - this.offsetHeight > this.scrollTop * 1.33) {
+                    return;
+                }
+
+                count += 10;
+
+                getApplications(cargoList, 'cargo', LIMIT_OFFSET_APPLICATION + count + "&my_application=true", false);
+            }, 500));
+        })
+}
+
+if (myApplicationListSecond) {
+    fetch(`${BACKEND_URL}/count?type=transport&my_application=true`)
+        .then(res => res.json())
+        .then(res => {
+            let count = 0;
+            myApplicationListSecond.addEventListener('scroll', throttle(function () {
+                if (res.count < count) {
+                    return;
+                }
+
+                if (this.scrollHeight - this.offsetHeight > this.scrollTop * 1.33) {
+                    return;
+                }
+
+                count += 10;
+
+                getApplications(cargoList, 'transport', LIMIT_OFFSET_APPLICATION + count + "&my_application=true", false);
+            }, 500));
+        })
+}
+
+if (myCargoList && myTransportList) {
+    getApplications(myCargoList, 'cargo', LIMIT_OFFSET_APPLICATION + "&my_application=true", false);
+    getApplications(myTransportList, 'transport', LIMIT_OFFSET_APPLICATION + "&my_application=true", false);
 }
 
 document.body.addEventListener('click', e => {
