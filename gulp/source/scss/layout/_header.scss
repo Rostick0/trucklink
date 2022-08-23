@@ -206,6 +206,52 @@
         }
     }
 
+    .header__authorization_img {
+        border-radius: 50%;
+
+        object-fit: cover;
+
+        width: $height_avatar;
+        min-width: $height_avatar;
+        height: $height_avatar;
+    }
+
+    .header__authorization_user-icon {
+        background: var(--header-icon);
+
+        color: var(--default-color);
+
+        border-radius: 50%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        text-transform: uppercase;
+
+        width: $height_avatar;
+        min-width: $height_avatar;
+        height: $height_avatar;
+    }
+
+    .header__authorization_logout {
+        color: var(--default-color);
+
+        display: flex;
+        align-items: center;
+        column-gap: 0.25rem;
+
+        transition: $transition_default;
+
+        svg {
+            path {
+                stroke: var(--default-color);
+
+                transition: $transition_default;
+            }
+        }
+    }
+
     .header__button {
         height: $height_button;
     }

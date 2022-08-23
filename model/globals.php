@@ -32,10 +32,15 @@ class Model {
         return $count;
     }
 
-    static public function getAll($table, $column, $value) {
+    static public function getAll($table, $column = null, $value = null) {
         global $mysqli;
 
-        $count = $mysqli->query("SELECT * FROM `$table` WHERE `$column` = '$value'");
+        if ($column && $value) {
+            $count = $mysqli->query("SELECT * FROM `$table` WHERE `$column` = '$value'");
+        } else {
+            $count = $mysqli->query("SELECT * FROM `$table`");
+        }
+
         return $count;
     }
 }

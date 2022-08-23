@@ -1,14 +1,30 @@
 <?
 
+function renderHeaderImg() {
+    global $user;
+
+    if (file_exists("./source/upload/" . $user['avatar'] && $user['avatar'])) {
+        return '<img class="header__authorization_img" src="./source/upload/' . $user['avatar'] . '" />';
+    }
+
+    return '<div class="header__authorization_user-icon">' . $user['name'][0] . '</div>';
+}
+
 function renderHeaderAuthorization()
 {
     if ($_SESSION['user']['id']) {
         return '
             <div class="header__rigth header__authorization">
                 <a class="header__authorization_link" href="profile?id=' . $_SESSION['user']['id'] . '">
-                    <button class="header__button button-yellow">
-                        Профиль
-                    </button>
+                    ' . renderHeaderImg() . '
+                </a>
+                <a class="header__authorization_logout" href="/logout">
+                    <svg width="1.5rem" height="1.5rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 7L8 6C8 4.89543 8.89543 4 10 4L17 4C18.1046 4 19 4.89543 19 6L19 18C19 19.1046 18.1046 20 17 20L10 20C8.89543 20 8 19.1046 8 18L8 17M4 12L15 12M15 12L12 15M15 12L12 9" stroke="#2D2D41" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>
+                        Выход
+                    </span>
                 </a>
             </div>';
     }
@@ -121,5 +137,3 @@ function renderHeader($title)
             </div>
         </header>';
 }
-
-?>

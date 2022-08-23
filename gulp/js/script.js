@@ -230,7 +230,7 @@ function applicationStatusColor(seconds) {
     return 'status-24h';
 }
 
-async function getApplications(listHtml, type, queryParams = null, clear = true) {
+async function getApplications(listHtml, type, queryParams = null, clear = true, isEdit = false) {
     const list = listHtml;
 
     if (clear) {
@@ -244,7 +244,7 @@ async function getApplications(listHtml, type, queryParams = null, clear = true)
                 if (!res[0]) {
                     return list.insertAdjacentHTML('beforeend', `<div class="text-center mt-1">Не найдено</div>`);
                 }
-                res.forEach(elem => applicationHtml(list, elem, true))
+                res.forEach(elem => applicationHtml(list, elem, true, isEdit))
             })
             .catch(() => {
                 list.insertAdjacentHTML('beforeend', `<div class="text-center mt-1">Не найдено</div>`);
@@ -258,7 +258,7 @@ async function getApplications(listHtml, type, queryParams = null, clear = true)
                 if (!res[0]) {
                     list.insertAdjacentHTML('beforeend', `<div class="text-center mt-1">Не найдено</div>`);
                 }
-                res.forEach(elem => applicationHtml(list, elem))
+                res.forEach(elem => applicationHtml(list, elem, false, isEdit))
             })
             .catch(() => {
                 list.insertAdjacentHTML('beforeend', `<div class="text-center mt-1">Не найдено</div>`);
@@ -297,18 +297,29 @@ function applicationHtml(list, elem, isCargo = null, isEdit = null) {
                 ${elem?.transport}
             </div>
             ${isEdit ?
-            ``
+            `
+            <a href="application_edit?id=${elem?.application_id}">
+                <svg width="1.25rem" height="1.25rem" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9.99967 3.33337H5.33301C4.22844 3.33337 3.33301 4.2288 3.33301 5.33337V14.6667C3.33301 15.7713 4.22844 16.6667 5.33301 16.6667H14.6663C15.7709 16.6667 16.6663 15.7713 16.6663 14.6667V10M7.49967 12.5V10.4167L14.7913 3.12504C15.3666 2.54974 16.2994 2.54974 16.8747 3.12504V3.12504C17.45 3.70034 17.45 4.63308 16.8747 5.20837L12.9163 9.16671L9.58301 12.5H7.49967Z" stroke="#2D2D41" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>            
+            </a>
+            <button>
+                <svg width="1.125rem" height="1.125rem" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.5 5.625L13.5 14.625M13.5 5.625L4.5 14.625" stroke="#E94141" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            `
             :
             `<a href="${isCargo ? 'cargo' : 'transport'}?id=${elem?.application_id}">
-                    <button class="service__button button-grey">
-                        Посмотреть
-                    </button>
-                </a>
-                <a href="${isCargo ? 'cargo' : 'transport'}?id=${elem?.application_id}">
-                    <button class="service__button button-dark">
-                        Связаться
-                    </button>
-                </a>`
+                <button class="service__button button-grey">
+                    Посмотреть
+                </button>
+            </a>
+            <a href="${isCargo ? 'cargo' : 'transport'}?id=${elem?.application_id}">
+                <button class="service__button button-dark">
+                    Связаться
+                </button>
+            </a>`
         }
         </li>`);
 }
@@ -989,7 +1000,7 @@ if (myApplicationList) {
 
                 count += 10;
 
-                getApplications(cargoList, 'cargo', LIMIT_OFFSET_APPLICATION + count + "&my_application=true", false);
+                getApplications(cargoList, 'cargo', LIMIT_OFFSET_APPLICATION + count + "&my_application=true", false, true);
             }, 500));
         })
 }
@@ -1010,14 +1021,14 @@ if (myApplicationListSecond) {
 
                 count += 10;
 
-                getApplications(cargoList, 'transport', LIMIT_OFFSET_APPLICATION + count + "&my_application=true", false);
+                getApplications(cargoList, 'transport', LIMIT_OFFSET_APPLICATION + count + "&my_application=true", false, true);
             }, 500));
         })
 }
 
 if (myCargoList && myTransportList) {
-    getApplications(myCargoList, 'cargo', LIMIT_OFFSET_APPLICATION + "&my_application=true", false);
-    getApplications(myTransportList, 'transport', LIMIT_OFFSET_APPLICATION + "&my_application=true", false);
+    getApplications(myCargoList, 'cargo', LIMIT_OFFSET_APPLICATION + "&my_application=true", false, true);
+    getApplications(myTransportList, 'transport', LIMIT_OFFSET_APPLICATION + "&my_application=true", false, true);
 }
 
 document.body.addEventListener('click', e => {

@@ -15,4 +15,10 @@ $month_short = [
     'дек'
 ];
 
+$user = null;
+
+if ($_SESSION['user']['id']) {
+    $user = Model::get('user', 'user_id', $_SESSION['user']['id']);
+}
+
 ?>

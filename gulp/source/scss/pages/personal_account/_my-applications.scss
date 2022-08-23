@@ -12,6 +12,10 @@
         padding: 1.75rem
     }
 
+    .my-application__content {
+        flex: 1;
+    }
+
     .account-card__image {
         background: var(--default-body-background);
 
@@ -79,5 +83,11 @@
         overflow-y: auto;
 
         height: calc(50px * 4 + 1.25rem * 3);
+
+        .service__item {
+            grid-template-columns: 0.17fr 0.7fr 1.55fr 0.7fr 1.7fr 0.2fr 0.2fr;
+
+            height: 50px;
+        }
     }
 }

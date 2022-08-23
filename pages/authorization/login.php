@@ -6,13 +6,9 @@ if ($_SESSION['user']['id']) {
 
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <? require_once './source/components/style.php'; ?>
-    <title>Вход в личный кабинет</title>
-</head>
+
+<?= rendeHead("Вход в личный кабинет") ?>
+
 <body>
     <div class="wrapper">
         <?= renderHeader("Вход в личный кабинет") ?>

@@ -41,6 +41,7 @@ require_once './controller/application_search.php';
 
 require_once './source/components/layout/header.php';
 require_once './source/components/layout/footer.php';
+require_once './source/components/layout/head.php';
 require_once './source/components/UI/navigation_top.php';
 
 require_once './hooks/session.php';

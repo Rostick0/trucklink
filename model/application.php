@@ -55,10 +55,10 @@ class Application {
             $query = $mysqli->query("UPDATE `application` SET `from`='$from', `to`='$to', `transport_upload_id`='$transport_upload_id',`upload_type_id`='$upload_type_id', `date_start`='$date_start', `date_end`='$date_end' WHERE `application_id` = '$application_id' AND `user_id` = '$user_id'");
         }
 
-        if ($query) {
-            return $mysqli->query("UPDATE `application_info` SET `volume`='$volume', `weight`='$weight', `length`='[value-4]', `width`='$width',`height`='$height', `description`='$description', `type`='$type' WHERE `application_id` = '$application_id'");
-        }
 
+        if ($query) {
+            return $mysqli->query("UPDATE `application_info` SET `volume`='$volume', `weight`='$weight', `length`='$length', `width`='$width',`height`='$height', `description`='$description', `type`='$type' WHERE `application_id` = '$application_id'");
+        }
     }
 
     static public function count($application_type_id, $user_id = null) {

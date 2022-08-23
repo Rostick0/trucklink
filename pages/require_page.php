@@ -20,6 +20,10 @@ $pages = [
         "path" => "authorization/registration.php"
     ],
     [
+        "url" => "/logout",
+        "path" => "authorization/logout.php"
+    ],
+    [
         "url" => "/support",
         "path" => "support.php"
     ],

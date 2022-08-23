@@ -4,18 +4,15 @@ if (!$_SESSION['user']['id']) {
 }
 
 $user = Model::get('user', 'user_id', $_SESSION['user']['id']);
+$activity = Model::get('user_activity', 'user_activity_id', $user['activity_id'])['name'];
+
+var_dump($user);
 ?>
 
 <!DOCTYPE html>
 <html lang="ru">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <? require_once './source/components/style.php' ?>
-    <title>Главная</title>
-</head>
+<?= rendeHead("Мои заявки") ?>
 
 <body>
     <div class="wrapper">
@@ -42,14 +39,14 @@ $user = Model::get('user', 'user_id', $_SESSION['user']['id']);
                                         <input type="file" name="user_avatar" id="user_avatar" hidden>
                                     </label>
                                     <div class="account-card__organization">
-                                        ООО “Исидафарм”
+                                        <?= $user['organization'] ? $user['organization'] : $user['name'] ?>
                                     </div>
                                     <div class="account-card__activity">
-                                        ИП Мамедов М.М
+                                        <?= $activity ?>
                                     </div>
                                     <div class="account-card__buttons">
                                         <button class="account-card__button button-grey">
-                                            +7(959)654-43-54
+                                            <?= $user['telephone'] ?>
                                         </button>
                                         <button class="account-card__button button-dark">
                                             Сообщения

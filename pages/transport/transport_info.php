@@ -11,13 +11,7 @@ $messengers = Model::getAll('user_messenger', 'user_id', $cargo['user_id']);
 <!DOCTYPE html>
 <html lang="ru">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <? require_once './source/components/style.php' ?>
-    <title>Заявка на транспорт #<?= $cargo['application_id'] ?></title>
-</head>
+<?= rendeHead("Заявка на транспорт #{$cargo['application_id']}") ?>
 
 <body>
     <div class="wrapper">
@@ -150,7 +144,7 @@ $messengers = Model::getAll('user_messenger', 'user_id', $cargo['user_id']);
                                 <ul class="client__contacts">
                                     <li class="client__contact">
                                         <a class="client__contact_href" href="">
-                                            <button class="client__contact_button client__contact_number button">
+                                            <button class="client__contact_button client__contact_number button-grey button">
                                                 <?= hideTelephone($user['telephone']) ?>
                                                 <span class="client__contact_button_hint">
                                                     нажмите, чтобы узнать
