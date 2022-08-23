@@ -8,7 +8,7 @@
     .navigation-bottom_href._next_page {
         background: none;
 
-        color: $blue_dark;
+        color: var(--default-color);
 
         width: auto;
         height: auto;
@@ -18,7 +18,7 @@
 .navigation-bottom_href {
     border-radius: 0.5rem;
 
-    color: $blue_dark;
+    color: var(--default-color);
 
     display: flex;
     align-items: center;
@@ -32,7 +32,7 @@
 
     &:hover,
     &._active {
-        background: $blue_dark;
+        background: var(--navigation-bottom-item);
 
         color: #FFFFFF;
     }

@@ -5,8 +5,6 @@ if (!$_SESSION['user']['id']) {
 
 $user = Model::get('user', 'user_id', $_SESSION['user']['id']);
 $activity = Model::get('user_activity', 'user_activity_id', $user['activity_id'])['name'];
-
-var_dump($user);
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +34,7 @@ var_dump($user);
                                                 Добавить логотип
                                             </div>
                                         </div>
-                                        <input type="file" name="user_avatar" id="user_avatar" hidden>
+                                        <input type="file" name="user_avatar" id="user_avatar" accept="image/png, image/jpeg" hidden>
                                     </label>
                                     <div class="account-card__organization">
                                         <?= $user['organization'] ? $user['organization'] : $user['name'] ?>

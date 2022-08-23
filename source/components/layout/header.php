@@ -7,7 +7,7 @@ function renderHeaderImg() {
         return '<img class="header__authorization_img" src="./source/upload/' . $user['avatar'] . '" />';
     }
 
-    return '<div class="header__authorization_user-icon">' . $user['name'][0] . '</div>';
+    return '<div class="header__authorization_user-icon">' . mb_substr($user['name'], 0, 1) . '</div>';
 }
 
 function renderHeaderAuthorization()
@@ -15,7 +15,7 @@ function renderHeaderAuthorization()
     if ($_SESSION['user']['id']) {
         return '
             <div class="header__rigth header__authorization">
-                <a class="header__authorization_link" href="profile?id=' . $_SESSION['user']['id'] . '">
+                <a class="header__authorization_link" href="/my_application">
                     ' . renderHeaderImg() . '
                 </a>
                 <a class="header__authorization_logout" href="/logout">
@@ -137,3 +137,5 @@ function renderHeader($title)
             </div>
         </header>';
 }
+
+?>

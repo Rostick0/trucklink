@@ -4,7 +4,7 @@ class Application {
     static public function getCargo($application_id = 0, $limit = 10) {
         global $mysqli;
 
-        return $mysqli->query("SELECT * FROM `application` JOIN `application_info` ON `application`.`application_id` = `application_info`.`application_info_id` WHERE `application`.`application_id` > $application_id LIMIT $limit");
+        return $mysqli->query("SELECT * FROM `application` JOIN `application_info` ON `application`.`application_id` = `application_info`.`application_info_id` WHERE `application`.`application_id` > $application_id AND `is_hide` = '0' LIMIT $limit");
     }
 
     static public function getApplicationOne($application_id) {
@@ -23,6 +23,7 @@ class Application {
         FROM `application`, `transport_upload`,`application_info`,`upload_type`
         WHERE `application`.`transport_upload_id` = `transport_upload`.`transport_upload_id`
         AND `application_info`.`application_id` = `application`.`application_id`
+        AND `application`.`is_hide` = '0'
         AND `upload_type`.`upload_type_id` = `application`.`upload_type_id`
         AND `application_type_id` = '$type' $where_params
         ");
@@ -74,6 +75,12 @@ class Application {
 
         $count = $count->fetch_assoc();
         return $count["COUNT(*)"];
+    }
+
+    static public function hide($user_id, $application_id) {
+        global $mysqli;
+
+        return $mysqli->query("UPDATE `application` SET `is_hide` = '1' WHERE `user_id` = '$user_id' AND `application_id` = '$application_id'");
     }
 }
 

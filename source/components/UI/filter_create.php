@@ -296,7 +296,7 @@
                         </svg>
                     </div>
                     <ul class="_select__list">
-                        <? foreach (Model::get('upload_type') as $value) {
+                        <? foreach (Model::getAll('upload_type') as $value) {
                             echo '<li class="_select__item">
                                     <label for="upload_type_' . $value['upload_type_id'] . '">
                                         ' . $value['name'] . '

@@ -16,6 +16,42 @@ class ApplicationController {
 
         Application::edit($price, $from, $to, $date_start, $date_end, $transport_upload_id, $upload_type_id, $volume, $weight, $length, $width, $height, $description, $type, $user_id, $application_id);
     }
+
+    static public function httpHide($user_id, $application_id) {
+        if (!$user_id) {
+            $code = "401";
+            $error = "Нет авторизаци";
+        }
+
+        if (!$application_id) {
+            $code = "404";
+            $error = "Не выбран id заявки";
+        }
+
+        if ($error) {
+            http_response_code($code);
+
+            echo json_encode([
+                "error" => $error
+            ]);
+
+            return;
+        }
+
+        $query = Application::hide($user_id, $application_id);
+
+        if (!$query) {
+            http_response_code(400);
+
+            echo json_encode([
+                "error" => "Заявка не удалена"
+            ]);
+        } else {
+            echo json_encode([
+                "status" => true
+            ]);
+        }
+    }
 }
 
 if (isset($_REQUEST['create_cargo'])) {

@@ -139,6 +139,7 @@ textarea {
   --image-add: #D8D8D8;
   --image-add-hover: #D8D8D8;
   --image-add-active: #D8D8D8;
+  --navigation-bottom-item: var(--default-color);
 }
 
 body._dark {
@@ -195,6 +196,7 @@ body._dark {
   --image-add: #D8D8D8;
   --image-add-hover: #D8D8D8;
   --image-add-active: #D8D8D8;
+  --navigation-bottom-item: var(--default-button-second);
 }
 body._dark .header__burger-fixed__social:first-child a {
   color: #FFC93A !important;
@@ -1778,14 +1780,14 @@ a {
 
 .navigation-bottom_item .navigation-bottom_href._next_page {
   background: none;
-  color: #2D2D41;
+  color: var(--default-color);
   width: auto;
   height: auto;
 }
 
 .navigation-bottom_href {
   border-radius: 0.5rem;
-  color: #2D2D41;
+  color: var(--default-color);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1803,7 +1805,7 @@ a {
   height: 3.25rem;
 }
 .navigation-bottom_href:hover, .navigation-bottom_href._active {
-  background: #2D2D41;
+  background: var(--navigation-bottom-item);
   color: #FFFFFF;
 }
 
@@ -2714,7 +2716,7 @@ a {
 }
 .my-application .my-application__list {
   overflow-y: auto;
-  height: calc(200px + 3.75rem);
+  max-height: calc(200px + 3.75rem);
 }
 .my-application .my-application__list .service__item {
   grid-template-columns: 0.17fr 0.7fr 1.55fr 0.7fr 1.7fr 0.2fr 0.2fr;

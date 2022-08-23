@@ -75,6 +75,8 @@ $height_avatar: 3.125rem;
     --image-add: #D8D8D8;
     --image-add-hover: #D8D8D8;
     --image-add-active: #D8D8D8;
+
+    --navigation-bottom-item: var(--default-color);
 }
 
 body {
@@ -139,6 +141,8 @@ body {
         --image-add: #D8D8D8;
         --image-add-hover: #D8D8D8;
         --image-add-active: #D8D8D8;
+
+        --navigation-bottom-item: var(--default-button-second);
 
         .header__burger-fixed__social {
             &:first-child {

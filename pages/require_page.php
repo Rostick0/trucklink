@@ -48,10 +48,6 @@ $pages = [
         "path" => "users.php"
     ],
     [
-        "url" => "/profile",
-        "path" => "account/profile.php"
-    ],
-    [
         "url" => "/my_application",
         "path" => "account/my_application.php"
     ],

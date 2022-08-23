@@ -82,7 +82,7 @@
     .my-application__list {
         overflow-y: auto;
 
-        height: calc(50px * 4 + 1.25rem * 3);
+        max-height: calc(50px * 4 + 1.25rem * 3);
 
         .service__item {
             grid-template-columns: 0.17fr 0.7fr 1.55fr 0.7fr 1.7fr 0.2fr 0.2fr;
