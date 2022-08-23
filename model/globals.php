@@ -23,10 +23,11 @@ class Model {
 
         if ($column && $value) {
             $count = $mysqli->query("SELECT * FROM `$table` WHERE `$column` = '$value' $limit");
-            $count = $count->fetch_assoc();
         } else {
             $count = $mysqli->query("SELECT * FROM `$table` $limit");
         }
+
+        $count = $count->fetch_assoc();
 
         return $count;
     }
