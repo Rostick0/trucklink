@@ -31,6 +31,10 @@ $pages = [
         "path" => "application.php"
     ],
     [
+        "url" => "/avatar",
+        "path" => "avatar.php"
+    ],
+    [
         "url" => "/count",
         "path" => "count.php"
     ]

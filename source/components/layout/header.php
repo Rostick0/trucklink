@@ -3,7 +3,7 @@
 function renderHeaderImg() {
     global $user;
 
-    if (file_exists("./source/upload/" . $user['avatar'] && $user['avatar'])) {
+    if ($user['avatar'] && file_exists("./source/upload/" . $user['avatar'])) {
         return '<img class="header__authorization_img" src="./source/upload/' . $user['avatar'] . '" />';
     }
 

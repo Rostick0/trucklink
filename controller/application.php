@@ -177,8 +177,6 @@ if (isset($_REQUEST['create_cargo'])) {
     $description = protectionData($_REQUEST['description']);
     $type = protectionData($_REQUEST['type']);
 
-    var_dump($_REQUEST['date_start'], $date_start);
-
     ApplicationController::create($price, $from, $to, $transport_upload_id, $upload_type_id, 1, $is_any_direction, $date_start, $date_end, $_SESSION['user']['id'], $volume, $weight, $length, $width, $height, $description, $type, $has_price);
 }
 

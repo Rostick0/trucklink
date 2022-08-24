@@ -1041,11 +1041,35 @@ if (myCargoList && myTransportList) {
     getApplications(myTransportList, 'transport', LIMIT_OFFSET_APPLICATION + "&my_application=true", false, true);
 }
 
-const userAvatar = document.querySelector('#user_avatar');
+const accountCardImage = document.querySelector('.account-card__image');
 
-if (userAvatar) {
-    userAvatar.onchange = e => {
-        
+if (accountCardImage) {
+    const userAvatar = accountCardImage.querySelector('#user_avatar');
+
+    userAvatar.onchange = function(e) {
+        console.log(this.files[0])
+        // console.log(e)
+
+        const formData = new FormData();
+
+        console.log(this.files[0])
+
+        formData.append('avatar', this.files[0]);
+
+        return fetch(`${BACKEND_URL}/avatar`, {
+            method: 'POST',
+            body: formData,
+        })
+            .then(res => {
+                if (res.status >= 200 && res.status < 300) {
+                    return res.json()
+                }
+            })
+            .then(res => {
+                if (res.path) {
+                    accountCardImage.innerHTML = `<img class="account-card__img" src="${res.path}" alt="">`;
+                }
+            });
     }
 }
 

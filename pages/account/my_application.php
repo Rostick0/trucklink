@@ -28,12 +28,18 @@ $activity = Model::get('user_activity', 'user_activity_id', $user['activity_id']
                                 </div>
                                 <div class="account-card__inner block-default">
                                     <label class="account-card__image" for="user_avatar">
-                                        <div class="account-card__image-add">
-                                            <div class="account-card__image-add_plus">+</div>
-                                            <div class="account-card__image-add_text">
-                                                Добавить логотип
-                                            </div>
-                                        </div>
+                                        <?
+                                            if ($user['avatar'] && file_exists("./source/upload/" . $user['avatar'])) {
+                                                echo '<img class="account-card__img" src="./source/upload/' . $user['avatar'] . '" alt="">';
+                                            } else {
+                                                echo '<div class="account-card__image-add">
+                                                        <div class="account-card__image-add_plus">+</div>
+                                                        <div class="account-card__image-add_text">
+                                                            Добавить логотип
+                                                        </div>
+                                                    </div>';
+                                            }
+                                        ?>
                                         <input type="file" name="user_avatar" id="user_avatar" accept="image/png, image/jpeg" hidden>
                                     </label>
                                     <div class="account-card__organization">

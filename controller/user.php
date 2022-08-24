@@ -76,13 +76,49 @@ class UserController {
     }
 
     public static function setAvatar($user_id, $avatar) {
-        if (mb_substr($avatar['type'], 0, 6) === 'image/') {
-            $avatar = time() . random_int(100, 900) . '.png';
+        $error = false;
 
-            if (User::setAvatar($user_id, $avatar)) {
-                move_uploaded_file($avatar['tmp_name'], './source/upload/' . $avatar);
-            }
+        if (!$user_id) {
+            $code = 401;
+
+            $error = "Нет авторизации";
         }
+
+        if (!$avatar) {
+            $code = 400;
+
+            $error = "Не загружена фотография";
+        }
+
+        if (mb_substr($avatar['type'], 0, 6) !== 'image/') {
+            $code = 400;
+
+            $error = "Не поддерживаемый формат фотографии";
+        }
+
+        if ($error) {
+            http_response_code($code);
+
+            echo json_encode([
+                "error" => $error
+            ]);
+
+            return;
+        }
+
+        $avatar_name = time() . random_int(100, 900) . '.png';
+
+        if (!User::setAvatar($user_id, $avatar_name)) {
+            return;
+        }
+
+        $path = './source/upload/' . $avatar_name;
+
+        move_uploaded_file($avatar['tmp_name'], $path);
+
+        echo json_encode([
+            "path" => $path
+        ]);
     }
 }
 
