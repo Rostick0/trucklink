@@ -19,6 +19,10 @@ function parseStrGet($value) {
 function normalizeDateSql($date) {
     global $month_short;
 
+    if (!$date) {
+        return;
+    }
+
     $result = explode(" ", $date);
     $result = $result[2] . "-" . (array_search($result[1], $month_short) + 1) . "-" . $result[0];
 
@@ -76,6 +80,22 @@ function hideTelephone($telephone) {
     $telephone_end = preg_replace('/\d/', 'X', $telephone_end);
 
     return $telephone_begin . $telephone_end;
+}
+
+function renderInput($error, $id = null, $name, $placeholder = null, $class = null, $type = "text", $isReadonly = false, $value = null) {
+    $isReadonly = $isReadonly ? 'readonly' : null;
+
+    if ($error) {
+        echo '<div class="error-input__form">
+                <input class="input ' . $class . ' error-input" type="' . $type . '" placeholder="' . $placeholder . '" id="' . $id . '" name="' . $name .'" value="' . $value . '" ' . $isReadonly . '>
+                <div class="error-input__text error">' .$error . '</div>
+            </div>';
+
+
+       return null;
+    }
+
+    echo '<input class="input ' . $class . '" type="' . $type . '" placeholder="' . $placeholder . '" id="' . $id . '" name="' . $name .'" value="' . $value . '" ' . $isReadonly . '>';
 }
 
 ?>

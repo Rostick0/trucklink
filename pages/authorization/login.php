@@ -26,13 +26,7 @@ if ($_SESSION['user']['id']) {
                                     Логин
                                 </label>
                                 <?
-                                    if ($_SESSION['error_login']) {
-                                        echo '<input class="login__input input error-input" type="text" placeholder="Введите логин" id="login" name="login">
-                                                <div class="error">' . $_SESSION['error_login'] . '</div>';
-                                                $_SESSION['error_login'] = null;
-                                    } else {
-                                        echo '<input class="login__input input" type="text" placeholder="Введите логин" id="login" name="login">';
-                                    }
+                                    $_SESSION['error_login'] = renderInput($_SESSION['error_login'], 'login', 'login', 'Введите логин', 'login__input');
                                 ?>
                             </div>
                             <div class="login__input-form input-form">
@@ -40,13 +34,7 @@ if ($_SESSION['user']['id']) {
                                     Пароль
                                 </label>
                                 <?
-                                    if ($_SESSION['error_password']) {
-                                        echo '<input class="login__input input error-input" type="password" placeholder="Введеите пароль" id="password" name="password">
-                                                <div class="error">' . $_SESSION['error_password'] . '</div>';
-                                        $_SESSION['error_password'] = null;
-                                    } else {
-                                        echo '<input class="login__input input" type="password" placeholder="Введеите пароль" id="password" name="password">';
-                                    }
+                                $_SESSION['error_password'] = renderInput($_SESSION['error_password'], 'password', 'password', '"Введите пароль', 'password', 'login__input');
                                 ?>
                             </div>
                         </div>

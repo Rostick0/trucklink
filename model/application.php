@@ -10,7 +10,7 @@ class Application {
     static public function getApplicationOne($application_id) {
         global $mysqli;
 
-        $cargo = $mysqli->query("SELECT * FROM `application` JOIN `application_info` ON `application`.`application_id` = `application_info`.`application_info_id` WHERE `application`.`application_id` = $application_id");
+        $cargo = $mysqli->query("SELECT * FROM `application` JOIN `application_info` ON `application`.`application_id` = `application_info`.`application_info_id` WHERE `application`.`application_id` = '$application_id'");
         return $cargo->fetch_assoc();
     }
 

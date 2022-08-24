@@ -27,13 +27,7 @@ if ($_SESSION['user']['id']) {
                             Email адрес *
                         </label>
                         <?
-                            if ($_SESSION['error_email']) {
-                                echo '<input class="registration__input input error-input" type="email" placeholder="Введите почтовый ящик" id="user_email" name="user_email">
-                                        <div class="error">' . $_SESSION['error_email'] . '</div>';
-                                $_SESSION['error_email'] = null;
-                            } else {
-                                echo '<input class="registration__input input" type="email" placeholder="Введите почтовый ящик" id="user_email" name="user_email">';
-                            }
+                            $_SESSION['error_email'] = renderInput($_SESSION['error_email'], 'user_email', 'user_email', 'Введите почтовый ящик', 'registration__input', 'email');
                         ?>
                     </div>
                     <div class="registration__input-form input-form">
@@ -41,13 +35,7 @@ if ($_SESSION['user']['id']) {
                             Телефон *
                         </label>
                         <?
-                            if ($_SESSION['error_telephone']) {
-                                echo '<input class="registration__input input error-input" type="tel" placeholder="Введите телефон" id="user_telephone" name="user_telephone">
-                                        <div class="error">' . $_SESSION['error_telephone'] . '</div>';
-                                $_SESSION['error_telephone'] = null;
-                            } else {
-                                echo '<input class="registration__input input" type="tel" placeholder="Введите телефон" id="user_telephone" name="user_telephone">';
-                            }
+                            $_SESSION['error_telephone'] = renderInput($_SESSION['error_telephone'], 'user_telephone', 'user_telephone', 'Введите телефон', 'registration__input', 'tel');
                         ?>
                     </div>
                     <div class="registration__input-form input-form">
@@ -55,13 +43,7 @@ if ($_SESSION['user']['id']) {
                             Логин *
                         </label>
                         <?
-                            if ($_SESSION['error_login']) {
-                                echo '<input class="registration__input input error-input" type="text" placeholder="Придумайте логин" id="user_login" name="user_login">
-                                        <div class="error">' . $_SESSION['error_login'] . '</div>';
-                                $_SESSION['error_login'] = null;
-                            } else {
-                                echo '<input class="registration__input input" type="text" placeholder="Придумайте логин" id="user_login" name="user_login">';
-                            }
+                            $_SESSION['error_login'] = renderInput($_SESSION['error_login'], 'user_login', 'user_login', 'Придумайте логин', 'registration__input');
                         ?>
                     </div>
                     <div class="registration__input-form input-form">
@@ -75,13 +57,7 @@ if ($_SESSION['user']['id']) {
                             Пароль *
                         </label>
                         <?
-                            if ($_SESSION['error_password']) {
-                                echo '<input class="registration__input input error-input" type="password" placeholder="Придумайте пароль" id="user_password" name="user_password">
-                                        <div class="error">' . $_SESSION['error_password'] . '</div>';
-                                $_SESSION['error_password'] = null;
-                            } else {
-                                echo '<input class="registration__input input" type="password" placeholder="Придумайте пароль" id="user_password" name="user_password">';
-                            }
+                            $_SESSION['error_password'] = renderInput($_SESSION['error_password'], 'user_password', 'user_password', 'Придумайте пароль', 'registration__input', 'password');
                         ?>
                     </div>
                     <div class="registration__input-form input-form">
