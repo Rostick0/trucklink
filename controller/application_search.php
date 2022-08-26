@@ -29,7 +29,7 @@ class ApplicationSearchController
         }
 
         if ($transport_upload) {
-            $transport_upload = "AND `transport_upload`.`transport_upload_id` = '$transport_upload'";
+            $transport_upload = "AND `application`.`transport_upload_id` = '$transport_upload'";
         }
 
         if ($date_start) {

@@ -62,7 +62,16 @@ class Application {
         }
     }
 
-    static public function count($application_type_id, $user_id = null) {
+    static public function count($where_param) {
+        global $mysqli;
+
+        $count = $mysqli->query("SELECT COUNT(*) FROM `application` JOIN `application_info` ON `application`.`application_id` = `application_info`.`application_id` WHERE `application`.`is_hide` = 0 $where_param");
+
+        $count = $count->fetch_assoc();
+        return $count["COUNT(*)"];
+    }
+
+    static public function countMy($application_type_id, $user_id = null) {
         global $mysqli;
 
         if ($user_id) {
@@ -71,7 +80,7 @@ class Application {
             $user_id = "";
         }
 
-        $count = $mysqli->query("SELECT COUNT(*) FROM `application` WHERE `application_type_id` = '$application_type_id' $user_id");
+        $count = $mysqli->query("SELECT COUNT(*) FROM `application` WHERE `application_type_id` = '$application_type_id' $user_id AND `is_hide` = 0");
 
         $count = $count->fetch_assoc();
         return $count["COUNT(*)"];

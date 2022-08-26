@@ -364,10 +364,10 @@ let cargoList = document.querySelector('.cargo__list');
 let tranposrtList = document.querySelector('.transport__list');
 const navigationBottom = document.querySelector('.navigation-bottom');
 
-async function getCountElems(type) {
+async function getCountElems(queryParams) {
     let result = null
 
-    const response = await fetch(`${BACKEND_URL}/count/?type=${type}`)
+    const response = await fetch(`${BACKEND_URL}/count/${queryParams}`)
         .then(res => res.json())
         .then(res => result = res)
         .catch(err => console.log(err))
@@ -375,7 +375,24 @@ async function getCountElems(type) {
     return await result;
 }
 
-function renderNavigtaionBottom(elem, type) {
+function removeURLParameter(url, parameter) {
+    let urlparts = url.split('?');
+    if (urlparts.length >= 2) {
+        let prefix = encodeURIComponent(parameter) + '=';
+        let pars = urlparts[1].split(/[&;]/g);
+
+        for (let i = pars.length; i-- > 0;) {
+            if (pars[i].lastIndexOf(prefix, 0) !== -1) {
+                pars.splice(i, 1);
+            }
+        }
+
+        return urlparts[0] + (pars.length > 0 ? '?' + pars.join('&') : '');
+    }
+    return url;
+}
+
+function renderNavigtaionBottom(elem, queryParams) {
     if (!elem) {
         return;
     }
@@ -386,28 +403,31 @@ function renderNavigtaionBottom(elem, type) {
 
     elem.innerHTML = "";
 
-    getCountElems(type).then(res => {
+    getCountElems(queryParams).then(res => {
         let count = Math.floor(res.count / 10 + 1);
+        let editedUrl = removeURLParameter(document.URL, 'p');
+        editedUrl = new URL(editedUrl);
+        editedUrl = editedUrl.search;
+        editedUrl = editedUrl.substring(1);
+        editedUrl = editedUrl ? '&' + editedUrl : '';
 
         if (!count) {
             return;
         }
-
-
 
         for (let i = 1 * counter; i <= count; i++) {
             if (i === 0) {
                 continue;
             }
 
-            // if (i === 1) {
-            //     break;
-            // }
+            if (count === 1) {
+                break;
+            }
 
             if (i >= (+counter + 10)) {
                 elem.innerHTML += `
                     <li class="navigation-bottom_item">
-                        <a class="navigation-bottom_href _next_page" href="?p=${Math.floor(page / 10 + 1) * 10}">
+                        <a class="navigation-bottom_href _next_page" href="?p=${Math.floor(page / 10 + 1) * 10}${editedUrl}">
                             Следующая страница
                         </a>
                     </li>
@@ -417,22 +437,13 @@ function renderNavigtaionBottom(elem, type) {
 
             elem.innerHTML += `
                 <li class="navigation-bottom_item">
-                    <a class="navigation-bottom_href ${page == i ? '_active' : ''}" href="?p=${i}">
+                    <a class="navigation-bottom_href ${page == i ? '_active' : ''}" href="?p=${i}${editedUrl}">
                         ${i}
                     </a>
                 </li>
             `;
         }
     });
-    // if (count > 10) {
-    //     elem.innerHTML += `
-    //         <li class="navigation-bottom_item">
-    //             <a class="navigation-bottom_href">
-    //                 ...
-    //             </a>
-    //         </li>
-    //     `;
-    // }
 }
 
 function pageApplicationOffset() {
@@ -472,86 +483,116 @@ if (catalogFilter) {
         });
     }, 100)
 
-    filterResetButton.onclick = () => {
+
+    filterResetButton.addEventListener('click', () => {
         inputs.forEach(input => input.value = '');
         filterButton.disabled = true;
+        window.history.pushState({}, document.title, window.location.pathname);
+    })
+}
+
+const filter = document.querySelector('.filter');
+const filterFrom = filter.from;
+const filterTo = filter.to;
+const filterTransport_upload = checkInputValue(filter.transport_upload);
+const filterDateStart = checkInputValue(filter.date_start);
+const filterDateEnd = checkInputValue(filter.date_end);
+const filterUploadType = checkInputValue(filter.upload_type);
+const filterPriceMin = checkInputValue(filter.price_min);
+const filterPriceMax = checkInputValue(filter.price_max);
+const filterVolumeMin = checkInputValue(filter.volume_min);
+const filterVolumeMax = checkInputValue(filter.volume_max);
+const filterMassMin = checkInputValue(filter.mass_min);
+const filterMassMax = checkInputValue(filter.mass_max);
+
+function searchActiveButton(htmlElem, type) {
+    return function (e) {
+        {
+            e.preventDefault();
+
+            const filter = document.querySelector('.filter');
+            const filterFrom = filter.from;
+            const filterTo = filter.to;
+            const filterTransport_upload = checkInputValue(filter.transport_upload);
+            const filterDateStart = checkInputValue(filter.date_start);
+            const filterDateEnd = checkInputValue(filter.date_end);
+            const filterUploadType = checkInputValue(filter.upload_type);
+            const filterPriceMin = checkInputValue(filter.price_min);
+            const filterPriceMax = checkInputValue(filter.price_max);
+            const filterVolumeMin = checkInputValue(filter.volume_min);
+            const filterVolumeMax = checkInputValue(filter.volume_max);
+            const filterMassMin = checkInputValue(filter.mass_min);
+            const filterMassMax = checkInputValue(filter.mass_max);
+
+            let filterFromCheked = filterFrom[[...filterFrom].findIndex(elem => elem.checked)];
+            let filterToCheked = filterTo[[...filterTo].findIndex(elem => elem.checked)];
+            filterFromCheked = checkInputValue(filterFromCheked);
+            filterToCheked = checkInputValue(filterToCheked);
+
+            let queryParams = [
+                filterFromCheked ? `from=${filterFromCheked}` : null,
+                filterToCheked ? `to=${filterToCheked}` : null,
+                filterTransport_upload ? `transport_upload=${filterTransport_upload}` : null,
+                filterDateStart ? `date_start=${normalizeDateSql(filterDateStart)}` : null,
+                filterDateEnd ? `date_end=${normalizeDateSql(filterDateEnd)}` : null,
+                filterUploadType ? `upload_type=${filterUploadType}` : null,
+                filterPriceMin ? `price_min=${filterPriceMin}` : null,
+                filterPriceMax ? `price_max=${filterPriceMax}` : null,
+                filterVolumeMin ? `volume_min=${filterVolumeMin}` : null,
+                filterVolumeMax ? `volume_max=${filterVolumeMax}` : null,
+                filterMassMin ? `mass_min=${filterMassMin}` : null,
+                filterMassMax ? `mass_max=${filterMassMax}` : null
+            ];
+
+            queryParams = queryParams.filter(query => query != null);
+
+            queryParams = setQueryParamsUrl(queryParams);
+
+            queryParams = window.location.search + (window.location.search ? '&' : '?') + queryParams.substring(1);
+
+            console.log(queryParams);
+
+            window.history.pushState({}, null, queryParams);
+
+            queryParams += LIMIT_OFFSET_APPLICATION;
+
+            renderNavigtaionBottom(navigationBottom, `${queryParams}&type=${type}`);
+
+            return getApplications(htmlElem, type, queryParams);
+        }
     }
 }
 
-function searchActiveButton(e) {
-    e.preventDefault();
-
-    const filter = document.querySelector('.filter');
-    const filterFrom = filter.from;
-    const filterTo = filter.to;
-    const filterTransport_upload = checkInputValue(filter.transport_upload);
-    const filterDateStart = checkInputValue(filter.date_start);
-    const filterDateEnd = checkInputValue(filter.date_end);
-    const filterUploadType = checkInputValue(filter.upload_type);
-    const filterPriceMin = checkInputValue(filter.price_min);
-    const filterPriceMax = checkInputValue(filter.price_max);
-    const filterVolumeMin = checkInputValue(filter.volume_min);
-    const filterVolumeMax = checkInputValue(filter.volume_max);
-    const filterMassMin = checkInputValue(filter.mass_min);
-    const filterMassMax = checkInputValue(filter.mass_max);
-
-    let filterFromCheked = filterFrom[[...filterFrom].findIndex(elem => elem.checked)];
-    let filterToCheked = filterTo[[...filterTo].findIndex(elem => elem.checked)];
-    filterFromCheked = checkInputValue(filterFromCheked);
-    filterToCheked = checkInputValue(filterToCheked);
-
-    let queryParams = [
-        filterFromCheked ? `from=${filterFromCheked}` : null,
-        filterToCheked ? `to=${filterToCheked}` : null,
-        filterTransport_upload ? `transport_upload=${filterTransport_upload}` : null,
-        filterDateStart ? `date_start=${normalizeDateSql(filterDateStart)}` : null,
-        filterDateEnd ? `date_end=${normalizeDateSql(filterDateEnd)}` : null,
-        filterUploadType ? `upload_type=${filterUploadType}` : null,
-        filterPriceMin ? `price_min=${filterPriceMin}` : null,
-        filterPriceMax ? `price_max=${filterPriceMax}` : null,
-        filterVolumeMin ? `volume_min=${filterVolumeMin}` : null,
-        filterVolumeMax ? `volume_max=${filterVolumeMax}` : null,
-        filterMassMin ? `mass_min=${filterMassMin}` : null,
-        filterMassMax ? `mass_max=${filterMassMax}` : null
-    ];
-
-    queryParams = queryParams.filter(query => query != null);
-
-    queryParams = setQueryParamsUrl(queryParams) + LIMIT_OFFSET_APPLICATION;
-
-    return getApplications(cargoList, 'cargo', queryParams);
-}
-
-function setFilterButton() {
+function setFilterButton(htmlElem, type) {
     if (!filterButton) {
         return;
     }
 
-    return filterButton.onclick = searchActiveButton;
+    return filterButton.onclick = searchActiveButton(htmlElem, type);
 }
 
 function renderCargoList() {
-    setFilterButton();
+    setFilterButton(cargoList, 'cargo');
 
-    getApplications(cargoList, 'cargo', LIMIT_OFFSET_APPLICATION);
+    getApplications(cargoList, 'cargo', window.location.search + LIMIT_OFFSET_APPLICATION);
 }
 
 function renderTransportList() {
-    setFilterButton();
+    setFilterButton(tranposrtList, 'transport');
 
-    getApplications(tranposrtList, 'transport', LIMIT_OFFSET_APPLICATION);
+    getApplications(tranposrtList, 'transport', window.location.search + LIMIT_OFFSET_APPLICATION);
 }
 
 if (cargoList) {
     renderCargoList();
 
-    renderNavigtaionBottom(navigationBottom, 'cargo');
+    renderNavigtaionBottom(navigationBottom, window.location.search + '&type=cargo');
 }
 
 if (tranposrtList) {
     renderTransportList();
 
-    renderNavigtaionBottom(navigationBottom, 'transport');
+    renderNavigtaionBottom(navigationBottom, window.location.search + '&type=transport');
 }
 
 
@@ -567,118 +608,49 @@ if (searchCargo && searchTransport && catalogIndex) {
     const indexPageTitle = catalogIndex.querySelector('.index__page-title__selected');
     const tableServiceNameFourth = catalogIndex.querySelector('.table__service_name:nth-child(4)');
 
+    filterResetButton.onclick = throttle(() => getApplications(cargoList, 'cargo'), 400);
+
     searchCargo.addEventListener('click', () => {
         searchCargo.classList.add('_active');
 
         indexPageTitle.textContent = "груз";
         tableServiceNameFourth.textContent = "Оплата";
 
-        filterButton.onclick = e => {
-            e.preventDefault();
-
-            const filter = document.querySelector('.filter');
-            const filterFrom = filter.from;
-            const filterTo = filter.to;
-            const filterTransport_upload = checkInputValue(filter.transport_upload);
-            const filterDateStart = checkInputValue(filter.date_start);
-            const filterDateEnd = checkInputValue(filter.date_end);
-            const filterUploadType = checkInputValue(filter.upload_type);
-            const filterPriceMin = checkInputValue(filter.price_min);
-            const filterPriceMax = checkInputValue(filter.price_max);
-            const filterVolumeMin = checkInputValue(filter.volume_min);
-            const filterVolumeMax = checkInputValue(filter.volume_max);
-            const filterMassMin = checkInputValue(filter.mass_min);
-            const filterMassMax = checkInputValue(filter.mass_max);
-
-            let filterFromCheked = filterFrom[[...filterFrom].findIndex(elem => elem.checked)];
-            let filterToCheked = filterTo[[...filterTo].findIndex(elem => elem.checked)];
-            filterFromCheked = checkInputValue(filterFromCheked);
-            filterToCheked = checkInputValue(filterToCheked);
-
-            let queryParams = [
-                filterFromCheked ? `from=${filterFromCheked}` : null,
-                filterToCheked ? `to=${filterToCheked}` : null,
-                filterTransport_upload ? `transport_upload=${filterTransport_upload}` : null,
-                filterDateStart ? `date_start=${filterDateStart}` : null,
-                filterDateEnd ? `date_end=${filterDateEnd}` : null,
-                filterUploadType ? `upload_type=${filterUploadType}` : null,
-                filterPriceMin ? `price_min=${filterPriceMin}` : null,
-                filterPriceMax ? `price_max=${filterPriceMax}` : null,
-                filterVolumeMin ? `volume_min=${filterVolumeMin}` : null,
-                filterVolumeMax ? `volume_max=${filterVolumeMax}` : null,
-                filterMassMin ? `mass_min=${filterMassMin}` : null,
-                filterMassMax ? `mass_max=${filterMassMax}` : null
-            ];
-
-            queryParams = queryParams.filter(query => query != null);
-
-            queryParams = '?' + queryParams.join('&');
-
-            return getApplications(cargoList, 'cargo', queryParams);
-        };
+        filterButton.onclick = searchActiveButton(cargoList, 'cargo');
+        filterResetButton.onclick = throttle(() => getApplications(cargoList, 'cargo'), 400);
 
         renderCargoList();
 
         removeClass(searchTransport, '_active');
+
+        renderNavigtaionBottom(navigationBottom, `&type=cargo`);
+
+        window.history.pushState({}, document.title, window.location.pathname);
     })
 
-    searchTransport.addEventListener('click', () => {
+    function indexCatalogTranposrt() {
         searchTransport.classList.add('_active');
 
         indexPageTitle.textContent = "транспорт";
         tableServiceNameFourth.textContent = "Тип загрузки";
 
-        //urlQuery.type = "tranposrt";
-        console.log(urlQuery)
+        filterButton.onclick = searchActiveButton(ApplicationListIndex, 'transport');
+        filterResetButton.onclick = throttle(() => getApplications(ApplicationListIndex, 'transport'), 400);
 
-        filterButton.onclick = e => {
-            e.preventDefault();
-
-            const filter = document.querySelector('.filter');
-            const filterFrom = filter.from;
-            const filterTo = filter.to;
-            const filterTransport_upload = checkInputValue(filter.transport_upload);
-            const filterDateStart = checkInputValue(filter.date_start);
-            const filterDateEnd = checkInputValue(filter.date_end);
-            const filterUploadType = checkInputValue(filter.upload_type);
-            const filterPriceMin = checkInputValue(filter.price_min);
-            const filterPriceMax = checkInputValue(filter.price_max);
-            const filterVolumeMin = checkInputValue(filter.volume_min);
-            const filterVolumeMax = checkInputValue(filter.volume_max);
-            const filterMassMin = checkInputValue(filter.mass_min);
-            const filterMassMax = checkInputValue(filter.mass_max);
-
-            let filterFromCheked = filterFrom[[...filterFrom].findIndex(elem => elem.checked)];
-            let filterToCheked = filterTo[[...filterTo].findIndex(elem => elem.checked)];
-            filterFromCheked = checkInputValue(filterFromCheked);
-            filterToCheked = checkInputValue(filterToCheked);
-
-            let queryParams = [
-                filterFromCheked ? `from=${filterFromCheked}` : null,
-                filterToCheked ? `to=${filterToCheked}` : null,
-                filterTransport_upload ? `transport_upload=${filterTransport_upload}` : null,
-                filterDateStart ? `date_start=${filterDateStart}` : null,
-                filterDateEnd ? `date_end=${filterDateEnd}` : null,
-                filterUploadType ? `upload_type=${filterUploadType}` : null,
-                filterPriceMin ? `price_min=${filterPriceMin}` : null,
-                filterPriceMax ? `price_max=${filterPriceMax}` : null,
-                filterVolumeMin ? `volume_min=${filterVolumeMin}` : null,
-                filterVolumeMax ? `volume_max=${filterVolumeMax}` : null,
-                filterMassMin ? `mass_min=${filterMassMin}` : null,
-                filterMassMax ? `mass_max=${filterMassMax}` : null
-            ];
-
-            queryParams = queryParams.filter(query => query != null);
-
-            queryParams = '?' + queryParams.join('&');
-
-            return getApplications(ApplicationListIndex, 'transport', queryParams);
-        };
-
-        getApplications(ApplicationListIndex, 'transport');
+        getApplications(ApplicationListIndex, 'transport', window.location.search);
 
         removeClass(searchCargo, '_active');
-    })
+
+        renderNavigtaionBottom(navigationBottom, `&type=transport`);
+
+        window.history.pushState({}, null, '?type=transport');
+    }
+
+    // if (urlQuery.type == "transport") {
+    //     indexCatalogTranposrt();
+    // }
+
+    searchTransport.addEventListener('click', indexCatalogTranposrt)
 }
 
 const modal = document.querySelector('.modal');
@@ -1046,7 +1018,7 @@ const accountCardImage = document.querySelector('.account-card__image');
 if (accountCardImage) {
     const userAvatar = accountCardImage.querySelector('#user_avatar');
 
-    userAvatar.onchange = function(e) {
+    userAvatar.onchange = function (e) {
         console.log(this.files[0])
         // console.log(e)
 
