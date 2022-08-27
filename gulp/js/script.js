@@ -7,6 +7,7 @@ const PATH_CONTENT = './source/static';
 const PATH_IMAGE = `${PATH_CONTENT}/img`
 const PATH_CONTENT_JS = `${PATH_CONTENT}/js`;
 const LIMIT_OFFSET_APPLICATION = `&limit=10&offset=${pageApplicationOffset()}`;
+const LIMIT_OFFSET_MIN = `&limit=10&offset=0`;
 
 const switchThemeSwitch = document.querySelector('.switch-theme__switch');
 
@@ -20,7 +21,7 @@ function smoothTransitionTheme() {
     }`.trim();
 
     if (style.cssRules[style.cssRules.length - 1].selectorText == '*') {
-        return
+        return;
     }
 
     style.insertRule(css, style.cssRules.length);
@@ -125,6 +126,27 @@ function normalizeDateSql(date) {
 
 
 
+function setAnimation(elem, determinantProperty, showProperty = 'd-flex', hideProperty = '_hide', duration = 500) {
+    if (elem.classList.contains(determinantProperty)) {
+        return;
+    }
+
+    elem.classList.add(showProperty);
+    elem.classList.add(hideProperty);
+
+    setTimeout(() => {
+        if (elem.classList.contains(determinantProperty)) {
+            return;
+        }
+
+        elem.classList.remove(showProperty);
+        elem.classList.remove(hideProperty);
+    }, duration);
+}
+
+
+
+
 const selects = document.querySelectorAll('._select');
 
 function select(selects) {
@@ -145,11 +167,7 @@ function select(selects) {
             arrow.classList.toggle('_active');
             selectList.classList.toggle('_show-flex');
 
-            if (!selectList.classList.contains('_show-flex')) {
-                selectList.classList.add('_hide');
-            } else {
-                selectList.classList.remove('_hide');
-            }
+            setAnimation(selectList);
         })
 
         select.querySelectorAll('._select__item').forEach(item => {
@@ -168,6 +186,7 @@ if (selectSearch) {
     selectSearch.forEach(select => {
         const selectInput = select.querySelector('._select-input');
         const selectItem = select.querySelectorAll('._select__item');
+        const selectSearchList = select.querySelector('._select-search__list');
 
         selectInput.oninput = throttle(() => {
             let valueInput = selectInput.value;
@@ -202,7 +221,9 @@ if (selectSearch) {
                     selectItem.forEach(elem => elem.style.display = '');
                     removeClass(selectInput, '_active');
                 })
-            })
+            });
+
+            selectSearchList.classList.add('_show-flex');
 
             selectInput.onblur = function () {
                 setTimeout(() => {
@@ -255,9 +276,17 @@ async function getApplications(listHtml, type, queryParams = null, clear = true,
 
     if (type == 'cargo') {
         return await fetch(`${BACKEND_URL}/${type}/${queryParams}`)
-            .then(res => res.json())
             .then(res => {
-                res.forEach(elem => applicationHtml(list, elem, true, isEdit))
+                if (res.status >= 200 && res.status < 300) {
+                    return res.json();
+                }
+
+                throw error;
+            })
+            .then(res => {
+                if (res[0]) {
+                    res.forEach(elem => applicationHtml(list, elem, true, isEdit));
+                }
             })
             .catch(() => {
                 list.insertAdjacentHTML('beforeend', `<div class="text-center mt-1">Не найдено</div>`);
@@ -266,9 +295,17 @@ async function getApplications(listHtml, type, queryParams = null, clear = true,
 
     if (type == 'transport') {
         return await fetch(`${BACKEND_URL}/${type}/${queryParams}`)
-            .then(res => res.json())
             .then(res => {
-                res.forEach(elem => applicationHtml(list, elem, false, isEdit))
+                if (res.status >= 200 && res.status < 300) {
+                    return res.json();
+                }
+
+                throw error;
+            })
+            .then(res => {
+                if (res[0]) {
+                    res.forEach(elem => applicationHtml(list, elem, true, isEdit));
+                }
             })
             .catch(() => {
                 list.insertAdjacentHTML('beforeend', `<div class="text-center mt-1">Не найдено</div>`);
@@ -301,7 +338,7 @@ function applicationHtml(list, elem, isCargo = null, isEdit = null) {
                 </div>
             </div>
             <div class="service__payment">
-                ${isCargo ? (elem?.price ? elem?.price + ' ₽' : "Запрос цены") : elem?.upload_type}
+                ${isCargo ? (elem?.price ? elem?.price + ' &#8381;' : "Запрос цены") : elem?.upload_type}
             </div>
             <div class="service__transport">
                 ${elem?.transport}
@@ -362,7 +399,6 @@ function showFlag(country) {
 
 let cargoList = document.querySelector('.cargo__list');
 let tranposrtList = document.querySelector('.transport__list');
-const navigationBottom = document.querySelector('.navigation-bottom');
 
 async function getCountElems(queryParams) {
     let result = null
@@ -392,8 +428,10 @@ function removeURLParameter(url, parameter) {
     return url;
 }
 
-function renderNavigtaionBottom(elem, queryParams) {
-    if (!elem) {
+function renderNavigtaionBottom(queryParams) {
+    const navigationBottom = document.querySelector('.navigation-bottom');
+
+    if (!navigationBottom) {
         return;
     }
 
@@ -401,7 +439,7 @@ function renderNavigtaionBottom(elem, queryParams) {
 
     let counter = Math.floor(page / 10) * 10;
 
-    elem.innerHTML = "";
+    navigationBottom.innerHTML = "";
 
     getCountElems(queryParams).then(res => {
         let count = Math.floor(res.count / 10 + 1);
@@ -425,7 +463,7 @@ function renderNavigtaionBottom(elem, queryParams) {
             }
 
             if (i >= (+counter + 10)) {
-                elem.innerHTML += `
+                navigationBottom.innerHTML += `
                     <li class="navigation-bottom_item">
                         <a class="navigation-bottom_href _next_page" href="?p=${Math.floor(page / 10 + 1) * 10}${editedUrl}">
                             Следующая страница
@@ -435,7 +473,7 @@ function renderNavigtaionBottom(elem, queryParams) {
                 break;
             }
 
-            elem.innerHTML += `
+            navigationBottom.innerHTML += `
                 <li class="navigation-bottom_item">
                     <a class="navigation-bottom_href ${page == i ? '_active' : ''}" href="?p=${i}${editedUrl}">
                         ${i}
@@ -487,79 +525,61 @@ if (catalogFilter) {
     filterResetButton.addEventListener('click', () => {
         inputs.forEach(input => input.value = '');
         filterButton.disabled = true;
-        window.history.pushState({}, document.title, window.location.pathname);
+        window.history.pushState({}, document.title, window.location.pathname + (urlQuery.type === 'transport' ? '?type=transport' : ''));
     })
 }
 
-const filter = document.querySelector('.filter');
-const filterFrom = filter.from;
-const filterTo = filter.to;
-const filterTransport_upload = checkInputValue(filter.transport_upload);
-const filterDateStart = checkInputValue(filter.date_start);
-const filterDateEnd = checkInputValue(filter.date_end);
-const filterUploadType = checkInputValue(filter.upload_type);
-const filterPriceMin = checkInputValue(filter.price_min);
-const filterPriceMax = checkInputValue(filter.price_max);
-const filterVolumeMin = checkInputValue(filter.volume_min);
-const filterVolumeMax = checkInputValue(filter.volume_max);
-const filterMassMin = checkInputValue(filter.mass_min);
-const filterMassMax = checkInputValue(filter.mass_max);
-
 function searchActiveButton(htmlElem, type) {
     return function (e) {
-        {
-            e.preventDefault();
+        e.preventDefault();
 
-            const filter = document.querySelector('.filter');
-            const filterFrom = filter.from;
-            const filterTo = filter.to;
-            const filterTransport_upload = checkInputValue(filter.transport_upload);
-            const filterDateStart = checkInputValue(filter.date_start);
-            const filterDateEnd = checkInputValue(filter.date_end);
-            const filterUploadType = checkInputValue(filter.upload_type);
-            const filterPriceMin = checkInputValue(filter.price_min);
-            const filterPriceMax = checkInputValue(filter.price_max);
-            const filterVolumeMin = checkInputValue(filter.volume_min);
-            const filterVolumeMax = checkInputValue(filter.volume_max);
-            const filterMassMin = checkInputValue(filter.mass_min);
-            const filterMassMax = checkInputValue(filter.mass_max);
+        const filter = document.querySelector('.filter');
+        const filterFrom = filter.from;
+        const filterTo = filter.to;
+        const filterTransport_upload = checkInputValue(filter.transport_upload);
+        const filterDateStart = checkInputValue(filter.date_start);
+        const filterDateEnd = checkInputValue(filter.date_end);
+        const filterUploadType = checkInputValue(filter.upload_type);
+        const filterPriceMin = checkInputValue(filter.price_min);
+        const filterPriceMax = checkInputValue(filter.price_max);
+        const filterVolumeMin = checkInputValue(filter.volume_min);
+        const filterVolumeMax = checkInputValue(filter.volume_max);
+        const filterMassMin = checkInputValue(filter.mass_min);
+        const filterMassMax = checkInputValue(filter.mass_max);
 
-            let filterFromCheked = filterFrom[[...filterFrom].findIndex(elem => elem.checked)];
-            let filterToCheked = filterTo[[...filterTo].findIndex(elem => elem.checked)];
-            filterFromCheked = checkInputValue(filterFromCheked);
-            filterToCheked = checkInputValue(filterToCheked);
+        let filterFromCheked = filterFrom[[...filterFrom].findIndex(elem => elem.checked)];
+        let filterToCheked = filterTo[[...filterTo].findIndex(elem => elem.checked)];
+        filterFromCheked = checkInputValue(filterFromCheked);
+        filterToCheked = checkInputValue(filterToCheked);
 
-            let queryParams = [
-                filterFromCheked ? `from=${filterFromCheked}` : null,
-                filterToCheked ? `to=${filterToCheked}` : null,
-                filterTransport_upload ? `transport_upload=${filterTransport_upload}` : null,
-                filterDateStart ? `date_start=${normalizeDateSql(filterDateStart)}` : null,
-                filterDateEnd ? `date_end=${normalizeDateSql(filterDateEnd)}` : null,
-                filterUploadType ? `upload_type=${filterUploadType}` : null,
-                filterPriceMin ? `price_min=${filterPriceMin}` : null,
-                filterPriceMax ? `price_max=${filterPriceMax}` : null,
-                filterVolumeMin ? `volume_min=${filterVolumeMin}` : null,
-                filterVolumeMax ? `volume_max=${filterVolumeMax}` : null,
-                filterMassMin ? `mass_min=${filterMassMin}` : null,
-                filterMassMax ? `mass_max=${filterMassMax}` : null
-            ];
+        let queryParams = [
+            filterFromCheked ? `from=${filterFromCheked}` : null,
+            filterToCheked ? `to=${filterToCheked}` : null,
+            filterTransport_upload ? `transport_upload=${filterTransport_upload}` : null,
+            filterDateStart ? `date_start=${normalizeDateSql(filterDateStart)}` : null,
+            filterDateEnd ? `date_end=${normalizeDateSql(filterDateEnd)}` : null,
+            filterUploadType ? `upload_type=${filterUploadType}` : null,
+            filterPriceMin ? `price_min=${filterPriceMin}` : null,
+            filterPriceMax ? `price_max=${filterPriceMax}` : null,
+            filterVolumeMin ? `volume_min=${filterVolumeMin}` : null,
+            filterVolumeMax ? `volume_max=${filterVolumeMax}` : null,
+            filterMassMin ? `mass_min=${filterMassMin}` : null,
+            filterMassMax ? `mass_max=${filterMassMax}` : null
+        ];
 
-            queryParams = queryParams.filter(query => query != null);
+        queryParams = queryParams.filter(query => query != null);
 
-            queryParams = setQueryParamsUrl(queryParams);
+        queryParams = setQueryParamsUrl(queryParams);
 
-            queryParams = window.location.search + (window.location.search ? '&' : '?') + queryParams.substring(1);
+        queryParams = window.location.search + (window.location.search ? '&' : '?') + queryParams.substring(1);
 
-            console.log(queryParams);
+        window.history.pushState({}, null, queryParams);
 
-            window.history.pushState({}, null, queryParams);
+        queryParams += LIMIT_OFFSET_APPLICATION;
 
-            queryParams += LIMIT_OFFSET_APPLICATION;
+        renderNavigtaionBottom(`${queryParams}&type=${type}`);
 
-            renderNavigtaionBottom(navigationBottom, `${queryParams}&type=${type}`);
-
-            return getApplications(htmlElem, type, queryParams);
-        }
+        return getApplications(htmlElem, type, queryParams);
     }
 }
 
@@ -572,27 +592,33 @@ function setFilterButton(htmlElem, type) {
 }
 
 function renderCargoList() {
+    if (urlQuery.type == "transport") {
+        return;
+    }
+
     setFilterButton(cargoList, 'cargo');
 
     getApplications(cargoList, 'cargo', window.location.search + LIMIT_OFFSET_APPLICATION);
+
+    renderNavigtaionBottom(window.location.search + '&type=cargo');
 }
 
-function renderTransportList() {
-    setFilterButton(tranposrtList, 'transport');
+function renderApplicationList(listHtml, type) {
+    setFilterButton(listHtml, type);
 
-    getApplications(tranposrtList, 'transport', window.location.search + LIMIT_OFFSET_APPLICATION);
+    getApplications(listHtml, type, window.location.search + LIMIT_OFFSET_APPLICATION);
+
+    renderNavigtaionBottom(window.location.search + `&type=${type}`);
 }
 
 if (cargoList) {
-    renderCargoList();
-
-    renderNavigtaionBottom(navigationBottom, window.location.search + '&type=cargo');
+    if (urlQuery.type != "transport") {
+        renderApplicationList(cargoList, 'cargo');
+    }
 }
 
 if (tranposrtList) {
-    renderTransportList();
-
-    renderNavigtaionBottom(navigationBottom, window.location.search + '&type=transport');
+    renderApplicationList(tranposrtList, 'transport');
 }
 
 
@@ -608,7 +634,25 @@ if (searchCargo && searchTransport && catalogIndex) {
     const indexPageTitle = catalogIndex.querySelector('.index__page-title__selected');
     const tableServiceNameFourth = catalogIndex.querySelector('.table__service_name:nth-child(4)');
 
-    filterResetButton.onclick = throttle(() => getApplications(cargoList, 'cargo'), 400);
+    function setFilterResetButton(listHtml, type) {
+        filterResetButton.onclick = throttle(() => {
+            getApplications(listHtml, type, LIMIT_OFFSET_MIN);
+
+            renderNavigtaionBottom(`&type=${type}`);
+
+            const navigationBottomHref = document.querySelectorAll('.navigation-bottom_href');
+
+            if (!navigationBottomHref[0]) {
+                return;
+            }
+
+            navigationBottomHref.forEach(elem => removeClass(elem, '_active'));
+
+            navigationBottomHref[0].classList.add('_active');
+        }, 400);
+    }
+
+    setFilterResetButton(cargoList, 'cargo');
 
     searchCargo.addEventListener('click', () => {
         searchCargo.classList.add('_active');
@@ -617,13 +661,11 @@ if (searchCargo && searchTransport && catalogIndex) {
         tableServiceNameFourth.textContent = "Оплата";
 
         filterButton.onclick = searchActiveButton(cargoList, 'cargo');
-        filterResetButton.onclick = throttle(() => getApplications(cargoList, 'cargo'), 400);
+        setFilterResetButton(cargoList, 'cargo');
 
-        renderCargoList();
+        renderApplicationList(cargoList, 'cargo');
 
         removeClass(searchTransport, '_active');
-
-        renderNavigtaionBottom(navigationBottom, `&type=cargo`);
 
         window.history.pushState({}, document.title, window.location.pathname);
     })
@@ -635,22 +677,21 @@ if (searchCargo && searchTransport && catalogIndex) {
         tableServiceNameFourth.textContent = "Тип загрузки";
 
         filterButton.onclick = searchActiveButton(ApplicationListIndex, 'transport');
-        filterResetButton.onclick = throttle(() => getApplications(ApplicationListIndex, 'transport'), 400);
+        setFilterResetButton(ApplicationListIndex, 'transport');
 
-        getApplications(ApplicationListIndex, 'transport', window.location.search);
+        renderApplicationList(ApplicationListIndex, 'transport')
 
         removeClass(searchCargo, '_active');
-
-        renderNavigtaionBottom(navigationBottom, `&type=transport`);
-
-        window.history.pushState({}, null, '?type=transport');
     }
 
-    // if (urlQuery.type == "transport") {
-    //     indexCatalogTranposrt();
-    // }
+    if (urlQuery.type == "transport") {
+        indexCatalogTranposrt();
+    }
 
-    searchTransport.addEventListener('click', indexCatalogTranposrt)
+    searchTransport.addEventListener('click', () => {
+        indexCatalogTranposrt();
+        window.history.pushState({}, null, window.location.pathname + '?type=transport');
+    });
 }
 
 const modal = document.querySelector('.modal');
@@ -751,6 +792,8 @@ class Calendar {
         return this.buttonShow.addEventListener('click', () => {
             this.hideCalendars();
             this.calendarHtml.classList.toggle('display-block');
+
+            setAnimation(this.calendarHtml, 'display-block', 'd-block');
         })
     }
 
@@ -802,6 +845,7 @@ class Calendar {
             this.daysHtml[i].onclick = () => {
                 this.setInput(this.daysHtml[i].textContent, !this.daysHtml[i].classList.contains('_disabled'));
                 this.hideCalendars();
+                setAnimation(this.calendarHtml, 'display-block', 'd-block');
             }
         }
     }
@@ -966,11 +1010,12 @@ const myApplicationListSecond = document.querySelectorAll('.my-application__list
 const myCargoList = document.querySelector('.my_cargo__list');
 const myTransportList = document.querySelector('.my_transport__list');
 
-if (myApplicationList) {
-    fetch(`${BACKEND_URL}/count?type=transport&my_application=true`)
+function MyApplictaionScrollListener(listHtml, type) {
+    fetch(`${BACKEND_URL}/count?type=${type}&my_application=true`)
         .then(res => res.json())
         .then(res => {
-            let count = 0;
+            let count = 10;
+
             myApplicationList.addEventListener('scroll', throttle(async function () {
                 if (res.count < count) {
                     return;
@@ -980,32 +1025,19 @@ if (myApplicationList) {
                     return;
                 }
 
-                count += 10;
+                getApplications(listHtml, type, LIMIT_OFFSET_APPLICATION + count + "&my_application=true", false, true);
 
-                getApplications(cargoList, 'cargo', LIMIT_OFFSET_APPLICATION + count + "&my_application=true", false, true);
+                count += 10;
             }, 500));
         })
 }
 
+if (myApplicationList) {
+    MyApplictaionScrollListener(myCargoList, 'cargo');
+}
+
 if (myApplicationListSecond) {
-    fetch(`${BACKEND_URL}/count?type=transport&my_application=true`)
-        .then(res => res.json())
-        .then(res => {
-            let count = 0;
-            myApplicationListSecond.addEventListener('scroll', throttle(function () {
-                if (res.count < count) {
-                    return;
-                }
-
-                if (this.scrollHeight - this.offsetHeight > this.scrollTop * 1.33) {
-                    return;
-                }
-
-                count += 10;
-
-                getApplications(cargoList, 'transport', LIMIT_OFFSET_APPLICATION + count + "&my_application=true", false, true);
-            }, 500));
-        })
+    MyApplictaionScrollListener(myTransportList, 'transport');
 }
 
 if (myCargoList && myTransportList) {
@@ -1019,12 +1051,8 @@ if (accountCardImage) {
     const userAvatar = accountCardImage.querySelector('#user_avatar');
 
     userAvatar.onchange = function (e) {
-        console.log(this.files[0])
-        // console.log(e)
-
         const formData = new FormData();
 
-        console.log(this.files[0])
 
         formData.append('avatar', this.files[0]);
 

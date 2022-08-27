@@ -16,7 +16,7 @@ if ($_SESSION['user']['id']) {
             <div class="container">
                 <div class="main__container">
                     <?= renderNavigationTop() ?>
-                    <form class="login block-default" action="" method="POST">
+                    <form class="login block-default" method="POST">
                         <div class="login__page-title page-title">
                             Вход в личный кабинет
                         </div>
@@ -34,7 +34,7 @@ if ($_SESSION['user']['id']) {
                                     Пароль
                                 </label>
                                 <?
-                                $_SESSION['error_password'] = renderInput($_SESSION['error_password'], 'password', 'password', '"Введите пароль', 'password', 'login__input');
+                                $_SESSION['error_password'] = renderInput($_SESSION['error_password'], 'password', 'password', 'Введите пароль', 'login__input', 'password');
                                 ?>
                             </div>
                         </div>

@@ -1,6 +1,7 @@
 <?
 
 $citiesAll = City::getWithCountry();
+$create_name = 'create_cargo';
 
 ?>
 

@@ -22,6 +22,8 @@
     }
 
     .service__item {
+        animation: show 250ms forwards;
+
         background: var(--default-block-background);
 
         border-radius: 0.625rem;

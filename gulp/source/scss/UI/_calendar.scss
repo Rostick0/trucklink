@@ -17,6 +17,8 @@
 }
 
 .calendar {
+    animation: show 500ms forwards;
+
     background: var(--default-block-background);
 
     border-radius: 0.5rem 0.5rem 0.25rem 0.25rem;

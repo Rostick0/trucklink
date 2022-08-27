@@ -133,6 +133,9 @@ body {
         scrollbar-width: thin;
         scrollbar-color: var(--scroll) var(--default-body-background);
 
+        --calendar-date-disabled-background: var(--default-no-active-button);
+        --calendar-date-disabled-color: var(--default-input-border);
+
         --logo-background-elem: #1A68AA;
         --logo-color: #FFFFFF;
 
@@ -230,4 +233,12 @@ body {
     @media (max-width: 1024px) {
         padding-right: 0;
     }
+}
+
+.d-flex {
+    display: flex !important;
+}
+
+.d-block {
+    display: block !important;
 }

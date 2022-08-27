@@ -1,10 +1,10 @@
 <?
 
-function renderHeaderImg() {
+function renderHeaderImg($class = null) {
     global $user;
 
     if ($user['avatar'] && file_exists("./source/upload/" . $user['avatar'])) {
-        return '<img class="header__authorization_img" src="./source/upload/' . $user['avatar'] . '" />';
+        return '<img class="header__authorization_img" src="./source/upload/' . $user['avatar'] . '" alt="' . $user . '">';
     }
 
     return '<div class="header__authorization_user-icon">' . mb_substr($user['name'], 0, 1) . '</div>';
@@ -30,15 +30,15 @@ function renderHeaderAuthorization()
     }
 
     return '<div class="header__rigth header__authorization">
-            <a class="header__authorization_link" href="login">
-                <button class="header__button button-yellow">
+            <a class="header__authorization_link header__button button-yellow" href="/login">
+                <div class="header__button button-yellow">
                     Вход
-                </button>
+                </div>
             </a>
-            <a class="header__authorization_link" href="registration">
-                <button class="header__button button-dark">
+            <a class="header__authorization_link" href="/registration">
+                <div class="header__button button-dark">
                     Регистрация
-                </button>
+                </div>
             </a>
             </div>
         </div>';

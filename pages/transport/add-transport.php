@@ -1,17 +1,18 @@
 <?
 
 $citiesAll = City::getWithCountry();
+$create_name = 'create_transport';
 
 ?>
 
 <!DOCTYPE html>
 <html lang="ru">
 
-<?= rendeHead("Добавить груз") ?>
+<?= rendeHead("Добавить транспорт") ?>
 
 <body>
     <div class="wrapper">
-        <?= renderHeader("Добавить груз") ?>
+        <?= renderHeader("Добавить транспорт") ?>
         <main class="main">
             <div class="container">
                 <div class="main__container">
@@ -19,7 +20,7 @@ $citiesAll = City::getWithCountry();
 
                     <form class="information" action="" method="POST">
                         <div class="page-title">
-                            Добавить груз
+                            Добавить транспорт
                         </div>
                         <?
                             require_once './source/components/UI/filter_create.php';

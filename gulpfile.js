@@ -52,7 +52,7 @@ function serve() {
 }
 
 function building() {
-    return src(['*/**',  '*', '.htaccess', '**/.htaccess','!gulp', '!.gitignore', '!package.json', '!package-lock.json', '!dist/**', '!node_modules/**', '!gulp/**', '!gulpfile.js'])
+    return src(['*/**',  '*', '.htaccess', '**/.htaccess', '!gulp', '!*.sql', '!.gitignore', '!package.json', '!package-lock.json', '!dist/**', '!node_modules/**', '!gulp/**', '!gulpfile.js'])
             .pipe(dest('dist/'));
 }
 

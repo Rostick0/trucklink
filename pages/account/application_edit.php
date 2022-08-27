@@ -386,47 +386,47 @@ if ($_SESSION['user']['id'] != $application['user_id']) {
                             </div>
                             <div class="information-additional__inputs">
                                 <div class="information-additional__input-form input-form">
-                                    <label class="label__for-input" for="">
+                                    <label class="label__for-input" for="volume">
                                         Объём <sup>м3</sup>
                                     </label>
-                                    <input type="number" class="input" placeholder="Введите объём" name="volume" value="<?= $application['volume'] ?>">
+                                    <input type="number" class="input" placeholder="Введите объём" name="volume" value="<?= $application['volume'] ?>" id="volume">
                                 </div>
                                 <div class="information-additional__input-form input-form">
-                                    <label class="label__for-input" for="">
+                                    <label class="label__for-input" for="weight">
                                         Масса <sup>т</sup>
                                     </label>
-                                    <input type="number" class="input" placeholder="Введите массу" name="weight" value="<?= $application['weight'] ?>">
+                                    <input type="number" class="input" placeholder="Введите массу" name="weight" value="<?= $application['weight'] ?>" id="weight">
                                 </div>
                                 <div class="information-additional__input-form input-form">
-                                    <label class="label__for-input" for="">
+                                    <label class="label__for-input" for="length">
                                         Длина <sup>м</sup>
                                     </label>
-                                    <input type="number" class="input" placeholder="Введите длину" name="length" value="<?= $application['length'] ?>">
+                                    <input type="number" class="input" placeholder="Введите длину" name="length" value="<?= $application['length'] ?>" id="length">
                                 </div>
                                 <div class="information-additional__input-form input-form">
-                                    <label class="label__for-input" for="">
+                                    <label class="label__for-input" for="width">
                                         Ширина <sup>м</sup>
                                     </label>
-                                    <input type="number" class="input" placeholder="Введите ширину" name="width" value="<?= $application['width'] ?>">
+                                    <input type="number" class="input" placeholder="Введите ширину" name="width" value="<?= $application['width'] ?>" id="width">
                                 </div>
                                 <div class="information-additional__input-form input-form">
-                                    <label class="label__for-input" for="">
+                                    <label class="label__for-input" for="height">
                                         Высота <sup>м</sup>
                                     </label>
-                                    <input type="number" class="input" placeholder="Введите высоту" name="height" value="<?= $application['height'] ?>">
+                                    <input type="number" class="input" placeholder="Введите высоту" name="height" value="<?= $application['height'] ?>" id="height">
                                 </div>
                                 <div class="information-additional__input-form input-form">
-                                    <label class="label__for-input" for="">
+                                    <label class="label__for-input" for="type">
                                         Тип груза
                                     </label>
-                                    <input type="text" class="input" placeholder="Например “кирпич”" name="type" value="<?= $application['type'] ?>">
+                                    <input type="text" class="input" placeholder="Например “кирпич”" name="type" value="<?= $application['type'] ?>" id="type">
                                 </div>
                             </div>
                             <div class="information-additional__textarea-form textarea-form">
                                 <label class="laber__for-textarea" for="user__about">
                                     Описание
                                 </label>
-                                <textarea class="information-additional__textarea textarea" type="text" placeholder="Начните вводить описание" id="user__about" name="description"><?= $application['description'] ?></textarea>
+                                <textarea class="information-additional__textarea textarea" placeholder="Начните вводить описание" id="user__about" name="description"><?= $application['description'] ?></textarea>
                             </div>
                             <button class="button-yellow information-additional__button" name="edit_application">
                                 Сохранить

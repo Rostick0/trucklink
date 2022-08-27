@@ -101,9 +101,9 @@
 }
 
 ._select-search__list {
-    animation: none;
+    animation: fast-hide 500ms forwards;
 
-    display: flex;
+    display: none;
 
     opacity: 1;
 

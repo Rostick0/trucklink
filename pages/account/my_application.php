@@ -30,7 +30,7 @@ $activity = Model::get('user_activity', 'user_activity_id', $user['activity_id']
                                     <label class="account-card__image" for="user_avatar">
                                         <?
                                             if ($user['avatar'] && file_exists("./source/upload/" . $user['avatar'])) {
-                                                echo '<img class="account-card__img" src="./source/upload/' . $user['avatar'] . '" alt="">';
+                                                echo '<img class="account-card__img" src="./source/upload/' . $user['avatar'] . '" alt="' . $user['name'] . '">';
                                             } else {
                                                 echo '<div class="account-card__image-add">
                                                         <div class="account-card__image-add_plus">+</div>

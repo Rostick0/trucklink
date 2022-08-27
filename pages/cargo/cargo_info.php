@@ -139,25 +139,31 @@ $messengers = Model::getAll('user_messenger', 'user_id', $cargo['user_id']);
                                         </a>
                                     </div>
                                     <div class="client__image">
-                                        <img class="client__img" src="./source/static/img/user_image.png" alt="">
+                                        <?
+                                            if ($user['avatar'] && file_exists("./source/upload/{$user['avatar']}")) {
+                                                echo '<img class="client__img" src="./source/upload/' . $user['avatar'] . '" alt="' . $user['name'] . '">';
+                                            } else {
+                                                echo '<img class="client__img" src="./source/static/img/user_image.png" alt="">';
+                                            }
+                                        ?>    
                                     </div>
                                 </div>
                                 <ul class="client__contacts">
                                     <li class="client__contact">
                                         <a class="client__contact_href" href="">
-                                            <button class="client__contact_button client__contact_number button-grey button">
+                                            <div class="client__contact_button client__contact_number button-grey button">
                                                 <?= hideTelephone($user['telephone']) ?>
                                                 <span class="client__contact_button_hint">
                                                     нажмите, чтобы узнать
                                                 </span>
-                                            </button>
+                                            </div>
                                         </a>
                                     </li>
                                     <li class="client__contact">
                                         <a class="client__contact_href" href="">
-                                            <button class="client__contact_button button-dark">
+                                            <div class="client__contact_button button-dark">
                                                 Написать сообщение
-                                            </button>
+                                            </div>
                                         </a>
                                     </li>
                                 </ul>

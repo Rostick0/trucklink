@@ -48,14 +48,14 @@
         margin-top: 1.875rem;
 
         .input-file__button {
-            height: 4.375rem;
+            height: $height_button;
         }
     }
 
     .registration__button {
         margin-top: 1.875rem;
 
-        height: 4.375rem;
+        height: $height_button;
     }
     
     @media (max-width: 1024px) {

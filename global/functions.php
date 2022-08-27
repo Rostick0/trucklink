@@ -85,9 +85,17 @@ function hideTelephone($telephone) {
 function renderInput($error, $id = null, $name, $placeholder = null, $class = null, $type = "text", $isReadonly = false, $value = null) {
     $isReadonly = $isReadonly ? 'readonly' : null;
 
+    if ($id) {
+        $id = 'id="' . $id . '"';
+    }
+
+    if ($name) {
+        $name = 'name="' . $name .'"';
+    }
+
     if ($error) {
         echo '<div class="error-input__form">
-                <input class="input ' . $class . ' error-input" type="' . $type . '" placeholder="' . $placeholder . '" id="' . $id . '" name="' . $name .'" value="' . $value . '" ' . $isReadonly . '>
+                <input class="input ' . $class . ' error-input" type="' . $type . '" placeholder="' . $placeholder . '" ' . $id . ' ' . $name . ' value="' . $value . '" ' . $isReadonly . '>
                 <div class="error-input__text error">' .$error . '</div>
             </div>';
 
@@ -95,7 +103,7 @@ function renderInput($error, $id = null, $name, $placeholder = null, $class = nu
        return null;
     }
 
-    echo '<input class="input ' . $class . '" type="' . $type . '" placeholder="' . $placeholder . '" id="' . $id . '" name="' . $name .'" value="' . $value . '" ' . $isReadonly . '>';
+    echo '<input class="input ' . $class . '" type="' . $type . '" placeholder="' . $placeholder . '" ' . $id . ' ' . $name . ' value="' . $value . '" ' . $isReadonly . '>';
 }
 
 ?>

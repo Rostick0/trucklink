@@ -144,19 +144,19 @@ $messengers = Model::getAll('user_messenger', 'user_id', $cargo['user_id']);
                                 <ul class="client__contacts">
                                     <li class="client__contact">
                                         <a class="client__contact_href" href="">
-                                            <button class="client__contact_button client__contact_number button-grey button">
+                                            <div class="client__contact_button client__contact_number button-grey button">
                                                 <?= hideTelephone($user['telephone']) ?>
                                                 <span class="client__contact_button_hint">
                                                     нажмите, чтобы узнать
                                                 </span>
-                                            </button>
+                                            </div>
                                         </a>
                                     </li>
                                     <li class="client__contact">
                                         <a class="client__contact_href" href="">
-                                            <button class="client__contact_button button-dark">
+                                            <div class="client__contact_button button-dark">
                                                 Написать сообщение
-                                            </button>
+                                            </div>
                                         </a>
                                     </li>
                                 </ul>

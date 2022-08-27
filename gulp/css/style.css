@@ -190,6 +190,8 @@ body._dark {
   --scroll-active: #000000;
   scrollbar-width: thin;
   scrollbar-color: var(--scroll) var(--default-body-background);
+  --calendar-date-disabled-background: var(--default-no-active-button);
+  --calendar-date-disabled-color: var(--default-input-border);
   --logo-background-elem: #1A68AA;
   --logo-color: #FFFFFF;
   --cargo-item: #FFFFFF;
@@ -271,6 +273,16 @@ body._dark .index__filter_button {
   ._hidden-scroll {
     padding-right: 0;
   }
+}
+
+.d-flex {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+
+.d-block {
+  display: block !important;
 }
 
 .header .header__container {
@@ -1264,6 +1276,8 @@ a {
   margin-left: 1rem;
 }
 .table__service .service__item {
+  -webkit-animation: show 250ms forwards;
+  animation: show 250ms forwards;
   background: var(--default-block-background);
   border-radius: 0.625rem;
   display: grid;
@@ -1593,11 +1607,9 @@ a {
 }
 
 ._select-search__list {
-  -webkit-animation: none;
-  animation: none;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  -webkit-animation: fast-hide 500ms forwards;
+  animation: fast-hide 500ms forwards;
+  display: none;
   opacity: 1;
 }
 ._select-search__list ._select__item {
@@ -1714,6 +1726,8 @@ a {
 }
 
 .calendar {
+  -webkit-animation: show 500ms forwards;
+  animation: show 500ms forwards;
   background: var(--default-block-background);
   border-radius: 0.5rem 0.5rem 0.25rem 0.25rem;
   -webkit-box-shadow: 0 0 21px rgba(0, 0, 0, 0.05);
@@ -2140,11 +2154,11 @@ a {
   margin-top: 1.875rem;
 }
 .registration .registration__input-form_file .input-file__button {
-  height: 4.375rem;
+  height: 3.125rem;
 }
 .registration .registration__button {
   margin-top: 1.875rem;
-  height: 4.375rem;
+  height: 3.125rem;
 }
 @media (max-width: 1024px) {
   .registration {
@@ -2370,6 +2384,9 @@ a {
 .index .index__hints_list {
   margin-left: 2.75rem;
   margin-bottom: 3rem;
+}
+.index .index__filter .filter {
+  border-top-left-radius: 0;
 }
 
 .information {
@@ -2743,6 +2760,7 @@ a {
 .my-application .account-card__image {
   display: inline-block;
   width: 21.625rem;
+  min-width: 21.625rem;
   height: 19.5rem;
 }
 .my-application .account-card__img {
@@ -2773,6 +2791,7 @@ a {
 .my-application .my-application__list .service__item {
   grid-template-columns: 0.17fr 0.7fr 1.55fr 0.7fr 1.7fr 0.2fr 0.2fr;
   height: 50px;
+  min-height: 50px;
 }
 
 .users {
