@@ -91,7 +91,7 @@ $messengers = Model::getAll('user_messenger', 'user_id', $cargo['user_id']);
                                     Оплата
                                 </div>
                                 <div class="application__item_info">
-                                    <?= $cargo['price'] ? $cargo['price'] . ' руб' : 'по запросу' ?>
+                                    <?= $cargo['price'] ? SpacesMumbers($cargo['price']) . ' руб' : 'по запросу' ?>
                                 </div>
                             </div>
                             <div class="application__item">
@@ -140,24 +140,22 @@ $messengers = Model::getAll('user_messenger', 'user_id', $cargo['user_id']);
                                     </div>
                                     <div class="client__image">
                                         <?
-                                            if ($user['avatar'] && file_exists("./source/upload/{$user['avatar']}")) {
-                                                echo '<img class="client__img" src="./source/upload/' . $user['avatar'] . '" alt="' . $user['name'] . '">';
-                                            } else {
-                                                echo '<img class="client__img" src="./source/static/img/user_image.png" alt="">';
-                                            }
-                                        ?>    
+                                        if ($user['avatar'] && file_exists("./source/upload/{$user['avatar']}")) {
+                                            echo '<img class="client__img" src="./source/upload/' . $user['avatar'] . '" alt="' . $user['name'] . '">';
+                                        } else {
+                                            echo '<img class="client__img" src="./source/static/img/user_image.png" alt="">';
+                                        }
+                                        ?>
                                     </div>
                                 </div>
                                 <ul class="client__contacts">
                                     <li class="client__contact">
-                                        <a class="client__contact_href" href="">
-                                            <div class="client__contact_button client__contact_number button-grey button">
-                                                <?= hideTelephone($user['telephone']) ?>
-                                                <span class="client__contact_button_hint">
-                                                    нажмите, чтобы узнать
-                                                </span>
-                                            </div>
-                                        </a>
+                                        <div class="client__contact_button client__contact_number button-grey button" data-tel="<?= $user['telephone'] ?>">
+                                            <?= hideTelephone($user['telephone']) ?>
+                                            <span class="client__contact_button_hint">
+                                                нажмите, чтобы узнать
+                                            </span>
+                                        </div>
                                     </li>
                                     <li class="client__contact">
                                         <a class="client__contact_href" href="">
@@ -177,4 +175,5 @@ $messengers = Model::getAll('user_messenger', 'user_id', $cargo['user_id']);
     </div>
     <? require_once './source/components/script.php' ?>
 </body>
+
 </html>

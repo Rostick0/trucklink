@@ -143,14 +143,16 @@ $messengers = Model::getAll('user_messenger', 'user_id', $cargo['user_id']);
                                 </div>
                                 <ul class="client__contacts">
                                     <li class="client__contact">
-                                        <a class="client__contact_href" href="">
-                                            <div class="client__contact_button client__contact_number button-grey button">
-                                                <?= hideTelephone($user['telephone']) ?>
-                                                <span class="client__contact_button_hint">
-                                                    нажмите, чтобы узнать
-                                                </span>
-                                            </div>
-                                        </a>
+                                        <?
+                                            if ($user['telephone']) {
+                                                echo '<div class="client__contact_button client__contact_number button-grey button" data-tel="' . $user['telephone'] . '">
+                                                        ' . hideTelephone($user['telephone']) . '
+                                                        <span class="client__contact_button_hint">
+                                                            нажмите, чтобы узнать
+                                                        </span>
+                                                    </div>';
+                                            }
+                                        ?>
                                     </li>
                                     <li class="client__contact">
                                         <a class="client__contact_href" href="">

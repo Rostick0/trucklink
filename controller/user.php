@@ -108,6 +108,12 @@ class UserController {
 
         $avatar_name = time() . random_int(100, 900) . '.png';
 
+        $old_avatar = Model::get('user', 'user_id', $user_id)['avatar'];
+
+        if ($old_avatar && file_exists('./source/upload/' . $old_avatar)) {
+            unlink('./source/upload/' . $old_avatar);
+        }
+
         if (!User::setAvatar($user_id, $avatar_name)) {
             return;
         }

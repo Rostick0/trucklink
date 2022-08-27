@@ -2,7 +2,7 @@ const urlQuery = new Proxy(new URLSearchParams(window.location.search), {
     get: (searchParams, prop) => searchParams.get(prop),
 });
 
-const BACKEND_URL = `http://backend/http`;
+const BACKEND_URL = `${window.location.origin}/http`;
 const PATH_CONTENT = './source/static';
 const PATH_IMAGE = `${PATH_CONTENT}/img`
 const PATH_CONTENT_JS = `${PATH_CONTENT}/js`;
@@ -33,7 +33,7 @@ function smoothTransitionTheme() {
 }
 
 const svgs = {
-    moon: `<svg width="0.875rem" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.935 7.793A5.937 5.937 0 0 0 .989 1.94 7.633 7.633 0 0 1 5.935.126c4.228 0 7.667 3.44 7.667 7.667 0 4.228-3.44 7.667-7.667 7.667a7.633 7.633 0 0 1-4.946-1.814 5.937 5.937 0 0 0 4.946-5.853zm0 6.183a6.19 6.19 0 0 0 6.183-6.183A6.19 6.19 0 0 0 5.935 1.61c-.526 0-1.047.068-1.55.199a7.421 7.421 0 0 1 0 11.969 6.154 6.154 0 0 0 1.55.198z" fill="#1A68AA"/><path d="M5.935 7.793A5.937 5.937 0 0 0 .989 1.94 7.633 7.633 0 0 1 5.935.126c4.228 0 7.667 3.44 7.667 7.667 0 4.228-3.44 7.667-7.667 7.667a7.633 7.633 0 0 1-4.946-1.814 5.937 5.937 0 0 0 4.946-5.853zm0 6.183a6.19 6.19 0 0 0 6.183-6.183A6.19 6.19 0 0 0 5.935 1.61c-.526 0-1.047.068-1.55.199a7.421 7.421 0 0 1 0 11.969 6.154 6.154 0 0 0 1.55.198z" stroke="#1A68AA"/></svg>`,
+    moon: `<svg width="0.875rem" height="1rem" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.935 7.793A5.937 5.937 0 0 0 .989 1.94 7.633 7.633 0 0 1 5.935.126c4.228 0 7.667 3.44 7.667 7.667 0 4.228-3.44 7.667-7.667 7.667a7.633 7.633 0 0 1-4.946-1.814 5.937 5.937 0 0 0 4.946-5.853zm0 6.183a6.19 6.19 0 0 0 6.183-6.183A6.19 6.19 0 0 0 5.935 1.61c-.526 0-1.047.068-1.55.199a7.421 7.421 0 0 1 0 11.969 6.154 6.154 0 0 0 1.55.198z" fill="#1A68AA"/><path d="M5.935 7.793A5.937 5.937 0 0 0 .989 1.94 7.633 7.633 0 0 1 5.935.126c4.228 0 7.667 3.44 7.667 7.667 0 4.228-3.44 7.667-7.667 7.667a7.633 7.633 0 0 1-4.946-1.814 5.937 5.937 0 0 0 4.946-5.853zm0 6.183a6.19 6.19 0 0 0 6.183-6.183A6.19 6.19 0 0 0 5.935 1.61c-.526 0-1.047.068-1.55.199a7.421 7.421 0 0 1 0 11.969 6.154 6.154 0 0 0 1.55.198z" stroke="#1A68AA"/></svg>`,
     sun: `<svg width="1.375rem" height="1.375rem" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.5 16.5 18 18l-1.5-1.5zM19 11h2-2zM5.5 5.5 4 4l1.5 1.5zm11 0L18 4l-1.5 1.5zm-11 11L4 18l1.5-1.5zM1 11h2-2zM11 1v2-2zm0 18v2-2zm4-8a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" stroke="#FFA61B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`
 }
 
@@ -144,8 +144,36 @@ function setAnimation(elem, determinantProperty, showProperty = 'd-flex', hidePr
     }, duration);
 }
 
+function reverseString(string) {
+    return [...string].reverse().join('');
+}
 
+function SpacesMumbers(price, lengthBetweenSpaces = 3) {
+    if (typeof price === 'number') {
+        price = price.toString();
+    }
 
+    let result = '';
+
+    price = '0' + reverseString(price);
+
+    for (let i = 1; i < price.length; i++) {
+        result += price[i];
+
+        if (i === 0) {
+            continue;
+        }
+
+        if (i % lengthBetweenSpaces === 0) {
+            result += ' ';
+        }
+    }
+
+    result = reverseString(result)
+    result = result.trim()
+
+    return result;
+}
 
 const selects = document.querySelectorAll('._select');
 
@@ -267,7 +295,7 @@ async function removeApplication(id) {
         })
 }
 
-async function getApplications(listHtml, type, queryParams = null, clear = true, isEdit = false) {
+async function getApplications(listHtml, type, queryParams = null, clear = true, isEdit = false, htmlForEmpty = '<div class="text-center mt-1">Не найдено</div>') {
     const list = listHtml;
 
     if (clear) {
@@ -289,7 +317,7 @@ async function getApplications(listHtml, type, queryParams = null, clear = true,
                 }
             })
             .catch(() => {
-                list.insertAdjacentHTML('beforeend', `<div class="text-center mt-1">Не найдено</div>`);
+                list.insertAdjacentHTML('beforeend', htmlForEmpty);
             })
     }
 
@@ -304,11 +332,11 @@ async function getApplications(listHtml, type, queryParams = null, clear = true,
             })
             .then(res => {
                 if (res[0]) {
-                    res.forEach(elem => applicationHtml(list, elem, true, isEdit));
+                    res.forEach(elem => applicationHtml(list, elem, false, isEdit));
                 }
             })
             .catch(() => {
-                list.insertAdjacentHTML('beforeend', `<div class="text-center mt-1">Не найдено</div>`);
+                list.insertAdjacentHTML('beforeend', htmlForEmpty);
             })
     }
 }
@@ -321,7 +349,7 @@ function applicationHtml(list, elem, isCargo = null, isEdit = null) {
             ">
             </div>
              <div class="service__date">
-                 ${normalizeDate(elem?.date_start)} - ${normalizeDate(elem?.date_end)}
+                ${normalizeDate(elem?.date_start)} - ${normalizeDate(elem?.date_end)}
             </div>
             <div class="service__way">
                 <div class="service__way_item">
@@ -338,7 +366,7 @@ function applicationHtml(list, elem, isCargo = null, isEdit = null) {
                 </div>
             </div>
             <div class="service__payment">
-                ${isCargo ? (elem?.price ? elem?.price + ' &#8381;' : "Запрос цены") : elem?.upload_type}
+                ${isCargo ? (elem?.price ? SpacesMumbers(elem?.price, 3) + ' &#8381;' : "Запрос цены") : elem?.upload_type}
             </div>
             <div class="service__transport">
                 ${elem?.transport}
@@ -1041,18 +1069,28 @@ if (myApplicationListSecond) {
 }
 
 if (myCargoList && myTransportList) {
-    getApplications(myCargoList, 'cargo', LIMIT_OFFSET_APPLICATION + "&my_application=true", false, true);
-    getApplications(myTransportList, 'transport', LIMIT_OFFSET_APPLICATION + "&my_application=true", false, true);
+    function myHtmlForEmpty(link) {
+        return `<li class="service__item">
+            <div class="service__status status-recently"></div>
+            <a class="service__item_create" href="${link}">
+                <svg width="1.15rem" height="1.15rem" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10.2913 2.375H5.95801C4.85344 2.375 3.95801 3.27043 3.95801 4.375V14.625C3.95801 15.7296 4.85344 16.625 5.95801 16.625H13.0413C14.1459 16.625 15.0413 15.7296 15.0413 14.625V7.125M10.2913 2.375L15.0413 7.125M10.2913 2.375V6.125C10.2913 6.67728 10.7391 7.125 11.2913 7.125H15.0413M9.49967 10.2917V13.4583M11.083 11.875H7.91634" stroke="var(--default-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+        </li>`.repeat(4);
+    }
+
+    getApplications(myCargoList, 'cargo', LIMIT_OFFSET_APPLICATION + "&my_application=true", false, true, myHtmlForEmpty('/add-cargo'));
+    getApplications(myTransportList, 'transport', LIMIT_OFFSET_APPLICATION + "&my_application=true", false, true, myHtmlForEmpty('/add-transport'));
 }
 
 const accountCardImage = document.querySelector('.account-card__image');
 
 if (accountCardImage) {
-    const userAvatar = accountCardImage.querySelector('#user_avatar');
+    const userAvatar = document.querySelector('#user_avatar');
 
-    userAvatar.onchange = function (e) {
+    userAvatar.onchange = function () {
         const formData = new FormData();
-
 
         formData.append('avatar', this.files[0]);
 
@@ -1062,15 +1100,35 @@ if (accountCardImage) {
         })
             .then(res => {
                 if (res.status >= 200 && res.status < 300) {
-                    return res.json()
+                    return res.json();
                 }
+
+                throw err;
             })
             .then(res => {
                 if (res.path) {
-                    accountCardImage.innerHTML = `<img class="account-card__img" src="${res.path}" alt="">`;
+                    accountCardImage.innerHTML = `<img class="account-card__img" src="${res.path}" alt="">
+                                                <div class="account-card__image-update">Нажмите, чтобы обновить фотографию</div>`;
                 }
-            });
+            })
+            .catch(err => console.log(err))
     }
+}
+
+const clientContactNumber = document.querySelector('.client__contact_number');
+
+if (clientContactNumber) {
+    let showClientContactNumber = false;
+
+    clientContactNumber.onclick = () => {
+        if (showClientContactNumber) {
+            return;
+        }
+
+        showClientContactNumber = true;
+
+        clientContactNumber.innerHTML = `<div class="_show">${clientContactNumber.getAttribute('data-tel')}</div>`;
+    };
 }
 
 document.body.addEventListener('click', e => {

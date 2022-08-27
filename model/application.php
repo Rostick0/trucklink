@@ -4,13 +4,13 @@ class Application {
     static public function getCargo($application_id = 0, $limit = 10) {
         global $mysqli;
 
-        return $mysqli->query("SELECT * FROM `application` JOIN `application_info` ON `application`.`application_id` = `application_info`.`application_info_id` WHERE `application`.`application_id` > $application_id AND `is_hide` = '0' LIMIT $limit");
+        return $mysqli->query("SELECT * FROM `application` JOIN `application_info` ON `application`.`application_id` = `application_info`.`application_id` WHERE `application`.`application_id` > $application_id AND `is_hide` = '0' LIMIT $limit");
     }
 
     static public function getApplicationOne($application_id) {
         global $mysqli;
 
-        $cargo = $mysqli->query("SELECT * FROM `application` JOIN `application_info` ON `application`.`application_id` = `application_info`.`application_info_id` WHERE `application`.`application_id` = '$application_id'");
+        $cargo = $mysqli->query("SELECT * FROM `application` JOIN `application_info` ON `application`.`application_id` = `application_info`.`application_id` WHERE `application`.`application_id` = '$application_id'");
         return $cargo->fetch_assoc();
     }
 

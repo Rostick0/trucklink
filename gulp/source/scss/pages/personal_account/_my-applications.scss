@@ -6,92 +6,13 @@
     display: flex;
     column-gap: 2rem;
 
-    .account-card__inner {
-        text-align: center;
-
-        padding: 1.75rem
-    }
-
     .my-application__content {
         flex: 1;
-    }
-
-    .account-card__image {
-        background: var(--default-body-background);
-
-        border-radius: 0.1875rem;
-
-        margin-bottom: 1.875rem;
-    }
-
-    .account-card__image-add {
-        color: var(--image-add);
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-
-        width: 100%;
-        height: 100%;
-
-        &:hover {
-            color: var(--image-add-hover);
-        }
-
-        &:active {
-            color: var(--image-add-active);
-        }
-    }
-
-    .account-card__image-add_plus {
-        font-size: 6.25rem;
-    }
-
-    .account-card__organization {
-        color: var(--default-input-color);
-
-        font-size: 1.5rem;
-
-        margin-bottom: 0.31rem;
-    }
-
-    .account-card__activity {
-        color: var(--default-no-active-color);
-
-        margin-bottom: 1.5rem;
-    }
-
-    .account-card__image {
-        display: inline-block;
-
-        width: 21.625rem;
-        min-width: 21.625rem;
-        height: 19.5rem;
-    }
-
-    .account-card__img {
-        object-fit: cover;
-        object-position: center;
-        
-        width: 100%;
-        height: 100%;
-    }
-
-    .account-card__buttons {
-        display: flex;
-        flex-direction: column;
-        row-gap: 0.81rem;
-    }
-
-    .account-card__button {
-        height: 50px;
     }
 
     .my-application__list {
         overflow-y: auto;
 
-        // height: calc(50px * 4 + 1.25rem * 3);
         max-height: calc(50px * 4 + 1.25rem * 3);
 
         .service__item {

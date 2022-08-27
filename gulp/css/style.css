@@ -1276,8 +1276,8 @@ a {
   margin-left: 1rem;
 }
 .table__service .service__item {
-  -webkit-animation: show 250ms forwards;
-  animation: show 250ms forwards;
+  -webkit-animation: show 500ms forwards;
+  animation: show 500ms forwards;
   background: var(--default-block-background);
   border-radius: 0.625rem;
   display: grid;
@@ -1307,6 +1307,22 @@ a {
 }
 .table__service .service__status {
   margin-left: 1.4rem;
+}
+.table__service .service__item_create {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  grid-column: 2/-1;
+}
+.table__service .service__item_create svg {
+  width: auto;
+  padding-right: 1.25rem;
 }
 .table__service .service__way {
   display: -webkit-inline-box;
@@ -2707,21 +2723,56 @@ a {
   -moz-column-gap: 2rem;
   column-gap: 2rem;
 }
-.my-application .account-card__inner {
-  text-align: center;
-  padding: 1.75rem;
-}
 .my-application .my-application__content {
   -webkit-box-flex: 1;
   -ms-flex: 1;
   flex: 1;
 }
-.my-application .account-card__image {
+.my-application .my-application__list {
+  overflow-y: auto;
+  max-height: calc(200px + 3.75rem);
+}
+.my-application .my-application__list .service__item {
+  grid-template-columns: 0.17fr 0.7fr 1.55fr 0.7fr 1.7fr 0.2fr 0.2fr;
+  height: 50px;
+  min-height: 50px;
+}
+
+.account-card .account-card__inner {
+  text-align: center;
+  padding: 1.75rem;
+}
+.account-card .account-card__image {
   background: var(--default-body-background);
   border-radius: 0.1875rem;
+  position: relative;
   margin-bottom: 1.875rem;
 }
-.my-application .account-card__image-add {
+.account-card .account-card__image-update {
+  background: rgba(0, 0, 0, 0.75);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  -webkit-transition: 500ms;
+  -o-transition: 500ms;
+  transition: 500ms;
+  width: 100%;
+  height: 100%;
+}
+.account-card .account-card__image-update:hover {
+  opacity: 1;
+}
+.account-card .account-card__image-add {
   color: var(--image-add);
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2736,34 +2787,36 @@ a {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
+  row-gap: 0.625rem;
   width: 100%;
   height: 100%;
 }
-.my-application .account-card__image-add:hover {
+.account-card .account-card__image-add:hover {
   color: var(--image-add-hover);
 }
-.my-application .account-card__image-add:active {
+.account-card .account-card__image-add:active {
   color: var(--image-add-active);
 }
-.my-application .account-card__image-add_plus {
+.account-card .account-card__image-add_plus {
   font-size: 6.25rem;
 }
-.my-application .account-card__organization {
+.account-card .account-card__organization {
   color: var(--default-input-color);
   font-size: 1.5rem;
   margin-bottom: 0.31rem;
 }
-.my-application .account-card__activity {
+.account-card .account-card__activity {
   color: var(--default-no-active-color);
   margin-bottom: 1.5rem;
 }
-.my-application .account-card__image {
+.account-card .account-card__image {
+  cursor: pointer;
   display: inline-block;
   width: 21.625rem;
   min-width: 21.625rem;
   height: 19.5rem;
 }
-.my-application .account-card__img {
+.account-card .account-card__img {
   -o-object-fit: cover;
   object-fit: cover;
   -o-object-position: center;
@@ -2771,7 +2824,7 @@ a {
   width: 100%;
   height: 100%;
 }
-.my-application .account-card__buttons {
+.account-card .account-card__buttons {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2781,17 +2834,65 @@ a {
   flex-direction: column;
   row-gap: 0.81rem;
 }
-.my-application .account-card__button {
-  height: 50px;
+.account-card .account-card__button {
+  font-size: 1.125rem;
+  height: 4.375rem;
 }
-.my-application .my-application__list {
-  overflow-y: auto;
-  max-height: calc(200px + 3.75rem);
+.account-card .account-card__button_number {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-column-gap: 0.5rem;
+  -moz-column-gap: 0.5rem;
+  column-gap: 0.5rem;
 }
-.my-application .my-application__list .service__item {
-  grid-template-columns: 0.17fr 0.7fr 1.55fr 0.7fr 1.7fr 0.2fr 0.2fr;
-  height: 50px;
-  min-height: 50px;
+.account-card .account-card__button_messager {
+  position: relative;
+}
+.account-card .account-card__button_messager svg path {
+  fill: none !important;
+}
+.account-card .messager__count {
+  background: #DC4747;
+  border-radius: 50%;
+  font-size: 0.375rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 0.6rem;
+  min-width: 0.6rem;
+  height: 0.6rem;
+}
+.account-card .account-card__tel {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-column-gap: 0.625rem;
+  -moz-column-gap: 0.625rem;
+  column-gap: 0.625rem;
+}
+.account-card .account-card__tel span {
+  color: var(--default-color);
+  font-size: 1.125rem;
+  font-weight: 500;
 }
 
 .users {

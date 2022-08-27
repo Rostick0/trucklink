@@ -22,7 +22,7 @@
     }
 
     .service__item {
-        animation: show 250ms forwards;
+        animation: show $transition_middle forwards;
 
         background: var(--default-block-background);
 
@@ -58,6 +58,20 @@
 
     .service__status {
         margin-left: 1.4rem;
+    }
+
+    .service__item_create {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        grid-column: 2/-1;
+
+        svg {
+            width: auto;
+
+            padding-right: 1.25rem;
+        }
     }
 
     .service__way {

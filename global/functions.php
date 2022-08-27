@@ -106,4 +106,29 @@ function renderInput($error, $id = null, $name, $placeholder = null, $class = nu
     echo '<input class="input ' . $class . '" type="' . $type . '" placeholder="' . $placeholder . '" ' . $id . ' ' . $name . ' value="' . $value . '" ' . $isReadonly . '>';
 }
 
+function SpacesMumbers($price, $lengthBetweenSpaces = 3) {
+    $price = (int) $price;
+    
+    $result = '';
+
+    $price = '0' . strrev((string) $price);
+
+    for ($i = 1; $i < strlen($price); $i++) {
+        $result .= $price[$i];
+
+        if ($i === 0) {
+            continue;
+        }
+
+        if ($i % $lengthBetweenSpaces === 0) {
+            $result .= ' ';
+        }
+    }
+
+    $result = strrev($result);
+    $result = trim($result);
+
+    return $result;
+}
+
 ?>
