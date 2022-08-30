@@ -1,22 +1,12 @@
 <?
 
-function renderHeaderImg($class = null) {
-    global $user;
-
-    if ($user['avatar'] && file_exists("./source/upload/" . $user['avatar'])) {
-        return '<img class="header__authorization_img" src="./source/upload/' . $user['avatar'] . '" alt="' . $user . '">';
-    }
-
-    return '<div class="header__authorization_user-icon">' . mb_substr($user['name'], 0, 1) . '</div>';
-}
-
 function renderHeaderAuthorization()
 {
     if ($_SESSION['user']['id']) {
         return '
             <div class="header__rigth header__authorization">
                 <a class="header__authorization_link" href="/profile?id=' . $_SESSION['user']['id'] . '">
-                    ' . renderHeaderImg() . '
+                    ' . renderAvatar('header__authorization_img', 'avatar__icon') . '
                 </a>
                 <a class="header__authorization_logout" href="/logout">
                     <svg width="1.5rem" height="1.5rem" id="accountExitSvg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

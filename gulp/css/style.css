@@ -285,6 +285,10 @@ body._dark .index__filter_button {
   display: block !important;
 }
 
+.cursor-default {
+  cursor: default !important;
+}
+
 .header .header__container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -488,24 +492,6 @@ body._dark .index__filter_button {
   border-radius: 50%;
   -o-object-fit: cover;
   object-fit: cover;
-  width: 3.125rem;
-  min-width: 3.125rem;
-  height: 3.125rem;
-}
-.header .header__authorization_user-icon {
-  background: var(--header-icon);
-  color: var(--default-color);
-  border-radius: 50%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  text-transform: uppercase;
   width: 3.125rem;
   min-width: 3.125rem;
   height: 3.125rem;
@@ -954,6 +940,7 @@ body._dark .index__filter_button {
   display: flex;
   padding: 1.56rem;
   margin-bottom: 3rem;
+  overflow-y: auto;
 }
 .navigation .navigation__list {
   display: grid;
@@ -1080,6 +1067,19 @@ body._dark .index__filter_button {
   }
   .navigation .navigation__subtitle {
     font-size: 0.85rem;
+  }
+}
+@media (max-width: 768px) {
+  .navigation {
+    padding: 3%;
+  }
+  .navigation .navigation__list {
+    min-width: 210%;
+  }
+}
+@media (max-width: 400px) {
+  .navigation .navigation__list {
+    min-width: 410%;
   }
 }
 .input, .textarea {
@@ -1319,6 +1319,10 @@ a {
   -ms-flex-pack: end;
   justify-content: flex-end;
   grid-column: 2/-1;
+}
+.table__service .service__item_create span {
+  color: var(--default-color);
+  text-align: center;
 }
 .table__service .service__item_create svg {
   width: auto;
@@ -1958,6 +1962,25 @@ a {
   height: 1.25rem;
 }
 
+.avatar__icon {
+  background: var(--header-icon);
+  color: var(--default-color);
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-transform: uppercase;
+  width: 3.125rem;
+  min-width: 3.125rem;
+  height: 3.125rem;
+}
+
 .flag-img {
   width: 1.25rem;
   height: 1.25rem;
@@ -2415,6 +2438,20 @@ a {
   flex-direction: column;
   row-gap: 2.125rem;
 }
+.information .information__added {
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+.information .information__added_href {
+  color: var(--default-color);
+  text-decoration: underline;
+  -webkit-transition: 200ms;
+  -o-transition: 200ms;
+  transition: 200ms;
+}
+.information .information__added_href:hover {
+  text-decoration: none;
+}
 .information .information-basic {
   padding: 2.5rem 3.125rem 4rem;
 }
@@ -2488,6 +2525,12 @@ a {
   }
 }
 @media (max-width: 1024px) {
+  .information .information-basic_form {
+    grid-gap: 1.5rem 1.25rem;
+  }
+  .information .information-basic {
+    padding: 3% 4%;
+  }
   .information .information-additional__inputs {
     grid-gap: 1rem;
   }
@@ -2496,6 +2539,33 @@ a {
   }
   .information .information-basic_form > * {
     grid-column: auto;
+  }
+  .information .information-basic__checkbox {
+    margin-left: 0;
+    margin-right: auto;
+  }
+  .information .filter__small-inputs {
+    -ms-flex-item-align: start;
+    align-self: flex-start;
+  }
+  .information .information-additional {
+    padding: 3% 4%;
+  }
+}
+@media (max-width: 768px) {
+  .information .information-additional__inputs {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .information .information-additional__inputs > *:last-child {
+    grid-column: 1/span 5;
+  }
+}
+@media (max-width: 480px) {
+  .information .information-additional__inputs {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .information .information-additional__inputs > *:last-child {
+    grid-column: 1/span 3;
   }
 }
 
@@ -2719,9 +2789,7 @@ a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-column-gap: 2rem;
-  -moz-column-gap: 2rem;
-  column-gap: 2rem;
+  grid-gap: 2rem;
 }
 .my-application .my-application__content {
   -webkit-box-flex: 1;
@@ -2738,6 +2806,15 @@ a {
   min-height: 50px;
 }
 
+@media (max-width: 768px) {
+  .my-application {
+    grid-gap: 1rem;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse;
+  }
+}
 .account-card .account-card__inner {
   text-align: center;
   padding: 1.75rem;
@@ -2750,6 +2827,7 @@ a {
 }
 .account-card .account-card__image-update {
   background: rgba(0, 0, 0, 0.75);
+  color: #FFFFFF;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2759,6 +2837,11 @@ a {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  row-gap: 0.25rem;
   position: absolute;
   top: 0;
   left: 0;
@@ -2807,16 +2890,17 @@ a {
 }
 .account-card .account-card__activity {
   color: var(--default-no-active-color);
-  margin-bottom: 1.5rem;
+  margin-bottom: 3rem;
 }
 .account-card .account-card__image {
   cursor: pointer;
   display: inline-block;
   width: 21.625rem;
   min-width: 21.625rem;
-  height: 19.5rem;
+  height: 16rem;
 }
 .account-card .account-card__img {
+  border-radius: 0.375rem;
   -o-object-fit: cover;
   object-fit: cover;
   -o-object-position: center;
@@ -2832,7 +2916,7 @@ a {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  row-gap: 0.81rem;
+  row-gap: 1.5rem;
 }
 .account-card .account-card__button {
   font-size: 1.125rem;
@@ -2895,6 +2979,27 @@ a {
   font-weight: 500;
 }
 
+@media (max-width: 1440px) {
+  .account-card .account-card__image {
+    width: 18rem;
+    min-width: 18rem;
+    height: 13.3rem;
+  }
+}
+@media (max-width: 1024px) {
+  .account-card .account-card__inner {
+    padding: 3%;
+  }
+  .account-card .account-card__image {
+    margin-bottom: 1.25rem;
+  }
+  .account-card .account-card__activity {
+    margin-bottom: 1rem;
+  }
+  .account-card .account-card__buttons {
+    row-gap: 0.75rem;
+  }
+}
 .users {
   padding: 2.75rem 3.75rem 5rem;
 }

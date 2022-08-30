@@ -58,7 +58,7 @@ class ApplicationController {
             return;
         }
 
-        Application::create($price, $from, $to, $transport_upload_id, $upload_type_id, $application_type_id, $is_any_direction, $date_start, $date_end, $user_id, $volume, $weight, $length, $width, $height, $description, $type);
+        return Application::create($price, $from, $to, $transport_upload_id, $upload_type_id, $application_type_id, $is_any_direction, $date_start, $date_end, $user_id, $volume, $weight, $length, $width, $height, $description, $type);
     }
 
     static public function edit($price, $from, $to, $date_start, $date_end, $transport_upload_id, $upload_type_id, $volume, $weight, $length, $width, $height, $description, $type, $user_id, $application_id, $has_price) {
@@ -156,50 +156,52 @@ class ApplicationController {
             ]);
         }
     }
+
+    static public function createVars($application_type_id) {
+        $price = (int) ($_REQUEST['price']);
+        $has_price = (boolean) $_REQUEST['has_price'];
+        $from = protectionData($_REQUEST['from']);
+        $to = protectionData($_REQUEST['to']);
+        $date_start = normalizeDateSql(protectionData($_REQUEST['date_start']));
+        $date_end = normalizeDateSql(protectionData($_REQUEST['date_end']));
+        $transport_upload_id = (int) ($_REQUEST['transport_upload']);
+        $upload_type_id = (int) ($_REQUEST['upload_type']);
+        $is_any_direction = (boolean) ($_REQUEST['is_any_direction']);
+        $is_any_direction = $is_any_direction ? 1 : 0;
+        $volume = (int) ($_REQUEST['volume']);
+        $weight = (int) ($_REQUEST['weight']);
+        $length = (int) ($_REQUEST['length']);
+        $width = (int) ($_REQUEST['width']);
+        $height = (int) ($_REQUEST['height']);
+        $description = protectionData($_REQUEST['description']);
+        $type = protectionData($_REQUEST['type']);
+    
+        return ApplicationController::create($price, $from, $to, $transport_upload_id, $upload_type_id, $application_type_id, $is_any_direction, $date_start, $date_end, $_SESSION['user']['id'], $volume, $weight, $length, $width, $height, $description, $type, $has_price);
+    }
 }
 
-if (isset($_REQUEST['create_cargo'])) {
-    $price = (int) ($_REQUEST['price']);
-    $has_price = (boolean) $_REQUEST['has_price'];
-    $from = protectionData($_REQUEST['from']);
-    $to = protectionData($_REQUEST['to']);
-    $date_start = normalizeDateSql(protectionData($_REQUEST['date_start']));
-    $date_end = normalizeDateSql(protectionData($_REQUEST['date_end']));
-    $transport_upload_id = (int) ($_REQUEST['transport_upload']);
-    $upload_type_id = (int) ($_REQUEST['upload_type']);
-    $is_any_direction = (boolean) ($_REQUEST['is_any_direction']);
-    $is_any_direction = $is_any_direction ? 1 : 0;
-    $volume = (int) ($_REQUEST['volume']);
-    $weight = (int) ($_REQUEST['weight']);
-    $length = (int) ($_REQUEST['length']);
-    $width = (int) ($_REQUEST['width']);
-    $height = (int) ($_REQUEST['height']);
-    $description = protectionData($_REQUEST['description']);
-    $type = protectionData($_REQUEST['type']);
+function issetCreateCargo() {
+    if (isset($_REQUEST['create_cargo'])) {
+        $application_id =  ApplicationController::createVars(1);
 
-    ApplicationController::create($price, $from, $to, $transport_upload_id, $upload_type_id, 1, $is_any_direction, $date_start, $date_end, $_SESSION['user']['id'], $volume, $weight, $length, $width, $height, $description, $type, $has_price);
+        if (!$application_id) {
+            return;
+        }
+    
+        return '<div class="information__added">Ваш груз успешно добавлен, <a class="information__added_href" href="/cargo?id=' . $application_id . '">посмотреть</a></div>';
+    }
 }
 
-if (isset($_REQUEST['create_transport'])) {
-    $price = (int) ($_REQUEST['price']);
-    $has_price = (boolean) $_REQUEST['has_price'];
-    $from = protectionData($_REQUEST['from']);
-    $to = protectionData($_REQUEST['to']);
-    $date_start = normalizeDateSql(protectionData($_REQUEST['date_start']));
-    $date_end = normalizeDateSql(protectionData($_REQUEST['date_end']));
-    $transport_upload_id = (int) ($_REQUEST['transport_upload']);
-    $upload_type_id = (int) ($_REQUEST['upload_type']);
-    $is_any_direction = (boolean) ($_REQUEST['is_any_direction']);
-    $is_any_direction = $is_any_direction ? 1 : 0;
-    $volume = (int) ($_REQUEST['volume']);
-    $weight = (int) ($_REQUEST['weight']);
-    $length = (int) ($_REQUEST['length']);
-    $width = (int) ($_REQUEST['width']);
-    $height = (int) ($_REQUEST['height']);
-    $description = protectionData($_REQUEST['description']);
-    $type = protectionData($_REQUEST['type']);
+function issetCreateTransport() {
+    if (isset($_REQUEST['create_transport'])) {
+        $application_id =  ApplicationController::createVars(2);
 
-    ApplicationController::create($price, $from, $to, $transport_upload_id, $upload_type_id, 2, $is_any_direction, $date_start, $date_end, $_SESSION['user']['id'], $volume, $weight, $length, $width, $height, $description, $type, $has_price);
+        if (!$application_id) {
+            return;
+        }
+    
+        return '<div>Ваш транспорт успешно добавлен, <a href="/transport?id=' . $application_id . '">посмотреть</a></div>';
+    }
 }
 
 if (isset($_REQUEST['edit_application'])) {

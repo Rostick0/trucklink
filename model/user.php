@@ -38,6 +38,13 @@ class User {
 
         return $mysqli->query("UPDATE `user` SET `avatar`='$avatar' WHERE `user_id` = '$user_id'");
     }
+
+    public static function updateOnline($user_id, $is_online) {
+        global $mysqli;
+
+        return $mysqli->query("UPDATE `user` SET `is_online`='$is_online', `last_online` = CURRENT_TIMESTAMP WHERE `user_id` = '$user_id'");
+    }
+
     //public static function delete();
 }
 

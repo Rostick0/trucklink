@@ -4,6 +4,8 @@
     padding: 1.56rem;
     margin-bottom: 3rem;
 
+    overflow-y: auto;
+
     .navigation__list {
         display: grid;
         grid-gap: 1.875rem;
@@ -136,6 +138,25 @@
 
         .navigation__subtitle {
             font-size: 0.85rem;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .navigation {
+        padding: 3%;
+
+        .navigation__list {
+            min-width: 210%;
+        }
+    }
+}
+
+@media (max-width: 400px) {
+    .navigation {
+
+        .navigation__list {
+            min-width: 410%;
         }
     }
 }

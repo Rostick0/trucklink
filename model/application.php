@@ -45,6 +45,8 @@ class Application {
         } else {
             var_dump($mysqli->error);
         }
+
+        return $id;
     }
 
     static public function edit($price, $from, $to, $date_start, $date_end, $transport_upload_id, $upload_type_id, $volume, $weight, $length, $width, $height, $description, $type, $user_id, $application_id) {

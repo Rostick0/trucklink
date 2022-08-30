@@ -15,6 +15,23 @@
     flex-direction: column;
     row-gap: 2.125rem;
 
+    .information__added {
+        font-size: 1.125rem;
+        font-weight: 500;
+    }
+
+    .information__added_href {
+        color: var(--default-color);
+
+        text-decoration: underline;
+
+        transition: $transition_default;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
     .information-basic {
         padding: 2.5rem 3.125rem 4rem;
     }
@@ -107,6 +124,14 @@
 
 
     @media (max-width: 1024px) {
+        .information-basic_form {
+            grid-gap: 1.5rem 1.25rem;
+        }
+
+        .information-basic {
+            padding: 3% 4%;
+        }
+
         .information-additional__inputs {
             grid-gap: 1rem;
         }
@@ -116,6 +141,41 @@
 
             & > * {
                 grid-column: auto;
+            }
+        }
+
+        .information-basic__checkbox {
+            margin-left: 0;
+            margin-right: auto;
+        }
+
+        .filter__small-inputs {
+            align-self: flex-start;
+        }
+
+        .information-additional {
+            padding: 3% 4%;
+        }
+    }
+
+
+
+    @media (max-width: 768px) {
+        .information-additional__inputs {
+            grid-template-columns: repeat(5, 1fr);
+
+            & > *:last-child {
+                grid-column: 1/span 5;
+            }
+        }
+    }
+
+    @media (max-width: 480px) {
+        .information-additional__inputs {
+            grid-template-columns: repeat(3, 1fr);
+
+            & > *:last-child {
+                grid-column: 1/span 3;
             }
         }
     }

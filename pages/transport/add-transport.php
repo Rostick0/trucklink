@@ -18,7 +18,8 @@ $create_name = 'create_transport';
                 <div class="main__container">
                     <?= renderNavigationTop() ?>
 
-                    <form class="information" action="" method="POST">
+                    <form class="information" method="POST">
+                        <?= issetCreateTransport() ?>
                         <div class="page-title">
                             Добавить транспорт
                         </div>

@@ -67,6 +67,12 @@
 
         grid-column: 2/-1;
 
+        span {
+            color: var(--default-color);
+
+            text-align: center;
+        }
+
         svg {
             width: auto;
 

@@ -373,16 +373,21 @@ function applicationHtml(list, elem, isCargo = null, isEdit = null) {
             </div>
             ${isEdit ?
             `
-            <a href="application_edit?id=${elem?.application_id}">
-                <svg width="1.25rem" height="1.25rem" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M9.99967 3.33337H5.33301C4.22844 3.33337 3.33301 4.2288 3.33301 5.33337V14.6667C3.33301 15.7713 4.22844 16.6667 5.33301 16.6667H14.6663C15.7709 16.6667 16.6663 15.7713 16.6663 14.6667V10M7.49967 12.5V10.4167L14.7913 3.12504C15.3666 2.54974 16.2994 2.54974 16.8747 3.12504V3.12504C17.45 3.70034 17.45 4.63308 16.8747 5.20837L12.9163 9.16671L9.58301 12.5H7.49967Z" stroke="var(--default-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>            
-            </a>
-            <button onclick="removeApplication(${elem?.application_id})">
-                <svg width="1.125rem" height="1.125rem" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4.5 5.625L13.5 14.625M13.5 5.625L4.5 14.625" stroke="#E94141" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </button>
+                ${elem?.my_application ? `
+                    <a href="application_edit?id=${elem?.application_id}">
+                        <svg width="1.25rem" height="1.25rem" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.99967 3.33337H5.33301C4.22844 3.33337 3.33301 4.2288 3.33301 5.33337V14.6667C3.33301 15.7713 4.22844 16.6667 5.33301 16.6667H14.6663C15.7709 16.6667 16.6663 15.7713 16.6663 14.6667V10M7.49967 12.5V10.4167L14.7913 3.12504C15.3666 2.54974 16.2994 2.54974 16.8747 3.12504V3.12504C17.45 3.70034 17.45 4.63308 16.8747 5.20837L12.9163 9.16671L9.58301 12.5H7.49967Z" stroke="var(--default-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>            
+                    </a>
+                    <button onclick="removeApplication(${elem?.application_id})">
+                        <svg width="1.125rem" height="1.125rem" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.5 5.625L13.5 14.625M13.5 5.625L4.5 14.625" stroke="#E94141" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                `
+                :
+                '<div></div>'.repeat(2)}
+            
             `
             :
             `<a href="${isCargo ? 'cargo' : 'transport'}?id=${elem?.application_id}">
@@ -1053,7 +1058,7 @@ function MyApplictaionScrollListener(listHtml, type) {
                     return;
                 }
 
-                getApplications(listHtml, type, LIMIT_OFFSET_APPLICATION + count + "&my_application=true", false, true);
+                getApplications(listHtml, type, LIMIT_OFFSET_APPLICATION + count + "&user_id=" + urlQuery.id, false, true);
 
                 count += 10;
             }, 500));
@@ -1073,6 +1078,7 @@ if (myCargoList && myTransportList) {
         return `<li class="service__item">
             <div class="service__status status-recently"></div>
             <a class="service__item_create" href="${link}">
+                <span>${link === '/add-cargo' ? 'Добавить груз' : 'Добавить транспорт'}</span>
                 <svg width="1.15rem" height="1.15rem" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10.2913 2.375H5.95801C4.85344 2.375 3.95801 3.27043 3.95801 4.375V14.625C3.95801 15.7296 4.85344 16.625 5.95801 16.625H13.0413C14.1459 16.625 15.0413 15.7296 15.0413 14.625V7.125M10.2913 2.375L15.0413 7.125M10.2913 2.375V6.125C10.2913 6.67728 10.7391 7.125 11.2913 7.125H15.0413M9.49967 10.2917V13.4583M11.083 11.875H7.91634" stroke="var(--default-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -1080,8 +1086,8 @@ if (myCargoList && myTransportList) {
         </li>`.repeat(4);
     }
 
-    getApplications(myCargoList, 'cargo', LIMIT_OFFSET_APPLICATION + "&my_application=true", false, true, myHtmlForEmpty('/add-cargo'));
-    getApplications(myTransportList, 'transport', LIMIT_OFFSET_APPLICATION + "&my_application=true", false, true, myHtmlForEmpty('/add-transport'));
+    getApplications(myCargoList, 'cargo', LIMIT_OFFSET_APPLICATION + "&user_id=" + urlQuery.id, false, true, myHtmlForEmpty('/add-cargo'));
+    getApplications(myTransportList, 'transport', LIMIT_OFFSET_APPLICATION + "&user_id=" + urlQuery.id, false, true, myHtmlForEmpty('/add-transport'));
 }
 
 const accountCardImage = document.querySelector('.account-card__image');
@@ -1108,7 +1114,10 @@ if (accountCardImage) {
             .then(res => {
                 if (res.path) {
                     accountCardImage.innerHTML = `<img class="account-card__img" src="${res.path}" alt="">
-                                                <div class="account-card__image-update">Нажмите, чтобы обновить фотографию</div>`;
+                                                <div class="account-card__image-update">
+                                                    <p>Нажмите, чтобы</p>
+                                                    <p>обновить фотографию</p>
+                                                </div>`;
                 }
             })
             .catch(err => console.log(err))
@@ -1130,6 +1139,29 @@ if (clientContactNumber) {
         clientContactNumber.innerHTML = `<div class="_show">${clientContactNumber.getAttribute('data-tel')}</div>`;
     };
 }
+
+const socket = new WebSocket("ws://127.0.0.1:2346");
+
+socket.onopen = function () {
+    
+};
+
+socket.onclose = function (event) {
+    if (event.wasClean) {
+        console.log('Соединение закрыто чисто');
+    } else {
+        console.log('Обрыв соединения');
+    }
+    console.log('Код: ' + event.code + ' причина: ' + event.reason);
+};
+
+socket.onmessage = function (event) {
+    console.log("Получены данные " + event.data);
+};
+
+socket.onerror = function (error) {
+    console.log("Ошибка " + error.message);
+};
 
 document.body.addEventListener('click', e => {
     if (selects) {

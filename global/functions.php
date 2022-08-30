@@ -131,4 +131,14 @@ function SpacesMumbers($price, $lengthBetweenSpaces = 3) {
     return $result;
 }
 
+function renderAvatar($classFirst = null, $classSecound = null) {
+    global $user;
+
+    if ($user['avatar'] && file_exists("./source/upload/" . $user['avatar'])) {
+        return '<img class="' . $classFirst . '" src="./source/upload/' . $user['avatar'] . '" alt="' . $user . '">';
+    }
+
+    return '<div class="' . $classSecound . '">' . mb_substr($user['name'], 0, 1) . '</div>';
+}
+
 ?>

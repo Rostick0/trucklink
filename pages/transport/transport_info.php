@@ -138,7 +138,13 @@ $messengers = Model::getAll('user_messenger', 'user_id', $cargo['user_id']);
                                         </a>
                                     </div>
                                     <div class="client__image">
-                                        <img class="client__img" src="./source/static/img/user_image.png" alt="">
+                                        <?
+                                            if ($user['avatar'] && file_exists("./source/upload/{$user['avatar']}")) {
+                                                echo '<img class="client__img" src="./source/upload/' . $user['avatar'] . '" alt="' . $user['name'] . '">';
+                                            } else {
+                                                echo renderAvatar('client__img', 'avatar__icon');
+                                            }
+                                        ?>
                                     </div>
                                 </div>
                                 <ul class="client__contacts">

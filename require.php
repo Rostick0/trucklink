@@ -39,16 +39,21 @@ require_once './controller/application.php';
 
 require_once './controller/application_search.php';
 
+require_once './http/functions.php';
+
 require_once './source/components/layout/header.php';
 require_once './source/components/layout/footer.php';
 require_once './source/components/layout/head.php';
 require_once './source/components/UI/navigation_top.php';
 
 require_once './hooks/session.php';
+require_once './hooks/local_socket.php';
 
 if ($_GET['http']) {
     require_once "./http/index.php";
-} else {
+}
+
+if ($_GET['path'] || $_SERVER['REQUEST_URI'] === '/') {
     require_once './pages/require_page.php';
 }
 

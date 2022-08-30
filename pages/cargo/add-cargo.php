@@ -19,6 +19,7 @@ $create_name = 'create_cargo';
                     <?= renderNavigationTop() ?>
 
                     <form class="information" method="POST">
+                        <?= issetCreateCargo() ?>
                         <div class="page-title">
                             Добавить груз
                         </div>

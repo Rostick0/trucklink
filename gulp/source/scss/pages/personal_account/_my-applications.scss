@@ -4,7 +4,7 @@
 
 .my-application {
     display: flex;
-    column-gap: 2rem;
+    grid-gap: 2rem;
 
     .my-application__content {
         flex: 1;
@@ -21,5 +21,14 @@
             height: 50px;
             min-height: 50px;
         }
+    }
+}
+
+
+
+@media (max-width: 768px) {
+    .my-application {
+        grid-gap: 1rem;
+        flex-direction: column-reverse;
     }
 }

@@ -1,24 +1,24 @@
 <?
-if (!$_SESSION['user']['id']) {
-    Router::location('/');
-}
 
 $id = parseIntGet('id');
 
-// $_SESSION['user']['id']
-
 $user = Model::get('user', 'user_id', $id);
+
+if (!$user) {
+    Router::location('/');
+}
+
 $activity = Model::get('user_activity', 'user_activity_id', $user['activity_id'])['name'];
 ?>
 
 <!DOCTYPE html>
 <html lang="ru">
 
-<?= rendeHead("Мои заявки") ?>
+<?= rendeHead("Заявки") ?>
 
 <body>
     <div class="wrapper">
-        <?= renderHeader("Мои заявки") ?>
+        <?= renderHeader("Заявки") ?>
         <main class="main">
             <div class="container">
                 <div class="main__container">
@@ -31,13 +31,20 @@ $activity = Model::get('user_activity', 'user_activity_id', $user['activity_id']
                                     Визитка
                                 </div>
                                 <div class="account-card__inner block-default">
-                                    <label class="account-card__image" for="user_avatar">
+                                    <label class="account-card__image <?= $user['user_id'] != $_SESSION['user']['id'] ? 'cursor-default' : '' ?>" for="user_avatar">
                                         <?
                                         if ($user['avatar'] && file_exists("./source/upload/" . $user['avatar'])) {
-                                            echo '<img class="account-card__img" src="./source/upload/' . $user['avatar'] . '" alt="' . $user['name'] . '">
-                                                    <div class="account-card__image-update">Нажмите, чтобы обновить фотографию</div>';
+                                            echo '<img class="account-card__img" src="./source/upload/' . $user['avatar'] . '" alt="' . $user['name'] . '">';
+                                            if ($user['user_id'] == $_SESSION['user']['id']) {
+                                                echo '<div class="account-card__image-update">
+                                                        <p>Нажмите, чтобы</p>
+                                                        <p>обновить фотографию</p>
+                                                    </div>';
+                                            }
+
                                         } else {
-                                            echo '<div class="account-card__image-add">
+                                            if ($user['user_id'] == $_SESSION['user']['id']) {
+                                                echo '<div class="account-card__image-add">
                                                         <svg width="2rem" height="2rem" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M17.3337 6.66663H12.1621C11.6317 6.66663 11.1229 6.87734 10.7479 7.25241L9.25278 8.74751C8.87771 9.12258 8.369 9.33329 7.83856 9.33329H4.66699C3.56242 9.33329 2.66699 10.2287 2.66699 11.3333L2.66699 26C2.66699 27.1045 3.56242 28 4.66699 28H24.667C25.7716 28 26.667 27.1045 26.667 26V16M22.667 6.66663H30.667M26.667 10.6666V2.66663M14.667 24C17.6125 24 20.0003 21.6121 20.0003 18.6666C20.0003 15.7211 17.6125 13.3333 14.667 13.3333C11.7215 13.3333 9.33366 15.7211 9.33366 18.6666C9.33366 21.6121 11.7215 24 14.667 24Z" stroke="#D8D8D8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                                         </svg>                                       
@@ -45,6 +52,7 @@ $activity = Model::get('user_activity', 'user_activity_id', $user['activity_id']
                                                             Добавить фото
                                                         </div>
                                                     </div>';
+                                            }
                                         }
                                         ?>
                                     </label>
@@ -67,7 +75,7 @@ $activity = Model::get('user_activity', 'user_activity_id', $user['activity_id']
                                                     </span> -->
                                                 </span>
                                                 <span>
-                                                    Сообщения
+                                                    <?= $_SESSION['user']['id'] === $id ? 'Сообщения' : 'Написать сообщение' ?>
                                                 </span>
                                             </span>
                                         </button>

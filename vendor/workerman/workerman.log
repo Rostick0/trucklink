@@ -1,0 +1,82 @@
+2022-08-29 02:36:13 pid:1 Error: Call to a member function getCookies() on null in D:\OpenServer\domains\backend\socket\index.php:12
+Stack trace:
+#0 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(2528): {closure}(Object(Workerman\Connection\TcpConnection))
+#1 D:\OpenServer\domains\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Worker->acceptConnection(Resource id #45)
+#2 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(2463): Workerman\Events\Select->loop()
+#3 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1449): Workerman\Worker->run()
+#4 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1392): Workerman\Worker::forkWorkersForWindows()
+#5 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
+#6 D:\OpenServer\domains\backend\socket\index.php(30): Workerman\Worker::runAll()
+#7 {main}
+2022-08-30 02:03:32 pid:1 Exception: You can't send(NULL) to client, you need to convert it to a string.  in D:\OpenServer\domains\backend\vendor\workerman\workerman\Protocols\Websocket.php:230
+Stack trace:
+#0 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(321): Workerman\Protocols\Websocket::encode(NULL, Object(Workerman\Connection\TcpConnection))
+#1 D:\OpenServer\domains\backend\socket\index.php(21): Workerman\Connection\TcpConnection->send(NULL)
+#2 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(659): {closure}(Object(Workerman\Connection\TcpConnection), '{"user_id":"33"...')
+#3 D:\OpenServer\domains\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #56)
+#4 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(2463): Workerman\Events\Select->loop()
+#5 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1449): Workerman\Worker->run()
+#6 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1392): Workerman\Worker::forkWorkersForWindows()
+#7 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
+#8 D:\OpenServer\domains\backend\socket\index.php(50): Workerman\Worker::runAll()
+#9 {main}
+2022-08-30 02:06:13 pid:1 Exception: You can't send(array) to client, you need to convert it to a string.  in D:\OpenServer\domains\backend\vendor\workerman\workerman\Protocols\Websocket.php:230
+Stack trace:
+#0 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(321): Workerman\Protocols\Websocket::encode(Array, Object(Workerman\Connection\TcpConnection))
+#1 D:\OpenServer\domains\backend\socket\index.php(20): Workerman\Connection\TcpConnection->send(Array)
+#2 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(659): {closure}(Object(Workerman\Connection\TcpConnection), Object(stdClass))
+#3 D:\OpenServer\domains\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #56)
+#4 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(2463): Workerman\Events\Select->loop()
+#5 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1449): Workerman\Worker->run()
+#6 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1392): Workerman\Worker::forkWorkersForWindows()
+#7 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
+#8 D:\OpenServer\domains\backend\socket\index.php(49): Workerman\Worker::runAll()
+#9 {main}
+2022-08-30 02:06:47 pid:1 Exception: You can't send(NULL) to client, you need to convert it to a string.  in D:\OpenServer\domains\backend\vendor\workerman\workerman\Protocols\Websocket.php:230
+Stack trace:
+#0 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(321): Workerman\Protocols\Websocket::encode(NULL, Object(Workerman\Connection\TcpConnection))
+#1 D:\OpenServer\domains\backend\socket\index.php(20): Workerman\Connection\TcpConnection->send(NULL)
+#2 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(659): {closure}(Object(Workerman\Connection\TcpConnection), Object(stdClass))
+#3 D:\OpenServer\domains\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #56)
+#4 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(2463): Workerman\Events\Select->loop()
+#5 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1449): Workerman\Worker->run()
+#6 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1392): Workerman\Worker::forkWorkersForWindows()
+#7 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
+#8 D:\OpenServer\domains\backend\socket\index.php(49): Workerman\Worker::runAll()
+#9 {main}
+2022-08-30 02:08:28 pid:1 Exception: You can't send(NULL) to client, you need to convert it to a string.  in D:\OpenServer\domains\backend\vendor\workerman\workerman\Protocols\Websocket.php:230
+Stack trace:
+#0 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(321): Workerman\Protocols\Websocket::encode(NULL, Object(Workerman\Connection\TcpConnection))
+#1 D:\OpenServer\domains\backend\socket\index.php(20): Workerman\Connection\TcpConnection->send(NULL)
+#2 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(659): {closure}(Object(Workerman\Connection\TcpConnection), Object(stdClass))
+#3 D:\OpenServer\domains\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #56)
+#4 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(2463): Workerman\Events\Select->loop()
+#5 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1449): Workerman\Worker->run()
+#6 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1392): Workerman\Worker::forkWorkersForWindows()
+#7 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
+#8 D:\OpenServer\domains\backend\socket\index.php(49): Workerman\Worker::runAll()
+#9 {main}
+2022-08-30 02:08:52 pid:1 Exception: You can't send(object) to client, you need to convert it to a string.  in D:\OpenServer\domains\backend\vendor\workerman\workerman\Protocols\Websocket.php:230
+Stack trace:
+#0 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(321): Workerman\Protocols\Websocket::encode(Object(stdClass), Object(Workerman\Connection\TcpConnection))
+#1 D:\OpenServer\domains\backend\socket\index.php(19): Workerman\Connection\TcpConnection->send(Object(stdClass))
+#2 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(659): {closure}(Object(Workerman\Connection\TcpConnection), Object(stdClass))
+#3 D:\OpenServer\domains\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #57)
+#4 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(2463): Workerman\Events\Select->loop()
+#5 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1449): Workerman\Worker->run()
+#6 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1392): Workerman\Worker::forkWorkersForWindows()
+#7 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
+#8 D:\OpenServer\domains\backend\socket\index.php(48): Workerman\Worker::runAll()
+#9 {main}
+2022-08-30 02:09:08 pid:1 Exception: You can't send(object) to client, you need to convert it to a string.  in D:\OpenServer\domains\backend\vendor\workerman\workerman\Protocols\Websocket.php:230
+Stack trace:
+#0 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(321): Workerman\Protocols\Websocket::encode(Object(stdClass), Object(Workerman\Connection\TcpConnection))
+#1 D:\OpenServer\domains\backend\socket\index.php(19): Workerman\Connection\TcpConnection->send(Object(stdClass))
+#2 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(659): {closure}(Object(Workerman\Connection\TcpConnection), Object(stdClass))
+#3 D:\OpenServer\domains\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #56)
+#4 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(2463): Workerman\Events\Select->loop()
+#5 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1449): Workerman\Worker->run()
+#6 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1392): Workerman\Worker::forkWorkersForWindows()
+#7 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
+#8 D:\OpenServer\domains\backend\socket\index.php(48): Workerman\Worker::runAll()
+#9 {main}

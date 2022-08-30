@@ -41,6 +41,7 @@ class AuthorizationController {
         $_SESSION['error_password'] = null;
 
         $_SESSION['user']['id'] = $authorization['user_id'];
+        // setcookie();
 
         AuthorizationSession::create($_SERVER['REMOTE_HOST'], $_SERVER['HTTP_USER_AGENT'], $authorization['user_id']);
 

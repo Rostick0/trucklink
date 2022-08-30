@@ -216,24 +216,6 @@
         height: $height_avatar;
     }
 
-    .header__authorization_user-icon {
-        background: var(--header-icon);
-
-        color: var(--default-color);
-
-        border-radius: 50%;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        text-transform: uppercase;
-
-        width: $height_avatar;
-        min-width: $height_avatar;
-        height: $height_avatar;
-    }
-
     .header__authorization_logout {
         color: var(--default-color);
 
