@@ -22,3 +22,13 @@
         font-size: 1.5rem;
     }
 }
+
+@media (max-width: 480px) {
+    .page-title {
+        font-size: 1.75rem;
+    }
+
+    .middle-title {
+        font-size: 1.25rem;
+    }
+}

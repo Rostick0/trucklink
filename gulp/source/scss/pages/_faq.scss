@@ -1,0 +1,33 @@
+.faq {
+    padding: 3rem;
+
+    .faq__page-title {
+        margin-bottom: 2.75rem;
+    }
+
+    .faq__p {
+        font-size: 1.25rem;
+
+        margin-bottom: 1.25rem;
+    }
+
+    .faq__list {
+        list-style: none;
+        counter-reset: faq__item;
+    }
+    
+    .faq__item {
+        @extend .faq__p;
+
+        &::before {
+            counter-increment: faq__item;
+            content: counters(faq__item, ".") ". ";
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .faq {
+        padding: 3%;
+    }
+}

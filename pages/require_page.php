@@ -58,6 +58,10 @@ $pages = [
     [
         "url" => "/php",
         "path" => "php.php"
+    ],
+    [
+        "url" => "/faq",
+        "path" => "faq.php"
     ]
 ];
 

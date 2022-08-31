@@ -168,6 +168,10 @@
                 grid-column: 1/span 5;
             }
         }
+
+        .information__title {
+            margin-bottom: 1.5rem;
+        }
     }
 
     @media (max-width: 480px) {
