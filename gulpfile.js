@@ -52,12 +52,12 @@ function serve() {
 }
 
 function building() {
-    return src(['*/**',  '*', '.htaccess', '**/.htaccess', '!gulp', '!source/upload/*.*', '!*.sql', '!.gitignore', '!package.json', '!package-lock.json', '!dist/**', '!node_modules/**', '!gulp/**', '!gulpfile.js'])
+    return src(['*/**',  '*', '.htaccess', '**/.htaccess', '!gulp', '!source/upload/*.*','!*.sql', '!.gitignore', '!package.json', '!package-lock.json', '!dist/**', '!node_modules/**', '!gulp/**', '!gulpfile.js'])
             .pipe(dest('dist/'));
 }
 
 function php() {
-    return src('dist/**/**.php')
+    return src(['dist/**/**.php', '!dist/vendor/**'])
             .pipe(htmlmin({
                 collapseWhitespace: true,
                 ignoreCustomFragments: [ /<%[\s\S]*?%>/, /<\?[=|php]?[\s\S]*?\?>/ ]

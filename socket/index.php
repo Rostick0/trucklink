@@ -51,3 +51,5 @@ $ws_worker->onClose = function ($connection) {
 };
 
 Worker::runAll();
+
+?>

@@ -123,7 +123,13 @@ function normalizeDateSql(date) {
     return result;
 }
 
-
+function validateEmail(email) {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
 
 
 function setAnimation(elem, determinantProperty, showProperty = 'd-flex', hideProperty = '_hide', duration = 500) {
@@ -729,9 +735,16 @@ if (searchCargo && searchTransport && catalogIndex) {
 
 const modal = document.querySelector('.modal');
 
-// if (modal) {
+if (modal) {
+    const modalClose = modal.querySelector('.modal__close');
 
-// }
+    modal.addEventListener('click', e => {
+        if (e.target === modal || e.target === modalClose) {
+            removeClass(modal, '_active');
+            return;
+        }
+    })
+}
 
 const headerBurgerFixed = document.querySelector('.header__burger-fixed');
 const headerBrgerActive = document.querySelector('.header__burger_active');
@@ -1140,28 +1153,162 @@ if (clientContactNumber) {
     };
 }
 
-const socket = new WebSocket("ws://127.0.0.1:2346");
+// const socket = new WebSocket("ws://127.0.0.1:2346");
 
-socket.onopen = function () {
-    
-};
+// socket.onopen = function () {
 
-socket.onclose = function (event) {
-    if (event.wasClean) {
-        console.log('Соединение закрыто чисто');
-    } else {
-        console.log('Обрыв соединения');
+// };
+
+// socket.onclose = function (event) {
+//     if (event.wasClean) {
+//         console.log('Соединение закрыто чисто');
+//     } else {
+//         console.log('Обрыв соединения');
+//     }
+//     console.log('Код: ' + event.code + ' причина: ' + event.reason);
+// };
+
+// socket.onmessage = function (event) {
+//     console.log("Получены данные " + event.data);
+// };
+
+// socket.onerror = function (error) {
+//     console.log("Ошибка " + error.message);
+// };
+
+function escapeHtmlNull(text) {
+    return text
+        .replace(/&/g, "")
+        .replace(/</g, "[")
+        .replace(/>/g, "]")
+        .replace(/"/g, "`")
+        .replace(/'/g, "`");
+}
+
+const support = document.querySelector('.support');
+
+if (support) {
+    function sendMessage() {
+        const supportButtonSubmit = support.querySelector('.support__button-submit');
+
+        supportButtonSubmit.addEventListener('click', async function (e) {
+            e.preventDefault();
+
+            let err = false;
+
+            let userName = support.querySelector('#user_name');
+            let userEmail = support.querySelector('#user_email');
+            let userMessage = support.querySelector('#user_message');
+
+            let userNameError = support.querySelector('#userNameError') ? support.querySelector('#userNameError') : null;
+            let userEmailError = support.querySelector('#userEmailError') ? support.querySelector('#userEmailError') : null;
+            let userMessageError = support.querySelector('#userMessageError') ? support.querySelector('#userMessageError') : null;
+
+            let userNameValue = userName.value.trim();
+            let userEmailValue = userEmail.value.trim();
+            let userMessageValue = userMessage.value.trim();
+
+            if (userNameValue.length < 2) {
+                err = true;
+
+                userName.classList.add('error-input');
+
+                if (!userNameError) {
+                    userName.insertAdjacentHTML('beforebegin', '<div class="error-input__text error" id="userNameError">Имя меньше 2 символов</div>');
+                }
+            }
+
+            if (userEmailValue.length < 5) {
+                err = true;
+
+                userEmail.classList.add('error-input');
+
+                if (!userEmailError) {
+                    userEmail.insertAdjacentHTML('beforebegin', '<div class="error-input__text error" id="userEmailError">Email меньше 5 символов</div>');
+                }
+            }
+
+            if (userMessageValue.length < 30) {
+                err = true;
+
+                userMessage.classList.add('error-input');
+
+                if (!userMessageError) {
+                    userMessage.insertAdjacentHTML('beforebegin', '<div class="error-input__text error" id="userMessageError">Сообщение меньше 30 символов</div>');
+                }
+            }
+
+            if (err) {
+                return;
+            }
+
+            const data = `<b>Имя: </b>${escapeHtmlNull(userNameValue)};%0A`
+                + `<b>Почта: </b>${escapeHtmlNull(userEmailValue)};%0A`
+                + `<b>Сообщение :</b>${escapeHtmlNull(userMessageValue)};`;
+
+            const token = "5720146432:AAG9a9G37vOH1cGUd2cbr99zuge1_6JqTZA";
+
+            const chatId = "926711333";
+
+            return await fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&parse_mode=html&text=${data}`)
+                .then(() => {
+                    userName = "";
+                    userEmail = "";
+                    userMessage = "";
+
+                    if (!modal) {
+                        alert('Спасибо! Ваша заявка принята. Мы свяжемся с вами в ближайшее время.');
+                        return;
+                    }
+
+                    modal.classList.add('_active');
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        });
     }
-    console.log('Код: ' + event.code + ' причина: ' + event.reason);
-};
 
-socket.onmessage = function (event) {
-    console.log("Получены данные " + event.data);
-};
+    support.oninput = throttle(() => {
+        let userName = support.querySelector('#user_name');
+        let userEmail = support.querySelector('#user_email');
+        let userMessage = support.querySelector('#user_message');
 
-socket.onerror = function (error) {
-    console.log("Ошибка " + error.message);
-};
+        let userNameError = support.querySelector('#userNameError') ? support.querySelector('#userNameError') : null;
+        let userEmailError = support.querySelector('#userEmailError') ? support.querySelector('#userEmailError') : null;
+        let userMessageError = support.querySelector('#userMessageError') ? support.querySelector('#userMessageError') : null;
+
+        let userNameValue = userName.value.trim();
+        let userEmailValue = userEmail.value.trim();
+        let userMessageValue = userMessage.value.trim();
+
+        if (userNameValue.length >= 2) {
+            removeClass(userName, 'error-input');
+
+            if (userNameError) {
+                userNameError.remove();
+            }
+        }
+
+        if (userEmailValue.length >= 5) {
+            removeClass(userEmail, 'error-input');
+
+            if (userEmailError) {
+                userEmailError.remove();
+            }
+        }
+
+        if (userMessageValue.length >= 30) {
+            removeClass(userMessage, 'error-input');
+            
+            if (userMessageError) {
+                userMessageError.remove();
+            }
+        }
+    }, 200);
+
+    sendMessage();
+}
 
 document.body.addEventListener('click', e => {
     if (selects) {
