@@ -2243,7 +2243,22 @@ a {
   display: grid;
   grid-template-columns: 1.4fr 0.6fr;
   grid-gap: 1.5rem 2rem;
+  position: relative;
   width: 85%;
+}
+.application-grid .application__is-hide {
+  background: rgba(0, 0, 0, 0.25);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  font-size: 2rem;
+  font-weight: 500;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 1rem;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 .application-grid .client {
   -ms-flex-item-align: start;
@@ -3140,27 +3155,27 @@ a {
   height: 0.625rem;
 }
 
-.faq {
+.agreement-policy {
   padding: 3rem;
 }
-.faq .faq__page-title {
+.agreement-policy .agreement-policy__page-title {
   margin-bottom: 2.75rem;
 }
-.faq .faq__p, .faq .faq__item {
+.agreement-policy .agreement-policy__p, .agreement-policy .agreement-policy__item {
   font-size: 1.25rem;
   margin-bottom: 1.25rem;
 }
-.faq .faq__list {
+.agreement-policy .agreement-policy__list {
   list-style: none;
   counter-reset: faq__item;
 }
-.faq .faq__item::before {
+.agreement-policy .agreement-policy__item::before {
   counter-increment: faq__item;
   content: counters(faq__item, ".") ". ";
 }
 
 @media (max-width: 1024px) {
-  .faq {
+  .agreement-policy {
     padding: 3%;
   }
 }

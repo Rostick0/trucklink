@@ -55,10 +55,10 @@
                                 </button>
                                 <span class="support__agreement">
                                     Нажимая на кнопку “Отправить”, вы даёте согласие
-                                    на обработку персональных данных
+                                    на <a class="blue-link" href="/agreement-policy">политику соглашения</a>
                                 </span>
                             </div>
-                            <div class="support__bottom_rigth">
+                            <!-- <div class="support__bottom_rigth">
                                 <label class="support__input-file input-file" for="file">
                                     <input type="file" id="file" hidden>
                                     <div class="button-dark input-file__button">
@@ -70,7 +70,7 @@
                                         </span>
                                     </div>
                                 </label>
-                            </div>
+                            </div> -->
                         </div>
                     </form>
                 </div>

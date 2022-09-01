@@ -60,8 +60,8 @@ $pages = [
         "path" => "php.php"
     ],
     [
-        "url" => "/faq",
-        "path" => "faq.php"
+        "url" => "/agreement-policy",
+        "path" => "agreement-policy.php"
     ]
 ];
 

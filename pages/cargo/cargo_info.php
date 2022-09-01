@@ -22,6 +22,13 @@ $messengers = Model::getAll('user_messenger', 'user_id', $cargo['user_id']);
                     <?= renderNavigationTop() ?>
 
                     <div class="application-grid">
+                        <?
+                            if ($cargo['is_hide']) {
+                                echo '<div class="application__is-hide">
+                                        Объявление скрыто
+                                    </div>';
+                                }
+                        ?>
                         <div class="page-title">
                             Информация о грузе
                         </div>

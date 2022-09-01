@@ -1191,8 +1191,14 @@ if (support) {
     function sendMessage() {
         const supportButtonSubmit = support.querySelector('.support__button-submit');
 
+        let timeoutLockSend = Date.now() + 1000 * 3;
+
         supportButtonSubmit.addEventListener('click', async function (e) {
             e.preventDefault();
+
+            if (timeoutLockSend > Date.now()) {
+                return;
+            }
 
             let err = false;
 
@@ -1207,6 +1213,20 @@ if (support) {
             let userNameValue = userName.value.trim();
             let userEmailValue = userEmail.value.trim();
             let userMessageValue = userMessage.value.trim();
+
+            let timeoutSupport = localStorage.getItem('timeout_support') ? localStorage.getItem('timeout_support') : Date.now();
+            timeoutSupport = parseInt(timeoutSupport);
+
+            if (Date.now() < timeoutSupport) {
+                err = true;
+
+                userName.classList.add('error-input');
+
+                if (!userNameError) {
+                    userName.insertAdjacentHTML('beforebegin', '<div class="error-input__text error" id="userNameError">Попробуйте отправить заявку через 5 минут</div>');
+                    userNameError = support.querySelector('#userNameError');
+                }
+            }
 
             if (userNameValue.length < 2) {
                 err = true;
@@ -1262,6 +1282,9 @@ if (support) {
                     }
 
                     modal.classList.add('_active');
+                    
+                    timeoutLockSend = Date.now() + 1000 * 3;
+                    localStorage.setItem('timeout_support', Date.now() + 1000 * 60 * 5);
                 })
                 .catch(err => {
                     console.log(err);
