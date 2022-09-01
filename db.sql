@@ -1,6 +1,3 @@
--- Версия сервера: 8.0.24
--- Версия PHP: 7.4.21
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -23,7 +20,6 @@ CREATE TABLE `application` (
   `user_id` int NOT NULL
 );
 
-
 CREATE TABLE `application_info` (
   `application_info_id` int NOT NULL,
   `volume` int NOT NULL,
@@ -35,6 +31,7 @@ CREATE TABLE `application_info` (
   `type` varchar(255) DEFAULT NULL,
   `application_id` int NOT NULL
 );
+
 
 CREATE TABLE `application_type` (
   `application_type` int NOT NULL,
@@ -60,6 +57,7 @@ CREATE TABLE `authorization_session` (
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_id` int NOT NULL
 );
+
 
 CREATE TABLE `certificate` (
   `certificate_id` int NOT NULL,
@@ -346,10 +344,22 @@ INSERT INTO `country` (`country_id`, `name`) VALUES
 (4, 'Абхазия'),
 (5, 'Украина');
 
+CREATE TABLE `message` (
+  `message_id` int NOT NULL,
+  `text` text NOT NULL,
+  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_edited` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `user_from` int NOT NULL,
+  `user_to` int NOT NULL,
+  `is_hide` tinyint(1) DEFAULT '0'
+);
+
+
 CREATE TABLE `transport_upload` (
   `transport_upload_id` int NOT NULL,
   `name` varchar(255) NOT NULL
 );
+
 
 INSERT INTO `transport_upload` (`transport_upload_id`, `name`) VALUES
 (1, 'Тент'),
@@ -421,6 +431,7 @@ CREATE TABLE `user` (
   `activity_id` int DEFAULT NULL,
   `organization` varchar(255) DEFAULT NULL,
   `last_online` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `is_online` tinyint(1) NOT NULL DEFAULT '0',
   `is_banned` tinyint(1) NOT NULL DEFAULT '0',
   `user_access_id` int NOT NULL DEFAULT '1'
 );
@@ -432,8 +443,10 @@ CREATE TABLE `user_access` (
 
 INSERT INTO `user_access` (`user_access_id`, `name`) VALUES
 (1, 'user'),
-(2, 'moderator'),
-(3, 'admin');
+(2, 'support'),
+(3, 'moderator'),
+(4, 'admin');
+
 
 CREATE TABLE `user_activity` (
   `user_activity_id` int NOT NULL,
@@ -485,6 +498,11 @@ ALTER TABLE `city`
 ALTER TABLE `country`
   ADD PRIMARY KEY (`country_id`);
 
+ALTER TABLE `message`
+  ADD PRIMARY KEY (`message_id`),
+  ADD KEY `user_from` (`user_from`),
+  ADD KEY `user_to` (`user_to`);
+
 ALTER TABLE `transport_upload`
   ADD PRIMARY KEY (`transport_upload_id`);
 
@@ -509,38 +527,77 @@ ALTER TABLE `user_messenger`
 ALTER TABLE `application`
   MODIFY `application_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
+--
+-- AUTO_INCREMENT для таблицы `application_info`
+--
 ALTER TABLE `application_info`
   MODIFY `application_info_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
+--
+-- AUTO_INCREMENT для таблицы `application_type`
+--
 ALTER TABLE `application_type`
   MODIFY `application_type` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
+--
+-- AUTO_INCREMENT для таблицы `authorization`
+--
 ALTER TABLE `authorization`
   MODIFY `authorization_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
+--
+-- AUTO_INCREMENT для таблицы `authorization_session`
+--
 ALTER TABLE `authorization_session`
   MODIFY `authorization_session_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
+--
+-- AUTO_INCREMENT для таблицы `certificate`
+--
 ALTER TABLE `certificate`
-  MODIFY `certificate_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `certificate_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
+--
+-- AUTO_INCREMENT для таблицы `city`
+--
 ALTER TABLE `city`
   MODIFY `city_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=260;
 
+--
+-- AUTO_INCREMENT для таблицы `country`
+--
 ALTER TABLE `country`
   MODIFY `country_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
+--
+-- AUTO_INCREMENT для таблицы `message`
+--
+ALTER TABLE `message`
+  MODIFY `message_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT для таблицы `transport_upload`
+--
 ALTER TABLE `transport_upload`
   MODIFY `transport_upload_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
+--
+-- AUTO_INCREMENT для таблицы `upload_type`
+--
 ALTER TABLE `upload_type`
   MODIFY `upload_type_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
+--
+-- AUTO_INCREMENT для таблицы `user`
+--
 ALTER TABLE `user`
   MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
+--
+-- AUTO_INCREMENT для таблицы `user_access`
+--
 ALTER TABLE `user_access`
-  MODIFY `user_access_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_access_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 ALTER TABLE `user_activity`
   MODIFY `user_activity_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
@@ -570,6 +627,10 @@ ALTER TABLE `certificate`
 
 ALTER TABLE `city`
   ADD CONSTRAINT `city_ibfk_1` FOREIGN KEY (`country_id`) REFERENCES `country` (`country_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `message`
+  ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`user_from`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `message_ibfk_2` FOREIGN KEY (`user_to`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 ALTER TABLE `user`
   ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`user_access_id`) REFERENCES `user_access` (`user_access_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
