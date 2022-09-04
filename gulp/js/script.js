@@ -125,11 +125,11 @@ function normalizeDateSql(date) {
 
 function validateEmail(email) {
     return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  };
+        .toLowerCase()
+        .match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
+};
 
 
 function setAnimation(elem, determinantProperty, showProperty = 'd-flex', hideProperty = '_hide', duration = 500) {
@@ -1153,28 +1153,111 @@ if (clientContactNumber) {
     };
 }
 
-// const socket = new WebSocket("ws://127.0.0.1:2346");
+const socket = new WebSocket("ws://127.0.0.1:2346");
 
-// socket.onopen = function () {
+socket.onopen = function () {
 
-// };
+};
 
-// socket.onclose = function (event) {
-//     if (event.wasClean) {
-//         console.log('Соединение закрыто чисто');
-//     } else {
-//         console.log('Обрыв соединения');
-//     }
-//     console.log('Код: ' + event.code + ' причина: ' + event.reason);
-// };
+socket.onclose = function (event) {
+    if (event.wasClean) {
+        console.log('Соединение закрыто чисто');
+    } else {
+        console.log('Обрыв соединения');
+    }
+    console.log('Код: ' + event.code + ' причина: ' + event.reason);
+};
 
-// socket.onmessage = function (event) {
-//     console.log("Получены данные " + event.data);
-// };
+socket.onerror = function (error) {
+    console.log("Ошибка " + error.message);
+};
 
-// socket.onerror = function (error) {
-//     console.log("Ошибка " + error.message);
-// };
+const messageSend = document.querySelector('.message__send');
+const messageList = document.querySelector('.message__list');
+
+if (messageSend && messageList) {
+    const messageInput = messageSend.querySelector('.message__input');
+    const messageButton = messageSend.querySelector('.message__button');
+
+    function isnertMessageItem(elem, text, date_created, form_me = null, whereCreate = 'beforeend') {
+        return elem.insertAdjacentHTML(whereCreate, `
+        <li class="message__item ${form_me ? 'message__item_from-me' : ''}">
+            <div class="message__image">
+                <div class="avatar__icon avatar__icon"></div>
+            </div>
+            <div class="message__text">
+                <div class="message-message">
+                ${text}
+                </div>
+                <date class="message__date">
+                    ${date_created}
+                </date>
+            </div>
+        </li>`);
+    }
+
+    fetch(`${BACKEND_URL}/message?user_first=${urlQuery.id}`)
+        .then(res => {
+            if (res.status >= 200 && res.status < 300) {
+                return res.json();
+            }
+
+            throw err;
+        })
+        .then(res => {
+            if (res[0]) {
+                res.forEach(data => isnertMessageItem(messageList, data.text, data.date_created, data.from_me));
+            }
+        })
+
+
+    messageButton.onclick = () => {
+        const data = {
+            user_to: urlQuery.id,
+            text: messageInput.value
+        };
+
+        socket.send(JSON.stringify(data));
+
+        messageInput.value = '';
+    }
+
+    socket.onmessage = function (event) {
+        const data = JSON.parse(event.data);
+        fetch(`${BACKEND_URL}/session?type=id`)
+            .then(res => {
+                if (res.status >= 200 && res.status < 300) {
+                    return res.json();
+                }
+
+                throw err;
+            })
+            .then(res => {
+                const user_id = res.user_id;
+
+                // console.log(data.user_to, data.user_from, urlQuery.id, user_id)
+                // console.log(urlQuery.id != data.user_to && user_id != data.user_from)
+                // console.log(urlQuery.id != data.user_from && user_id != data.user_to)
+
+
+                console.log();
+
+                if (!((urlQuery.id == data.user_to && user_id == data.user_from) || (urlQuery.id == data.user_from && user_id == data.user_to))) {
+                    return;
+                }
+
+                console.log(data);
+
+                let fromMe = false;
+
+                if (urlQuery.id == data.user_to) {
+                    fromMe = true;
+                }
+
+                isnertMessageItem(messageList, data.text, data.date_created, fromMe, 'afterbegin');
+            })
+    };
+}
 
 function escapeHtmlNull(text) {
     return text
@@ -1282,7 +1365,7 @@ if (support) {
                     }
 
                     modal.classList.add('_active');
-                    
+
                     timeoutLockSend = Date.now() + 1000 * 3;
                     localStorage.setItem('timeout_support', Date.now() + 1000 * 60 * 5);
                 })
@@ -1323,7 +1406,7 @@ if (support) {
 
         if (userMessageValue.length >= 30) {
             removeClass(userMessage, 'error-input');
-            
+
             if (userMessageError) {
                 userMessageError.remove();
             }

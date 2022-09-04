@@ -15,3 +15,17 @@
     min-width: $height_avatar;
     height: $height_avatar;
 }
+
+.avatar__img {
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-transform: uppercase;
+
+    width: $height_avatar;
+    min-width: $height_avatar;
+    height: $height_avatar;
+}

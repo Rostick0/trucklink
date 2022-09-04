@@ -39,6 +39,14 @@ $pages = [
     [
         "url" => "/count",
         "path" => "count.php"
+    ],
+    [
+        "url" => "/message",
+        "path" => "message.php"
+    ],
+    [
+        "url" => "/session",
+        "path" => "session.php"
     ]
 ];
 

@@ -80,3 +80,95 @@ Stack trace:
 #7 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
 #8 D:\OpenServer\domains\backend\socket\index.php(48): Workerman\Worker::runAll()
 #9 {main}
+2022-09-04 22:55:28 pid:1 Error: Cannot use object of type stdClass as array in D:\OpenServer\domains\backend\socket\index.php:31
+Stack trace:
+#0 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}(Object(Workerman\Connection\TcpConnection), '{"user_to":"17"...')
+#1 D:\OpenServer\domains\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #60)
+#2 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(2463): Workerman\Events\Select->loop()
+#3 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1449): Workerman\Worker->run()
+#4 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1392): Workerman\Worker::forkWorkersForWindows()
+#5 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
+#6 D:\OpenServer\domains\backend\socket\index.php(59): Workerman\Worker::runAll()
+#7 {main}
+2022-09-04 22:56:39 pid:1 Error: Cannot use object of type stdClass as array in D:\OpenServer\domains\backend\socket\index.php:31
+Stack trace:
+#0 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}(Object(Workerman\Connection\TcpConnection), '{"user_to":"17"...')
+#1 D:\OpenServer\domains\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #60)
+#2 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(2463): Workerman\Events\Select->loop()
+#3 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1449): Workerman\Worker->run()
+#4 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1392): Workerman\Worker::forkWorkersForWindows()
+#5 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
+#6 D:\OpenServer\domains\backend\socket\index.php(59): Workerman\Worker::runAll()
+#7 {main}
+2022-09-04 23:02:53 pid:1 Error: Class 'Message' not found in D:\OpenServer\domains\backend\socket\index.php:31
+Stack trace:
+#0 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}(Object(Workerman\Connection\TcpConnection), '{"user_to":"17"...')
+#1 D:\OpenServer\domains\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #60)
+#2 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(2463): Workerman\Events\Select->loop()
+#3 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1449): Workerman\Worker->run()
+#4 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1392): Workerman\Worker::forkWorkersForWindows()
+#5 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
+#6 D:\OpenServer\domains\backend\socket\index.php(60): Workerman\Worker::runAll()
+#7 {main}
+2022-09-04 23:03:26 pid:1 Error: Class 'Message' not found in D:\OpenServer\domains\backend\socket\index.php:31
+Stack trace:
+#0 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}(Object(Workerman\Connection\TcpConnection), '{"user_to":"17"...')
+#1 D:\OpenServer\domains\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #58)
+#2 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(2463): Workerman\Events\Select->loop()
+#3 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1449): Workerman\Worker->run()
+#4 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1392): Workerman\Worker::forkWorkersForWindows()
+#5 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
+#6 D:\OpenServer\domains\backend\socket\index.php(60): Workerman\Worker::runAll()
+#7 {main}
+2022-09-04 23:05:54 pid:1 Error: Cannot use object of type stdClass as array in D:\OpenServer\domains\backend\socket\index.php:31
+Stack trace:
+#0 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}(Object(Workerman\Connection\TcpConnection), '{"user_to":"17"...')
+#1 D:\OpenServer\domains\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #61)
+#2 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(2463): Workerman\Events\Select->loop()
+#3 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1449): Workerman\Worker->run()
+#4 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1392): Workerman\Worker::forkWorkersForWindows()
+#5 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
+#6 D:\OpenServer\domains\backend\socket\index.php(60): Workerman\Worker::runAll()
+#7 {main}
+2022-09-04 23:06:45 pid:1 Error: Cannot use object of type stdClass as array in D:\OpenServer\domains\backend\socket\index.php:31
+Stack trace:
+#0 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}(Object(Workerman\Connection\TcpConnection), '{"user_to":"17"...')
+#1 D:\OpenServer\domains\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #61)
+#2 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(2463): Workerman\Events\Select->loop()
+#3 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1449): Workerman\Worker->run()
+#4 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1392): Workerman\Worker::forkWorkersForWindows()
+#5 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
+#6 D:\OpenServer\domains\backend\socket\index.php(60): Workerman\Worker::runAll()
+#7 {main}
+2022-09-04 23:07:45 pid:1 Error: Cannot use object of type stdClass as array in D:\OpenServer\domains\backend\socket\index.php:31
+Stack trace:
+#0 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}(Object(Workerman\Connection\TcpConnection), '{"user_to":"17"...')
+#1 D:\OpenServer\domains\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #61)
+#2 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(2463): Workerman\Events\Select->loop()
+#3 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1449): Workerman\Worker->run()
+#4 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1392): Workerman\Worker::forkWorkersForWindows()
+#5 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
+#6 D:\OpenServer\domains\backend\socket\index.php(61): Workerman\Worker::runAll()
+#7 {main}
+2022-09-04 23:17:22 pid:1 Error: Call to a member function fetch_assoc() on bool in D:\OpenServer\domains\backend\model\globals.php:41
+Stack trace:
+#0 D:\OpenServer\domains\backend\socket\index.php(33): Model::get('message', 'message_id', NULL)
+#1 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}(Object(Workerman\Connection\TcpConnection), '{"user_to":"17"...')
+#2 D:\OpenServer\domains\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #64)
+#3 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(2463): Workerman\Events\Select->loop()
+#4 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1449): Workerman\Worker->run()
+#5 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1392): Workerman\Worker::forkWorkersForWindows()
+#6 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
+#7 D:\OpenServer\domains\backend\socket\index.php(61): Workerman\Worker::runAll()
+#8 {main}
+2022-09-05 00:08:05 pid:1 Error: Call to a member function fetch_assoc() on bool in D:\OpenServer\domains\backend\model\globals.php:41
+Stack trace:
+#0 D:\OpenServer\domains\backend\socket\index.php(33): Model::get('message', 'message_id', NULL)
+#1 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}(Object(Workerman\Connection\TcpConnection), '{"user_to":"17"...')
+#2 D:\OpenServer\domains\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #115)
+#3 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(2463): Workerman\Events\Select->loop()
+#4 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1449): Workerman\Worker->run()
+#5 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1392): Workerman\Worker::forkWorkersForWindows()
+#6 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
+#7 D:\OpenServer\domains\backend\socket\index.php(61): Workerman\Worker::runAll()
+#8 {main}

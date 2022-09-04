@@ -2,11 +2,13 @@
 
 function renderHeaderAuthorization()
 {
+    global $user;
+
     if ($_SESSION['user']['id']) {
         return '
             <div class="header__rigth header__authorization">
                 <a class="header__authorization_link" href="/profile?id=' . $_SESSION['user']['id'] . '">
-                    ' . renderAvatar('header__authorization_img', 'avatar__icon') . '
+                    ' . renderAvatar('header__authorization_img', 'avatar__icon', $user['avatar'], $user['name']) . '
                 </a>
                 <a class="header__authorization_logout" href="/logout">
                     <svg width="1.5rem" height="1.5rem" id="accountExitSvg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

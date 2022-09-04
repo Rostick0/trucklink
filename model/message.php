@@ -1,10 +1,22 @@
 <?
 
 class Message {
+    static public function get($user_from, $user_to, $limit, $offset) {
+        global $mysqli;
+
+        if ($limit && $offset) {
+            $limitAndOffset = "LIMIT $limit OFFSET $offset";
+        } else {
+            $limitAndOffset = "LIMIT 15";
+        }
+
+        return $mysqli->query("SELECT * FROM `message` WHERE `user_from` = '$user_from' AND `user_to` = '$user_to' UNION SELECT * FROM `message` WHERE `user_from` = '$user_to' AND `user_to` = '$user_from' ORDER BY `message_id` DESC $limitAndOffset");
+    }
+
     static public function create($text, $user_from, $user_to) {
         global $mysqli;
 
-        $message = $mysqli->query("INSERT INTO `message` (`text`, `user_from`, `user_to`) VALUES ('$text', '$user_from', '$user_to',)");
+        $message = $mysqli->query("INSERT INTO `message` (`text`, `user_from`, `user_to`) VALUES ('$text', '$user_from', '$user_to')");
 
         if (!$message) {
             return;

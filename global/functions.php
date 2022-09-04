@@ -82,7 +82,7 @@ function hideTelephone($telephone) {
     return $telephone_begin . $telephone_end;
 }
 
-function renderInput($error, $id = null, $name, $placeholder = null, $class = null, $type = "text", $isReadonly = false, $value = null) {
+function renderInput($error, $id = null, $name, $placeholder = null, $class = null, $type = "text", $isReadonly = false, $value = null, $title = null) {
     $isReadonly = $isReadonly ? 'readonly' : null;
 
     if ($id) {
@@ -93,9 +93,13 @@ function renderInput($error, $id = null, $name, $placeholder = null, $class = nu
         $name = 'name="' . $name .'"';
     }
 
+    if ($title) {
+        $title = 'title="' . $title . '"';
+    }
+
     if ($error) {
         echo '<div class="error-input__form">
-                <input class="input ' . $class . ' error-input" type="' . $type . '" placeholder="' . $placeholder . '" ' . $id . ' ' . $name . ' value="' . $value . '" ' . $isReadonly . '>
+                <input class="input ' . $class . ' error-input" type="' . $type . '" placeholder="' . $placeholder . '" ' . $id . ' ' . $name . ' value="' . $value . '" ' . $title . ' ' . $isReadonly . '>
                 <div class="error-input__text error">' .$error . '</div>
             </div>';
 
@@ -131,14 +135,22 @@ function SpacesMumbers($price, $lengthBetweenSpaces = 3) {
     return $result;
 }
 
-function renderAvatar($classFirst = null, $classSecound = null) {
-    global $user;
+// function renderAvatar($classFirst = null, $classSecound = null, $avatar = null, $name = null) {
+//     global $user;
 
-    if ($user['avatar'] && file_exists("./source/upload/" . $user['avatar'])) {
-        return '<img class="' . $classFirst . '" src="./source/upload/' . $user['avatar'] . '" alt="' . $user . '">';
+//     if ($user['avatar'] && file_exists("./source/upload/" . $user['avatar'])) {
+//         return '<img class="' . $classFirst . '" src="./source/upload/' . $user['avatar'] . '" alt="' . $user . '">';
+//     }
+
+//     return '<div class="' . $classSecound . '">' . mb_substr($user['name'], 0, 1) . '</div>';
+// }
+
+function renderAvatar($classFirst = null, $classSecound = null, $avatar = null, $name = null) {
+    if ($avatar && file_exists("./source/upload/" . $avatar)) {
+        return '<img class="avatar__img ' . $classFirst . '" src="./source/upload/' . $avatar . '" alt="' . $name . '">';
     }
 
-    return '<div class="' . $classSecound . '">' . mb_substr($user['name'], 0, 1) . '</div>';
+    return '<div class="avatar__icon ' . $classSecound . '">' . mb_substr($name, 0, 1) . '</div>';
 }
 
 ?>

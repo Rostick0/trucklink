@@ -52,15 +52,15 @@ if ($_SESSION['user']['id']) {
                         </label>
                         <input class="registration__input input" type="text" placeholder="Введите имя" id="user_name" name="user_name">
                     </div>
-                    <div class="registration__input-form input-form">
+                    <div class="registration__input-form input-form" title="Минимум 8 символов">
                         <label class="label__for-input" for="user_password">
                             Пароль *
                         </label>
                         <?
-                            $_SESSION['error_password'] = renderInput($_SESSION['error_password'], 'user_password', 'user_password', 'Придумайте пароль', 'registration__input', 'password');
+                            $_SESSION['error_password'] = renderInput($_SESSION['error_password'], 'user_password', 'user_password', 'Придумайте пароль', 'registration__input', 'password', false);
                         ?>
                     </div>
-                    <div class="registration__input-form input-form">
+                    <div class="registration__input-form input-form" title="Пароли должны совпадать">
                         <label class="label__for-input" for="user_password_confirm">
                             Подтвердите пароль *
                         </label>

@@ -60,6 +60,10 @@ $pages = [
         "path" => "php.php"
     ],
     [
+        "url" => "/chat",
+        "path" => "account/chat.php"
+    ],
+    [
         "url" => "/agreement-policy",
         "path" => "agreement-policy.php"
     ]
