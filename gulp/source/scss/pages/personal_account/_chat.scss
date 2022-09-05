@@ -16,16 +16,22 @@
     }
 
     .chat__item {
-        cursor: pointer;
+        a {
+            cursor: pointer;
 
-        display: flex;
-        align-items: center;
-        column-gap: 0.75rem;
+            color: var(--default-color);
 
-        padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            column-gap: 0.75rem;
+
+            padding: 0.5rem;
+        }
     }
 
     .chat__image {
+        position: relative;
+
         &._online {
             &::before {
                 background: #00BC8B;
@@ -34,7 +40,7 @@
                 outline: 2px solid var(--default-block-background);
 
                 content: "";
-                
+
                 position: absolute;
                 right: 4px;
                 bottom: 4px;
@@ -131,7 +137,7 @@
                 outline: 2px solid var(--default-block-background);
 
                 content: "";
-                
+
                 position: absolute;
                 right: 4px;
                 bottom: 4px;
@@ -143,7 +149,7 @@
         }
     }
 
-    .message__text  {
+    .message__text {
         background: var(--default-button-third);
 
         border-radius: 0.25rem;

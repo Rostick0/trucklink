@@ -3073,8 +3073,9 @@ a {
   overflow-y: auto;
   max-height: 41.25rem;
 }
-.chat .chat__item {
+.chat .chat__item a {
   cursor: pointer;
+  color: var(--default-color);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3085,6 +3086,9 @@ a {
   -moz-column-gap: 0.75rem;
   column-gap: 0.75rem;
   padding: 0.5rem;
+}
+.chat .chat__image {
+  position: relative;
 }
 .chat .chat__image._online::before {
   background: #00BC8B;

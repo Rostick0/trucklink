@@ -31,45 +31,6 @@ $activity = Model::get('user_activity', 'user_activity_id', $user['activity_id']
                                     Чаты
                                 </div>
                                 <ul class="chat__list block-default">
-                                    <li class="chat__item">
-                                        <div class="chat__image">
-                                            <?= renderAvatar('header__authorization_img', 'avatar__icon') ?>
-                                        </div>
-                                        <div class="chat__text">
-                                            <div class="chat__user-name">
-                                                Пользователь
-                                            </div>
-                                            <div class="chat__user-message">
-                                                Сообщение
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="chat__item">
-                                        <div class="chat__image">
-                                            <?= renderAvatar('header__authorization_img', 'avatar__icon') ?>
-                                        </div>
-                                        <div class="chat__text">
-                                            <div class="chat__user-name">
-                                                Пользователь
-                                            </div>
-                                            <div class="chat__user-message">
-                                                Сообщение
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="chat__item">
-                                        <div class="chat__image">
-                                            <?= renderAvatar('header__authorization_img', 'avatar__icon') ?>
-                                        </div>
-                                        <div class="chat__text">
-                                            <div class="chat__user-name">
-                                                Пользователь
-                                            </div>
-                                            <div class="chat__user-message">
-                                                Сообщение
-                                            </div>
-                                        </div>
-                                    </li>
                                 </ul>
                             </div>
                             <div class="message__content">
@@ -91,32 +52,6 @@ $activity = Model::get('user_activity', 'user_activity_id', $user['activity_id']
                                         </div>
                                     </div>
                                     <ul class="message__list">
-                                        <!-- <li class="message__item">
-                                            <div class="message__image">
-                                                <?= renderAvatar('header__authorization_img', 'avatar__icon') ?>
-                                            </div>
-                                            <div class="message__text">
-                                                <div class="message-message">
-                                                    Сообщение
-                                                </div>
-                                                <date class="message__date">
-                                                    21.02.2022
-                                                </date>
-                                            </div>
-                                        </li>
-                                        <li class="message__item message__item_from-me">
-                                            <div class="message__image">
-                                                <?= renderAvatar('header__authorization_img', 'avatar__icon') ?>
-                                            </div>
-                                            <div class="message__text">
-                                                <div class="message-message">
-                                                    Сообщение
-                                                </div>
-                                                <date class="message__date">
-                                                    21.02.2022
-                                                </date>
-                                            </div>
-                                        </li> -->
                                     </ul>
                                     <div class="message__send">
                                         <input type="text" class="message__input input">

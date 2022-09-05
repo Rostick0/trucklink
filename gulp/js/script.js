@@ -1182,9 +1182,7 @@ if (messageSend && messageList) {
     function isnertMessageItem(elem, text, date_created, form_me = null, whereCreate = 'beforeend') {
         return elem.insertAdjacentHTML(whereCreate, `
         <li class="message__item ${form_me ? 'message__item_from-me' : ''}">
-            <div class="message__image">
-                <div class="avatar__icon avatar__icon"></div>
-            </div>
+            
             <div class="message__text">
                 <div class="message-message">
                 ${text}
@@ -1196,7 +1194,12 @@ if (messageSend && messageList) {
         </li>`);
     }
 
-    fetch(`${BACKEND_URL}/message?user_first=${urlQuery.id}`)
+    let offset = 0;
+
+    renderMessageItem(offset)
+
+    function renderMessageItem(offset) {
+        return fetch(`${BACKEND_URL}/message?user_first=${urlQuery.id}&limit=50&offset=${offset}`)
         .then(res => {
             if (res.status >= 200 && res.status < 300) {
                 return res.json();
@@ -1209,7 +1212,17 @@ if (messageSend && messageList) {
                 res.forEach(data => isnertMessageItem(messageList, data.text, data.date_created, data.from_me));
             }
         })
+    }
 
+    messageList.addEventListener('scroll', throttle(async function () {
+        if (this.scrollHeight - this.offsetHeight < this.scrollTop * 1.15) {
+            return;
+        }
+
+        offset += 50;
+
+        renderMessageItem(offset)
+    }, 750));
 
     messageButton.onclick = () => {
         const data = {
@@ -1235,11 +1248,6 @@ if (messageSend && messageList) {
             .then(res => {
                 const user_id = res.user_id;
 
-                // console.log(data.user_to, data.user_from, urlQuery.id, user_id)
-                // console.log(urlQuery.id != data.user_to && user_id != data.user_from)
-                // console.log(urlQuery.id != data.user_from && user_id != data.user_to)
-
-
                 if (!((urlQuery.id == data.user_to && user_id == data.user_from) || (urlQuery.id == data.user_from && user_id == data.user_to))) {
                     return;
                 }
@@ -1255,6 +1263,71 @@ if (messageSend && messageList) {
                 isnertMessageItem(messageList, data.text, data.date_created, fromMe, 'afterbegin');
             })
     };
+}
+
+const chatList = document.querySelector('.chat__list');
+
+function maxLenMessage(message, len) {
+    if (message.length < len) {
+        return message;
+    }
+
+    return message.slice(0, len) + '...'
+}
+
+if (chatList) {
+    let offset = 0;
+
+    function chatItemRender(offset) {
+        fetch(`${BACKEND_URL}/chat?limit=20&offset=${offset}`)
+        .then(res => {
+            if (res.status >= 200 && res.status < 300) {
+                return res.json();
+            }
+
+            throw err;
+        })
+        .then(res => {
+            if (res[0]) {
+                res.forEach(elem => {
+                    chatList.insertAdjacentHTML('beforeend', `
+                    <li class="chat__item">
+                        <a href="/chat?id=${elem?.user_id}">
+                            <div class="chat__image ${elem?.is_online == 1 ? '_online' : ''}">
+                                ${elem?.avatar
+                                    ?
+                                    `<img class="avatar__img" src="./source/upload/${elem?.avatar}" alt="${elem?.name}">'`
+                                    :
+                                    `<div class="avatar__icon avatar__icon">${elem?.name[0]}</div>`
+                                }
+                            </div>
+                            <div class="chat__text">
+                                <div class="chat__user-name">
+                                ${elem?.name}
+                                </div>
+                                <div class="chat__user-message">
+                                    ${maxLenMessage(elem?.last_message?.text, 15)}
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    `);
+                })
+            }
+        })
+    }
+
+    chatItemRender(offset);
+
+    chatList.addEventListener('scroll', throttle(async function () {
+        if (this.scrollHeight - this.offsetHeight < this.scrollTop * 1.15) {
+            return;
+        }
+
+        offset += 20;
+
+        chatItemRender(offset)
+    }, 750));
 }
 
 function escapeHtmlNull(text) {

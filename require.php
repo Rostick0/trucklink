@@ -37,7 +37,10 @@ require_once './model/authorization_session.php';
 require_once './model/application.php';
 require_once './controller/application.php';
 
-require_once './model//message.php';
+require_once './model/message.php';
+
+require_once './model/chat.php';
+require_once './controller/chat.php';
 
 require_once './controller/application_search.php';
 

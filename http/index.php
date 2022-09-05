@@ -47,6 +47,10 @@ $pages = [
     [
         "url" => "/session",
         "path" => "session.php"
+    ],
+    [
+        "url" => "/chat",
+        "path" => "chat.php"
     ]
 ];
 

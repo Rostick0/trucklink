@@ -1,7 +1,7 @@
 <?
 
 $user_first = (int) $_GET['user_first'];
-$user_second = $_SESSION['user']['id'] ? $_SESSION['user']['id'] : 33;
+$user_second = $_SESSION['user']['id'];
 $limit = (int) $_GET['limit'];
 $offset = (int) $_GET['offset'];
 

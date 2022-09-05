@@ -135,16 +135,6 @@ function SpacesMumbers($price, $lengthBetweenSpaces = 3) {
     return $result;
 }
 
-// function renderAvatar($classFirst = null, $classSecound = null, $avatar = null, $name = null) {
-//     global $user;
-
-//     if ($user['avatar'] && file_exists("./source/upload/" . $user['avatar'])) {
-//         return '<img class="' . $classFirst . '" src="./source/upload/' . $user['avatar'] . '" alt="' . $user . '">';
-//     }
-
-//     return '<div class="' . $classSecound . '">' . mb_substr($user['name'], 0, 1) . '</div>';
-// }
-
 function renderAvatar($classFirst = null, $classSecound = null, $avatar = null, $name = null) {
     if ($avatar && file_exists("./source/upload/" . $avatar)) {
         return '<img class="avatar__img ' . $classFirst . '" src="./source/upload/' . $avatar . '" alt="' . $name . '">';
