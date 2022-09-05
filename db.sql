@@ -32,7 +32,6 @@ CREATE TABLE `application_info` (
   `application_id` int NOT NULL
 );
 
-
 CREATE TABLE `application_type` (
   `application_type` int NOT NULL,
   `name` varchar(255) NOT NULL
@@ -57,7 +56,6 @@ CREATE TABLE `authorization_session` (
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_id` int NOT NULL
 );
-
 
 CREATE TABLE `certificate` (
   `certificate_id` int NOT NULL,
@@ -351,15 +349,14 @@ CREATE TABLE `message` (
   `date_edited` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_from` int NOT NULL,
   `user_to` int NOT NULL,
+  `is_read` tinyint(1) NOT NULL DEFAULT '0',
   `is_hide` tinyint(1) DEFAULT '0'
 );
-
 
 CREATE TABLE `transport_upload` (
   `transport_upload_id` int NOT NULL,
   `name` varchar(255) NOT NULL
 );
-
 
 INSERT INTO `transport_upload` (`transport_upload_id`, `name`) VALUES
 (1, 'Тент'),
@@ -447,7 +444,6 @@ INSERT INTO `user_access` (`user_access_id`, `name`) VALUES
 (3, 'moderator'),
 (4, 'admin');
 
-
 CREATE TABLE `user_activity` (
   `user_activity_id` int NOT NULL,
   `name` varchar(255) NOT NULL
@@ -514,6 +510,7 @@ ALTER TABLE `user`
   ADD KEY `activity_id` (`activity_id`),
   ADD KEY `user_access_id` (`user_access_id`);
 
+
 ALTER TABLE `user_access`
   ADD PRIMARY KEY (`user_access_id`);
 
@@ -525,77 +522,41 @@ ALTER TABLE `user_messenger`
   ADD KEY `user_id` (`user_id`);
 
 ALTER TABLE `application`
-  MODIFY `application_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `application_id` int NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT для таблицы `application_info`
---
 ALTER TABLE `application_info`
-  MODIFY `application_info_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `application_info_id` int NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT для таблицы `application_type`
---
 ALTER TABLE `application_type`
   MODIFY `application_type` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
---
--- AUTO_INCREMENT для таблицы `authorization`
---
 ALTER TABLE `authorization`
-  MODIFY `authorization_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `authorization_id` int NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT для таблицы `authorization_session`
---
 ALTER TABLE `authorization_session`
-  MODIFY `authorization_session_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `authorization_session_id` int NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT для таблицы `certificate`
---
 ALTER TABLE `certificate`
-  MODIFY `certificate_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `certificate_id` int NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT для таблицы `city`
---
 ALTER TABLE `city`
   MODIFY `city_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=260;
 
---
--- AUTO_INCREMENT для таблицы `country`
---
 ALTER TABLE `country`
   MODIFY `country_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
---
--- AUTO_INCREMENT для таблицы `message`
---
 ALTER TABLE `message`
-  MODIFY `message_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `message_id` int NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT для таблицы `transport_upload`
---
 ALTER TABLE `transport_upload`
   MODIFY `transport_upload_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
---
--- AUTO_INCREMENT для таблицы `upload_type`
---
 ALTER TABLE `upload_type`
   MODIFY `upload_type_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
---
--- AUTO_INCREMENT для таблицы `user`
---
 ALTER TABLE `user`
-  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `user_id` int NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT для таблицы `user_access`
---
 ALTER TABLE `user_access`
   MODIFY `user_access_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
@@ -603,7 +564,7 @@ ALTER TABLE `user_activity`
   MODIFY `user_activity_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 ALTER TABLE `user_messenger`
-  MODIFY `user_messenger_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `user_messenger_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 ALTER TABLE `application`
   ADD CONSTRAINT `application_ibfk_1` FOREIGN KEY (`application_type_id`) REFERENCES `application_type` (`application_type`) ON DELETE RESTRICT ON UPDATE RESTRICT,

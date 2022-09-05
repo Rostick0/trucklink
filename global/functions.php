@@ -143,4 +143,12 @@ function renderAvatar($classFirst = null, $classSecound = null, $avatar = null, 
     return '<div class="avatar__icon ' . $classSecound . '">' . mb_substr($name, 0, 1) . '</div>';
 }
 
+function cssOnline($online) {
+    if (!$online) {
+        return;
+    }
+
+    return '_online';
+}
+
 ?>

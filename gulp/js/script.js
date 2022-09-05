@@ -1212,6 +1212,7 @@ if (messageSend && messageList) {
                 res.forEach(data => isnertMessageItem(messageList, data.text, data.date_created, data.from_me));
             }
         })
+        .catch(err => err)
     }
 
     messageList.addEventListener('scroll', throttle(async function () {
@@ -1315,6 +1316,7 @@ if (chatList) {
                 })
             }
         })
+        .catch(err => err)
     }
 
     chatItemRender(offset);

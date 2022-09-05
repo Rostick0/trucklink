@@ -9,6 +9,18 @@ if (!$user) {
 }
 
 $activity = Model::get('user_activity', 'user_activity_id', $user['activity_id'])['name'];
+
+function renderCountNotReadMessages() {
+    global $id;
+
+    $countNotReadMessages = Message::countNotRead($id);
+    
+    if (!$countNotReadMessages) {
+        return;
+    }
+
+    return '<span class="messager__count">' . $countNotReadMessages . '</span>';
+}
 ?>
 
 <!DOCTYPE html>
@@ -73,6 +85,7 @@ $activity = Model::get('user_activity', 'user_activity_id', $user['activity_id']
                                                             <svg width="1.5rem" height="1.5rem" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                                 <path id="messagerSvgPath" d="M3 8L10.8906 13.2604C11.5624 13.7083 12.4376 13.7083 13.1094 13.2604L21 8M5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19Z" stroke="var(--default-button-third-color)" stroke-width="2" />
                                                             </svg>
+                                                            ' .  renderCountNotReadMessages() . '
                                                             <!-- <span class="messager__count">
                                                                 1
                                                             </span> -->
@@ -91,9 +104,6 @@ $activity = Model::get('user_activity', 'user_activity_id', $user['activity_id']
                                                             <svg width="1.5rem" height="1.5rem" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                                 <path id="messagerSvgPath" d="M3 8L10.8906 13.2604C11.5624 13.7083 12.4376 13.7083 13.1094 13.2604L21 8M5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19Z" stroke="var(--default-button-third-color)" stroke-width="2" />
                                                             </svg>
-                                                            <!-- <span class="messager__count">
-                                                                1
-                                                            </span> -->
                                                         </span>
                                                         <span>
                                                             Написать сообщение

@@ -31,6 +31,18 @@ class Message {
         return mysqli_insert_id($mysqli);
     }
 
+    static public function setRead($message_id) {
+        global $mysqli;
+
+        return $mysqli->query("UPDATE `message` SET `is_read` = '1' WHERE `message_id` = '$message_id'");
+    }
+
+    static public function countNotRead($user_id) {
+        global $mysqli;
+
+        return $mysqli->query("SELECT DISTINCT `user_from` FROM `message` WHERE `user_to` = '$user_id' AND `is_read` = 0")->num_rows;
+    }
+
     static public function edit($message_id, $text, $user_from) {
         global $mysqli;
 
