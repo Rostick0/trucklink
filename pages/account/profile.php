@@ -64,21 +64,45 @@ $activity = Model::get('user_activity', 'user_activity_id', $user['activity_id']
                                         <?= $activity ?>
                                     </div>
                                     <div class="account-card__buttons">
-                                        <button class="account-card__button button-grey">
-                                            <span class="account-card__button_number">
-                                                <span class="account-card__button_messager">
-                                                    <svg width="1.5rem" height="1.5rem" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                        <path id="messagerSvgPath" d="M3 8L10.8906 13.2604C11.5624 13.7083 12.4376 13.7083 13.1094 13.2604L21 8M5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19Z" stroke="var(--default-button-third-color)" stroke-width="2" />
-                                                    </svg>
-                                                    <!-- <span class="messager__count">
-                                                        1
-                                                    </span> -->
-                                                </span>
-                                                <span>
-                                                    <?= $_SESSION['user']['id'] === $id ? 'Сообщения' : 'Написать сообщение' ?>
-                                                </span>
-                                            </span>
-                                        </button>
+                                        <?
+                                            if ($_SESSION['user']['id'] == $id) {
+                                                echo '
+                                                <a class="account-card__button button-grey" href="/chat">
+                                                    <span class="account-card__button_number">
+                                                        <span class="account-card__button_messager">
+                                                            <svg width="1.5rem" height="1.5rem" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                <path id="messagerSvgPath" d="M3 8L10.8906 13.2604C11.5624 13.7083 12.4376 13.7083 13.1094 13.2604L21 8M5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19Z" stroke="var(--default-button-third-color)" stroke-width="2" />
+                                                            </svg>
+                                                            <!-- <span class="messager__count">
+                                                                1
+                                                            </span> -->
+                                                        </span>
+                                                        <span>
+                                                            Сообщения
+                                                        </span>
+                                                    </span>
+                                                </a>
+                                                ';
+                                            } else {
+                                                echo '
+                                                <a class="account-card__button button-grey" href="/chat?id=' . $id . '">
+                                                    <span class="account-card__button_number">
+                                                        <span class="account-card__button_messager">
+                                                            <svg width="1.5rem" height="1.5rem" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                <path id="messagerSvgPath" d="M3 8L10.8906 13.2604C11.5624 13.7083 12.4376 13.7083 13.1094 13.2604L21 8M5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19Z" stroke="var(--default-button-third-color)" stroke-width="2" />
+                                                            </svg>
+                                                            <!-- <span class="messager__count">
+                                                                1
+                                                            </span> -->
+                                                        </span>
+                                                        <span>
+                                                            Написать сообщение
+                                                        </span>
+                                                    </span>
+                                                </a>
+                                                ';
+                                            }
+                                        ?>
                                         <a href="tel:<?= $user['telephone'] ?>" class="account-card__tel">
                                             <svg width="1.5rem" height="1.5rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M17.0002 11C17.0002 8.79086 15.2094 7 13.0002 7M21.0002 11C21.0002 6.58172 17.4185 3 13.0002 3M17.1022 21.9752C8.98075 21.5259 2.47449 15.0196 2.02512 6.89814C1.99356 6.32773 2.24464 5.78287 2.67161 5.40333L4.54984 3.7338C5.53347 2.85946 7.07887 3.15708 7.66742 4.33419L8.35567 5.71068C8.74066 6.48066 8.58975 7.41061 7.98103 8.01933L7.58613 8.41423C7.21105 8.78931 6.98336 9.30694 7.14985 9.81057C7.94916 12.2285 11.7719 16.0512 14.1898 16.8505C14.6934 17.017 15.2111 16.7893 15.5861 16.4142L15.981 16.0193C16.5898 15.4106 17.5197 15.2597 18.2897 15.6447L19.6662 16.3329C20.8433 16.9215 21.1409 18.4669 20.2666 19.4505L18.597 21.3287C18.2175 21.7557 17.6726 22.0068 17.1022 21.9752Z" stroke="var(--default-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />

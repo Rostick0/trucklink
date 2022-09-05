@@ -1240,8 +1240,6 @@ if (messageSend && messageList) {
                 // console.log(urlQuery.id != data.user_from && user_id != data.user_to)
 
 
-                console.log();
-
                 if (!((urlQuery.id == data.user_to && user_id == data.user_from) || (urlQuery.id == data.user_from && user_id == data.user_to))) {
                     return;
                 }

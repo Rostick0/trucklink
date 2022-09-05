@@ -78,14 +78,14 @@ $activity = Model::get('user_activity', 'user_activity_id', $user['activity_id']
                                 </div>
                                 <div class="message__content_inner block-default">
                                     <div class="message__user">
-                                        <div class="message__image _online">
-                                            <?= renderAvatar('header__authorization_img', 'avatar__icon', '1661644345278.png') ?>
+                                        <div class="message__image <?= $user['is_online'] ? '_online' : '' ?>">
+                                            <?= renderAvatar('header__authorization_img', 'avatar__icon', $user['avatar'], $user['name']) ?>
                                         </div>
                                         <div class="message__user_text">
                                             <div class="message__user_name">
-                                                Пользователь
+                                                <?= $user['name'] ?>
                                             </div>
-                                            <a class="message__user_link blue-link" href="#">
+                                            <a class="message__user_link blue-link" href="/profile?id=<?= $user['user_id'] ?>">
                                                 Открыть профиль
                                             </a>
                                         </div>
