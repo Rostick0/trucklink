@@ -62,6 +62,4 @@ if ($_GET['path'] || $_SERVER['REQUEST_URI'] === '/' || $_GET['type'] === 'trans
     require_once './pages/require_page.php';
 }
 
-require_once './hooks/local_socket.php';
-
 ?>

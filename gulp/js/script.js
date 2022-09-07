@@ -1550,6 +1550,10 @@ if (support) {
     sendMessage();
 }
 
+window.onunload = () => fetch(`${BACKEND_URL}/session?type=exit`, {
+    method: 'POST'
+});
+
 document.body.addEventListener('click', e => {
     if (selects) {
         selects.forEach(select => {

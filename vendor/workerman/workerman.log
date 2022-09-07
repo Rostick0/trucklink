@@ -297,3 +297,14 @@ Stack trace:
 #8 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
 #9 D:\OpenServer\domains\backend\socket\index.php(137): Workerman\Worker::runAll()
 #10 {main}
+2022-09-07 21:50:03 pid:1 Error: Call to a member function fetch_assoc() on bool in D:\OpenServer\domains\backend\model\globals.php:41
+Stack trace:
+#0 D:\OpenServer\domains\backend\socket\index.php(117): Model::get('message', 'message_id', NULL)
+#1 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}(Object(Workerman\Connection\TcpConnection), Object(stdClass))
+#2 D:\OpenServer\domains\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #108)
+#3 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(2463): Workerman\Events\Select->loop()
+#4 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1449): Workerman\Worker->run()
+#5 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1392): Workerman\Worker::forkWorkersForWindows()
+#6 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
+#7 D:\OpenServer\domains\backend\socket\index.php(142): Workerman\Worker::runAll()
+#8 {main}

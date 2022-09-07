@@ -31,4 +31,14 @@ if ($type == 'id') {
     ]);
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($type == 'exit') {
+        if (!$_SESSION['user']['id']) {
+            die();
+        }
+    
+        User::updateOnline($_SESSION['user']['id'], 0);
+    }
+}
+
 ?>
