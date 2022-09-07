@@ -172,3 +172,128 @@ Stack trace:
 #6 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
 #7 D:\OpenServer\domains\backend\socket\index.php(61): Workerman\Worker::runAll()
 #8 {main}
+2022-09-06 20:54:34 pid:1 Error: Call to a member function fetch_assoc() on bool in D:\OpenServer\domains\backend\model\globals.php:41
+Stack trace:
+#0 D:\OpenServer\domains\backend\socket\index.php(31): Model::get('message', 'message_id', NULL)
+#1 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}(Object(Workerman\Connection\TcpConnection), '{"user_to":"32"...')
+#2 D:\OpenServer\domains\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #175)
+#3 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(2463): Workerman\Events\Select->loop()
+#4 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1449): Workerman\Worker->run()
+#5 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1392): Workerman\Worker::forkWorkersForWindows()
+#6 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
+#7 D:\OpenServer\domains\backend\socket\index.php(57): Workerman\Worker::runAll()
+#8 {main}
+2022-09-06 21:19:31 pid:1 Error: Call to a member function fetch_assoc() on bool in D:\OpenServer\domains\backend\model\globals.php:41
+Stack trace:
+#0 D:\OpenServer\domains\backend\socket\index.php(31): Model::get('message', 'message_id', NULL)
+#1 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}(Object(Workerman\Connection\TcpConnection), '{"user_to":"32"...')
+#2 D:\OpenServer\domains\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #99)
+#3 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(2463): Workerman\Events\Select->loop()
+#4 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1449): Workerman\Worker->run()
+#5 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1392): Workerman\Worker::forkWorkersForWindows()
+#6 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
+#7 D:\OpenServer\domains\backend\socket\index.php(63): Workerman\Worker::runAll()
+#8 {main}
+2022-09-06 22:08:10 pid:1 Error: Cannot use object of type stdClass as array in D:\OpenServer\domains\backend\socket\index.php:22
+Stack trace:
+#0 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(659): {closure}(Object(Workerman\Connection\TcpConnection), Object(stdClass))
+#1 D:\OpenServer\domains\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #56)
+#2 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(2463): Workerman\Events\Select->loop()
+#3 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1449): Workerman\Worker->run()
+#4 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1392): Workerman\Worker::forkWorkersForWindows()
+#5 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
+#6 D:\OpenServer\domains\backend\socket\index.php(61): Workerman\Worker::runAll()
+#7 {main}
+2022-09-06 22:08:16 pid:1 Error: Cannot use object of type stdClass as array in D:\OpenServer\domains\backend\socket\index.php:22
+Stack trace:
+#0 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(659): {closure}(Object(Workerman\Connection\TcpConnection), Object(stdClass))
+#1 D:\OpenServer\domains\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #56)
+#2 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(2463): Workerman\Events\Select->loop()
+#3 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1449): Workerman\Worker->run()
+#4 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1392): Workerman\Worker::forkWorkersForWindows()
+#5 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
+#6 D:\OpenServer\domains\backend\socket\index.php(61): Workerman\Worker::runAll()
+#7 {main}
+2022-09-06 22:25:49 pid:1 Error: Call to a member function fetch_assoc() on bool in D:\OpenServer\domains\backend\model\globals.php:41
+Stack trace:
+#0 D:\OpenServer\domains\backend\socket\index.php(35): Model::get('message', 'message_id', NULL)
+#1 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}(Object(Workerman\Connection\TcpConnection), Object(stdClass))
+#2 D:\OpenServer\domains\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #111)
+#3 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(2463): Workerman\Events\Select->loop()
+#4 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1449): Workerman\Worker->run()
+#5 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1392): Workerman\Worker::forkWorkersForWindows()
+#6 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
+#7 D:\OpenServer\domains\backend\socket\index.php(83): Workerman\Worker::runAll()
+#8 {main}
+2022-09-06 22:59:46 pid:1 Error: Call to a member function fetch_assoc() on bool in D:\OpenServer\domains\backend\model\globals.php:41
+Stack trace:
+#0 D:\OpenServer\domains\backend\socket\index.php(36): Model::get('message', 'message_id', NULL)
+#1 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}(Object(Workerman\Connection\TcpConnection), Object(stdClass))
+#2 D:\OpenServer\domains\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #185)
+#3 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(2463): Workerman\Events\Select->loop()
+#4 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1449): Workerman\Worker->run()
+#5 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1392): Workerman\Worker::forkWorkersForWindows()
+#6 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
+#7 D:\OpenServer\domains\backend\socket\index.php(88): Workerman\Worker::runAll()
+#8 {main}
+2022-09-06 23:14:45 pid:1 Error: Call to a member function fetch_assoc() on bool in D:\OpenServer\domains\backend\model\globals.php:41
+Stack trace:
+#0 D:\OpenServer\domains\backend\socket\index.php(36): Model::get('message', 'message_id', NULL)
+#1 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}(Object(Workerman\Connection\TcpConnection), Object(stdClass))
+#2 D:\OpenServer\domains\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #121)
+#3 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(2463): Workerman\Events\Select->loop()
+#4 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1449): Workerman\Worker->run()
+#5 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1392): Workerman\Worker::forkWorkersForWindows()
+#6 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
+#7 D:\OpenServer\domains\backend\socket\index.php(67): Workerman\Worker::runAll()
+#8 {main}
+2022-09-07 14:50:29 pid:1 Error: Call to a member function fetch_assoc() on bool in D:\OpenServer\domains\backend\model\authorization.php:13
+Stack trace:
+#0 D:\OpenServer\domains\backend\socket\index.php(80): Authorization::checkSession('33', '88df03c858ef246...')
+#1 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}(Object(Workerman\Connection\TcpConnection), Object(stdClass))
+#2 D:\OpenServer\domains\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #53)
+#3 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(2463): Workerman\Events\Select->loop()
+#4 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1449): Workerman\Worker->run()
+#5 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1392): Workerman\Worker::forkWorkersForWindows()
+#6 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
+#7 D:\OpenServer\domains\backend\socket\index.php(120): Workerman\Worker::runAll()
+#8 {main}
+2022-09-07 14:51:19 pid:1 Error: Call to a member function fetch_assoc() on bool in D:\OpenServer\domains\backend\model\authorization.php:13
+Stack trace:
+#0 D:\OpenServer\domains\backend\socket\index.php(80): Authorization::checkSession(33, '88df03c858ef246...')
+#1 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}(Object(Workerman\Connection\TcpConnection), Object(stdClass))
+#2 D:\OpenServer\domains\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #53)
+#3 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(2463): Workerman\Events\Select->loop()
+#4 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1449): Workerman\Worker->run()
+#5 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1392): Workerman\Worker::forkWorkersForWindows()
+#6 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
+#7 D:\OpenServer\domains\backend\socket\index.php(120): Workerman\Worker::runAll()
+#8 {main}
+2022-09-07 15:15:15 pid:1 Error: Call to a member function fetch_assoc() on bool in D:\OpenServer\domains\backend\model\globals.php:41
+Stack trace:
+#0 D:\OpenServer\domains\backend\socket\index.php(98): Model::get('message', 'message_id', NULL)
+#1 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}(Object(Workerman\Connection\TcpConnection), Object(stdClass))
+#2 D:\OpenServer\domains\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #80)
+#3 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(2463): Workerman\Events\Select->loop()
+#4 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1449): Workerman\Worker->run()
+#5 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1392): Workerman\Worker::forkWorkersForWindows()
+#6 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
+#7 D:\OpenServer\domains\backend\socket\index.php(129): Workerman\Worker::runAll()
+#8 {main}
+2022-09-07 15:40:07 pid:1 Worker process terminated with ERROR: E_RECOVERABLE_ERROR "Object of class Workerman\Connection\TcpConnection could not be converted to string in D:\OpenServer\domains\backend\model\user.php on line 45"
+2022-09-07 15:50:33 pid:1 Worker process terminated with ERROR: E_RECOVERABLE_ERROR "Object of class Workerman\Connection\TcpConnection could not be converted to string in D:\OpenServer\domains\backend\model\user.php on line 45"
+2022-09-07 15:50:51 pid:1 Worker process terminated with ERROR: E_RECOVERABLE_ERROR "Object of class Workerman\Connection\TcpConnection could not be converted to string in D:\OpenServer\domains\backend\model\user.php on line 45"
+2022-09-07 15:51:14 pid:1 Worker process terminated with ERROR: E_RECOVERABLE_ERROR "Object of class Workerman\Connection\TcpConnection could not be converted to string in D:\OpenServer\domains\backend\model\user.php on line 45"
+2022-09-07 15:51:51 pid:1 ArgumentCountError: Too few arguments to function {closure}(), 1 passed in D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php on line 920 and exactly 2 expected in D:\OpenServer\domains\backend\socket\index.php:82
+Stack trace:
+#0 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(920): {closure}(Object(Workerman\Connection\TcpConnection))
+#1 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(827): Workerman\Connection\TcpConnection->destroy()
+#2 D:\OpenServer\domains\backend\vendor\workerman\workerman\Protocols\Websocket.php(103): Workerman\Connection\TcpConnection->close('\x88\x02\x03\xE8', true)
+#3 D:\OpenServer\domains\backend\vendor\workerman\workerman\Connection\TcpConnection.php(601): Workerman\Protocols\Websocket::input('\x88\x82k\xD3D,h:', Object(Workerman\Connection\TcpConnection))
+#4 D:\OpenServer\domains\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead(Resource id #56)
+#5 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(2463): Workerman\Events\Select->loop()
+#6 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1449): Workerman\Worker->run()
+#7 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(1392): Workerman\Worker::forkWorkersForWindows()
+#8 D:\OpenServer\domains\backend\vendor\workerman\workerman\Worker.php(557): Workerman\Worker::forkWorkers()
+#9 D:\OpenServer\domains\backend\socket\index.php(137): Workerman\Worker::runAll()
+#10 {main}

@@ -118,18 +118,25 @@
     }
 
     .message__item {
-        display: inline-flex;
+        display: flex;
         column-gap: 0.75rem;
+
+        padding: 0.25rem;
+
+        &._no-read {
+            background: var(--chat-background-no-read);
+        }
     }
 
     .message__item_from-me {
-        margin-left: auto;
         flex-direction: row-reverse;
 
         .message__text {
             background: var(--default-button-second);
 
             color: var(--default-button-second-color);
+
+            margin-left: auto;
         }
     }
 
@@ -162,6 +169,8 @@
         background: var(--default-button-third);
 
         border-radius: 0.25rem;
+
+        display: inline-block;
 
         padding: 0.5rem;
     }

@@ -58,10 +58,10 @@ if ($_GET['http']) {
     die();
 }
 
-require_once './hooks/local_socket.php';
-
 if ($_GET['path'] || $_SERVER['REQUEST_URI'] === '/' || $_GET['type'] === 'transport') {
     require_once './pages/require_page.php';
 }
+
+require_once './hooks/local_socket.php';
 
 ?>

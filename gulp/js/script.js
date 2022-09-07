@@ -1156,8 +1156,21 @@ if (clientContactNumber) {
 const socket = new WebSocket("ws://127.0.0.1:2346");
 
 socket.onopen = function () {
+    fetch(`${BACKEND_URL}/session?type=id`)
+        .then(res => res.json())
+        .then(res => {
+            const userId = res.user_id;
+            const sessionToken = res.session_token;
 
-};
+            socket.send(JSON.stringify({
+                user_id: userId,
+                session_token: sessionToken,
+                type: 'auth'
+            }));
+        })
+}
+
+// let editorReadMessageSocket = new WebSocket("ws://127.0.0.1:1235");
 
 socket.onclose = function (event) {
     if (event.wasClean) {
@@ -1179,10 +1192,9 @@ if (messageSend && messageList) {
     const messageInput = messageSend.querySelector('.message__input');
     const messageButton = messageSend.querySelector('.message__button');
 
-    function isnertMessageItem(elem, text, date_created, form_me = null, whereCreate = 'beforeend') {
+    function isnertMessageItem(elem, id, text, date_created, form_me = null, is_read = null, whereCreate = 'beforeend') {
         return elem.insertAdjacentHTML(whereCreate, `
-        <li class="message__item ${form_me ? 'message__item_from-me' : ''}">
-            
+        <li class="message__item ${form_me ? 'message__item_from-me' : ''} ${is_read == 1 ? '' : '_no-read'}" data-id="${id}">
             <div class="message__text">
                 <div class="message-message">
                 ${text}
@@ -1200,19 +1212,37 @@ if (messageSend && messageList) {
 
     function renderMessageItem(offset) {
         return fetch(`${BACKEND_URL}/message?user_first=${urlQuery.id}&limit=50&offset=${offset}`)
-        .then(res => {
-            if (res.status >= 200 && res.status < 300) {
-                return res.json();
-            }
+            .then(res => {
+                if (res.status >= 200 && res.status < 300) {
+                    return res.json();
+                }
 
-            throw err;
-        })
-        .then(res => {
-            if (res[0]) {
-                res.forEach(data => isnertMessageItem(messageList, data.text, data.date_created, data.from_me));
-            }
-        })
-        .catch(err => err)
+                throw err;
+            })
+            .then(res => {
+                if (res[0]) {
+                    res.forEach(data => {
+                        let from_me = data.from_me
+                        let is_read = data?.is_read
+
+                        if (!from_me) {
+                            is_read = 1;
+
+                            fetch(`${BACKEND_URL}/message?type=read&message_id=${data.message_id}`, {
+                                method: 'PUT'
+                            });
+
+                            socket.send(JSON.stringify({
+                                message_id: data.message_id,
+                                type: 'message_read'
+                            }));
+                        }
+
+                        isnertMessageItem(messageList, data.message_id, data.text, data.date_created, from_me, is_read);
+                    });
+                }
+            })
+            .catch(err => console.log(err))
     }
 
     messageList.addEventListener('scroll', throttle(async function () {
@@ -1222,47 +1252,78 @@ if (messageSend && messageList) {
 
         offset += 50;
 
-        renderMessageItem(offset)
+        renderMessageItem(offset);
     }, 750));
 
     messageButton.onclick = () => {
-        const data = {
-            user_to: urlQuery.id,
-            text: messageInput.value
-        };
+        fetch(`${BACKEND_URL}/session?type=id`)
+            .then(res => res.json())
+            .then(res => {
+                const data = {
+                    user_to: urlQuery.id,
+                    user_from: res.user_id,
+                    text: messageInput.value,
+                    type: 'message'
+                };
 
-        socket.send(JSON.stringify(data));
+                socket.send(JSON.stringify(data));
 
-        messageInput.value = '';
+                messageInput.value = '';
+            })
     }
 
     socket.onmessage = function (event) {
         const data = JSON.parse(event.data);
-        fetch(`${BACKEND_URL}/session?type=id`)
-            .then(res => {
-                if (res.status >= 200 && res.status < 300) {
-                    return res.json();
-                }
 
-                throw err;
-            })
-            .then(res => {
-                const user_id = res.user_id;
+        console.log(data)
 
-                if (!((urlQuery.id == data.user_to && user_id == data.user_from) || (urlQuery.id == data.user_from && user_id == data.user_to))) {
-                    return;
-                }
+        if (data.type == 'message') {
+            fetch(`${BACKEND_URL}/session?type=id`)
+                .then(res => {
+                    if (res.status >= 200 && res.status < 300) {
+                        return res.json();
+                    }
 
-                console.log(data);
+                    throw err;
+                })
+                .then(res => {
+                    const user_id = res.user_id;
 
-                let fromMe = false;
+                    if (!((urlQuery.id == data.user_to && user_id == data.user_from) || (urlQuery.id == data.user_from && user_id == data.user_to))) {
+                        return;
+                    }
 
-                if (urlQuery.id == data.user_to) {
-                    fromMe = true;
-                }
+                    let fromMe = false;
 
-                isnertMessageItem(messageList, data.text, data.date_created, fromMe, 'afterbegin');
-            })
+
+                    if (urlQuery.id == data.user_to) {
+                        fromMe = true;
+                    }
+
+                    isnertMessageItem(messageList, data.message_id, data.text, data.date_created, fromMe, data?.is_read, 'afterbegin');
+                })
+
+            fetch(`${BACKEND_URL}/session?type=id`)
+                .then(res => res.json())
+                .then(res => {
+                    const user_id = res.user_id;
+
+                    if (data.user_to == user_id && data.user_from == urlQuery.id) {
+                        socket.send(JSON.stringify({
+                            message_id: data.message_id,
+                            type: 'message_read'
+                        }));
+                    }
+                })
+        }
+
+        if (data.type == 'message_read') {
+            const messageHtml = document.querySelector(`.message__item[data-id="${data.message_id}"]`);
+
+            if (messageHtml) {
+                removeClass(messageHtml, '_no-read');
+            }
+        }
     };
 }
 
@@ -1281,26 +1342,26 @@ if (chatList) {
 
     function chatItemRender(offset) {
         fetch(`${BACKEND_URL}/chat?limit=20&offset=${offset}`)
-        .then(res => {
-            if (res.status >= 200 && res.status < 300) {
-                return res.json();
-            }
+            .then(res => {
+                if (res.status >= 200 && res.status < 300) {
+                    return res.json();
+                }
 
-            throw err;
-        })
-        .then(res => {
-            if (res[0]) {
-                res.forEach(elem => {
-                    chatList.insertAdjacentHTML('beforeend', `
+                throw err;
+            })
+            .then(res => {
+                if (res[0]) {
+                    res.forEach(elem => {
+                        chatList.insertAdjacentHTML('beforeend', `
                     <li class="chat__item">
                         <a href="/chat?id=${elem?.user_id}">
                             <div class="chat__image ${elem?.is_online == 1 ? '_online' : ''}">
                                 ${elem?.avatar
-                                    ?
-                                    `<img class="avatar__img" src="./source/upload/${elem?.avatar}" alt="${elem?.name}">'`
-                                    :
-                                    `<div class="avatar__icon avatar__icon">${elem?.name[0]}</div>`
-                                }
+                                ?
+                                `<img class="avatar__img" src="./source/upload/${elem?.avatar}" alt="${elem?.name}">'`
+                                :
+                                `<div class="avatar__icon avatar__icon">${elem?.name[0]}</div>`
+                            }
                             </div>
                             <div class="chat__text">
                                 <div class="chat__user-name">
@@ -1313,10 +1374,10 @@ if (chatList) {
                         </a>
                     </li>
                     `);
-                })
-            }
-        })
-        .catch(err => err)
+                    })
+                }
+            })
+            .catch(err => console.log(err))
     }
 
     chatItemRender(offset);

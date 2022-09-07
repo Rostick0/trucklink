@@ -34,7 +34,7 @@ class Message {
     static public function setRead($message_id) {
         global $mysqli;
 
-        return $mysqli->query("UPDATE `message` SET `is_read` = '1' WHERE `message_id` = '$message_id'");
+        return $mysqli->query("UPDATE `message` SET `is_read` = '1' WHERE `message_id` <= '$message_id' AND `is_read` = 0");
     }
 
     static public function countNotRead($user_id) {
