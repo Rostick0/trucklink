@@ -10,7 +10,8 @@ $users = [];
 $ws_worker = new Worker('websocket://0.0.0.0:2346');
 $ws_worker->count = 4;
 
-function connectUser($user_id) {
+function connectUser($user_id)
+{
     User::updateOnline($user_id, 1);
 
     var_dump("Вошел в сети $user_id");
@@ -34,7 +35,7 @@ $ws_worker->onMessage = function ($connection, $data) use ($ws_worker) {
         $id = Message::create($message->text, $message->user_from, $message->user_to);
         $result = Model::get('message', 'message_id', $id) + ['type' => 'message'];
 
-        foreach($ws_worker->connections as $clientConnection) {
+        foreach ($ws_worker->connections as $clientConnection) {
             $clientConnection->send(json_encode($result));
         }
     }
@@ -44,15 +45,11 @@ $ws_worker->onMessage = function ($connection, $data) use ($ws_worker) {
 
         $result = ['message_id' => $data->message_id] + ['type' => 'message_read'];
 
-        foreach($ws_worker->connections as $clientConnection) {
+        foreach ($ws_worker->connections as $clientConnection) {
             $clientConnection->send(json_encode($result));
         }
     }
 };
-
-// $ws_worker->onConnect = function ($connection) use (&$user) {
-
-// };
 
 Worker::runAll();
 

@@ -2,6 +2,8 @@
 
 $citiesAll = City::getWithCountry();
 
+// echo calculateTheDistance('55.755864', '37.617698', '55.7500', '49.1333');
+
 ?>
 
 <!DOCTYPE html>

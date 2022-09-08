@@ -21,4 +21,6 @@ if ($_SESSION['user']['id']) {
     $user = Model::get('user', 'user_id', $_SESSION['user']['id']);
 }
 
+define('EARTH_RADIUS', 6372795);
+
 ?>
