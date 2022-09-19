@@ -54,6 +54,11 @@ $height_avatar: 3.125rem;
     --header-icon: #ebe8fe;
     --icon: #fffbe3;
 
+    --client-contact-color: #9B9B9B;
+
+    --card-background: linear-gradient(180deg, #FFFFFF 83.04%, #F6F6F6 100%);
+    --card-border: 0.33px solid rgba(0, 0, 0, 0.16);
+
     --navigation-background-first: linear-gradient(147.96deg, #eefee8 19.25%, #d9ffcc 89.03%);
     --navigation-background-second: linear-gradient(150.55deg, #fff8e5 18.04%, #ffeab3 102.95%);
     --navigation-icon-first: linear-gradient(180deg, #24C86D 0%, #24F792 100%);
@@ -121,6 +126,11 @@ body {
 
         --header-icon: #1A68AA;
         --icon: #090D13;
+
+        --client-contact-color: #FFF;
+
+        --card-background: var(--default-block-background);
+        --card-border: 0.33px solid rgba(255, 255, 255, 0.16);
 
         --navigation-background-first: linear-gradient(147.96deg, #04070C 19.25%, #131A24 89.03%);
         --navigation-background-second: var(--navigation-background-first);

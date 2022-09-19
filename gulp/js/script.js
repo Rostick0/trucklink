@@ -181,6 +181,20 @@ function SpacesMumbers(price, lengthBetweenSpaces = 3) {
     return result;
 }
 
+function maxLenMessage(message, len) {
+    if (message.length < len) {
+        return message;
+    }
+
+    return message.slice(0, len) + '...'
+}
+
+
+
+function getTime(dataFromBase) {
+    return dataFromBase.split(' ')[1];
+}
+
 const selects = document.querySelectorAll('._select');
 
 function select(selects) {
@@ -380,16 +394,21 @@ function applicationHtml(list, elem, isCargo = null, isEdit = null) {
             ${isEdit ?
             `
                 ${elem?.my_application ? `
-                    <a href="application_edit?id=${elem?.application_id}">
-                        <svg width="1.25rem" height="1.25rem" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9.99967 3.33337H5.33301C4.22844 3.33337 3.33301 4.2288 3.33301 5.33337V14.6667C3.33301 15.7713 4.22844 16.6667 5.33301 16.6667H14.6663C15.7709 16.6667 16.6663 15.7713 16.6663 14.6667V10M7.49967 12.5V10.4167L14.7913 3.12504C15.3666 2.54974 16.2994 2.54974 16.8747 3.12504V3.12504C17.45 3.70034 17.45 4.63308 16.8747 5.20837L12.9163 9.16671L9.58301 12.5H7.49967Z" stroke="var(--default-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>            
-                    </a>
-                    <button onclick="removeApplication(${elem?.application_id})">
-                        <svg width="1.125rem" height="1.125rem" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4.5 5.625L13.5 14.625M13.5 5.625L4.5 14.625" stroke="#E94141" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <a class="service__edit" href="application_edit?id=${elem?.application_id}">
+                        <svg width="1rem" height="1rem" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 3L10.1716 1.82843C10.702 1.29799 11.4214 1 12.1716 1V1C13.7337 1 15 2.26633 15 3.82843V3.82843C15 4.57857 14.702 5.29799 14.1716 5.82843L13 7M9 3L13 7M9 3L7 5M13 7L11 9M7 5L1 11V15H5L11 9M7 5L11 9" stroke="var(--default-color)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                    </button>
+                        <span>
+                            ред.
+                        </span>
+                    </a>
+                    <a class="service__application-link button-grey" href="/${isCargo ? 'cargo' : 'transport'}?id=${elem?.application_id}">
+                        <svg width="1.5rem" height="1.5rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path style="fill: none !important;" d="M11.6797 14.62L14.2397 12.06L11.6797 9.5" stroke="var(--default-color)" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path style="fill: none !important;" d="M4 12.0601H14.17" stroke="var(--default-color)" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path style="fill: none !important;" d="M12 4C16.42 4 20 7 20 12C20 17 16.42 20 12 20" stroke="var(--default-color)" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>                    
+                    </a>
                 `
                 :
                 '<div></div>'.repeat(2)}
@@ -1087,20 +1106,20 @@ if (myApplicationListSecond) {
 }
 
 if (myCargoList && myTransportList) {
-    function myHtmlForEmpty(link) {
-        return `<li class="service__item">
-            <div class="service__status status-recently"></div>
-            <a class="service__item_create" href="${link}">
-                <span>${link === '/add-cargo' ? 'Добавить груз' : 'Добавить транспорт'}</span>
-                <svg width="1.15rem" height="1.15rem" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10.2913 2.375H5.95801C4.85344 2.375 3.95801 3.27043 3.95801 4.375V14.625C3.95801 15.7296 4.85344 16.625 5.95801 16.625H13.0413C14.1459 16.625 15.0413 15.7296 15.0413 14.625V7.125M10.2913 2.375L15.0413 7.125M10.2913 2.375V6.125C10.2913 6.67728 10.7391 7.125 11.2913 7.125H15.0413M9.49967 10.2917V13.4583M11.083 11.875H7.91634" stroke="var(--default-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </a>
-        </li>`.repeat(4);
+    function myHtmlForEmpty(type) {
+        if (type == 'cargo') {
+            return `<li class="my-application__list_none">
+                        У вас нет заявок на груз
+                    </li> `;
+        }
+
+        return `<li class="my-application__list_none">
+                    У вас нет заявок на транспорт
+                </li> `;
     }
 
-    getApplications(myCargoList, 'cargo', LIMIT_OFFSET_APPLICATION + "&user_id=" + urlQuery.id, false, true, myHtmlForEmpty('/add-cargo'));
-    getApplications(myTransportList, 'transport', LIMIT_OFFSET_APPLICATION + "&user_id=" + urlQuery.id, false, true, myHtmlForEmpty('/add-transport'));
+    getApplications(myCargoList, 'cargo', LIMIT_OFFSET_APPLICATION + "&user_id=" + urlQuery.id, false, true, myHtmlForEmpty('cargo'));
+    getApplications(myTransportList, 'transport', LIMIT_OFFSET_APPLICATION + "&user_id=" + urlQuery.id, false, true, myHtmlForEmpty('transport'));
 }
 
 const accountCardImage = document.querySelector('.account-card__image');
@@ -1137,22 +1156,6 @@ if (accountCardImage) {
     }
 }
 
-const clientContactNumber = document.querySelector('.client__contact_number');
-
-if (clientContactNumber) {
-    let showClientContactNumber = false;
-
-    clientContactNumber.onclick = () => {
-        if (showClientContactNumber) {
-            return;
-        }
-
-        showClientContactNumber = true;
-
-        clientContactNumber.innerHTML = `<div class="_show">${clientContactNumber.getAttribute('data-tel')}</div>`;
-    };
-}
-
 const socket = new WebSocket("ws://127.0.0.1:2346");
 
 socket.onopen = function () {
@@ -1168,9 +1171,7 @@ socket.onopen = function () {
                 type: 'auth'
             }));
         })
-}
-
-// let editorReadMessageSocket = new WebSocket("ws://127.0.0.1:1235");
+};
 
 socket.onclose = function (event) {
     if (event.wasClean) {
@@ -1188,21 +1189,61 @@ socket.onerror = function (error) {
 const messageSend = document.querySelector('.message__send');
 const messageList = document.querySelector('.message__list');
 
+function getCalendarDayTime(date) {
+    if (Object.prototype.toString.call(date) != '[object Date]') {
+        date = new Date(date);
+    }
+
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
+}
+
+function renderDateMessage(date) {
+    const today = getCalendarDayTime(new Date());
+    const yesterday = getCalendarDayTime(new Date().setDate(new Date() - 1));
+    const beforeYesterday = getCalendarDayTime(new Date().setDate(new Date() - 2));
+
+    if (getCalendarDayTime(date) == today) {
+        return 'Сегодня';
+    }
+
+    if (getCalendarDayTime(date) == yesterday) {
+        return 'Вчера';
+    }
+
+    if (getCalendarDayTime(date) == beforeYesterday) {
+        return 'Позавчера';
+    }
+
+    return normalizeDate(date.slice(0, 10));
+}
+
 if (messageSend && messageList) {
     const messageInput = messageSend.querySelector('.message__input');
     const messageButton = messageSend.querySelector('.message__button');
+    const messageCurrentDate = document.querySelector('.message__current_date');
 
-    function isnertMessageItem(elem, id, text, date_created, form_me = null, is_read = null, whereCreate = 'beforeend') {
+    function isnertMessageItem(elem, id, text, date_created, form_me = null, is_read = null, whereCreate = 'beforeend', time) {
+        const lastMessageItem = document.querySelector('.message__item:last-child');
+
+        console.log(date_created)
+        console.log(normalizeDate(date_created.slice(0, 10)));
+
+        if (lastMessageItem) {
+            if (lastMessageItem.getAttribute('data-time') != time) {
+                elem.insertAdjacentHTML(whereCreate, `<li class="message__item_date">${renderDateMessage(date_created)}</li>`);
+            }
+        }
+
         return elem.insertAdjacentHTML(whereCreate, `
-        <li class="message__item ${form_me ? 'message__item_from-me' : ''} ${is_read == 1 ? '' : '_no-read'}" data-id="${id}">
+        <li class="message__item ${form_me ? 'message__item_from-me' : ''} ${is_read == 1 ? '' : '_no-read'}" data-id="${id}" data-time="${time}">
             <div class="message__text">
                 <div class="message-message">
-                ${text}
+                    ${text}
                 </div>
-                <date class="message__date">
-                    ${date_created}
-                </date>
             </div>
+            <date class="message__date">
+                ${getTime(date_created)}
+            </date>
         </li>`);
     }
 
@@ -1222,8 +1263,8 @@ if (messageSend && messageList) {
             .then(res => {
                 if (res[0]) {
                     res.forEach(data => {
-                        let from_me = data.from_me
-                        let is_read = data?.is_read
+                        let from_me = data?.from_me;
+                        let is_read = data?.is_read;
 
                         if (!from_me) {
                             is_read = 1;
@@ -1238,7 +1279,7 @@ if (messageSend && messageList) {
                             }));
                         }
 
-                        isnertMessageItem(messageList, data.message_id, data.text, data.date_created, from_me, is_read);
+                        isnertMessageItem(messageList, data.message_id, data.text, data.date_created, from_me, is_read, 'beforeend', getCalendarDayTime(data.date_created));
                     });
                 }
             })
@@ -1246,7 +1287,9 @@ if (messageSend && messageList) {
     }
 
     messageList.addEventListener('scroll', throttle(async function () {
-        if (this.scrollHeight - this.offsetHeight < this.scrollTop * 1.15) {
+        // messageCurrentDate.textContent = "";
+
+        if (this.scrollHeight > (this.offsetHeight + -this.scrollTop) * 1.15) {
             return;
         }
 
@@ -1275,8 +1318,6 @@ if (messageSend && messageList) {
     socket.onmessage = function (event) {
         const data = JSON.parse(event.data);
 
-        console.log(data)
-
         if (data.type == 'message') {
             fetch(`${BACKEND_URL}/session?type=id`)
                 .then(res => {
@@ -1300,7 +1341,7 @@ if (messageSend && messageList) {
                         fromMe = true;
                     }
 
-                    isnertMessageItem(messageList, data.message_id, data.text, data.date_created, fromMe, data?.is_read, 'afterbegin');
+                    isnertMessageItem(messageList, data.message_id, data.text, data.date_created, fromMe, data?.is_read, 'afterbegin', getCalendarDayTime(data.date_created));
                 })
 
             fetch(`${BACKEND_URL}/session?type=id`)
@@ -1329,14 +1370,6 @@ if (messageSend && messageList) {
 
 const chatList = document.querySelector('.chat__list');
 
-function maxLenMessage(message, len) {
-    if (message.length < len) {
-        return message;
-    }
-
-    return message.slice(0, len) + '...'
-}
-
 if (chatList) {
     let offset = 0;
 
@@ -1353,27 +1386,27 @@ if (chatList) {
                 if (res[0]) {
                     res.forEach(elem => {
                         chatList.insertAdjacentHTML('beforeend', `
-                    <li class="chat__item">
-                        <a href="/chat?id=${elem?.user_id}">
-                            <div class="chat__image ${elem?.is_online == 1 ? '_online' : ''}">
-                                ${elem?.avatar
-                                ?
-                                `<img class="avatar__img" src="./source/upload/${elem?.avatar}" alt="${elem?.name}">'`
-                                :
-                                `<div class="avatar__icon avatar__icon">${elem?.name[0]}</div>`
-                            }
-                            </div>
-                            <div class="chat__text">
-                                <div class="chat__user-name">
-                                ${elem?.name}
-                                </div>
-                                <div class="chat__user-message">
-                                    ${maxLenMessage(elem?.last_message?.text, 15)}
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    `);
+                            <li class="chat__item ${ urlQuery.id == elem?.user_id ? '_active' : '' }">
+                                <a href="/chat?id=${elem?.user_id}">
+                                    <div class="chat__image ${elem?.is_online == 1 ? '_online' : ''}">
+                                        ${elem?.avatar
+                                        ?
+                                        `<img class="avatar__img" src="./source/upload/${elem?.avatar}" alt="${elem?.name}">'`
+                                        :
+                                        `<div class="avatar__icon avatar__icon">${elem?.name[0]}</div>`
+                                    }
+                                    </div>
+                                    <div class="chat__text">
+                                        <div class="chat__user-name">
+                                            ${elem?.name}
+                                        </div>
+                                        <div class="chat__user-message">
+                                            ${ (elem?.last_message?.user_from == elem?.user_id ? 'Вам' : 'Вы') + ': ' + maxLenMessage(elem?.last_message?.text, 15)}
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        `);
                     })
                 }
             })
@@ -1383,7 +1416,7 @@ if (chatList) {
     chatItemRender(offset);
 
     chatList.addEventListener('scroll', throttle(async function () {
-        if (this.scrollHeight - this.offsetHeight < this.scrollTop * 1.15) {
+        if (this.scrollHeight > (this.offsetHeight + -this.scrollTop) * 1.15) {
             return;
         }
 

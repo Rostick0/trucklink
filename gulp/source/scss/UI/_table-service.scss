@@ -24,13 +24,16 @@
     .service__item {
         animation: show $transition_middle forwards;
 
-        background: var(--default-block-background);
+        background: var(--card-background);
 
+        border: var(--card-border);
         border-radius: 0.625rem;
 
         display: grid;
         grid-template-columns: $grid_template_columns;
         grid-gap: 0.625rem;
+
+        position: relative;
 
         transition: $transition_default;
 
@@ -44,7 +47,14 @@
 
         & > *:nth-child(6) {
             margin-left: 1rem;
-            margin-right: -2rem;
+        }
+
+        .service__application-link {
+            position: absolute;
+            right: 0;
+    
+            width: 50px;
+            height: 100%;
         }
 
         a {
@@ -117,6 +127,19 @@
 
         &:last-child {
             order: 3;
+        }
+    }
+
+    .service__edit {
+        color: var(--default-color);
+
+        display: flex;
+        align-items: center;
+        column-gap: 0.5rem;
+
+        svg {
+            max-width: 1rem;
+            min-width: 1rem;
         }
     }
 

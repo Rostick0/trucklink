@@ -1,0 +1,110 @@
+.client {
+    align-self: flex-start;
+    flex: 0 0 28.5%;
+
+    position: sticky;
+    top: 0;
+
+    .client__avatar {
+        border-radius: 0.5rem;
+    
+        position: relative;
+    
+        overflow: hidden;
+    
+        z-index: 10;
+    }
+    
+    .client__inner {
+        border: var(--card-border);
+
+        padding: 3rem 3.375rem 3.375rem;
+    }
+    
+    .client__inner_first {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    
+        margin-top: -0.5rem;
+        padding-top: 3.5rem;
+    }
+    
+    .client__inner_second {
+        margin-top: 2.5rem;
+    }
+    
+    .client__title {
+        font-size: 1.5rem;
+        font-weight: 500;
+    
+        margin-bottom: 2.9rem;
+    }
+    
+    .client-data__list {
+        display: flex;
+        flex-direction: column;
+        row-gap: 2.25rem;
+    }
+    
+    .client-data__item {
+        display: flex;
+        flex-direction: column;
+        row-gap: 0.5rem;
+    }
+    
+    .client-data__name {
+        color: var(--client-contact-color);
+    
+        font-size: 1.25rem;
+    }
+    
+    .client-data__value {
+        font-size: 1.375rem;
+    }
+    
+    .client__block {
+        padding: 1.875rem 2rem 2.75rem;
+    }
+    
+    .client__info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    
+        margin-bottom: 1.5rem;
+    }
+    
+    .client__href {
+        display: block;
+    }
+    
+    .client__img {
+        border-radius: 0;
+    
+        font-size: 4rem;
+    
+        object-fit: cover;
+    
+        width: 100%;
+        height: 18.125rem;
+    }
+    
+    .client__contacts {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1.125rem;
+    }
+    
+    .client__contact_button {
+        border-radius: 0;
+    
+        width: 100%;
+        height: $height_big_button;
+    }
+
+    .client-account {
+        font-size: 1.25rem;
+
+        display: block;
+    }
+}
