@@ -1,0 +1,39 @@
+.input {
+    background: #293443;
+
+    border: 1px solid transparent;
+    border-radius: 8px;
+
+    color: #fff;
+
+    transition: 200ms;
+
+    padding: 1rem 1.25rem;
+
+    width: 100%;
+
+    &:hover,
+    &:focus {
+        border: 1px solid #4A5764;
+    }
+
+    &::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+    }
+}
+
+.input__block {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.75rem;
+
+    .input__title {
+        display: block;
+
+        font-size: 0.875rem;
+    }
+
+    .input {
+        font-size: 1rem;
+    }
+}
