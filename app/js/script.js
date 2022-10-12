@@ -36,3 +36,120 @@ if (select) {
         }
     })
 }
+
+const personalAccountNavigationItem = document.querySelectorAll('.personal-account__navigation_item');
+const personalAccountRight = document.querySelector('.personal-account__right');
+
+function removeClass(elem, classHtml) {
+    if (!elem.classList.contains(classHtml)) return;
+
+    elem.classList.remove(classHtml)
+}
+
+if (personalAccountNavigationItem && personalAccountRight) {
+    const personalAccountRightHtmls = [
+        {
+            type: 'my_applications',
+            html: `<div class="personal-account__title section-title">
+            Заявки
+        </div>
+        <ul class="personal-account__application_list">
+            <li class="personal-account__application_item">
+                <div class="personal-account__application_item_top application__item">
+                    <div class="application__route">
+                        <div class="application__status"></div>
+                        <div class="application__way">
+                            <div class="application__from">
+                                <img src="../img/flag.png" alt=""> Нью-Йорк
+                            </div>
+                            <span class="applicaton__arrow">
+                                →
+                            </span>
+                            <div class="application__to">
+                                <img src="../img/flag.png" alt=""> Вашингтон-на-Бразосе
+                            </div>
+                        </div>
+                    </div>
+                    <div class="application__date">
+                        15 апр — 23 апр 
+                    </div>
+                    <div class="application__transport">
+                        Специальная техника
+                    </div>
+                    <div class="application__payment">        
+                        $10 000
+                    </div>
+                </div>
+                <div class="personal-account__application_item_bottom">
+                    <a class="button-second" href="">
+                        Отследить груз
+                    </a>
+                    <a class="button-second" href="">
+                        Подробнее
+                    </a>
+                    <a class="button-second" href="">
+                        Редактировать
+                    </a>
+                </div>
+            </li>
+        </ul>`
+        },
+        {
+            type: 'about_me',
+            html: `<div class="personal-account__title section-title">
+            Информация
+        </div>
+        <form class="personal-account__form">
+            <div class="input__block">
+                <label class="input__title" for="input">
+                    Имя
+                </label>
+                <input class="input" type="text" value="Константин" id="input">
+            </div>
+            <div class="input__block">
+                <label class="input__title" for="input">
+                    Фамилия
+                </label>
+                <input class="input" type="text" value="Константинопольский" id="input">
+            </div>
+            <div class="input__block">
+                <label class="input__title" for="input">
+                    Текст
+                </label>
+                <input class="input" type="text" id="input">
+            </div>
+            <div class="input__block">
+                <label class="input__title" for="input">
+                    Текст
+                </label>
+                <input class="input" type="text" id="input">
+            </div>
+            <div class="input__block">
+                <label class="input__title" for="input">
+                    Текст
+                </label>
+                <input class="input" type="text" id="input">
+            </div>
+            <div class="input__block">
+                <label class="input__title" for="input">
+                    Текст
+                </label>
+                <input class="input" type="text" id="input">
+            </div>
+        </form>`
+        }
+    ];
+
+    personalAccountNavigationItem.forEach(item => {
+        item.onclick = () => {
+            for (let i = 0; i < personalAccountRightHtmls.length; i++) {
+                if (personalAccountRightHtmls[i].type === item.getAttribute('data-type')) {
+                    personalAccountNavigationItem.forEach(elem => removeClass(elem, '_active'));
+                    item.classList.add('_active')
+                    personalAccountRight.innerHTML = personalAccountRightHtmls[i].html
+                    break;
+                }
+            }
+        }
+    })
+}

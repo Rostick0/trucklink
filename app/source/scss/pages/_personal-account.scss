@@ -1,0 +1,151 @@
+.personal-account {
+    .personal-account__header {
+        background: url('../img/application-background.png');
+        background-size: cover;
+        background-position: center center;
+
+        font-size: 4.5rem;
+        font-weight: 700;
+
+        text-align: center;
+
+        padding: 10.25rem;
+        margin-bottom: 5rem;
+    }
+
+    .personal-account__container {
+        display: flex;
+        column-gap: 2.5rem;
+    }
+
+    .personal-account__left {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1.5rem;
+        flex: 0 0 15rem;
+    }
+
+    .personal-account__navigation {
+        background: #17212B;
+
+        border-radius: 0.5rem;
+
+        display: flex;
+        flex-direction: column;
+        row-gap: 2rem;
+
+        padding: 1.625rem;
+
+        position: relative;
+    }
+
+    .personal-account__create {
+        font-size: 0.93rem;
+
+        text-align: center;
+
+        padding: 1.06rem;
+    }
+
+    .personal-account__navigation_item {
+        cursor: pointer;
+
+        display: flex;
+        align-items: center;
+        column-gap: 1.25rem;
+
+        color: rgba(255, 255, 255, 0.4);
+
+        transition: 200ms;
+
+        &::before {
+            background: transparent;
+
+            content: "";
+
+            position: absolute;
+            left: 0;
+
+            transition: 200ms;
+
+            width: 2px;
+            height: 2.5rem;
+        }
+
+        svg {
+            g {
+                transition: 200ms;
+            }
+        }
+
+        &:hover,
+        &._active {
+            color: #fff;
+
+            svg {
+                g {
+                    opacity: 1;
+                }
+            }
+
+            &::before {
+                background: #2A7AD4;
+            }
+        }
+    }
+
+    .personal-account__right {
+        flex-grow: 1;
+    }
+
+    .personal-account__title {
+        font-size: 2.5rem;
+
+        text-align: left;
+
+        margin-bottom: 2.5rem;
+    }
+
+    .personal-account__application_list {
+        display: flex;
+        flex-direction: column;
+        row-gap: 2.5rem;
+    }
+
+    .personal-account__application_item {
+        display: flex;
+        flex-direction: column;
+        row-gap: 0.75rem;
+    }
+
+    .personal-account__application_item_top {
+        display: flex;
+        align-items: center;
+
+        & > * {
+            display: flex;
+            align-items: center;
+
+            padding-right: 3vw;
+        }
+
+        .application__route {
+            flex-grow: 1;
+        }
+
+        .application__payment {
+            flex-grow: 0;
+        }
+    }
+    
+    .personal-account__application_item_bottom {
+        display: flex;
+        grid-gap: 0.5rem;
+    }
+
+    .personal-account__form {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 1.25rem;
+    }
+}
