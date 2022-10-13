@@ -1,0 +1,1 @@
+<script src="/view/static/js/script.js" defer></script>
