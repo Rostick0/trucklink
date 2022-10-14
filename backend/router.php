@@ -1,6 +1,6 @@
 <?
 
-$path_page = "./view/pages";
+$path_page = './view/pages';
 
 switch ($uri_short) {
     case '/registration':
@@ -16,7 +16,10 @@ switch ($uri_short) {
         $path_page .= '/index.php';
 }
 
-var_dump(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
-var_dump($uri_short);
+if (!file_exists($path_page)) {
+    $path_page = './view/pages/index.php';
+}
 
 require_once $path_page;
+
+?>

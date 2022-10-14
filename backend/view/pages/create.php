@@ -97,21 +97,7 @@
                 </div>
             </div>
         </main>
-        <footer class="footer">
-            <div class="container">
-                <div class="footer__container">
-                    <a class="footer__link link" href="">
-                        Политика конфидениальности
-                    </a>
-                    <a class="footer__link link" href="">
-                        © 2022
-                    </a>
-                    <a class="footer__link link" href="">
-                        Условия использования
-                    </a>
-                </div>
-            </div>
-        </footer>
+        <? require_once __DIR__ . './../components/footer.php'; ?>
     </div>
     <? require_once __DIR__ . './../components/script.php'; ?>
 </body>
