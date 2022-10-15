@@ -13,6 +13,8 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+
+        position: relative;
     }
 
     .header__burger {
@@ -35,7 +37,16 @@
     }
 
     .header__logo {
-        margin-left: 2.75rem;
+        position: absolute;
+        left: 50%;
+        
+        transform: translateX(-50%);
+    }
+
+    .header__log {
+        display: flex;
+        align-items: center;
+        column-gap: 0.25rem;
     }
 
     .header__log_href {
@@ -263,6 +274,16 @@
 
 @media (max-width: 1024px) {
     .header {
+        .header__logo {
+            position: static;
+            
+            transform: none;
+        }
+
+        .header__log {
+            display: none;
+        }
+
         .header__slider_item {
             flex: 1 0 100%;
         }

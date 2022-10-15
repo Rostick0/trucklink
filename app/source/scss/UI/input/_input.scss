@@ -20,6 +20,10 @@
     &::placeholder {
         color: rgba(255, 255, 255, 0.4);
     }
+
+    &._error {
+        border: 1px solid #8A1D1D;
+    }
 }
 
 .input__block {

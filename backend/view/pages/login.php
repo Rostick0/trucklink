@@ -1,28 +1,12 @@
 <?
 
-$type = $_GET['type'];
+$button_log = $_REQUEST['button_log'];
 
-if ($type == 'confirm' && !$_SESSION['user_registration']) {
-    //header('Location: /registration');
-}
-
-$button_reg = $_REQUEST['button_reg'];
-
-if (isset($button_reg)) {
+if (isset($button_log)) {
     $email = $_REQUEST['user_email'];
     $password = $_REQUEST['user_password'];
-    $name = $_REQUEST['user_name'];
-    $surname = $_REQUEST['user_surname'];
 
-    $query = UserController::registration($email, $password, $name, $surname);
-}
-
-$button_confirm = $_REQUEST['button_confirm'];
-
-if (isset($button_confirm)) {
-    $user_code = $_REQUEST['user_code'];
-
-    $query_email = UserController::confirmCreate($user_code);
+    $query = AuthorizationController::log($email, $password);
 }
 
 ?>
@@ -33,7 +17,7 @@ if (isset($button_confirm)) {
 <head>
     <? require_once __DIR__ . './../components/meta.php' ?>
     <? require_once __DIR__ . './../components/style.php' ?>
-    <title>Регистрация</title>
+    <title>Вход</title>
 </head>
 
 <body>
@@ -86,37 +70,11 @@ if (isset($button_confirm)) {
                     <a class="registration__link-back link" onclick="history.go(-1)">
                         Назад
                     </a>
-                    <? if ($type === 'confirm'): ?>
-                        <div class="registration__title section-title">
-                        Подтвердите регистрацию
-                    </div>
-                    <div class="registration__subtitle section-subtitle">
-                        Введите код, который придет на вашу почту в ближайщее время
-                    </div>
-                    <form class="registration__form" method="POST">
-                        <div class="registration__form_top">
-                            <div class="input__block">
-                                <label class="input__title" for="user_code">
-                                    Код из почты
-                                </label>
-                                <input class="input<?= $query_email['data']['email'] ? ' _error' : null ?>" name="user_code" type="text" id="user_code">
-                                <? if ($query_email['data']['email']): ?>
-                                    <div class="_color-error">
-                                        <?= $query_email['data']['email'] ?>
-                                    </div>
-                                <? endif; ?>
-                            </div>
-                        </div>
-                        <button class="registration__button button" name="button_confirm">
-                            Подтвердить
-                        </button>
-                    </form>
-                    <? else: ?>
                     <div class="registration__title section-title">
-                        Создание аккаунта
+                        Войти в аккаунт
                     </div>
                     <div class="registration__subtitle section-subtitle">
-                        Зарегистрируйтесь в сервисе, чтобы сохранить текущий груз и получать информацию о нём
+                        Войдите в сервис, чтобы посмотреть заявки на груз и получить информацию о них
                     </div>
                     <form class="registration__form" method="POST">
                         <div class="registration__form_top">
@@ -136,7 +94,7 @@ if (isset($button_confirm)) {
                                     Пароль
                                 </label>
                                 <div class="input-password block__password">
-                                    <input class="input <?= $query['data']['password'] ? ' _error' : null ?>" type="password" for="user_password">
+                                    <input class="input<?= $query['data']['password'] ? ' _error' : null ?>" type="password" id="user_password">
                                     <div class="password-icon">
                                         <svg class="password-icon_hide" width="1.5rem" height="1.5rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <g opacity="0.4">
@@ -164,35 +122,10 @@ if (isset($button_confirm)) {
                                 <? endif; ?>
                             </div>
                         </div>
-                        <div class="registration__form_bottom">
-                            <div class="input__block">
-                                <label class="input__title" for="user_name">
-                                    Имя
-                                </label>
-                                <input class="input<?= $query['data']['name'] ? ' _error' : null ?>" name="user_name" type="text" id="user_name">
-                                <? if ($query['data']['name']): ?>
-                                    <div class="_color-error">
-                                        <?= $query['data']['name'] ?>
-                                    </div>
-                                <? endif; ?>
-                            </div>
-                            <div class="input__block">
-                                <label class="input__title" for="user_surname">
-                                    Фамилия
-                                </label>
-                                <input class="input<?= $query['data']['surname'] ? ' _error' : null ?>" name="user_surname" type="text" id="user_surname">
-                                <? if ($query['data']['surname']): ?>
-                                    <div class="_color-error">
-                                        <?= $query['data']['surname'] ?>
-                                    </div>
-                                <? endif; ?>
-                            </div>
-                        </div>
-                        <button class="registration__button button" name="button_reg">
-                            Продолжить
+                        <button class="registration__button button" name="button_log">
+                            Войти
                         </button>
                     </form>
-                    <? endif ?>
                 </div>
             </div>
         </main>

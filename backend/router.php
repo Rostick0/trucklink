@@ -9,9 +9,12 @@ switch ($uri_short) {
     case '/login':
         $path_page .= '/login.php';
         break;
-        case '/create':
-            $path_page .= '/create.php';
-            break;
+    case '/create':
+        $path_page .= '/create.php';
+        break;
+    case '/profile':
+        $path_page .= '/profile.php';
+        break;
     default:
         $path_page .= '/index.php';
 }
