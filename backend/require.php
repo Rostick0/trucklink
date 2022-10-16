@@ -9,8 +9,8 @@ require_once './global/vars.php';
 
 require_once './controller/email.php';
 
-require_once './model/authorization.php';
-require_once './controller/authorization.php';
+require_once './model/user_session.php';
+require_once './controller/user_session.php';
 
 require_once './model/user.php';
 require_once './controller/user.php';

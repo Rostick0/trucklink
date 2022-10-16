@@ -24,4 +24,9 @@ function getDbDate($table, $column, $value, $limit = null, $offset = null) {
     return $db->query("SELECT * FROM `$table` WHERE `$column` = '$value' $limitAndOffset");
 }
 
+function normalizeTepelhone($telephone) {
+    return $telephone = mb_ereg_replace('[^0-9]', '', $telephone);
+
+}
+
 ?>

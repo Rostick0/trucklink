@@ -106,7 +106,7 @@
                         </div>
                     </div>
                     <div class="header__bottom">
-                        <form class="header__form">
+                        <form class="header__form" method="POST">
                             <table class="header__table-form">
                                 <tbody>
                                     <tr class="input-block__title">
@@ -164,9 +164,9 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <a class="header__button button" href="/pages/cargo-create.html">
+                                            <button class="header__button button" href="/create">
                                                 Продолжить
-                                            </a>
+                                            </button>
                                         </td>
                                     </tr>
                                 </tbody>

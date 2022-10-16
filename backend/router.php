@@ -3,6 +3,9 @@
 $path_page = './view/pages';
 
 switch ($uri_short) {
+    case '/api':
+        $path_page = './api/index.php';
+        break;
     case '/registration':
         $path_page .= '/registration.php';
         break;
@@ -10,7 +13,7 @@ switch ($uri_short) {
         $path_page .= '/login.php';
         break;
     case '/create':
-        $path_page .= '/create.php';
+        $path_page .= '/create/create.php';
         break;
     case '/profile':
         $path_page .= '/profile.php';

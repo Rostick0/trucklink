@@ -8,8 +8,8 @@ class Email {
         $_SESSION['email_code'] = random_int(100000, 999999);
 
         $to      = "$email";
-        $subject = 'the subject';
-        $message = "Ваш код для потверждения регистрации";
+        $subject = 'Регистрация';
+        $message = "Ваш код для потверждения регистрации: {$_SESSION['email_code']}";
         $headers = "From: $EMAIL"       . "\r\n" .
             "Reply-To: $EMAIL" . "\r\n" .
             'X-Mailer: PHP/' . phpversion();
