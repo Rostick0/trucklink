@@ -95,7 +95,12 @@ if (isset($button_confirm)) {
                                     <label class="input__title" for="user_telephone">
                                         Телефон
                                     </label>
-                                    <input class="input input-tel" name="user_telephone" type="tel" id="user_telephone">
+                                    <input class="input input-tel<?= $query['data']['telephone'] ? ' _error' : null ?>" name="user_telephone" type="tel" id="user_telephone">
+                                    <? if ($query['data']['telephone']) : ?>
+                                        <div class="_color-error">
+                                            <?= $query['data']['telephone'] ?>
+                                        </div>
+                                    <? endif; ?>
                                 </div>
                                 <div class="input__block">
                                     <label class="input__title" for="user_password">

@@ -24,6 +24,10 @@ class UserController
             $errors['email'] = "Данный аккаунт уже существует";
         }
 
+        if (mb_strlen($telephone) < 8) {
+            $errors['telephone'] = "Телефон меньше 8 символов";
+        }
+
         if (mb_strlen($password) < 8) {
             $errors['password'] = "Пароль меньше 8 символов";
         }
@@ -71,13 +75,13 @@ class UserController
             ];
         }
 
-        UserController::create();
+        return UserController::create();
     }
 
     public static function create() {
         $user_data = $_SESSION['user_registration'];
 
-        if (!empty($user_data)) {
+        if (empty($user_data)) {
             return [
                 'type' => 'error',
                 'data' => [
@@ -103,7 +107,7 @@ class UserController
 
             setcookie('session_token', $token, time() + 60*60*24*30, '/');
 
-            header("Location: /profile?type={$user_id}");
+            header("Location: /profile?id={$user_id}");
         }
     }
 
@@ -138,7 +142,7 @@ class UserController
 
         setcookie('session_token', $token, time() + 60*60*24*30, '/');
         $_SESSION['user'] = $user;
-        header("Location: /profile?type={$user['user_id']}");
+        header("Location: /profile?id={$user['user_id']}");
     }
 }
 
