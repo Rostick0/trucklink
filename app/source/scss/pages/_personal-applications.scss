@@ -1,6 +1,5 @@
 .personal-applications {
     background: url('../img/application-background2.png');
-    background-size: 100% 50vw;
     background-position: top;
     background-repeat: no-repeat;
 
@@ -10,21 +9,8 @@
         align-items: center;
     }
 
-    .personal-applications__user {
-        margin-bottom: 0.5rem;
-    }
-
-    .personal-applications__greet {
-        margin-bottom: 1.25rem;
-    }
-
-    .personal-applications_create {
-        display: inline-flex;
-        align-items: center;
-        column-gap: 0.625rem;
-
-        margin: 0 auto 5.75rem;
-        padding: 1.25rem 2.75rem;
+    .personal-applications__buttons {
+        margin: 2.125rem auto 5.75rem;
     }
 
     .application__table {

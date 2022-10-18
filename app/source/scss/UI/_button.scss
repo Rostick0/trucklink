@@ -45,3 +45,19 @@
         color: #023A79;
     }
 }
+
+.button-outline {
+    @extend .button;
+
+    background: none;
+
+    border: 1px solid #fff;
+
+    &:hover {
+        background: none;
+    }
+
+    &:active {
+        background: none;
+    }
+}

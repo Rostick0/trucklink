@@ -130,11 +130,11 @@
                                                     </g>
                                                     <defs>
                                                 </svg>
-                                                <input class="input-block__input" type="text" placeholder="Откуда">
+                                                <input class="input-block__input addres-search" type="text" placeholder="Откуда">
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="input-block__content">
+                                            <div class="input-block__content addres-search">
                                                 <svg width="1rem" height="1rem" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <g clip-path="url(#clip0_39_896)">
                                                         <path d="M1 7.63158L15 1L8.36842 15L6.89474 9.10526L1 7.63158Z" stroke="#131A24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -160,7 +160,7 @@
                                                     <path d="M5.5 21C6.88071 21 8 19.8807 8 18.5C8 17.1193 6.88071 16 5.5 16C4.11929 16 3 17.1193 3 18.5C3 19.8807 4.11929 21 5.5 21Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M18.5 21C19.8807 21 21 19.8807 21 18.5C21 17.1193 19.8807 16 18.5 16C17.1193 16 16 17.1193 16 18.5C16 19.8807 17.1193 21 18.5 21Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                 </svg>
-                                                <input class="input-block__input" type="text" placeholder="Специальная техника">
+                                                <input class="input-block__input" type="text" name="transport_type" placeholder="Специальная техника">
                                             </div>
                                         </td>
                                         <td>
@@ -494,6 +494,14 @@
         </main>
     </div>
     <? require_once __DIR__ . './../components/script.php'; ?>
+    <script>
+        var autocompletes, marker, infowindow, map;
+function initMap()  { 
+}
+
+        const addresSearch = document.querySelector('.addres-search');
+        autocompletes = new google.maps.places.Autocomplete(addresSearch);
+    </script>
 </body>
 
 </html>

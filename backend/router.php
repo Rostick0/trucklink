@@ -18,6 +18,9 @@ switch ($uri_short) {
     case '/profile':
         $path_page .= '/profile.php';
         break;
+    case '/application':
+        $path_page .= '/application.php';
+        break;
     default:
         $path_page .= '/index.php';
 }
