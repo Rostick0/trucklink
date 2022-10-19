@@ -1,5 +1,91 @@
 .application-info {
-    .application-info__main {
-        
+    background: url('../img/application-background2.png');
+    background-position: top;
+    background-repeat: no-repeat;
+
+    .application-info__main_container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .application-info__flex {
+        color: #fff;
+
+        cursor: pointer;
+
+        display: flex;
+        align-items: center;
+        column-gap: 0.4375rem;
+
+        span {
+            color: inherit;
+        }
+
+        &._red {
+            color: #DA4242;
+        }
+    }
+
+    .application-info__link {
+        @extend .application-info__flex;
+
+        text-decoration: underline;
+    }
+
+    .application-info__info {
+        margin-top: 4.25rem;
+        margin-bottom: 3.75rem;
+
+        max-width: 58.75rem;
+        width: 100%;
+    }
+
+    .application-info__interaction {
+        max-width: 58.75rem;
+        width: 100%;
+    }
+
+    .application-info__interaction_top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        margin-bottom: 2.75rem;
+    }
+
+    .application-info__interaction__bottom {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .application-info {
+        .application-info__interaction_top {
+            flex-wrap: wrap;
+            justify-content: center;
+            grid-gap: 1rem;
+
+            &>*:first-child {
+                order: 2;
+            }
+
+            &>*:nth-child(2) {
+                flex: 1 0 100%;
+                order: 1;
+
+                .personal-applications_create,
+                .personal-applications_profile {
+                    justify-content: center;
+
+                    width: 100%;
+                }
+            }
+
+            &>*:nth-child(3) {
+                order: 3;
+            }
+        }
     }
 }

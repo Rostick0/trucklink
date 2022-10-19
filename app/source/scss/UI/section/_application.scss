@@ -196,6 +196,16 @@
     width: 1rem;
     height: 1rem;
 }
+@media (min-width: 1650px) {
+    .recently-loads {
+        .application__item {
+            td:last-child {
+                width: 17%;
+            }
+        }
+    }
+}
+
 
 @media (max-width: 1024px) {
     .application__item_title {
@@ -245,22 +255,22 @@
     }
 }
 
-@media (min-width: 1650px) {
-    .recently-loads {
-        .application__item {
-            td:last-child {
-                width: 17%;
-            }
-        }
-    }
-}
-
 @media (max-width: 576px) {
     .recently-loads {
         .application__item {
             td {
                 padding: 0.75rem;
             }
+        }
+    }
+
+    .application__buttons {
+        column-gap: 0.75rem;
+    
+        &>* {
+            column-gap: 0.32rem;
+    
+            padding: 0.75rem 1rem;
         }
     }
 }
