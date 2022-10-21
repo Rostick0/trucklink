@@ -259,7 +259,7 @@ $applications = Application::get($application_sql);
                                             <?= $application['transport_type'] ?>
                                         </div>
                                     </td>
-                                    <td>
+                                    <td class="application__payment_td">
                                         <div class="application__payment">
                                             <span>
                                                 $<?= NormalizeView::price($application['price']) ?>

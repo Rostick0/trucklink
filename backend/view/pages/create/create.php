@@ -3,9 +3,9 @@
 $page_count = (int) $_GET['page'];
 
 if ($page_count == 2) {
-    die(require_once __DIR__ . './create2.php');
+    die(require_once './view/pages/create/create2.php');
 } else if ($page_count == 3) {
-    die(require_once __DIR__ . './create3.php');
+    die(require_once './view/pages/create/create3.php');
 }
 
 $user_fullname = $_REQUEST['user_fullname'];
