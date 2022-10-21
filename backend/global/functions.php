@@ -37,16 +37,32 @@ function normalizeTepelhone($telephone) {
 
 // }
 
-function whereParams($array_data) {
-    if (empty($array_data)) return;
+function whereParams($data, $data_more = null, $data_less = null) {
+    if (empty($data) && empty($data_more) && empty($data_less)) return;
 
-    $where_params = "WHERE ";
+    $where_params = "";
 
-    foreach($array_data as $name => $data) {
+    foreach($data as $name => $data) {
         if ($data) {
             $where_params .= "`{$name}` = '{$data}' AND ";
         }
     }
+
+    foreach($data_more as $name => $data) {
+        if ($data) {
+            $where_params .= "`{$name}` < '{$data}' AND ";
+        }
+    }
+
+    foreach($data_less as $name => $data) {
+        if ($data) {
+            $where_params .= "`{$name}` > '{$data}' AND ";
+        }
+    }
+
+    if (!$where_params) return;
+
+    $where_params = "WHERE " . $where_params;
 
     return mb_substr($where_params, 0, -5);
 }

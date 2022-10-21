@@ -230,82 +230,6 @@ $applications = Application::get($application_sql);
                                     Оплата
                                 </th>
                             </tr>
-                            <tr class="application__item">
-                                <td>
-                                    <div class="application__route">
-                                        <div class="application__status"></div>
-                                        <div class="application__way">
-                                            <div class="application__from">
-                                                <img src="/view/static/img/flag.png" alt=""> Нью-Йорк
-                                            </div>
-                                            <span class="applicaton__arrow">
-                                                →
-                                            </span>
-                                            <div class="application__to">
-                                                <img src="/view/static/img/flag.png" alt=""> Вашингтон-на-Бразосе
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="application__date">
-                                        15 апр — 23 апр
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="application__transport">
-                                        Специальная техника
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="application__payment">
-                                        <span>
-                                            $10 000
-                                        </span>
-                                        <a class="application__payment_link button">
-                                            Подробнее
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="application__item">
-                                <td>
-                                    <div class="application__route">
-                                        <div class="application__status"></div>
-                                        <div class="application__way">
-                                            <div class="application__from">
-                                                <img src="/view/static/img/flag.png" alt=""> Нью-Йорк
-                                            </div>
-                                            <span class="applicaton__arrow">
-                                                →
-                                            </span>
-                                            <div class="application__to">
-                                                <img src="/view/static/img/flag.png" alt=""> Вашингтон-на-Бразосе
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="application__date">
-                                        15 апр — 23 апр
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="application__transport">
-                                        Специальная техника
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="application__payment">
-                                        <span>
-                                            $10 000
-                                        </span>
-                                        <a class="application__payment_link button">
-                                            Подробнее
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
                             <? foreach ($applications as $application) : ?>
                                 <tr class="application__item">
                                 <tr class="application__item">
@@ -327,7 +251,7 @@ $applications = Application::get($application_sql);
                                     </td>
                                     <td>
                                         <div class="application__date">
-                                            <?= $application['date'] ?>
+                                            <?= NormalizeView::date($application['date']) ?>
                                         </div>
                                     </td>
                                     <td>
@@ -338,7 +262,7 @@ $applications = Application::get($application_sql);
                                     <td>
                                         <div class="application__payment">
                                             <span>
-                                                <?= $application['price'] ?>
+                                                $<?= NormalizeView::price($application['price']) ?>
                                             </span>
                                             <a class="application__payment_link button">
                                                 Подробнее

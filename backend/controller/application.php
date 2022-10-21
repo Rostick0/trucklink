@@ -113,8 +113,57 @@ class ApplicationController {
     }
 
     public static function create($from, $to, $date, $type_transport, $user_fullname, $user_telephone, $user_email, $user_id, $body_type, $loading_method,  $size, $height, $mass, $price) {
-
         return Application::create($from, $to, $date, $type_transport, $user_fullname, $user_telephone, $user_email, $user_id, $body_type, $loading_method,  $size, $height, $mass, $price);
+    }
+
+    public static function httpDelete($application_id, $user_id) {
+        $error = '';
+        $code = 200;
+
+        if (!$application_id) {
+            $code = 404;
+
+            $error = 'application not found';
+        }
+
+        if (!$user_id) {
+            $code = 401;
+
+            $error = 'no authorization';
+        }
+
+        if ($error) {
+            http_response_code($code);
+
+            echo json_encode(
+                [
+                    'type' => 'error',
+                    'message' => $error
+                ]
+            );
+
+            return;
+        }
+
+        $query = Application::delete($application_id, $user_id);
+
+        if ($query) {
+            echo json_encode(
+                [
+                    'message' => 'application deleted'
+                ]
+            );
+            return;
+        }
+
+        http_response_code(403);
+
+        echo json_encode(
+            [
+                'type' => 'error',
+                'message' => 'no access'
+            ]
+        );
     }
 }
 

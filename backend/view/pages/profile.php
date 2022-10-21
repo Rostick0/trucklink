@@ -101,7 +101,7 @@ $applications = Application::get($application_sql);
                                 </td>
                                 <td>
                                     <div class="application__date">
-                                        <?= $application['date'] ?>
+                                        <?= NormalizeView::date($application['date']) ?>
                                     </div>
                                 </td>
                                 <td>
@@ -111,7 +111,7 @@ $applications = Application::get($application_sql);
                                 </td>
                                 <td>
                                     <div class="application__payment">
-                                        <?= $application['price'] ?>
+                                        $<?= NormalizeView::price($application['price']) ?>
                                     </div>
                                 </td>
                                 <td>

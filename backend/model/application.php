@@ -22,6 +22,12 @@ class Application {
 
         return $db->query("SELECT * FROM `application` $where_params");
     }
+
+    public static function delete($application_id, $user_id) {
+        global $db;
+
+        return $db->query("DELETE FROM `application` WHERE `application_id` = '$application_id' AND `user_id` = '$user_id'");
+    }
 }
 
 ?>
