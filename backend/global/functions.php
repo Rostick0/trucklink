@@ -8,8 +8,12 @@ function protectedData($string) {
     return $string;
 }
 
-function getDbDate($table, $column, $value, $limit = null, $offset = null) {
+function getDbDate($table, $column = null, $value = null, $limit = null, $offset = null) {
     global $db;
+
+    if (!$value && !$column) {
+        return $db->query("SELECT * FROM `$table`");
+    }
 
     $limitAndOffset = null;
 
@@ -27,6 +31,11 @@ function getDbDate($table, $column, $value, $limit = null, $offset = null) {
 function normalizeTepelhone($telephone) {
     return $telephone = mb_ereg_replace('[^0-9]', '', $telephone);
 }
+
+// дд.мм.год
+// function normalizeDate($date) {
+
+// }
 
 function whereParams($array_data) {
     if (empty($array_data)) return;

@@ -70,9 +70,11 @@
         border: 1px solid #4A5764;
         border-top: 1px solid transparent;
 
-        transition: 200ms;
+        cursor: pointer;
 
-        padding: 1rem 0.75rem;
+        display: flex;
+
+        transition: 200ms;
     
         &:hover {
             background: #4A5764; 
@@ -80,6 +82,12 @@
 
         &:last-child {
             border-radius: 0 0 0.5rem 0.5rem;
+        }
+
+        & > * {
+            padding: 1rem 0.75rem;
+
+            width: 100%;
         }
     }
 

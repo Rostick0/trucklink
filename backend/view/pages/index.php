@@ -1,3 +1,22 @@
+<?
+
+$from = $_REQUEST['from'];
+$to = $_REQUEST['to'];
+$date = $_REQUEST['date'];
+$transport_type = $_REQUEST['transport_type'];
+
+$create_button = $_REQUEST['create_button'];
+
+if (isset($create_button)) {
+    $query = ApplicationController::firstCreate($from, $to, $date, $transport_type);
+}
+
+$application_sql = "WHERE `is_deleted` = 0 ORDER BY `application_id` ASC LIMIT 10";
+
+$applications = Application::get($application_sql);
+
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -27,26 +46,7 @@
                                 <path d="M100 26.3783C100 28.0352 98.6569 29.3783 97 29.3783C95.3431 29.3783 94 28.0352 94 26.3783C94 24.7214 95.3431 23.3783 97 23.3783C98.6569 23.3783 100 24.7214 100 26.3783Z" stroke="white" stroke-width="2" />
                             </svg>
                         </a>
-                        <div class="header__log">
-                            <a class="header__log_href" href="/login">
-                                <svg width="1.5rem" height="1.37rem" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M19 18V16.3333C19 15.4493 18.6313 14.6014 17.9749 13.9763C17.3185 13.3512 16.4283 13 15.5 13H8.5C7.57174 13 6.6815 13.3512 6.02513 13.9763C5.36875 14.6014 5 15.4493 5 16.3333V18" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M12.5 9C14.433 9 16 7.433 16 5.5C16 3.567 14.433 2 12.5 2C10.567 2 9 3.567 9 5.5C9 7.433 10.567 9 12.5 9Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                                <span>
-                                    Войти
-                                </span>
-                            </a>
-                            <a class="header__log_href" href="/registration">
-                                <svg width="1.5rem" height="1.37rem" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M19 18V16.3333C19 15.4493 18.6313 14.6014 17.9749 13.9763C17.3185 13.3512 16.4283 13 15.5 13H8.5C7.57174 13 6.6815 13.3512 6.02513 13.9763C5.36875 14.6014 5 15.4493 5 16.3333V18" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M12.5 9C14.433 9 16 7.433 16 5.5C16 3.567 14.433 2 12.5 2C10.567 2 9 3.567 9 5.5C9 7.433 10.567 9 12.5 9Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                                <span>
-                                    Регистрация
-                                </span>
-                            </a>
-                        </div>
+                        <? require_once __DIR__ . './../components/header_log.php' ?>
                     </div>
                     <div class="header__center">
                         <h1 class="header__title section-title">
@@ -123,48 +123,76 @@
                                     </tr>
                                     <tr class="input-block__item">
                                         <td>
-                                            <div class="input-block__content">
-                                                <svg width="1rem" height="1rem" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <g clip-path="url(#clip0_39_896)">
-                                                        <path d="M1 7.63158L15 1L8.36842 15L6.89474 9.10526L1 7.63158Z" stroke="#131A24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                    </g>
-                                                    <defs>
-                                                </svg>
-                                                <input class="input-block__input addres-search" type="text" placeholder="Откуда">
+                                            <div class="input__block">
+                                                <div class="input-block__content">
+                                                    <svg width="1rem" height="1rem" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <g clip-path="url(#clip0_39_896)">
+                                                            <path d="M1 7.63158L15 1L8.36842 15L6.89474 9.10526L1 7.63158Z" stroke="#131A24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                                        </g>
+                                                        <defs>
+                                                    </svg>
+                                                    <input class="input-block__input addres-search" type="text" placeholder="Откуда" name="from">
+                                                </div>
+                                                <? if ($query['data']['from']) : ?>
+                                                    <div class="_color-error">
+                                                        <?= $query['data']['from'] ?>
+                                                    </div>
+                                                <? endif; ?>
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="input-block__content addres-search">
-                                                <svg width="1rem" height="1rem" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <g clip-path="url(#clip0_39_896)">
-                                                        <path d="M1 7.63158L15 1L8.36842 15L6.89474 9.10526L1 7.63158Z" stroke="#131A24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                    </g>
-                                                    <defs>
-                                                </svg>
-                                                <input class="input-block__input" type="text" placeholder="Куда">
+                                            <div class="input__block">
+                                                <div class="input-block__content addres-search">
+                                                    <svg width="1rem" height="1rem" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <g clip-path="url(#clip0_39_896)">
+                                                            <path d="M1 7.63158L15 1L8.36842 15L6.89474 9.10526L1 7.63158Z" stroke="#131A24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                                        </g>
+                                                        <defs>
+                                                    </svg>
+                                                    <input class="input-block__input" type="text" placeholder="Куда" name="to">
+                                                </div>
+                                                <? if ($query['data']['to']) : ?>
+                                                    <div class="_color-error">
+                                                        <?= $query['data']['to'] ?>
+                                                    </div>
+                                                <? endif; ?>
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="input-block__content">
-                                                <svg width="1.5rem" height="1.5rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M15.9736 3.75C15.9736 3.33579 15.6378 3 15.2236 3C14.8094 3 14.4736 3.33579 14.4736 3.75V4.4501H9.52832V3.75C9.52832 3.33579 9.19253 3 8.77832 3C8.36411 3 8.02832 3.33579 8.02832 3.75V4.4501H6.36133C5.13352 4.4501 4 5.36273 4 6.65024V9.55058V16.8012C4 18.0887 5.13352 19.0013 6.36133 19.0013H17.6406C18.8684 19.0013 20.002 18.0887 20.002 16.8012V9.55058V6.65024C20.002 5.36273 18.8684 4.4501 17.6406 4.4501H15.9736V3.75ZM18.502 8.80058V6.65024C18.502 6.33596 18.1927 5.9501 17.6406 5.9501H15.9736V6.65027C15.9736 7.06449 15.6378 7.40027 15.2236 7.40027C14.8094 7.40027 14.4736 7.06449 14.4736 6.65027V5.9501H9.52832V6.65027C9.52832 7.06449 9.19253 7.40027 8.77832 7.40027C8.36411 7.40027 8.02832 7.06449 8.02832 6.65027V5.9501H6.36133C5.80932 5.9501 5.5 6.33596 5.5 6.65024V8.80058H18.502ZM5.5 10.3006H18.502V16.8012C18.502 17.1155 18.1927 17.5013 17.6406 17.5013H6.36133C5.80932 17.5013 5.5 17.1155 5.5 16.8012V10.3006Z" fill="black" />
-                                                </svg>
-                                                <input class="input-block__input" type="text" placeholder="6 октября 2022">
+                                            <div class="input__block">
+                                                <div class="input-block__content">
+                                                    <svg width="1.5rem" height="1.5rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.9736 3.75C15.9736 3.33579 15.6378 3 15.2236 3C14.8094 3 14.4736 3.33579 14.4736 3.75V4.4501H9.52832V3.75C9.52832 3.33579 9.19253 3 8.77832 3C8.36411 3 8.02832 3.33579 8.02832 3.75V4.4501H6.36133C5.13352 4.4501 4 5.36273 4 6.65024V9.55058V16.8012C4 18.0887 5.13352 19.0013 6.36133 19.0013H17.6406C18.8684 19.0013 20.002 18.0887 20.002 16.8012V9.55058V6.65024C20.002 5.36273 18.8684 4.4501 17.6406 4.4501H15.9736V3.75ZM18.502 8.80058V6.65024C18.502 6.33596 18.1927 5.9501 17.6406 5.9501H15.9736V6.65027C15.9736 7.06449 15.6378 7.40027 15.2236 7.40027C14.8094 7.40027 14.4736 7.06449 14.4736 6.65027V5.9501H9.52832V6.65027C9.52832 7.06449 9.19253 7.40027 8.77832 7.40027C8.36411 7.40027 8.02832 7.06449 8.02832 6.65027V5.9501H6.36133C5.80932 5.9501 5.5 6.33596 5.5 6.65024V8.80058H18.502ZM5.5 10.3006H18.502V16.8012C18.502 17.1155 18.1927 17.5013 17.6406 17.5013H6.36133C5.80932 17.5013 5.5 17.1155 5.5 16.8012V10.3006Z" fill="black" />
+                                                    </svg>
+                                                    <input class="input-block__input" type="date" placeholder="6 октября 2022" name="date">
+                                                </div>
+                                                <? if ($query['data']['date']) : ?>
+                                                    <div class="_color-error">
+                                                        <?= $query['data']['date'] ?>
+                                                    </div>
+                                                <? endif; ?>
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="input-block__content">
-                                                <svg width="1.5rem" height="1.5rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M16 3H1V16H16V3Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                    <path d="M16 8H20L23 11V16H16V8Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                    <path d="M5.5 21C6.88071 21 8 19.8807 8 18.5C8 17.1193 6.88071 16 5.5 16C4.11929 16 3 17.1193 3 18.5C3 19.8807 4.11929 21 5.5 21Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                    <path d="M18.5 21C19.8807 21 21 19.8807 21 18.5C21 17.1193 19.8807 16 18.5 16C17.1193 16 16 17.1193 16 18.5C16 19.8807 17.1193 21 18.5 21Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg>
-                                                <input class="input-block__input" type="text" name="transport_type" placeholder="Специальная техника">
+                                            <div class="input__block">
+                                                <div class="input-block__content">
+                                                    <svg width="1.5rem" height="1.5rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M16 3H1V16H16V3Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                                        <path d="M16 8H20L23 11V16H16V8Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                                        <path d="M5.5 21C6.88071 21 8 19.8807 8 18.5C8 17.1193 6.88071 16 5.5 16C4.11929 16 3 17.1193 3 18.5C3 19.8807 4.11929 21 5.5 21Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                                        <path d="M18.5 21C19.8807 21 21 19.8807 21 18.5C21 17.1193 19.8807 16 18.5 16C17.1193 16 16 17.1193 16 18.5C16 19.8807 17.1193 21 18.5 21Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                                    </svg>
+                                                    <input class="input-block__input" type="text" placeholder="Специальная техника" name="transport_type">
+                                                </div>
+                                                <? if ($query['data']['transport_type']) : ?>
+                                                    <div class="_color-error">
+                                                        <?= $query['data']['transport_type'] ?>
+                                                    </div>
+                                                <? endif; ?>
                                             </div>
                                         </td>
                                         <td>
-                                            <button class="header__button button" href="/create">
+                                            <button class="header__button button" name="create_button">
                                                 Продолжить
                                             </button>
                                         </td>
@@ -278,6 +306,48 @@
                                     </div>
                                 </td>
                             </tr>
+                            <? foreach ($applications as $application) : ?>
+                                <tr class="application__item">
+                                <tr class="application__item">
+                                    <td>
+                                        <div class="application__route">
+                                            <div class="application__status"></div>
+                                            <div class="application__way">
+                                                <div class="application__from">
+                                                    <img src="/view/static/img/flag.png" alt=""> <?= $application['from'] ?>
+                                                </div>
+                                                <span class="applicaton__arrow">
+                                                    →
+                                                </span>
+                                                <div class="application__to">
+                                                    <img src="/view/static/img/flag.png" alt=""> <?= $application['to'] ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="application__date">
+                                            <?= $application['date'] ?>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="application__transport">
+                                            <?= $application['transport_type'] ?>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="application__payment">
+                                            <span>
+                                                <?= $application['price'] ?>
+                                            </span>
+                                            <a class="application__payment_link button">
+                                                Подробнее
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tr>
+                            <? endforeach ?>
                         </tbody>
                     </table>
                 </div>
@@ -495,12 +565,12 @@
     </div>
     <? require_once __DIR__ . './../components/script.php'; ?>
     <script>
-        var autocompletes, marker, infowindow, map;
-function initMap()  { 
-}
+        // var autocompletes, marker, infowindow, map;
 
-        const addresSearch = document.querySelector('.addres-search');
-        autocompletes = new google.maps.places.Autocomplete(addresSearch);
+        // function initMap() {}
+
+        // const addresSearch = document.querySelector('.addres-search');
+        // autocompletes = new google.maps.places.Autocomplete(addresSearch);
     </script>
 </body>
 

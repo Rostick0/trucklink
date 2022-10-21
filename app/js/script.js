@@ -30,7 +30,9 @@ if (select) {
             }
         })
 
-        elem.onclick = () => {
+        elem.onclick = e => {
+            if (e.target.tagName === 'LABEL') return;
+
             elem.classList.toggle('_active');
         }
     })

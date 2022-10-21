@@ -6,6 +6,9 @@ switch ($uri_short) {
     case '/api':
         $path_page = './api/index.php';
         break;
+    case '/socket':
+        $path_page = './socket/index.php';
+        break;
     case '/registration':
         $path_page .= '/registration.php';
         break;
@@ -30,5 +33,3 @@ if (!file_exists($path_page)) {
 }
 
 require_once $path_page;
-
-?>

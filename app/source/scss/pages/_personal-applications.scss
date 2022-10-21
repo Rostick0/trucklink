@@ -1,7 +1,8 @@
 .personal-applications {
     background: url('../img/application-background2.png');
-    background-position: top;
+    background-position: top center;
     background-repeat: no-repeat;
+    background-size: cover;
 
     .personal-applications__main_container {
         display: flex;
