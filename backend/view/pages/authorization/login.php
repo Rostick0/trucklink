@@ -15,14 +15,14 @@ if (isset($button_log)) {
 <html lang="ru">
 
 <head>
-    <? require_once __DIR__ . './../components/meta.php' ?>
-    <? require_once __DIR__ . './../components/style.php' ?>
+    <? require_once __DIR__ . './../../components/meta.php' ?>
+    <? require_once __DIR__ . './../../components/style.php' ?>
     <title>Вход</title>
 </head>
 
 <body>
     <div class="wrapper registration">
-        <? require_once __DIR__ . './../components/header.php'; ?>
+        <? require_once __DIR__ . './../../components/header.php'; ?>
         <main class="main">
             <div class="container">
                 <div class="registration__main">
@@ -88,9 +88,9 @@ if (isset($button_log)) {
                 </div>
             </div>
         </main>
-        <? require_once __DIR__ . './../components/footer.php'; ?>
+        <? require_once __DIR__ . './../../components/footer.php'; ?>
     </div>
-    <? require_once __DIR__ . './../components/script.php'; ?>
+    <? require_once __DIR__ . './../../components/script.php'; ?>
 </body>
 
 </html>

@@ -29,10 +29,6 @@
     }
 
     .application-info__link {
-        @extend .application-info__flex;
-
-        text-decoration: underline;
-
         margin-top: 4rem;
     }
 

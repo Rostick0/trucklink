@@ -13,3 +13,27 @@
 ._red {
     color: rgb(138, 29, 29);
 }
+
+.back-office__link {
+    color: #fff;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    column-gap: 0.4375rem;
+
+    text-decoration: underline;
+
+    span {
+        color: inherit;
+    }
+
+    &._red {
+        color: #DA4242;
+    }
+
+    &:hover {
+        text-decoration: none;
+    }
+}

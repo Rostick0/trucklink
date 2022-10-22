@@ -10,16 +10,19 @@ switch ($uri_short) {
         $path_page = './socket/index.php';
         break;
     case '/registration':
-        $path_page .= '/registration.php';
+        $path_page .= '/authorization/registration.php';
         break;
     case '/login':
-        $path_page .= '/login.php';
+        $path_page .= '/authorization/login.php';
         break;
     case '/create':
         $path_page .= '/create/create.php';
         break;
     case '/profile':
-        $path_page .= '/profile.php';
+        $path_page .= '/profile/profile.php';
+        break;
+    case '/profile_info':
+        $path_page .= '/profile/profile_info.php';
         break;
     case '/application':
         $path_page .= '/application.php';

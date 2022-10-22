@@ -264,7 +264,7 @@ $applications = Application::get($application_sql);
                                             <span>
                                                 $<?= NormalizeView::price($application['price']) ?>
                                             </span>
-                                            <a class="application__payment_link button">
+                                            <a class="application__payment_link button" href="/application?id=<?= $application['application_id'] ?>">
                                                 Подробнее
                                             </a>
                                         </div>
