@@ -1,1 +1,1 @@
-"use strict";
+"use strict";var inputPhoto,inputBlockFileContentText,inputBlockFile=document.querySelector(".input__block_file");inputBlockFile&&(inputPhoto=inputBlockFile.querySelector("#photo"),inputBlockFileContentText=inputBlockFile.querySelector(".input__block_file_content_text"),inputPhoto.onchange=function(){inputPhoto.files[0]&&(inputPhoto.files[0],inputBlockFileContentText.textContent="Ваш файл загружен",inputPhoto.title="Вы можете заново загрузить файл")});

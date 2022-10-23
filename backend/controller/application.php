@@ -73,20 +73,22 @@ class ApplicationController {
         header('Location: ./create?page=2');
     }
 
-    public static function thirdCreate($body_type, $loading_method,  $size, $height, $mass, $price) {
-        global $db;
+    public static function thirdCreate($loading_method,  $size, $height, $photo, $mass, $price, $comment) {
+        global $ALLOWED_IMAGE_TYPES, $db;
 
-        $body_type = (int) $body_type;
         $loading_method = (int) $loading_method;
         $size = (int) $size;
         $height = (int) $height;
         $mass = (float) $mass;
         $price = (float) $price;
+        $comment = protectedData($comment);
 
         $errors = [];
 
-        if (!$price) {
-            $errors['price'] = "Не указана стоимость";
+        if (!empty($photo) && !array_search($photo['type'], $ALLOWED_IMAGE_TYPES)) {
+            $errors['photo'] = 'Не поддерживается формат фотографии';
+        } else {
+            $photo = ImageController::uploadImage($photo);
         }
 
         if (!empty($errors)) {
@@ -105,16 +107,16 @@ class ApplicationController {
         $telephone = $_SESSION['application']['telephone'];
         $email = $_SESSION['application']['email'];
 
-        $query = Application::create($from, $to, $date, $transport_type, $fullname, $telephone, $email, $user_id, $body_type, $loading_method, $size, $height, $mass, $price);
+        $query = Application::create($from, $to, $date, $transport_type, $fullname, $telephone, $email, $user_id, $loading_method, $size, $height, $photo, $mass, $price, $comment);
 
         if ($query) {
             header('Location: ./create?page=3');
         }
     }
 
-    public static function create($from, $to, $date, $type_transport, $user_fullname, $user_telephone, $user_email, $user_id, $body_type, $loading_method,  $size, $height, $mass, $price) {
-        return Application::create($from, $to, $date, $type_transport, $user_fullname, $user_telephone, $user_email, $user_id, $body_type, $loading_method,  $size, $height, $mass, $price);
-    }
+    // public static function create($from, $to, $date, $type_transport, $user_fullname, $user_telephone, $user_email, $user_id, $body_type, $loading_method,  $size, $height, $mass, $price) {
+    //     return Application::create($from, $to, $date, $type_transport, $user_fullname, $user_telephone, $user_email, $user_id, $body_type, $loading_method,  $size, $height, $mass, $price);
+    // }
 
     public static function httpDelete($application_id, $user_id) {
         $error = '';

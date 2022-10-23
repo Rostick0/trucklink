@@ -8,6 +8,8 @@ require_once './global/functions.php';
 require_once './global/vars.php';
 require_once './global/normalize_view.php';
 
+require_once './controller/image.php';
+
 require_once './controller/email.php';
 
 require_once './model/user_session.php';

@@ -56,7 +56,9 @@ if (!$user) {
                         </a>
                     </div>
                     <div class="profile-info__card card">
-                        <div class="card__title"></div>
+                        <div class="card__title">
+                            Profile card
+                        </div>
                         <ul class="card__list">
                             <li class="card__item">
                                 <svg width="1.25rem" height="2rem" viewBox="0 0 20 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -103,6 +105,19 @@ if (!$user) {
                         <ul class="card__list">
                             
                         </ul>
+                        <div class="card__user">
+                            <div class="card__avatar">
+                                <img src="./view/static/img/no-avatar.png" alt="">
+                            </div>
+                            <div class="card__user_text">
+                                <a class="card__phone" tel="">
+                                    +1 (812) 900-94-20
+                                </a>
+                                <a class="card__email">
+                                    uncle.barber.spb@gmail.com
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

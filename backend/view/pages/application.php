@@ -27,7 +27,7 @@ if (!$application_id) {
         <main class="main">
             <div class="container">
                 <div class="application-info__main_container">
-                    <? if ($user): ?>
+                    <? if ($user) : ?>
                         <section class="user-info">
                             <? require_once __DIR__ . './../components/profile_avatar.php'; ?>
                             <div class="user-info__user section-title">
@@ -101,7 +101,7 @@ if (!$application_id) {
                                 <?= $application['transport_type'] ?>
                             </div>
                         </li>
-                        <? if ($application['loading_method']): ?>
+                        <? if ($application['loading_method']) : ?>
                             <li class="info__item">
                                 <div class="info__title">
                                     Вид загрузки
@@ -125,17 +125,17 @@ if (!$application_id) {
                             </div>
                             <div class="info__value">
                                 <div class="info__flex">
-                                    <? if ($application['size']): ?>
+                                    <? if ($application['size']) : ?>
                                         <span>
                                             размера палета: <?= $application['size'] ?> <sup>м2</sup>
                                         </span>
                                     <? endif ?>
-                                    <? if ($application['mass']): ?>
+                                    <? if ($application['mass']) : ?>
                                         <span>
                                             масса: <?= $application['mass'] ?> <sup>т</sup>
                                         </span>
                                     <? endif ?>
-                                    <? if ($application['height']): ?>
+                                    <? if ($application['height']) : ?>
                                         <span>
                                             высота: <?= $application['height'] ?> <sup>м</sup>
                                         </span>
@@ -143,16 +143,18 @@ if (!$application_id) {
                                 </div>
                             </div>
                         </li>
-                        <li class="info__item">
-                            <div class="info__title">
-                                Комментарий
-                            </div>
-                            <div class="info__value">
-                                Срочная заявка, готов выдвинутся прямо сейчас в любом направлении
-                            </div>
-                        </li>
+                        <? if ($application['comment']) : ?>
+                            <li class="info__item">
+                                <div class="info__title">
+                                    Комментарий
+                                </div>
+                                <div class="info__value">
+                                    <?= $application['comment'] ?>
+                                </div>
+                            </li>
+                        <? endif ?>
                     </section>
-                    <? if ($_SESSION['user']['user_id'] == 1): ?>
+                    <? if ($_SESSION['user']['user_id'] == $user['user_id']) : ?>
                         <div class="application-info__interaction">
                             <div class="application-info__interaction_top">
                                 <div class="application-info__flex">

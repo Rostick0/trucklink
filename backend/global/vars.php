@@ -8,3 +8,13 @@ $MONTHS = [
 ];
 
 $EMAIL = 'support@cm31563.tmweb.ru';
+
+$PATH_UPLOAD = './view/upload/';
+
+$ALLOWED_IMAGE_TYPES = [
+    'image/png',
+    'image/jpeg',
+    'image/webp'
+];
+
+?>

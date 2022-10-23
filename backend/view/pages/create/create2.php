@@ -5,17 +5,18 @@ $loading_method_db = getDbDate('loading_method');
 $size_db = getDbDate('size');
 $height_db = getDbDate('height');
 
-$body_type = $_REQUEST['body_type'];
 $loading_method = $_REQUEST['loading_method'];
 $size = $_REQUEST['size'];
 $height = $_REQUEST['height'];
+$photo = $_FILES['photo'];
 $mass = $_REQUEST['mass'];
 $price = $_REQUEST['price'];
+$comment = $_REQUEST['comment'];
 
 $button_create = $_REQUEST['button_create'];
 
 if (isset($button_create)) {
-    $query = ApplicationController::thirdCreate($body_type, $loading_method, $size, $height, $mass, $price);
+    $query = ApplicationController::thirdCreate($loading_method,  $size, $height, $photo, $mass, $price, $comment);
 }
 
 ?>
@@ -63,32 +64,7 @@ if (isset($button_create)) {
                     <div class="applicaton-create__subtitle section-subtitle">
                         Дополнительная информация
                     </div>
-                    <form class="applicaton-create__form" method="POST">
-                        <div class="select">
-                            <div class="select__title">
-                                Тип кузова:
-                            </div>
-                            <div class="select__content">
-                                <div class="select-block">
-                                    <input class="select__input" type="text" placeholder="Выберите тип кузова">
-                                    <div class="select-icon">
-                                        <svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.742422 0.276188C0.374922 0.632552 0.374922 1.2071 0.742422 1.56346L6.97492 7.6071C7.26742 7.89073 7.73992 7.89073 8.03242 7.6071L14.2649 1.56346C14.6324 1.2071 14.6324 0.632551 14.2649 0.276187C13.8974 -0.0801763 13.3049 -0.0801762 12.9374 0.276187L7.49992 5.54164L2.06242 0.268916C1.70242 -0.0801745 1.10242 -0.0801757 0.742422 0.276188Z" fill="#6E7B8B" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <ul class="select__options">
-                                    <? foreach ($body_type_db as $value) : ?>
-                                        <li class="select__option">
-                                            <label for="<?= "body_type_" . $value['body_type_id'] ?>">
-                                                <?= $value['name'] ?>
-                                            </label>
-                                            <input type="radio" name="body_type" id="<?= "body_type_" . $value['body_type_id'] ?>" value="<?= $value['body_type_id'] ?>" hidden>
-                                        </li>
-                                    <? endforeach ?>
-                                </ul>
-                            </div>
-                        </div>
+                    <form class="applicaton-create__form" method="POST" enctype="multipart/form-data">
                         <div class="select">
                             <div class="select__title">
                                 Метод загрузки:
@@ -164,27 +140,44 @@ if (isset($button_create)) {
                                 </ul>
                             </div>
                         </div>
+                        <label class="input__block input__block_file" for="photo">
+                            <div class="input__title">
+                                Фото груза:
+                            </div>
+                            <div class="input__block_file_content input <?= $query['data']['photo'] ? ' _error' : null ?>">
+                                <svg class="input__block_file_icon" width="1.5rem" height="1.5rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12.06 17.25C11.65 17.25 11.31 16.91 11.31 16.5V11.5C11.31 11.09 11.65 10.75 12.06 10.75C12.47 10.75 12.81 11.09 12.81 11.5V16.5C12.81 16.91 12.47 17.25 12.06 17.25Z" fill="#7F858E" />
+                                    <path d="M14.5 14.75H9.5C9.09 14.75 8.75 14.41 8.75 14C8.75 13.59 9.09 13.25 9.5 13.25H14.5C14.91 13.25 15.25 13.59 15.25 14C15.25 14.41 14.91 14.75 14.5 14.75Z" fill="#7F858E" />
+                                    <path d="M17 22.75H7C2.59 22.75 1.25 21.41 1.25 17V7C1.25 2.59 2.59 1.25 7 1.25H8.5C10.25 1.25 10.8 1.82 11.5 2.75L13 4.75C13.33 5.19 13.38 5.25 14 5.25H17C21.41 5.25 22.75 6.59 22.75 11V17C22.75 21.41 21.41 22.75 17 22.75ZM7 2.75C3.43 2.75 2.75 3.43 2.75 7V17C2.75 20.57 3.43 21.25 7 21.25H17C20.57 21.25 21.25 20.57 21.25 17V11C21.25 7.43 20.57 6.75 17 6.75H14C12.72 6.75 12.3 6.31 11.8 5.65L10.3 3.65C9.78 2.96 9.63 2.75 8.5 2.75H7V2.75Z" fill="#7F858E" />
+                                </svg>
+                                <span class="input__block_file_content_text">
+                                    Нажмите, чтобы добавить
+                                </span>
+                            </div>
+                            <? if ($query['data']['photo']) : ?>
+                                <div class="_color-error">
+                                    <?= $query['data']['photo'] ?>
+                                </div>
+                            <? endif; ?>
+                            <input type="file" accept="<?= implode(',', $ALLOWED_IMAGE_TYPES) ?>" id="photo" name="photo" hidden>
+                        </label>
                         <div class="input__block">
                             <label class="input__title" for="mass">
                                 Общая масса груза:
                             </label>
-                            <input class="input<?= $query['data']['mass'] ? ' _error' : null ?>" type="number" id="mass" placeholder="Введите массу груза">
-                            <? if ($query['data']['mass']) : ?>
-                                <div class="_color-error">
-                                    <?= $query['data']['mass'] ?>
-                                </div>
-                            <? endif; ?>
+                            <input class="input" type="number" id="mass" placeholder="Введите массу груза">
                         </div>
                         <div class="input__block">
                             <label class="input__title" for="amount">
                                 Стоимость:
                             </label>
-                            <input class="input<?= $query['data']['price'] ? ' _error' : null ?>" type="number" id="amount" placeholder="Введите стоимость" name="price">
-                            <? if ($query['data']['price']) : ?>
-                                <div class="_color-error">
-                                    <?= $query['data']['price'] ?>
-                                </div>
-                            <? endif; ?>
+                            <input class="input" type="number" id="amount" placeholder="Введите стоимость" name="price">
+                        </div>
+                        <div class="input__block input__block_comment">
+                            <label class="input__title" for="comment">
+                                Комментарий:
+                            </label>
+                            <input class="input" type="text" id="comment" placeholder="Введите ваш комментарий касательно груза" name="comment">
                         </div>
                         <button class="applicaton-create__form_create button" name="button_create">
                             Отправить
@@ -196,6 +189,7 @@ if (isset($button_create)) {
         <? require_once __DIR__ . './../../components/footer.php'; ?>
     </div>
     <? require_once __DIR__ . './../../components/script.php'; ?>
+    <script src="/view/static/js/application.js" defer></script>
 </body>
 
 </html>

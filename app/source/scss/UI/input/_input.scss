@@ -42,6 +42,26 @@
     }
 }
 
+.input__block_comment {
+    grid-column: 1/4;
+    
+    .input__title {
+        text-align: center;
+    }
+}
+
+.input__block_file {
+    position: relative;
+
+    .input__block_file_content {
+        color: rgba(255, 255, 255, 0.4);
+
+        display: flex;
+        align-items: center;
+        column-gap: 0.875rem;
+    }
+}
+
 td {
     .input__block {
         position: relative;
@@ -53,6 +73,16 @@ td {
 
             position: absolute;
             bottom: -0.5rem;
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .input__block_comment {
+        grid-column: 1;
+        
+        .input__title {
+            text-align: left;
         }
     }
 }

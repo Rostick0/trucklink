@@ -293,14 +293,22 @@
         }
 
         .input-block__item {
+            border-radius: 0.5rem;
+
+            display: flex;
+            flex-wrap: wrap;
+
+            overflow: hidden;
+
             td:first-child {
                 .input-block__input {
                     border-radius: 0;
                 }
             }
 
-            td:first-child,
-            td:nth-child(2) {
+            td {
+                flex: 1 0 100%;
+
                 .input-block__content::before {
                     background: rgba(100, 26, 36, .1);
 
@@ -314,18 +322,11 @@
 
                     z-index: 1;
                 }
+
+                .input-block__content::after {
+                    content: none;
+                }
             }
-
-            td {
-                flex: 1 0 40%;
-            }
-
-            border-radius: 0.5rem;
-
-            display: flex;
-            flex-wrap: wrap;
-
-            overflow: hidden;
         }
 
         .header__button {
