@@ -1,0 +1,128 @@
+.chat {
+    .chat__main_container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .chat__block {
+        background: #17212B;
+
+        border-radius: 0.5rem;
+
+        padding: 0.75rem 1rem 1.5rem;
+        margin-top: 5rem;
+
+        width: 100%;
+        max-width: 58.75rem;
+    }
+
+    .chat__user-image {
+        display: flex;
+        flex-shrink: 0;
+
+        img {
+            border-radius: 50%;
+
+            width: 3.25rem;
+            height: 3.25rem;
+        }
+    }
+
+    .chat__block_top {
+        display: flex;
+        align-items: center;
+        column-gap: 0.875rem;
+
+        margin-bottom: 0.875rem;
+    }
+
+    .chat__block_top_text {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .chat__user-status {
+        color: #AFAFAF;
+
+        ._online {
+            color: #00CC66;
+        }
+    }
+
+    .chat__messages {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-end;
+        flex-direction: column;
+
+        padding: 2.75rem 0;
+
+        overflow-y: auto;
+
+        min-height: 30rem;
+    }
+
+    .chat__date {
+        color: #A6A6A6;
+
+        font-size: 1.125rem;
+        font-weight: 500;
+
+        margin: 0 auto 2.12rem;
+    }
+
+    .chat__message {
+        background: #16324F;
+
+        border: 1px solid rgba(35, 35, 35, 0.02);
+        border-radius: 0.5rem 1.25rem 1.25rem 0.5rem;
+
+        box-shadow: 0 2px 5px rgba(35, 35, 35, 0.05);
+
+        display: inline-block;
+
+        padding: 0.75rem 1rem;
+
+        &._from-me {
+            background: #2168AE;
+
+            border-radius: 1.25rem 0.5rem 0.5rem 1.25rem;
+            
+            margin-left: auto;
+        }
+    }
+
+    .chat__content_bottom {
+        display: flex;
+        align-items: flex-start;
+
+        position: relative;
+    }
+
+    .chat__textarea {
+        font-size: 1.125rem;
+
+        padding: 1.125rem 0.93rem;
+        padding-right: 4rem;
+
+        &._height-important {
+            height: 3.75rem !important;
+        }
+    }
+
+    .chat__send {
+        border-radius: 50%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        position: absolute;
+        top: 0.625rem;
+        right: 0.93rem;
+
+        width: 2.375rem;
+        height: 2.375rem;
+    }
+}

@@ -155,7 +155,7 @@ if (!$application_id) {
                         <? endif ?>
                     </section>
                     <? if ($_SESSION['user']['user_id'] == $user['user_id']) : ?>
-                        <div class="application-info__interaction">
+                        <section class="application-info__interaction">
                             <div class="application-info__interaction_top">
                                 <div class="application-info__flex">
                                     <svg width="1.19rem" height="1.19rem" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -214,7 +214,7 @@ if (!$application_id) {
                                     </span>
                                 </div>
                             </div>
-                        </div>
+                        </section>
                     <? endif; ?>
                 </div>
             </div>

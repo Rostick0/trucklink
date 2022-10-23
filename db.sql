@@ -10,12 +10,13 @@ CREATE TABLE `application` (
   `user_telephone` int(30) DEFAULT NULL,
   `user_email` varchar(60) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `body_type` int(11) DEFAULT NULL,
   `loading_method` int(11) DEFAULT NULL,
   `size` int(11) DEFAULT NULL,
   `height` int(11) DEFAULT NULL,
+  `photo` varchar(255) DEFAULT NULL,
   `mass` float DEFAULT NULL,
-  `price` float NOT NULL,
+  `price` float DEFAULT NULL,
+  `comment` text,
   `is_deleted` tinyint(1) NOT NULL DEFAULT '0'
 );
 
@@ -23,19 +24,9 @@ CREATE TABLE `application` (
 -- Дамп данных таблицы `application`
 --
 
-INSERT INTO `application` (`application_id`, `from`, `to`, `date`, `date_created`, `date_edited`, `transport_type`, `user_fullname`, `user_telephone`, `user_email`, `user_id`, `body_type`, `loading_method`, `size`, `height`, `mass`, `price`, `is_deleted`) VALUES
-(1, 'Россия', 'Россия', '2022-10-20', '2022-10-21 13:06:37', '2022-10-21 13:06:37', 'Тяжелая', 'Ростислав Фамилия', 79999999, 'rostik057@gmail.com', 1, NULL, NULL, NULL, NULL, NULL, 3221, 0);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `body_type`
---
-
-CREATE TABLE `body_type` (
-  `body_type_id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL
-);
+INSERT INTO `application` (`application_id`, `from`, `to`, `date`, `date_created`, `date_edited`, `transport_type`, `user_fullname`, `user_telephone`, `user_email`, `user_id`, `loading_method`, `size`, `height`, `photo`, `mass`, `price`, `comment`, `is_deleted`) VALUES
+(1, 'Россия', 'Россия', '2022-10-20', '2022-10-21 13:06:37', '2022-10-21 13:06:37', 'Тяжелая', 'Ростислав Фамилия', 79999999, 'rostik057@gmail.com', 1, NULL, NULL, NULL, NULL, NULL, 3221, NULL, 0),
+(2, 'Россия', 'Россия', '2022-10-07', '2022-10-23 12:26:36', '2022-10-23 12:26:36', 'Легковой автомобиль', 'Ростислав Фамилия', 79999999, 'rostik057@gmail.com', 1, NULL, NULL, NULL, '16665171969845.jpeg', NULL, NULL, 'Срочный заказ', 0);
 
 -- --------------------------------------------------------
 
@@ -75,9 +66,9 @@ CREATE TABLE `size` (
 --
 
 INSERT INTO `size` (`size_id`, `name`) VALUES
-(1, 'Small straight'),
-(2, 'Large Straight'),
-(3, 'Cargo Van');
+(1, '1'),
+(2, '3'),
+(3, '5');
 
 -- --------------------------------------------------------
 
@@ -92,6 +83,7 @@ CREATE TABLE `user` (
   `password` varchar(131) NOT NULL,
   `name` varchar(63) NOT NULL,
   `surname` varchar(63) NOT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
   `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_type_id` int(11) NOT NULL DEFAULT '1',
   `last_online` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -103,9 +95,9 @@ CREATE TABLE `user` (
 -- Дамп данных таблицы `user`
 --
 
-INSERT INTO `user` (`user_id`, `email`, `telephone`, `password`, `name`, `surname`, `created`, `user_type_id`, `last_online`, `is_online`, `is_banned`) VALUES
-(1, 'rostik057@gmail.com', '79999999', '$2y$10$bsQTdXVTQ0Q46j8ljpKPXOfluHPuF3pXoS.BudiL0voc2GEX6SdqS', 'Ростислав', 'Фамилия', '2022-10-15 22:27:42', 1, '2022-10-15 22:27:42', 1, 0),
-(2, 'zajcevav30@gmail.com', '79999999999', '$2y$10$HPWufvrFTHNVH.iqJm3wb.p1KIgQK9Bx1RN2B0MrkpyBy3RestyTy', 'zajcevav301', 'zajcevav301', '2022-10-17 16:00:48', 1, '2022-10-17 16:00:48', 1, 0);
+INSERT INTO `user` (`user_id`, `email`, `telephone`, `password`, `name`, `surname`, `avatar`, `created`, `user_type_id`, `last_online`, `is_online`, `is_banned`) VALUES
+(1, 'rostik057@gmail.com', '79999999', '$2y$10$bsQTdXVTQ0Q46j8ljpKPXOfluHPuF3pXoS.BudiL0voc2GEX6SdqS', 'Ростислав', 'Фамилия', NULL, '2022-10-15 22:27:42', 1, '2022-10-15 22:27:42', 1, 0),
+(2, 'zajcevav30@gmail.com', '79999999999', '$2y$10$HPWufvrFTHNVH.iqJm3wb.p1KIgQK9Bx1RN2B0MrkpyBy3RestyTy', 'zajcevav301', 'zajcevav301', NULL, '2022-10-17 16:00:48', 1, '2022-10-17 16:00:48', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -182,7 +174,7 @@ ALTER TABLE `user_session`
 -- AUTO_INCREMENT для таблицы `application`
 --
 ALTER TABLE `application`
-  MODIFY `application_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `application_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `body_type`
