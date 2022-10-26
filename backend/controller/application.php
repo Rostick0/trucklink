@@ -85,7 +85,7 @@ class ApplicationController {
 
         $errors = [];
 
-        if (!empty($photo) && !array_search($photo['type'], $ALLOWED_IMAGE_TYPES)) {
+        if (!empty($photo['name']) && !array_search($photo['type'], $ALLOWED_IMAGE_TYPES)) {
             $errors['photo'] = 'Не поддерживается формат фотографии';
         } else {
             $photo = ImageController::uploadImage($photo);

@@ -1,2 +1,2 @@
-<!-- <script src="//maps.googleapis.com/maps/api/js?key=api_key&libraries=places&callback=initMap"></script> -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAo_FkCsKwfbxhVNweaqqJ8eQGHucub5Gs&libraries=places"></script>
 <script src="/view/static/js/script.js" defer></script>

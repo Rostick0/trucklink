@@ -1,3 +1,9 @@
+const BACKEND_URL_API = 'http://backend/api';
+
+const params = new Proxy(new URLSearchParams(window.location.search), {
+    get: (searchParams, prop) => searchParams.get(prop),
+  });
+
 const blockPassowrd = document.querySelectorAll('.block__password');
 
 if (blockPassowrd) {
@@ -391,7 +397,30 @@ class Calendar {
 const calendarFirst = document.querySelector('.calendar');
 const calendarFromActive = document.querySelector('.calendar-from__active');
 
+
 if (calendarFirst) {
     const calendarStart = new Calendar(calendarFirst, calendarFromActive);
     calendarStart.start();
+}
+
+function googleSearch(input, inputChecked) {
+    const autocomplete = new google.maps.places.Autocomplete(input);
+    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        const place = autocomplete.getPlace();
+        inputChecked.value = place.name;
+    });
+}
+
+const addresSearchFromText = document.querySelector('.addres-search._from_text');
+const addresSearchFrom = document.querySelector('.addres-search._from');
+
+if (addresSearchFromText && addresSearchFrom) {
+    google.maps.event.addDomListener(window, 'load', googleSearch(addresSearchFromText, addresSearchFrom));   
+}
+
+const addresSearchToText = document.querySelector('.addres-search._to_text');
+const addresSearchTo = document.querySelector('.addres-search._to');
+
+if (addresSearchToText && addresSearchTo) {
+    google.maps.event.addDomListener(window, 'load', googleSearch(addresSearchToText, addresSearchTo));   
 }

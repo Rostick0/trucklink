@@ -99,7 +99,7 @@ $applications = Application::get($application_sql);
                                     </td>
                                     <td>
                                         <div class="application__transport">
-                                            <?= $application['transport_type'] ?>
+                                            <?= getDbDate('transport_type', 'transport_type_id', $application['transport_type'])->fetch_assoc()['name'] ?>
                                         </div>
                                     </td>
                                     <td>

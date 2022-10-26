@@ -73,7 +73,8 @@ if (isset($button_save)) {
                                 <svg width="1.125rem" height="1.125rem" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M2.25 8.25L16.5 1.5L9.75 15.75L8.25 9.75L2.25 8.25Z" stroke="#7F858E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
-                                <input class="input<?= $query['data']['from'] ? ' _error' : null ?>" type="text" id="from" name="from" placeholder="Введите город отправки" value="<?= $application['from'] ?>">
+                                <input class="input addres-search _from_text<?= $query['data']['from'] ? ' _error' : null ?>" type="text" id="from" placeholder="Введите город отправки" value="<?= $application['from'] ?>">
+                                <input class="input addres-search _from" type="text" name="from" hidden>
                             </div>
                             <? if ($query['data']['from']) : ?>
                                 <div class="_color-error">
@@ -89,7 +90,8 @@ if (isset($button_save)) {
                                 <svg width="1.125rem" height="1.125rem" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M2.25 8.25L16.5 1.5L9.75 15.75L8.25 9.75L2.25 8.25Z" stroke="#7F858E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
-                                <input class="input<?= $query['data']['to'] ? ' _error' : null ?>" type="text" id="to" name="to" placeholder="Введите город доставки" value="<?= $application['to'] ?>">
+                                <input class="input addres-search _to_text<?= $query['data']['to'] ? ' _error' : null ?>" type="text" id="to" placeholder="Введите город доставки" value="<?= $application['to'] ?>">
+                                <input class="input addres-search _to" type="text" name="to" hidden>
                             </div>
                             <? if ($query['data']['to']) : ?>
                                 <div class="_color-error">

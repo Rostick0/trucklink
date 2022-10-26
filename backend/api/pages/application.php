@@ -26,6 +26,7 @@ switch ($http_method) {
             'loading_method' => $loading_method,
             'size' => $size,
             'height' => $height,
+            'is_deleted' => 0
         ];
         
         $params_more = [

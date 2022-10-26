@@ -132,7 +132,8 @@ $transport_type_db = getDbDate('transport_type');
                                                         </g>
                                                         <defs>
                                                     </svg>
-                                                    <input class="input-block__input addres-search" type="text" placeholder="Откуда" name="from" value="<?= $from ?>">
+                                                    <input class="input-block__input addres-search _from_text" type="text" placeholder="Откуда" value="<?= $from ?>">
+                                                    <input class="input-block__input addres-search _from" type="text" name="from" hidden>
                                                 </div>
                                                 <? if ($query['data']['from']) : ?>
                                                     <div class="_color-error">
@@ -150,7 +151,8 @@ $transport_type_db = getDbDate('transport_type');
                                                         </g>
                                                         <defs>
                                                     </svg>
-                                                    <input class="input-block__input" type="text" placeholder="Куда" name="to" value=<?= $to ?>>
+                                                    <input class="input-block__input addres-search _to_text" type="text" placeholder="Куда" value="<?= $to ?>">
+                                                    <input class="input-block__input addres-search _to" type="text" name="to" hidden>
                                                 </div>
                                                 <? if ($query['data']['to']) : ?>
                                                     <div class="_color-error">
@@ -353,7 +355,7 @@ $transport_type_db = getDbDate('transport_type');
                                     </td>
                                     <td>
                                         <div class="application__transport">
-                                            <?= $application['transport_type'] ?>
+                                            <?= getDbDate('transport_type', 'transport_type_id', $application['transport_type'])->fetch_assoc()['name'] ?>
                                         </div>
                                     </td>
                                     <td class="application__payment_td">

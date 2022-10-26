@@ -6,7 +6,7 @@ $application = getDbDate('application', 'application_id', $application_id)->fetc
 
 $user = getDbDate('user', 'user_id', $application['user_id'])->fetch_assoc();
 
-if (!$application_id) {
+if (!$application) {
     header('Location: /');
 }
 
@@ -157,7 +157,7 @@ if (!$application_id) {
                     <? if ($_SESSION['user']['user_id'] == $user['user_id']) : ?>
                         <section class="application-info__interaction">
                             <div class="application-info__interaction_top">
-                                <div class="application-info__flex">
+                                <a class="application-info__flex" href="/application_edit?id=<?= $application_id ?>">
                                     <svg width="1.19rem" height="1.19rem" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M4.38582 15.4531C3.90291 15.4531 3.45166 15.2869 3.12707 14.9781C2.71541 14.5902 2.51749 14.0044 2.58874 13.3711L2.88166 10.8061C2.93707 10.3231 3.22999 9.6819 3.57041 9.33356L10.07 2.45398C11.6929 0.736065 13.3871 0.688565 15.105 2.31148C16.8229 3.9344 16.8704 5.62856 15.2475 7.34648L8.74791 14.2261C8.41541 14.5823 7.79791 14.9148 7.31499 14.994L4.76582 15.4294C4.63124 15.4373 4.51249 15.4531 4.38582 15.4531ZM12.6112 2.30357C12.0017 2.30357 11.4712 2.68357 10.9329 3.25357L4.43332 10.1411C4.27499 10.3073 4.09291 10.7031 4.06124 10.9327L3.76832 13.4977C3.73666 13.759 3.79999 13.9727 3.94249 14.1073C4.08499 14.2419 4.29874 14.2894 4.55999 14.2498L7.10916 13.8144C7.33874 13.7748 7.71874 13.569 7.87707 13.4027L14.3767 6.52315C15.3583 5.47815 15.7146 4.51232 14.2817 3.16648C13.6483 2.5569 13.1021 2.30357 12.6112 2.30357Z" fill="white" />
                                         <path d="M13.7275 8.66932C13.7117 8.66932 13.6879 8.66932 13.6721 8.66932C11.2021 8.42391 9.21502 6.54766 8.83502 4.09349C8.78752 3.76891 9.00919 3.46807 9.33377 3.41266C9.65835 3.36516 9.95919 3.58682 10.0146 3.91141C10.3154 5.82724 11.8671 7.29974 13.7988 7.48974C14.1234 7.52141 14.3609 7.81432 14.3292 8.13891C14.2896 8.43974 14.0284 8.66932 13.7275 8.66932Z" fill="white" />
@@ -166,7 +166,7 @@ if (!$application_id) {
                                     <span>
                                         Edit
                                     </span>
-                                </div>
+                                </a>
                                 <div class="application-info__buttons application__buttons">
                                     <a class="personal-applications_create button" href="/pages/">
                                         <svg width="1.56rem" height="1.5rem" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -189,7 +189,7 @@ if (!$application_id) {
                                         </span>
                                     </a>
                                 </div>
-                                <div class="application-info__flex _red">
+                                <div class="application-info__flex _red _application-delete">
                                     <svg width="1.25rem" height="1.25rem" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M9.87492 18.4271C5.18034 18.4271 1.3645 14.6112 1.3645 9.91667C1.3645 5.22208 5.18034 1.40625 9.87492 1.40625C14.5695 1.40625 18.3853 5.22208 18.3853 9.91667C18.3853 14.6112 14.5695 18.4271 9.87492 18.4271ZM9.87492 2.59375C5.83742 2.59375 2.552 5.87917 2.552 9.91667C2.552 13.9542 5.83742 17.2396 9.87492 17.2396C13.9124 17.2396 17.1978 13.9542 17.1978 9.91667C17.1978 5.87917 13.9124 2.59375 9.87492 2.59375Z" fill="#DA4242" />
                                         <path d="M7.6345 12.7503C7.48408 12.7503 7.33366 12.6949 7.21491 12.5762C6.98533 12.3466 6.98533 11.9666 7.21491 11.737L11.6957 7.25617C11.9253 7.02659 12.3053 7.02659 12.5349 7.25617C12.7645 7.48576 12.7645 7.86575 12.5349 8.09534L8.05408 12.5762C7.94324 12.6949 7.78491 12.7503 7.6345 12.7503Z" fill="#DA4242" />
@@ -222,6 +222,7 @@ if (!$application_id) {
         <? require_once __DIR__ . './../components/footer.php'; ?>
     </div>
     <? require_once __DIR__ . './../components/script.php'; ?>
+    <script src="/view/static/js/application.js" defer></script>
 </body>
 
 </html>
