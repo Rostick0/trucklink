@@ -129,9 +129,9 @@ class ApplicationController {
         $comment = protectedData($comment);
         $user_id = (int) $_SESSION['user']['user_id'];
 
-        if (!DateController::availableUntil($date_created, 3600)) {
-            $errors['from'] = "Истекло время изменения";
-        }
+        // if (!DateController::availableUntil($date_created, 3600)) {
+        //     $errors['from'] = "Истекло время изменения";
+        // }
 
         if (mb_strlen($from) < 2) {
             $errors['from'] = "Не указано откуда";
@@ -141,8 +141,10 @@ class ApplicationController {
             $errors['to'] = "Не указано куда";
         }
 
+        $photo_type = ImageController::getTypeImg($photo['type']);
+
         if (!empty($photo['tmp_name'])) {
-            if (!ImageController::checkTypePhoto($photo['type']) && empty($errors)) {
+            if (ImageController::checkTypePhoto($photo_type) && empty($errors)) {
                 $errors['photo'] = 'Не поддерживается формат фотографии';
             } else {
                 $photo = ImageController::updatePhoto($photo, $photo_old);

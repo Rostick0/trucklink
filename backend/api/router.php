@@ -6,6 +6,9 @@ switch ($uri_api_type) {
     case '/application':
         $path_page .= '/application.php';
         break;
+    case '/user_avatar':
+        $path_page .= '/user_avatar.php';
+        break;
     default:
         $path_page .= '/index.php';
 }

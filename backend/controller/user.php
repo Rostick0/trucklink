@@ -144,6 +144,35 @@ class UserController
         $_SESSION['user'] = $user;
         header("Location: /profile?id={$user['user_id']}");
     }
+
+    public static function updateAvatar($user_id, $avatar) {
+        global $PATH_UPLOAD;
+
+        if (!$user_id) die(messageError('Нет авторизации', 401));
+
+        if (!$avatar['tmp_name']) die(messageError('Не загружается фотография', 400));
+
+        $avatar_type = ImageController::getTypeImg($avatar['type']);
+
+        if (ImageController::checkTypePhoto($avatar_type)) die(messageError('Тип фотографии не поддерживается', 400));
+
+        $user = getDbDate('user', 'user_id', $user_id)->fetch_assoc();
+
+        if (!$user) die(messageError('Пользователя не существует', 404));
+
+        $avatar = ImageController::updatePhoto($avatar, $user['avatar']);
+
+        $query = User::updateAvatar($user_id, $avatar);
+
+        if ($query) {
+            $user = getDbDate('user', 'user_id', $user_id)->fetch_assoc();
+            $avatar_new = $user['avatar'];
+            
+            echo json_encode([
+                'avatar' => $PATH_UPLOAD . $avatar_new
+            ]);
+        }
+    }
 }
 
 ?>

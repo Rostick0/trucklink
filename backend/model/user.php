@@ -10,6 +10,12 @@ class User {
             return mysqli_insert_id($db);
         }
     }
+
+    public static function updateAvatar($user_id, $avatar) {
+        global $db;
+
+        return $db->query("UPDATE `user` SET `avatar`='$avatar' WHERE `user_id`='$user_id'");
+    }
 }
 
 ?>
