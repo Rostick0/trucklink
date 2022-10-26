@@ -4,7 +4,7 @@ class ApplicationController {
     public static function firstCreate($from, $to, $date, $transport_type) {
         $from = protectedData($from);
         $to = protectedData($to);
-        $date = protectedData($date);
+        $date = DateView::normalizeDateSql($date);
         $transport_type = protectedData($transport_type);
 
         $errors = [];
@@ -74,7 +74,7 @@ class ApplicationController {
     }
 
     public static function thirdCreate($loading_method,  $size, $height, $photo, $mass, $price, $comment) {
-        global $ALLOWED_IMAGE_TYPES, $db;
+        global $ALLOWED_IMAGE_TYPES;
 
         $loading_method = (int) $loading_method;
         $size = (int) $size;
@@ -112,6 +112,43 @@ class ApplicationController {
         if ($query) {
             header('Location: ./create?page=3');
         }
+    }
+
+    public static function edit($from, $to, $date, $transport_type, $loading_method, $size, $height, $photo, $mass, $price, $comment, $application_id, $date_created) {
+        $errors = [];
+
+        $from = protectedData($from);
+        $to = protectedData($to);
+        $date = DateView::normalizeDateSql($date);
+        $transport_type = (int) $transport_type;
+        $loading_method = (int) $loading_method;
+        $size = (int) $size;
+        $height = (int) $height;
+        $mass = (float) $mass;
+        $price = (float) $price;
+        $comment = protectedData($comment);
+        $user_id = (int) $_SESSION['user']['user_id'];
+
+        // if ($date_created) {
+        //     $errors['from'] = "Заявку больше нельзя изменить";
+        // }
+
+        if (mb_strlen($from) < 2) {
+            $errors['from'] = "Не указано откуда";
+        }
+
+        if (mb_strlen($to) < 2) {
+            $errors['to'] = "Не указано куда";
+        }
+
+        if (!empty($errors)) {
+            return [
+                'type' => 'error',
+                'data' => $errors
+            ];
+        }
+
+        Application::edit($from, $to, $date, $transport_type, $loading_method, $size, $height, $photo, $mass, $price, $comment, $application_id, $user_id);
     }
 
     // public static function create($from, $to, $date, $type_transport, $user_fullname, $user_telephone, $user_email, $user_id, $body_type, $loading_method,  $size, $height, $mass, $price) {

@@ -39,7 +39,7 @@
     .header__logo {
         position: absolute;
         left: 50%;
-        
+
         transform: translateX(-50%);
     }
 
@@ -167,6 +167,11 @@
         }
     }
 
+    .input-block__input {
+        border: none !important;
+        border-radius: 0;
+    }
+
     .input-block__title {
         margin-bottom: 1rem;
 
@@ -219,6 +224,13 @@
 
         position: relative;
 
+        .calendar {
+            svg {
+                position: static;
+                left: 0;
+            }
+        }
+
         svg {
             position: absolute;
             left: 1.75rem;
@@ -242,9 +254,15 @@
     .input-block__input {
         background: #fff;
 
+        color: #000;
+
         position: relative;
 
         height: 4.5rem;
+
+        &::placeholder {
+            color: #a1a3a7;
+        }
     }
 
     .input-block__input {
@@ -276,7 +294,7 @@
     .header {
         .header__logo {
             position: static;
-            
+
             transform: none;
         }
 

@@ -27,6 +27,9 @@ switch ($uri_short) {
     case '/application':
         $path_page .= '/application.php';
         break;
+    case '/application_edit':
+        $path_page .= '/edit/application_edit.php';
+        break;
     case '/chat':
         $path_page .= '/chat.php';
         break;

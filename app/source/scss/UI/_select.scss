@@ -54,12 +54,18 @@
     }
 
     .select__options {
+        border-radius: 0 0 0.5rem 0.5rem;
+
         display: none;
         flex-direction: column;
 
         position: absolute;
 
         width: 100%;
+
+        overflow: auto;
+
+        max-height: 16.7rem;
 
         z-index: 1;
     }
@@ -80,9 +86,9 @@
             background: #4A5764; 
         }
 
-        &:last-child {
-            border-radius: 0 0 0.5rem 0.5rem;
-        }
+        // &:last-child {
+        //     border-radius: 0 0 0.5rem 0.5rem;
+        // }
 
         & > * {
             padding: 1rem 0.75rem;

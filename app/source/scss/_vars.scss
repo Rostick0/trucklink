@@ -37,3 +37,19 @@
         text-decoration: none;
     }
 }
+
+.display-block {
+    display: block !important;
+}
+
+.d-block {
+    @extend .display-block;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.d-none {
+    display: none;
+}

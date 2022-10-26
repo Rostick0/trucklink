@@ -131,12 +131,6 @@ ALTER TABLE `application`
   ADD PRIMARY KEY (`application_id`);
 
 --
--- Индексы таблицы `body_type`
---
-ALTER TABLE `body_type`
-  ADD PRIMARY KEY (`body_type_id`);
-
---
 -- Индексы таблицы `height`
 --
 ALTER TABLE `height`
@@ -175,12 +169,6 @@ ALTER TABLE `user_session`
 --
 ALTER TABLE `application`
   MODIFY `application_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT для таблицы `body_type`
---
-ALTER TABLE `body_type`
-  MODIFY `body_type_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `height`

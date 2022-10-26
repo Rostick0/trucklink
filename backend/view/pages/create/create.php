@@ -8,6 +8,8 @@ if ($page_count == 2) {
     die(require_once './view/pages/create/create3.php');
 }
 
+$session_fullname = $_SESSION['user']['name'] . " " . $_SESSION['user']['surname'];
+
 $user_fullname = $_REQUEST['user_fullname'];
 $user_telephone = $_REQUEST['user_telephone'];
 $user_email = $_REQUEST['user_email'];
@@ -48,16 +50,6 @@ if (isset($button_create)) {
                         <div class="applicaton-create__title section-title">
                             Добавить груз
                         </div>
-                        <!-- <div class="applicaton-create__link">
-                            <a href="/pages/cargo-create2.html" class="applicaton-create__href link">
-                                пропустить
-                            </a>
-                            <div class="applicaton-create__arrow">
-                                <svg width="1rem" height="0.69rem" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M15.8051 5.04502L11.1251 0.201097C10.9991 0.0766103 10.831 0.00790116 10.6565 0.00967715C10.4821 0.0114531 10.3153 0.0835732 10.1917 0.210599C10.0682 0.337626 9.99785 0.509464 9.99567 0.68933C9.99348 0.869197 10.0597 1.0428 10.1801 1.17297L13.6976 4.813H0.66756C0.576634 4.80726 0.48553 4.82076 0.399857 4.85269C0.314183 4.88462 0.235754 4.93429 0.169399 4.99865C0.103043 5.06301 0.0501646 5.14069 0.0140198 5.22692C-0.022125 5.31314 -0.0407715 5.40608 -0.0407715 5.50002C-0.0407715 5.59395 -0.022125 5.6869 0.0140198 5.77312C0.0501646 5.85935 0.103043 5.93703 0.169399 6.00139C0.235754 6.06575 0.314183 6.11542 0.399857 6.14735C0.48553 6.17928 0.576634 6.19278 0.66756 6.18704H13.7501L10.1826 9.82449C10.1147 9.8867 10.0598 9.96253 10.0214 10.0474C9.98291 10.1322 9.96163 10.2242 9.95885 10.3178C9.95606 10.4114 9.97182 10.5046 10.0052 10.5917C10.0385 10.6788 10.0887 10.7579 10.1528 10.8243C10.2168 10.8907 10.2933 10.9429 10.3776 10.9778C10.4619 11.0126 10.5522 11.0294 10.643 11.027C10.7338 11.0246 10.8231 11.0032 10.9056 10.964C10.988 10.9247 11.0619 10.8686 11.1226 10.7989L15.8026 6.01947C15.8647 5.95554 15.914 5.87959 15.9476 5.79599C15.9813 5.71238 15.9986 5.62276 15.9986 5.53224C15.9986 5.44173 15.9813 5.3521 15.9476 5.2685C15.914 5.18489 15.8647 5.10895 15.8026 5.04502H15.8051Z" fill="#9A9A9A" />
-                                </svg>
-                            </div>
-                        </div> -->
                     </div>
                     <div class="applicaton-create__subtitle section-subtitle">
                         Контактная информация
@@ -67,7 +59,7 @@ if (isset($button_create)) {
                             <label class="input__title" for="user_fullname">
                                 Имя и фамилия:
                             </label>
-                            <input class="input<?= $query['data']['fullname'] ? ' _error' : null ?>" type="text" value="<?= $_SESSION['user']['name'] . " " . $_SESSION['user']['surname'] ?>" id="user_fullname" placeholder="Сергей Иванов" name="user_fullname">
+                            <input class="input<?= $query['data']['fullname'] ? ' _error' : null ?>" type="text" value="<?= $session_fullname ?>" value="<?= $user_fullname ? $user_fullname : $session_fullname ?>" id="user_fullname" placeholder="Сергей Иванов" name="user_fullname">
                             <? if ($query['data']['fullname']) : ?>
                                 <div class="_color-error">
                                     <?= $query['data']['fullname'] ?>
@@ -78,7 +70,7 @@ if (isset($button_create)) {
                             <label class="input__title" for="user_telephone">
                                 Номер телефона:
                             </label>
-                            <input class="input input-tel<?= $query['data']['telephone'] ? ' _error' : null ?>" type="tel" value="<?= $_SESSION['user']['telephone'] ?>" id="user_telephone" placeholder="+1(ххх)ххх-хх-хх" name="user_telephone">
+                            <input class="input input-tel<?= $query['data']['telephone'] ? ' _error' : null ?>" type="tel" value="<?= $_SESSION['user']['telephone'] ?>" value="<?= $user_telephone ? $user_telephone : $_SESSION['user']['telephone'] ?>" id="user_telephone" placeholder="+1(ххх)ххх-хх-хх" name="user_telephone">
                             <? if ($query['data']['telephone']) : ?>
                                 <div class="_color-error">
                                     <?= $query['data']['telephone'] ?>
@@ -89,7 +81,7 @@ if (isset($button_create)) {
                             <label class="input__title" for="user_email">
                                 E-mail:
                             </label>
-                            <input class="input<?= $query['data']['email'] ? ' _error' : null ?>" type="email" value="<?= $_SESSION['user']['email'] ?>" id="user_email" placeholder="info@trucklink.com" name="user_email">
+                            <input class="input<?= $query['data']['email'] ? ' _error' : null ?>" type="email" value="<?= $_SESSION['user']['email'] ?>" value="<?= $user_email ? $user_email : $_SESSION['user']['email'] ?>" id="user_email" placeholder="info@trucklink.com" name="user_email">
                             <? if ($query['data']['email']) : ?>
                                 <div class="_color-error">
                                     <?= $query['data']['email'] ?>

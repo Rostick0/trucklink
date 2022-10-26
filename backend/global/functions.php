@@ -67,4 +67,14 @@ function whereParams($data, $data_more = null, $data_less = null) {
     return mb_substr($where_params, 0, -5);
 }
 
+function searchKeyArray($id, $array, $elem) {
+    foreach ($array as $key => $val) {
+        if ($val[$elem] == $id) {
+            return $key;
+            break;
+        }
+    }
+    return null;
+}
+
 ?>

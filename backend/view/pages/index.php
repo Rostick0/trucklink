@@ -14,6 +14,7 @@ if (isset($create_button)) {
 $application_sql = "WHERE `is_deleted` = 0 ORDER BY `application_id` ASC LIMIT 10";
 
 $applications = Application::get($application_sql);
+$transport_type_db = getDbDate('transport_type');
 
 ?>
 
@@ -131,7 +132,7 @@ $applications = Application::get($application_sql);
                                                         </g>
                                                         <defs>
                                                     </svg>
-                                                    <input class="input-block__input addres-search" type="text" placeholder="Откуда" name="from">
+                                                    <input class="input-block__input addres-search" type="text" placeholder="Откуда" name="from" value="<?= $from ?>">
                                                 </div>
                                                 <? if ($query['data']['from']) : ?>
                                                     <div class="_color-error">
@@ -149,7 +150,7 @@ $applications = Application::get($application_sql);
                                                         </g>
                                                         <defs>
                                                     </svg>
-                                                    <input class="input-block__input" type="text" placeholder="Куда" name="to">
+                                                    <input class="input-block__input" type="text" placeholder="Куда" name="to" value=<?= $to ?>>
                                                 </div>
                                                 <? if ($query['data']['to']) : ?>
                                                     <div class="_color-error">
@@ -164,7 +165,93 @@ $applications = Application::get($application_sql);
                                                     <svg width="1.5rem" height="1.5rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M15.9736 3.75C15.9736 3.33579 15.6378 3 15.2236 3C14.8094 3 14.4736 3.33579 14.4736 3.75V4.4501H9.52832V3.75C9.52832 3.33579 9.19253 3 8.77832 3C8.36411 3 8.02832 3.33579 8.02832 3.75V4.4501H6.36133C5.13352 4.4501 4 5.36273 4 6.65024V9.55058V16.8012C4 18.0887 5.13352 19.0013 6.36133 19.0013H17.6406C18.8684 19.0013 20.002 18.0887 20.002 16.8012V9.55058V6.65024C20.002 5.36273 18.8684 4.4501 17.6406 4.4501H15.9736V3.75ZM18.502 8.80058V6.65024C18.502 6.33596 18.1927 5.9501 17.6406 5.9501H15.9736V6.65027C15.9736 7.06449 15.6378 7.40027 15.2236 7.40027C14.8094 7.40027 14.4736 7.06449 14.4736 6.65027V5.9501H9.52832V6.65027C9.52832 7.06449 9.19253 7.40027 8.77832 7.40027C8.36411 7.40027 8.02832 7.06449 8.02832 6.65027V5.9501H6.36133C5.80932 5.9501 5.5 6.33596 5.5 6.65024V8.80058H18.502ZM5.5 10.3006H18.502V16.8012C18.502 17.1155 18.1927 17.5013 17.6406 17.5013H6.36133C5.80932 17.5013 5.5 17.1155 5.5 16.8012V10.3006Z" fill="black" />
                                                     </svg>
-                                                    <input class="input-block__input" type="date" placeholder="6 октября 2022" name="date">
+                                                    <div class="calendar-form">
+                                                        <div class="calendar-from__active">
+                                                        <input class="input input-block__input" type="text" placeholder="6 октября 2022" name="date" value="<?= $date ?>" readonly>
+                                                        </div>
+                                                        <div class="calendar">
+                                                            <div class="calendar__month">
+                                                                <div class="calendar__arrow_left calendar__month_left">
+                                                                    <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path d="M7 12L2 6.49997L7 1" stroke="#2D2D41" stroke-width="2" stroke-linecap="round" />
+                                                                    </svg>
+                                                                </div>
+                                                                <div class="calendar__month_text calendar__text"></div>
+                                                                <div class="calendar__arrow_right calendar__month_right">
+                                                                    <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path d="M1 12L6 6.49997L1 1" stroke="#2D2D41" stroke-width="2" stroke-linecap="round" />
+                                                                    </svg>
+                                                                </div>
+                                                            </div>
+                                                            <ul class="calendar__weekday">
+                                                                <li class="calendar__weekday_item">
+                                                                    пн
+                                                                </li>
+                                                                <li class="calendar__weekday_item">
+                                                                    вт
+                                                                </li>
+                                                                <li class="calendar__weekday_item">
+                                                                    ср
+                                                                </li>
+                                                                <li class="calendar__weekday_item">
+                                                                    чт
+                                                                </li>
+                                                                <li class="calendar__weekday_item">
+                                                                    пт
+                                                                </li>
+                                                                <li class="calendar__weekday_item">
+                                                                    сб
+                                                                </li>
+                                                                <li class="calendar__weekday_item">
+                                                                    вс
+                                                                </li>
+                                                            </ul>
+                                                            <ul class="calendar__day">
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                                <li class="calendar__day_item"></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <? if ($query['data']['date']) : ?>
                                                     <div class="_color-error">
@@ -174,7 +261,7 @@ $applications = Application::get($application_sql);
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="input__block">
+                                            <div class="input__block input-search__block">
                                                 <div class="input-block__content">
                                                     <svg width="1.5rem" height="1.5rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M16 3H1V16H16V3Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -182,7 +269,17 @@ $applications = Application::get($application_sql);
                                                         <path d="M5.5 21C6.88071 21 8 19.8807 8 18.5C8 17.1193 6.88071 16 5.5 16C4.11929 16 3 17.1193 3 18.5C3 19.8807 4.11929 21 5.5 21Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                         <path d="M18.5 21C19.8807 21 21 19.8807 21 18.5C21 17.1193 19.8807 16 18.5 16C17.1193 16 16 17.1193 16 18.5C16 19.8807 17.1193 21 18.5 21Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     </svg>
-                                                    <input class="input-block__input" type="text" placeholder="Специальная техника" name="transport_type">
+                                                    <input class="input-block__input input-search" type="text" placeholder="Специальная техника">
+                                                    <ul class="input-search__list">
+                                                        <? foreach ($transport_type_db as $value): ?>
+                                                        <li class="input-search__item">
+                                                            <label for="transport_type_<?= $value['transport_type_id'] ?>">
+                                                                <?= $value['name'] ?>
+                                                            </label>
+                                                            <input type="radio" id="transport_type_<?= $value['transport_type_id'] ?>" value="<?= $value['transport_type_id'] ?>" name="transport_type">
+                                                        </li>
+                                                        <? endforeach ?>
+                                                    </ul>
                                                 </div>
                                                 <? if ($query['data']['transport_type']) : ?>
                                                     <div class="_color-error">
@@ -488,14 +585,7 @@ $applications = Application::get($application_sql);
         </main>
     </div>
     <? require_once __DIR__ . './../components/script.php'; ?>
-    <script>
-        // var autocompletes, marker, infowindow, map;
-
-        // function initMap() {}
-
-        // const addresSearch = document.querySelector('.addres-search');
-        // autocompletes = new google.maps.places.Autocomplete(addresSearch);
-    </script>
+    <script src="/view/static/js/main.js"></script>
 </body>
 
 </html>
