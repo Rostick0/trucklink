@@ -114,7 +114,7 @@ class ApplicationController {
         }
     }
 
-    public static function edit($from, $to, $date, $transport_type, $loading_method, $size, $height, $photo, $mass, $price, $comment, $application_id, $date_created) {
+    public static function edit($from, $to, $date, $transport_type, $loading_method, $size, $height, $photo, $photo_old, $mass, $price, $comment, $application_id, $date_created) {        
         $errors = [];
 
         $from = protectedData($from);
@@ -129,9 +129,9 @@ class ApplicationController {
         $comment = protectedData($comment);
         $user_id = (int) $_SESSION['user']['user_id'];
 
-        // if ($date_created) {
-        //     $errors['from'] = "Заявку больше нельзя изменить";
-        // }
+        if (!DateController::availableUntil($date_created, 3600)) {
+            $errors['from'] = "Истекло время изменения";
+        }
 
         if (mb_strlen($from) < 2) {
             $errors['from'] = "Не указано откуда";
@@ -141,6 +141,16 @@ class ApplicationController {
             $errors['to'] = "Не указано куда";
         }
 
+        if (!empty($photo['tmp_name'])) {
+            if (!ImageController::checkTypePhoto($photo['type']) && empty($errors)) {
+                $errors['photo'] = 'Не поддерживается формат фотографии';
+            } else {
+                $photo = ImageController::updatePhoto($photo, $photo_old);
+            }
+        } else {
+            $photo = $photo_old;
+        }
+
         if (!empty($errors)) {
             return [
                 'type' => 'error',
@@ -148,7 +158,11 @@ class ApplicationController {
             ];
         }
 
-        Application::edit($from, $to, $date, $transport_type, $loading_method, $size, $height, $photo, $mass, $price, $comment, $application_id, $user_id);
+        $query = Application::edit($from, $to, $date, $transport_type, $loading_method, $size, $height, $photo, $mass, $price, $comment, $application_id, $user_id);
+
+        if ($query) {
+            header("Refresh:0");
+        }
     }
 
     // public static function create($from, $to, $date, $type_transport, $user_fullname, $user_telephone, $user_email, $user_id, $body_type, $loading_method,  $size, $height, $mass, $price) {
@@ -205,5 +219,3 @@ class ApplicationController {
         );
     }
 }
-
-?>

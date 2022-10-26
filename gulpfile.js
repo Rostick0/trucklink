@@ -6,11 +6,6 @@ const babel = require('gulp-babel');
 const uglify = require('gulp-uglify');
 const { init, watch, reload } = require('browser-sync').create();
 
-// function pages() {
-//     return src('app/pages/**')
-//         .pipe(dest('dist/pages'))
-// }
-
 function scss() {
     return src('app/source/scss/style.scss')
         .pipe(sass())
@@ -29,16 +24,6 @@ function js() {
         .pipe(uglify())
         .pipe(dest('backend/view/static/js'))
 }
-
-// function img() {
-//     return src('app/img/**')
-//         .pipe(dest('dist/img'))
-// }
-
-// function fonts() {
-//     return src('app/font/**')
-//         .pipe(dest('dist/font'))
-// }
 
 function serve() {
     init({

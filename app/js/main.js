@@ -17,10 +17,12 @@ if (inputSearchBlock) {
         })
     }
 
+    inputSearch.onclick = () => {
+        inputSearchList.classList.add('d-flex');
+    }
+
     inputSearch.oninput = (e) => {
-        if (e.target.value) {
-            inputSearchList.classList.add('d-flex');
-        }
+        inputSearchList.classList.add('d-flex');
 
         visibilityElems(e.target.value);
     }
@@ -28,7 +30,7 @@ if (inputSearchBlock) {
     inputSearch.onblur = () => {
         setTimeout(() => {
             if (inputSearchList.classList.contains('d-flex')) {
-                inputSearchList.classList.remove('d-flex')
+                inputSearchList.classList.remove('d-flex');
             }
         }, 250)
     }

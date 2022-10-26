@@ -21,6 +21,29 @@ class ImageController {
     public static function getTypeImg($type) {
         return array_pop(explode('/', $type));
     }
+
+    public static function deletePhoto($name) {
+        global $PATH_UPLOAD;
+
+        if (!$name) return;
+
+        $path = $PATH_UPLOAD . $name;
+
+        if (!file_exists($path)) return;
+
+        return unlink($path);
+    }
+
+    public static function updatePhoto($photo_new, $photo_old) {
+        ImageController::deletePhoto($photo_old);
+        return ImageController::uploadImage($photo_new);
+    }
+
+    public static function checkTypePhoto($type) {
+        global $ALLOWED_IMAGE_TYPES;
+
+        return array_search($type, $ALLOWED_IMAGE_TYPES);
+    }
 }
 
 ?>

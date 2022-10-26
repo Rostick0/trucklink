@@ -17,6 +17,14 @@ class NormalizeView {
         return strrev($result);
     }
 
+    public static function checkPrice($price, $money_icon = "$") {
+        if ($price) {
+            return $money_icon . NormalizeView::price($price);
+        }
+
+        return 'Запрос цены';
+    }
+
     public static function date($date) {
         global $MONTHS;
 

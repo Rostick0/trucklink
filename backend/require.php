@@ -9,6 +9,8 @@ require_once './global/vars.php';
 require_once './global/normalize_view.php';
 require_once './global/date.php';
 
+require_once './controller/date.php';
+
 require_once './controller/image.php';
 
 require_once './controller/email.php';

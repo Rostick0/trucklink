@@ -48,7 +48,7 @@ $applications = Application::get($application_sql);
                                 My profile
                             </span>
                         </a>
-                        <a class="personal-applications_create button" href="/pages/">
+                        <a class="personal-applications_create button" href="/">
                             <svg width="1.56rem" height="1.5rem " viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12.5 22C18.0228 22 22.5 17.5228 22.5 12C22.5 6.47715 18.0228 2 12.5 2C6.97715 2 2.5 6.47715 2.5 12C2.5 17.5228 6.97715 22 12.5 22Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                 <path d="M12.5 8V16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -104,7 +104,7 @@ $applications = Application::get($application_sql);
                                     </td>
                                     <td>
                                         <div class="application__payment">
-                                            <?= $application['price'] ? '$' . NormalizeView::price($application['price']) : 'Запрос цены' ?>
+                                            <?= NormalizeView::checkPrice($application['price']) ?>
                                         </div>
                                     </td>
                                     <td>

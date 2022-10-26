@@ -21,6 +21,8 @@ $application_loading_method = $loading_method_fetch_all[searchKeyArray($applicat
 $application_size = $size_fetch_all[searchKeyArray($application['size'], $size_fetch_all, 0)][1];
 $application_height = $height_fetch_all[searchKeyArray($application['height'], $height_fetch_all, 0)][1];
 
+$photo_old = $application['photo'];
+
 $from = $_REQUEST['from'];
 $to = $_REQUEST['to'];
 $date = $_REQUEST['date'];
@@ -36,7 +38,7 @@ $comment = $_REQUEST['comment'];
 $button_save = $_REQUEST['button_save'];
 
 if (isset($button_save)) {
-    $query = ApplicationController::edit($from, $to, $date, $transport_type, $loading_method, $size, $height, $photo, $mass, $price, $comment, $application_id, $application['date_created']);
+    $query = ApplicationController::edit($from, $to, $date, $transport_type, $loading_method, $size, $height, $photo, $photo_old, $mass, $price, $comment, $application_id, $application['date_created']);
 }
 
 ?>
@@ -74,7 +76,7 @@ if (isset($button_save)) {
                                     <path d="M2.25 8.25L16.5 1.5L9.75 15.75L8.25 9.75L2.25 8.25Z" stroke="#7F858E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                                 <input class="input addres-search _from_text<?= $query['data']['from'] ? ' _error' : null ?>" type="text" id="from" placeholder="Введите город отправки" value="<?= $application['from'] ?>">
-                                <input class="input addres-search _from" type="text" name="from" hidden>
+                                <input class="input addres-search _from" type="text" name="from" value="<?= $application['from'] ?>" hidden>
                             </div>
                             <? if ($query['data']['from']) : ?>
                                 <div class="_color-error">
@@ -91,7 +93,7 @@ if (isset($button_save)) {
                                     <path d="M2.25 8.25L16.5 1.5L9.75 15.75L8.25 9.75L2.25 8.25Z" stroke="#7F858E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                                 <input class="input addres-search _to_text<?= $query['data']['to'] ? ' _error' : null ?>" type="text" id="to" placeholder="Введите город доставки" value="<?= $application['to'] ?>">
-                                <input class="input addres-search _to" type="text" name="to" hidden>
+                                <input class="input addres-search _to" type="text" name="to" value="<?= $application['to'] ?>" hidden>
                             </div>
                             <? if ($query['data']['to']) : ?>
                                 <div class="_color-error">

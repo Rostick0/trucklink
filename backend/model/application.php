@@ -27,7 +27,15 @@ class Application {
     public static function edit($from, $to, $date, $transport_type, $loading_method, $size, $height, $photo, $mass, $price, $comment, $application_id, $user_id) {
         global $db;
 
-        return $db->query("UPDATE `application` SET `from`='$from',`to`='$to',`date`='$date',`date_edited`='',`transport_type`='$transport_type'`loading_method`='$loading_method',`size`='$size',`height`='$height',`photo`='$photo',`mass`='$mass',`price`='$price',`comment`='$comment' WHERE `application_id` = '$application_id' AND `user_id` = '$user_id'");
+        $loading_method = !empty($loading_method) ? "'$loading_method'" : "NULL";
+        $size = !empty($size) ? "'$size'" : "NULL";
+        $height = !empty($height) ? "'$height'" : "NULL";
+        $photo = !empty($photo) ? "'$photo'" : "NULL";
+        $mass = !empty($mass) ? "'$mass'" : "NULL";
+        $price = !empty($price) ? "'$price'" : "NULL";
+        $comment = !empty($comment) ? "'$comment'" : "NULL";
+        
+        return $db->query("UPDATE `application` SET `from`='$from',`to`='$to',`date`='$date',`date_edited`=CURRENT_TIMESTAMP,`transport_type`='$transport_type',`loading_method`=$loading_method,`size`=$size,`height`=$height,`photo`=$photo,`mass`=$mass,`price`=$price,`comment`=$comment WHERE `application_id` = '$application_id' AND `user_id` = '$user_id'");
     }
 
     public static function delete($application_id, $user_id) {

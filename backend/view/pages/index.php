@@ -361,7 +361,7 @@ $transport_type_db = getDbDate('transport_type');
                                     <td class="application__payment_td">
                                         <div class="application__payment">
                                             <span>
-                                                $<?= NormalizeView::price($application['price']) ?>
+                                                <?= NormalizeView::checkPrice($application['price']) ?>
                                             </span>
                                             <a class="application__payment_link button" href="/application?id=<?= $application['application_id'] ?>">
                                                 Подробнее
