@@ -1,0 +1,40 @@
+.application-filter {
+    background: #131A24;
+
+    border: 1.5px solid #17212B;
+    //border-radius: 0.5rem;
+
+    color: #6E7B8B;
+
+    overflow: hidden;
+
+    & > * {
+        height: 4.75rem;
+
+        &:first-child {
+            border-radius: 0.5rem 0 0 0.5rem;
+        }
+
+        &:last-child {
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+    }
+
+    .application-filter__date_input {
+        background: transparent;
+
+        &::placeholder {
+            color: #6E7B8B;
+        }
+    }
+
+    .application-filter__button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        column-gap: 0.25rem;
+
+        width: 100%;
+        height: 100%;
+    }
+}
