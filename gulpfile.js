@@ -18,7 +18,7 @@ function scss() {
 }
 
 function js() {
-    return src(['app/js/script.js', 'app/js/main.js', 'app/js/application.js', 'app/js/chat.js'])
+    return src(['app/js/vars.js', 'app/js/functions.js', 'app/js/UI/**.js', 'app/js/util/**', 'app/js/script.js','app/js/main.js', 'app/js/application.js', 'app/js/chat.js'])
         .pipe(babel({
             presets: ['@babel/env']
         }))
