@@ -189,7 +189,6 @@ if (isset($button_create)) {
         <? require_once __DIR__ . './../../components/footer.php'; ?>
     </div>
     <? require_once __DIR__ . './../../components/script.php'; ?>
-    <script src="/view/static/js/application.js" defer></script>
 </body>
 
 </html>

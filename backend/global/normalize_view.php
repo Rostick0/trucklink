@@ -14,7 +14,7 @@ class NormalizeView {
             $result .= $price[$i];
         }
         
-        return strrev($result);
+        return trim(strrev($result));
     }
 
     public static function checkPrice($price, $money_icon = "$") {
@@ -22,7 +22,7 @@ class NormalizeView {
             return $money_icon . NormalizeView::price($price);
         }
 
-        return 'Запрос цены';
+        return 'Find out price';
     }
 
     public static function date($date) {

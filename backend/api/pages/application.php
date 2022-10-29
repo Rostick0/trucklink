@@ -5,11 +5,11 @@ $user_id = (int) $_GET['user_id'];
 $from = protectedData($_GET['from']);
 $to = protectedData($_GET['to']);
 $date = protectedData($_GET['date']);
-$transport_type = protectedData($_GET['transport_type']);
-$body_type = protectedData($_GET['body_type']);
-$loading_method = protectedData($_GET['loading_method']);
-$size = protectedData($_GET['size']);
-$height = protectedData($_GET['height']);
+$status = (int) $_GET['status'];
+$transport_type = (int) $_GET['transport_type'];
+$loading_method = (int) $_GET['loading_method'];
+$size = (int) $_GET['size'];
+$height = (int) $_GET['height'];
 $price_min = (float) $_GET['price_min'];
 $price_max = (float) $_GET['price_max'];
 
@@ -21,8 +21,8 @@ switch ($http_method) {
             'from' => $from,
             'to' => $to,
             'date' => $date,
+            'status' => $status,
             'transport_type' => $transport_type,
-            'body_type' => $body_type,
             'loading_method' => $loading_method,
             'size' => $size,
             'height' => $height,
@@ -56,6 +56,15 @@ switch ($http_method) {
         $data = [];
         
         while ($application = $applications->fetch_assoc()) {
+            $application['from'] = stringMaxAndPoint($application['from'], 12);
+            $application['to'] = stringMaxAndPoint($application['to'], 12);
+            $application['date'] = DateView::normalizeDate($application['date']);
+            $application['transport_type'] = parseDd('transport_type', 'transport_type_id', $application['transport_type']);
+            $application['status'] = parseDd('status', 'status_id', $application['status']);
+            $application['loading_method'] = parseDd('loading_method', 'loading_method_id', $application['loading_method']);
+            $application['size'] = parseDd('size', 'size_id', $application['size']);
+            $application['height'] = parseDd('height', 'height_id', $application['height']);
+            $application['price'] = NormalizeView::checkPrice($application['price']);
             $data[] = $application;
         }
         

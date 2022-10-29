@@ -33,6 +33,9 @@ switch ($uri_short) {
     case '/chat':
         $path_page .= '/chat.php';
         break;
+    case '/admin':
+        $path_page .= '/admin/index.php';
+        break;
     default:
         $path_page .= '/index.php';
 }

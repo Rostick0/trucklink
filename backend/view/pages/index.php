@@ -587,7 +587,6 @@ $transport_type_db = getDbDate('transport_type');
         </main>
     </div>
     <? require_once __DIR__ . './../components/script.php'; ?>
-    <script src="/view/static/js/main.js"></script>
 </body>
 
 </html>

@@ -1,13 +1,15 @@
 const chatTextarea = document.querySelector('.chat__textarea');
 
-autosize(chatTextarea);
+if (chatTextarea) {
+    autosize(chatTextarea);
 
-function deleteHeightImportant() {
-    if (!chatTextarea.classList.contains('_height-important')) return;
+    function deleteHeightImportant() {
+        if (!chatTextarea.classList.contains('_height-important')) return;
 
-    chatTextarea.classList.remove('_height-important');
+        chatTextarea.classList.remove('_height-important');
 
-    chatTextarea.removeEventListener('autosize:resized',  deleteHeightImportant);
+        chatTextarea.removeEventListener('autosize:resized', deleteHeightImportant);
+    }
+
+    chatTextarea.addEventListener('autosize:resized', deleteHeightImportant);
 }
-
-chatTextarea.addEventListener('autosize:resized',  deleteHeightImportant);

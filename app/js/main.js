@@ -45,11 +45,3 @@ if (inputSearchBlock) {
         }
     })
 }
-
-// inputSearch.onfocus = () => {
-//     console.log(5)
-// }
-
-// inputSearch.onblur = () => {
-//     console.log(1)
-// }

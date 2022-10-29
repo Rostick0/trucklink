@@ -28,14 +28,13 @@ function getDbDate($table, $column = null, $value = null, $limit = null, $offset
     return $db->query("SELECT * FROM `$table` WHERE `$column` = '$value' $limitAndOffset");
 }
 
+function parseDd($table, $column = null, $value = null, $name = 'name') {
+    return getDbDate($table, $column, $value)->fetch_assoc()[$name];
+}
+
 function normalizeTepelhone($telephone) {
     return $telephone = mb_ereg_replace('[^0-9]', '', $telephone);
 }
-
-// дд.мм.год
-// function normalizeDate($date) {
-
-// }
 
 function whereParams($data, $data_more = null, $data_less = null) {
     if (empty($data) && empty($data_more) && empty($data_less)) return;
@@ -75,6 +74,12 @@ function searchKeyArray($id, $array, $elem) {
         }
     }
     return null;
+}
+
+function stringMaxAndPoint($string, $length) {
+    if (mb_strlen($string) < $length) return $string;
+    
+    return mb_substr($string, 0, $length) . '...';
 }
 
 ?>

@@ -4,6 +4,7 @@ const csso = require('gulp-csso');
 const autoprefixer = require('gulp-autoprefixer');
 const babel = require('gulp-babel');
 const uglify = require('gulp-uglify');
+const concat = require('gulp-concat');
 const { init, watch, reload } = require('browser-sync').create();
 
 function scss() {
@@ -17,11 +18,12 @@ function scss() {
 }
 
 function js() {
-    return src('app/js/**.js')
+    return src(['app/js/script.js', 'app/js/main.js', 'app/js/application.js', 'app/js/chat.js'])
         .pipe(babel({
             presets: ['@babel/env']
         }))
         .pipe(uglify())
+        .pipe(concat('all.js'))
         .pipe(dest('backend/view/static/js'))
 }
 

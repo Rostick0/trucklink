@@ -102,9 +102,8 @@ if (!$user) {
         </main>
         <? require_once __DIR__ . './../components/footer.php'; ?>
     </div>
-    <? require_once __DIR__ . './../components/script.php'; ?>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/autosize.js/3.0.15/autosize.min.js'></script>
-    <script src="/view/static/js/chat.js" defer></script>
+    <? require_once __DIR__ . './../components/script.php'; ?>
 </body>
 
 </html>

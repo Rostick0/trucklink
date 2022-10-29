@@ -1,1 +1,0 @@
-"use strict";var chatTextarea=document.querySelector(".chat__textarea");function deleteHeightImportant(){chatTextarea.classList.contains("_height-important")&&(chatTextarea.classList.remove("_height-important"),chatTextarea.removeEventListener("autosize:resized",deleteHeightImportant))}autosize(chatTextarea),chatTextarea.addEventListener("autosize:resized",deleteHeightImportant);
