@@ -36,7 +36,7 @@ function normalizeTepelhone($telephone) {
     return $telephone = mb_ereg_replace('[^0-9]', '', $telephone);
 }
 
-function whereParams($data, $data_more = null, $data_less = null) {
+function whereParams($data, $data_more = null, $data_less = null, $date_like = null) {
     if (empty($data) && empty($data_more) && empty($data_less)) return;
 
     $where_params = "";
@@ -56,6 +56,12 @@ function whereParams($data, $data_more = null, $data_less = null) {
     foreach($data_less as $name => $data) {
         if ($data) {
             $where_params .= "`{$name}` > '{$data}' AND ";
+        }
+    }
+
+    foreach($date_like as $name => $data) {
+        if ($data) {
+            $where_params .= "`{$name}` LIKE '%{$data}%' AND ";
         }
     }
 

@@ -336,14 +336,14 @@ $transport_type_db = getDbDate('transport_type');
                                         <div class="application__route">
                                             <div class="application__status"></div>
                                             <div class="application__way">
-                                                <div class="application__from">
-                                                    <img src="/view/static/img/flag.png" alt=""> <?= $application['from'] ?>
+                                                <div class="application__from" title="<?= $application['from'] ?>">
+                                                    <img src="/view/static/img/flag.png" alt=""> <?= stringMaxAndPoint($application['from'], 20) ?>
                                                 </div>
                                                 <span class="applicaton__arrow">
                                                     →
                                                 </span>
-                                                <div class="application__to">
-                                                    <img src="/view/static/img/flag.png" alt=""> <?= $application['to'] ?>
+                                                <div class="application__to" title="<?= $application['to'] ?>">
+                                                    <img src="/view/static/img/flag.png" alt=""> <?= stringMaxAndPoint($application['to'], 20) ?>
                                                 </div>
                                             </div>
                                         </div>

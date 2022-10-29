@@ -2,7 +2,13 @@ const BACKEND_URL_API = 'http://backend/api';
 
 const params = new Proxy(new URLSearchParams(window.location.search), {
     get: (searchParams, prop) => searchParams.get(prop),
-  });
+});
+
+function stringMaxAndPoint(string, len = 10) {
+    if (string.length < len) return string;
+    
+    return string.substr(0, len) + '...';
+}
 
 const blockPassowrd = document.querySelectorAll('.block__password');
 

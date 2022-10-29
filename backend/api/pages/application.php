@@ -18,8 +18,6 @@ switch ($http_method) {
         $params = [
             'application_id' => $application_id,
             'user_id' => $user_id,
-            'from' => $from,
-            'to' => $to,
             'date' => $date,
             'status' => $status,
             'transport_type' => $transport_type,
@@ -36,8 +34,13 @@ switch ($http_method) {
         $params_less = [
             'price' => $price_min
         ];
+
+        $params_like = [
+            'from' => $from,
+            'to' => $to,
+        ];
         
-        $where_params = whereParams($params, $params_more, $params_less);
+        $where_params = whereParams($params, $params_more, $params_less, $params_like);
         
         if ($limit) {
             $where_params .= "LIMIT $limit";
@@ -56,8 +59,8 @@ switch ($http_method) {
         $data = [];
         
         while ($application = $applications->fetch_assoc()) {
-            $application['from'] = stringMaxAndPoint($application['from'], 12);
-            $application['to'] = stringMaxAndPoint($application['to'], 12);
+            $application['from'] = $application['from'];
+            $application['to'] = $application['to'];
             $application['date'] = DateView::normalizeDate($application['date']);
             $application['transport_type'] = parseDd('transport_type', 'transport_type_id', $application['transport_type']);
             $application['status'] = parseDd('status', 'status_id', $application['status']);
