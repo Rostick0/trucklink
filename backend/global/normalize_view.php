@@ -33,8 +33,9 @@ class NormalizeView {
         $day = substr($date, -2);
         $month = (int) substr($date, 0, 2);
         $month = $MONTHS[$month - 1];
+        $month = mb_substr($month, 0, 3);
 
-        return "$day - $month";
+        return "$day $month";
     }
 }
 

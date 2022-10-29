@@ -122,6 +122,45 @@
     width: 0.5rem;
     min-width: 0.5rem;
     height: 0.5rem;
+
+    &._awaiting_payment {
+        background: linear-gradient(148.97deg, #FEE3AD 20.53%, #F0A91C 76.8%);
+
+        border: 1.5px solid rgba(255, 255, 255, 0.6);
+        outline: 1px solid #B47700;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        position: relative;
+
+        width: 0.85rem;
+        min-width: 0.85rem;
+        height: 0.85rem;
+
+        &::before {
+            border-radius: 50%;
+
+            content: url('../img/icon/exclamation-mark.svg');
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+
+            width: 0.625rem;
+            height: 0.625rem;
+        }
+    }
+
+    &._awaiting_quote {
+        background: linear-gradient(180deg, #4159D8 0%, #2478F7 100%);
+    }
+
+    &._search {
+        background: linear-gradient(180deg, #FCD925 0%, #F7BC24 100%);
+    }
 }
 
 .application__from {

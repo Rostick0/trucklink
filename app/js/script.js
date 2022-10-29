@@ -403,27 +403,27 @@ if (calendarFirst) {
     calendarStart.start();
 }
 
-function googleSearch(input, inputChecked) {
-    const autocomplete = new google.maps.places.Autocomplete(input);
-    google.maps.event.addListener(autocomplete, 'place_changed', function () {
-        const place = autocomplete.getPlace();
-        inputChecked.value = place.name;
-    });
-}
+// function googleSearch(input, inputChecked) {
+//     const autocomplete = new google.maps.places.Autocomplete(input);
+//     google.maps.event.addListener(autocomplete, 'place_changed', function () {
+//         const place = autocomplete.getPlace();
+//         inputChecked.value = place.name;
+//     });
+// }
 
-const addresSearchFromText = document.querySelector('.addres-search._from_text');
-const addresSearchFrom = document.querySelector('.addres-search._from');
+// const addresSearchFromText = document.querySelector('.addres-search._from_text');
+// const addresSearchFrom = document.querySelector('.addres-search._from');
 
-if (addresSearchFromText && addresSearchFrom) {
-    google.maps.event.addDomListener(window, 'load', googleSearch(addresSearchFromText, addresSearchFrom));   
-}
+// if (addresSearchFromText && addresSearchFrom) {
+//     google.maps.event.addDomListener(window, 'load', googleSearch(addresSearchFromText, addresSearchFrom));   
+// }
 
-const addresSearchToText = document.querySelector('.addres-search._to_text');
-const addresSearchTo = document.querySelector('.addres-search._to');
+// const addresSearchToText = document.querySelector('.addres-search._to_text');
+// const addresSearchTo = document.querySelector('.addres-search._to');
 
-if (addresSearchToText && addresSearchTo) {
-    google.maps.event.addDomListener(window, 'load', googleSearch(addresSearchToText, addresSearchTo));   
-}
+// if (addresSearchToText && addresSearchTo) {
+//     google.maps.event.addDomListener(window, 'load', googleSearch(addresSearchToText, addresSearchTo));   
+// }
 
 const userAvatar = document.querySelector('#user_avatar');
 
