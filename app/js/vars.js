@@ -1,4 +1,4 @@
-const BACKEND_URL_API = 'http://backend/api';
+const BACKEND_URL_API = `${location.origin}/api`;
 
 const monthShort = [
     'янв',

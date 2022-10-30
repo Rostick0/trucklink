@@ -272,12 +272,12 @@ function getApplicationsFilter() {
 }
 
 if (applicationTableFilter) {
-    const calendarFirst = document.querySelector('.calendar');
-    const calendarFromActive = document.querySelector('.calendar-from__active');
+    // const calendarFirst = document.querySelector('.calendar');
+    // const calendarFromActive = document.querySelector('.calendar-from__active');
 
-    const calendarStart = new Calendar(calendarFirst, calendarFromActive);
-    calendarStart.start();
-    calendarStart.previousDays(true);
+    // const calendarStart = new Calendar(calendarFirst, calendarFromActive);
+    // calendarStart.start();
+    // calendarStart.previousDays(true);
 
     getApplicationsFilter();
 }

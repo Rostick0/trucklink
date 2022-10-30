@@ -1,6 +1,6 @@
 <?
 
-$path_page = __DIR__ . './../api/pages';
+$path_page = __DIR__ . '/../api/pages';
 
 switch ($uri_api_type) {
     case '/application':
@@ -14,7 +14,7 @@ switch ($uri_api_type) {
 }
 
 if (!file_exists($path_page)) {
-    $path_page = __DIR__ . './../api/pages/index.php';
+    $path_page = __DIR__ . '/../api/pages/index.php';
 }
 
 require_once $path_page;
