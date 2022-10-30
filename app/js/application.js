@@ -26,17 +26,13 @@ if (applicationDelete) {
                 method: 'DELETE'
             })
                 .then(res => {
-                    if (res.status >= 200 && res.status < 300) {
-                        return res.json();
-                    }
+                    if (res.status >= 200 && res.status < 300) return res.json();
 
                     throw res;
                 })
-                .then(() => {
-                    window.history.go(-1);
-                })
+                .then(() => window.history.go(-1))
                 .catch(data => data.json())
-                .then(res => alert(res?.message));
+                .then(res => console.log(res?.message));
         }
     }
 }

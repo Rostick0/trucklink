@@ -116,7 +116,7 @@ if (!$application) {
                                 Оплата
                             </div>
                             <div class="info__value">
-                                <?= NormalizeView::price($application['price']) ?>$
+                                <?= NormalizeView::checkPrice($application['price']) ?>
                             </div>
                         </li>
                         <li class="info__item">

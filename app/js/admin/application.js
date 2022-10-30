@@ -19,24 +19,17 @@ if (applicationDelete) {
                     //window.history.go(-1);
                 })
                 .catch(data => data.json())
-                .then(res => alert(res?.message));
+                .then(res => {
+                    if (!res?.message) return;
+
+                    alert(res?.message)
+                });
         }
     }
 }
 
-const applicationTableFilterAdmin = document.querySelector('.application__table._filter-admin tbody');
-
-function getApplicationsAdmin(htmlContainer, htmlElem, queryParams = '') {
-    return fetch(`${BACKEND_URL_API}/application${queryParams}`)
-        .then(res => res.json())
-        .then(res => {
-
-            if (htmlElem) {
-                htmlElem.forEach(item => item.remove())
-            }
-
-            if (!res[0]) {
-                htmlContainer.insertAdjacentHTML('beforeend',
+function setApplicationNoFound(htmlContainer) {
+    return htmlContainer.insertAdjacentHTML('beforeend',
                     `<tr class="application__item _none">
                 <td>
                     <div class="application__flex">
@@ -116,13 +109,27 @@ function getApplicationsAdmin(htmlContainer, htmlElem, queryParams = '') {
                         </svg>
                     </a>
                 </td>
-            </tr>`
-                )
+            </tr>`);
+}
+
+const applicationTableFilterAdmin = document.querySelector('.application__table._filter-admin tbody');
+
+function getApplicationsAdmin(htmlContainer, htmlElem, queryParams = '') {
+    return fetch(`${BACKEND_URL_API}/application${queryParams}`)
+        .then(res => res.json())
+        .then(res => {
+
+            if (htmlElem) {
+                htmlElem.forEach(item => item.remove())
+            }
+
+            if (!res[0]) {
+                setApplicationNoFound(htmlContainer);
                 return;
             }
 
             res.forEach(elem => htmlContainer.insertAdjacentHTML('beforeend',
-                `<tr class="application__item">
+                `<tr class="application__item" data-application-id="${elem?.application_id}">
                     <td>
                         <div class="application__flex">
                             </svg>
@@ -191,8 +198,8 @@ function getApplicationsAdmin(htmlContainer, htmlElem, queryParams = '') {
                             </svg>
                         </a>
                     </td>
-                    <td>
-                        <a class="application__flex justify-center">
+                    <td onclick="deleteApplicationAdmin(${elem?.application_id})">
+                        <span class="application__flex justify-center">
                             <svg width="1.5rem" height="1.5rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect x="4.5" y="5.10059" width="15" height="18" rx="1.5" stroke="#F53D3D" stroke-width="1.5" />
                                 <rect x="2.25" y="2.10059" width="19.5" height="3" rx="0.75" stroke="#F53D3D" stroke-width="1.5" stroke-linejoin="round" />
@@ -201,11 +208,46 @@ function getApplicationsAdmin(htmlContainer, htmlElem, queryParams = '') {
                                 <path d="M15.75 9V19.5" stroke="#F53D3D" stroke-width="1.5" stroke-linecap="round" />
                                 <path d="M8.25 9V19.5" stroke="#F53D3D" stroke-width="1.5" stroke-linecap="round" />
                             </svg>
-                        </a>
+                        </span>
                     </td>
                 </tr>`
             ))
         })
+}
+
+function deleteApplicationAdmin(id) {
+    const applications = applicationTableFilterAdmin.querySelectorAll('.application__item')
+    const len = applications.length
+
+    return [...applications].forEach(item => {
+        if (item.getAttribute('data-application-id') != id) return;
+
+        const confirmRemove = confirm('Подтвердите удаление');
+
+        if (!confirmRemove) return;
+
+        fetch(`${BACKEND_URL_API}/application?application_id=${id}`, {
+            method: 'DELETE'
+        })
+            .then(res => {
+                if (res.status >= 200 && res.status < 300) return res.json();
+
+                throw res;
+            })
+            .then(() => {
+                item.remove();
+
+                if (len > 1) return;
+
+                setApplicationNoFound(applications);
+            })
+            .catch(data => data.json())
+            .then(res => {
+                if (!res?.message) return;
+
+                alert(res?.message)
+            });
+    })
 }
 
 function getApplicationsFilterAdmin() {
@@ -222,8 +264,6 @@ function getApplicationsFilterAdmin() {
         const transportType = [...document.getElementsByName('transport_type')].filter(elem => elem.checked)[0]?.value;
         const price = document.querySelector('.application-filter_select__input._price').value;
         const applicationId = document.querySelector('.application-filter_input._application-id').value;
-
-        console.log(applicationId)
 
         let queryParams = '';
 
@@ -251,8 +291,6 @@ function getApplicationsFilterAdmin() {
             }
         ];
 
-        console.log(filterDate)
-
         filterDate.forEach(elem => {
             if (!elem?.queryParam) return;
 
@@ -260,8 +298,6 @@ function getApplicationsFilterAdmin() {
         })
 
         queryParams = queryParams ? '?' + queryParams.substr(1) : '';
-
-        console.log(queryParams);
 
         const applicationItem = applicationTableFilterAdmin.querySelectorAll('.application__item');
 

@@ -41,6 +41,13 @@ class Application {
     public static function delete($application_id, $user_id) {
         global $db;
 
+        $user_transport_type_id = getDbDate('user', 'user_id', $user_id)->fetch_assoc()['user_type_id'];
+        $user_power = getDbDate('user_type', 'user_type_id', $user_transport_type_id)->fetch_assoc()['power'];
+
+        if ($user_power >= 10) {
+            return $db->query("DELETE FROM `application` WHERE `application_id` = '$application_id'");
+        }
+
         return $db->query("DELETE FROM `application` WHERE `application_id` = '$application_id' AND `user_id` = '$user_id'");
     }
 }
