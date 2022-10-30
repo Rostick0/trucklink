@@ -26,6 +26,7 @@ class Calendar {
             'ноя',
             'дек'
         ];
+        this.previousDays = false;
     }
 
     setAnimation(elem, determinantProperty, showProperty = 'd-flex', hideProperty = '_hide', duration = 500) {
@@ -100,6 +101,10 @@ class Calendar {
         })
     }
 
+    setPreviousDays(value) {
+        this.previousDays = value;
+    }
+
     days() {
         if (!this.daysHtml) {
             return;
@@ -129,7 +134,9 @@ class Calendar {
             if (this.daysHtml[i - 1] && +this.daysHtml[i - 1].textContent >= +this.daysHtml[i].textContent && !firstOne) disabled = true;
 
             if (disabled) this.daysHtml[i].classList.add('_disabled');
-            else if (this.today > new Date(`${this.month} ${this.daysHtml[i].textContent} ${this.year}`)) this.daysHtml[i].classList.add('_disabled');
+            else if (!this.previousDays) {
+                if (this.today > new Date(`${this.month} ${this.daysHtml[i].textContent} ${this.year}`)) this.daysHtml[i].classList.add('_disabled');
+            }
 
             this.daysHtml[i].onclick = () => {
                 this.setInput(this.daysHtml[i].textContent, !this.daysHtml[i].classList.contains('_disabled'));

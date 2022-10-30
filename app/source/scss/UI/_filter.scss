@@ -67,12 +67,23 @@
         }
     }
 
+    // .input__block {
+    //     display: flex;
+    //     align-items: center;
+
+    //     height: 100%;
+    // }
+
     .application-filter_input {
         background: transparent;
 
         color: #fff;
 
         text-decoration: underline;
+
+        padding: 0 1rem;
+
+        height: 100%;
 
         &._city {
             padding: 0 1rem 0 3.75rem;
