@@ -88,4 +88,14 @@ function stringMaxAndPoint($string, $length) {
     return mb_substr($string, 0, $length) . '...';
 }
 
+function wordLast($string) {
+    $string = substr($string, strrpos($string,','), strlen($string));
+    $string = str_replace(',', '', $string);
+    return trim($string);
+}
+
+// Козова, Тернопольская область, Украина
+
+// var_dump(wordLast('Козова, Тернопольская область, Украина'));
+
 ?>

@@ -22,7 +22,7 @@ if (isset($button_create)) {
 ?>
 
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 
 <head>
     <? require_once __DIR__ . './../../components/meta.php' ?>
@@ -117,7 +117,7 @@ if (isset($button_create)) {
                         </div>
                         <div class="select">
                             <div class="select__title">
-                                Высота груза:
+                                Высота груза (метров):
                             </div>
                             <div class="select__content">
                                 <div class="select-block">
@@ -163,7 +163,7 @@ if (isset($button_create)) {
                         </label>
                         <div class="input__block">
                             <label class="input__title" for="mass">
-                                Общая масса груза:
+                                Общая масса груза (тонн):
                             </label>
                             <input class="input" type="number" id="mass" placeholder="Введите массу груза">
                         </div>

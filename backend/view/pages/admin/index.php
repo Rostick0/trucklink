@@ -43,7 +43,7 @@ $price_select = [
 ?>
 
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 
 <head>
     <? require_once __DIR__ . './../../components/meta.php' ?>
@@ -296,7 +296,6 @@ $price_select = [
                     </table>
                 </div>
             </div>
-            <div class="underline_main"></div>
         </main>
         <? require_once __DIR__ . './../../components/footer.php'; ?>
     </div>

@@ -1,14 +1,14 @@
 <?
 
-$from = $_REQUEST['from'];
-$to = $_REQUEST['to'];
+$from = $_REQUEST['from_checked'] ? $_REQUEST['from'] : null;
+$to = $_REQUEST['to_checked'] ? $_REQUEST['to'] : null;
 $date = $_REQUEST['date'];
 $transport_type = $_REQUEST['transport_type'];
 
 $create_button = $_REQUEST['create_button'];
 
 if (isset($create_button)) {
-    $query = ApplicationController::firstCreate($from, $to, $date, $transport_type);
+   $query = ApplicationController::firstCreate($from, $to, $date, $transport_type);
 }
 
 $application_sql = "WHERE `is_deleted` = 0 ORDER BY `application_id` ASC LIMIT 10";
@@ -19,7 +19,7 @@ $transport_type_db = getDbDate('transport_type');
 ?>
 
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 
 <head>
     <? require_once __DIR__ . './../components/meta.php' ?>
@@ -49,7 +49,7 @@ $transport_type_db = getDbDate('transport_type');
                         </a>
                         <? require_once __DIR__ . './../components/header_log.php' ?>
                     </div>
-                    <div class="header__center">
+                    <div class="header__center aniEl">
                         <h1 class="header__title section-title">
                             Доставим ваш 
                             груз с гарантией
@@ -106,7 +106,7 @@ $transport_type_db = getDbDate('transport_type');
                             </div>
                         </div>
                     </div>
-                    <div class="header__bottom">
+                    <div class="header__bottom aniEl">
                         <form class="header__form" method="POST">
                             <table class="header__table-form">
                                 <tbody>
@@ -126,14 +126,14 @@ $transport_type_db = getDbDate('transport_type');
                                         <td>
                                             <div class="input__block">
                                                 <div class="input-block__content">
-                                                    <svg width="1rem" height="1rem" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <svg class="inpImg" width="1rem" height="1rem" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <g clip-path="url(#clip0_39_896)">
                                                             <path d="M1 7.63158L15 1L8.36842 15L6.89474 9.10526L1 7.63158Z" stroke="#131A24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                         </g>
                                                         <defs>
                                                     </svg>
-                                                    <input class="input-block__input addres-search _from_text" type="text" placeholder="Откуда" value="<?= $from ?>">
-                                                    <input class="input-block__input addres-search _from" type="text" name="from" hidden>
+                                                    <input class="input-block__input addres-search _from_text" type="text" placeholder="Откуда" name="from" value="<?= $from ?>">
+                                                    <input class="input-block__input addres-search _from" type="text" name="from_checked" hidden>
                                                 </div>
                                                 <? if ($query['data']['from']) : ?>
                                                     <div class="_color-error">
@@ -145,14 +145,14 @@ $transport_type_db = getDbDate('transport_type');
                                         <td>
                                             <div class="input__block">
                                                 <div class="input-block__content addres-search">
-                                                    <svg width="1rem" height="1rem" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <svg class="inpImg" width="1rem" height="1rem" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <g clip-path="url(#clip0_39_896)">
                                                             <path d="M1 7.63158L15 1L8.36842 15L6.89474 9.10526L1 7.63158Z" stroke="#131A24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                         </g>
                                                         <defs>
                                                     </svg>
-                                                    <input class="input-block__input addres-search _to_text" type="text" placeholder="Куда" value="<?= $to ?>">
-                                                    <input class="input-block__input addres-search _to" type="text" name="to" hidden>
+                                                    <input class="input-block__input addres-search _to_text" type="text" placeholder="Куда" name="to" value="<?= $to ?>">
+                                                    <input class="input-block__input addres-search _to" type="text" name="to_checked" hidden>
                                                 </div>
                                                 <? if ($query['data']['to']) : ?>
                                                     <div class="_color-error">
@@ -164,7 +164,7 @@ $transport_type_db = getDbDate('transport_type');
                                         <td>
                                             <div class="input__block">
                                                 <div class="input-block__content">
-                                                    <svg width="1.5rem" height="1.5rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <svg class="inpImg" width="1.5rem" height="1.5rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M15.9736 3.75C15.9736 3.33579 15.6378 3 15.2236 3C14.8094 3 14.4736 3.33579 14.4736 3.75V4.4501H9.52832V3.75C9.52832 3.33579 9.19253 3 8.77832 3C8.36411 3 8.02832 3.33579 8.02832 3.75V4.4501H6.36133C5.13352 4.4501 4 5.36273 4 6.65024V9.55058V16.8012C4 18.0887 5.13352 19.0013 6.36133 19.0013H17.6406C18.8684 19.0013 20.002 18.0887 20.002 16.8012V9.55058V6.65024C20.002 5.36273 18.8684 4.4501 17.6406 4.4501H15.9736V3.75ZM18.502 8.80058V6.65024C18.502 6.33596 18.1927 5.9501 17.6406 5.9501H15.9736V6.65027C15.9736 7.06449 15.6378 7.40027 15.2236 7.40027C14.8094 7.40027 14.4736 7.06449 14.4736 6.65027V5.9501H9.52832V6.65027C9.52832 7.06449 9.19253 7.40027 8.77832 7.40027C8.36411 7.40027 8.02832 7.06449 8.02832 6.65027V5.9501H6.36133C5.80932 5.9501 5.5 6.33596 5.5 6.65024V8.80058H18.502ZM5.5 10.3006H18.502V16.8012C18.502 17.1155 18.1927 17.5013 17.6406 17.5013H6.36133C5.80932 17.5013 5.5 17.1155 5.5 16.8012V10.3006Z" fill="black" />
                                                     </svg>
                                                     <div class="calendar-form">
@@ -265,7 +265,7 @@ $transport_type_db = getDbDate('transport_type');
                                         <td>
                                             <div class="input__block input-search__block">
                                                 <div class="input-block__content">
-                                                    <svg width="1.5rem" height="1.5rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <svg class="inpImg" width="1.5rem" height="1.5rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M16 3H1V16H16V3Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                         <path d="M16 8H20L23 11V16H16V8Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                         <path d="M5.5 21C6.88071 21 8 19.8807 8 18.5C8 17.1193 6.88071 16 5.5 16C4.11929 16 3 17.1193 3 18.5C3 19.8807 4.11929 21 5.5 21Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -306,14 +306,14 @@ $transport_type_db = getDbDate('transport_type');
         <main class="main">
             <section class="recently-loads">
                 <div class="container">
-                    <div class="recently-loads__title section-title">
+                    <div class="recently-loads__title section-title aniEl">
                         Недавно добавленные грузы
                     </div>
-                    <div class="recently-loads__subtitle section-subtitle">
+                    <div class="recently-loads__subtitle section-subtitle aniEl">
                         Our service offerings include freight forwarding, international shipping and customs brokerage, freight transportation management,
                         warehousing services, and more.
                     </div>
-                    <table class="application__table">
+                    <table class="application__table aniEl">
                         <tbody>
                             <tr class="application__item_title">
                                 <th>
@@ -336,14 +336,20 @@ $transport_type_db = getDbDate('transport_type');
                                         <div class="application__route">
                                             <div class="application__status"></div>
                                             <div class="application__way">
-                                                <div class="application__from" title="<?= $application['from'] ?>">
-                                                    <img src="/view/static/img/flag.png" alt=""> <?= stringMaxAndPoint($application['from'], 20) ?>
+                                                <div class="application__from" data-title="<?= $application['from'] ?>">
+                                                    <img class="application__flag" src="/view/static/img/flags/<?= wordLast($application['from']) ?>.png" alt="<?= wordLast($application['from']) ?>">
+                                                    <span>
+                                                        <?= stringMaxAndPoint($application['from'], 20) ?>
+                                                    </span>
                                                 </div>
                                                 <span class="applicaton__arrow">
                                                     →
                                                 </span>
-                                                <div class="application__to" title="<?= $application['to'] ?>">
-                                                    <img src="/view/static/img/flag.png" alt=""> <?= stringMaxAndPoint($application['to'], 20) ?>
+                                                <div class="application__to" data-title="<?= $application['to'] ?>">
+                                                    <img class="application__flag" src="/view/static/img/flags/<?= wordLast($application['to']) ?>.png" alt="<?= wordLast($application['to']) ?>">
+                                                    <span>
+                                                        <?= stringMaxAndPoint($application['to'], 20) ?>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -377,31 +383,31 @@ $transport_type_db = getDbDate('transport_type');
             </section>
             <section class="transport-nearby">
                 <div class="container">
-                    <div class="transport-nearby__title section-title">
+                    <div class="transport-nearby__title section-title aniEl">
                         Доступный транспорт рядом
                     </div>
-                    <div class="transport-nearby__subtitle section-subtitle">
+                    <div class="transport-nearby__subtitle section-subtitle aniEl">
                         Our service offerings include freight forwarding, international shipping and customs brokerage, freight transportation management,
                         warehousing services, and more.
                     </div>
-                    <a class="transport-nearby__button button" href="">
+                    <a class="transport-nearby__button button aniEl" href="">
                         Узнать расстояние
                     </a>
                     <ul class="transport-nearby__list">
-                        <li class="transport-nearby__item">
+                        <li class="transport-nearby__item aniEl">
                             <div class="transport-nearby__icon">
                                 <svg width="2.12rem" height="2.62rem" viewBox="0 0 34 42" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M17 40C17 40 32 32.4 32 21V7.7L17 2L2 7.7V21C2 32.4 17 40 17 40Z" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                             </div>
-                            <div class="transport-nearby__item_title">
+                            <div class="transport-nearby__item_title aniEl">
                                 Гарантия
                             </div>
-                            <div class="transport-nearby__item_subtitle">
+                            <div class="transport-nearby__item_subtitle aniEl">
                                 полная ответственность за сохранность груза
                             </div>
                         </li>
-                        <li class="transport-nearby__item">
+                        <li class="transport-nearby__item aniEl">
                             <div class="transport-nearby__icon">
                                 <svg width="3rem" height="3rem" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M31 9H6V31H31V9Z" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
@@ -410,37 +416,37 @@ $transport_type_db = getDbDate('transport_type');
                                     <path d="M35 39C37.2091 39 39 37.2091 39 35C39 32.7909 37.2091 31 35 31C32.7909 31 31 32.7909 31 35C31 37.2091 32.7909 39 35 39Z" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                             </div>
-                            <div class="transport-nearby__item_title">
+                            <div class="transport-nearby__item_title aniEl">
                                 Автопарк
                             </div>
-                            <div class="transport-nearby__item_subtitle">
+                            <div class="transport-nearby__item_subtitle aniEl">
                                 больше 2000 машин в распоряжении
                             </div>
                         </li>
-                        <li class="transport-nearby__item">
+                        <li class="transport-nearby__item aniEl">
                             <div class="transport-nearby__icon">
                                 <svg width="3rem" height="3rem" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M7 35V23.8C7 19.3444 8.79107 15.0712 11.9792 11.9206C15.1673 8.77 19.4913 7 24 7C28.5087 7 32.8327 8.77 36.0208 11.9206C39.2089 15.0712 41 19.3444 41 23.8V35" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
                                     <path d="M41 37.2857C41 38.2708 40.602 39.2155 39.8935 39.9121C39.185 40.6087 38.2242 41 37.2222 41H35.3333C34.3314 41 33.3705 40.6087 32.662 39.9121C31.9536 39.2155 31.5556 38.2708 31.5556 37.2857V31.7143C31.5556 30.7292 31.9536 29.7845 32.662 29.0879C33.3705 28.3913 34.3314 28 35.3333 28H41V37.2857ZM7 37.2857C7 38.2708 7.39801 39.2155 8.10649 39.9121C8.81496 40.6087 9.77585 41 10.7778 41H12.6667C13.6686 41 14.6295 40.6087 15.338 39.9121C16.0464 39.2155 16.4444 38.2708 16.4444 37.2857V31.7143C16.4444 30.7292 16.0464 29.7845 15.338 29.0879C14.6295 28.3913 13.6686 28 12.6667 28H7V37.2857Z" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                             </div>
-                            <div class="transport-nearby__item_title">
+                            <div class="transport-nearby__item_title aniEl">
                                 Поддержка
                             </div>
-                            <div class="transport-nearby__item_subtitle">
+                            <div class="transport-nearby__item_subtitle aniEl">
                                 круглосуточная поддержка на 8 языках мира
                             </div>
                         </li>
-                        <li class="transport-nearby__item">
+                        <li class="transport-nearby__item aniEl">
                             <div class="transport-nearby__icon">
                                 <svg width="3rem" height="3rem" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M15.1451 41.9998H9.65804C8.68787 41.9998 7.75743 41.6205 7.07142 40.9454C6.3854 40.2702 6 39.3546 6 38.3998V25.7999C6 24.8451 6.3854 23.9294 7.07142 23.2543C7.75743 22.5792 8.68787 22.1999 9.65804 22.1999H15.1451M27.9483 18.5999V11.4C27.9483 9.96781 27.3702 8.5943 26.3411 7.58161C25.3121 6.56892 23.9165 6 22.4612 6L15.1451 22.1999V41.9998H35.7765C36.6587 42.0096 37.5147 41.7053 38.187 41.143C38.8592 40.5807 39.3022 39.7982 39.4345 38.9398L41.9586 22.7399C42.0382 22.2239 42.0028 21.6971 41.8549 21.196C41.7071 20.6948 41.4503 20.2312 41.1023 19.8374C40.7544 19.4436 40.3236 19.129 39.8398 18.9153C39.356 18.7016 38.8308 18.594 38.3005 18.5999H27.9483Z" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                             </div>
-                            <div class="transport-nearby__item_title">
+                            <div class="transport-nearby__item_title aniEl">
                                 Репутация
                             </div>
-                            <div class="transport-nearby__item_subtitle">
+                            <div class="transport-nearby__item_subtitle aniEl">
                                 более 15 лет успешной работы с отзывами от клиентов
                             </div>
                         </li>
@@ -449,10 +455,10 @@ $transport_type_db = getDbDate('transport_type');
             </section>
             <section class="about-company">
                 <div class="container">
-                    <div class="about-company__title section-title">
+                    <div class="about-company__title section-title aniEl">
                         О компании
                     </div>
-                    <div class="about-company__subtitle section-subtitle">
+                    <div class="about-company__subtitle section-subtitle aniEl">
                         <p>
                             CNU Logistics LLC is one of the leading and fastest growing companies in the field of carrier and logistics services (FTL & LTL). We provide our drivers with the best working conditions in North America, so that our clients would receive the best service.
                         </p>
@@ -461,7 +467,7 @@ $transport_type_db = getDbDate('transport_type');
                         </p>
                     </div>
                     <ul class="about-company__people">
-                        <li class="about-company__people_item">
+                        <li class="about-company__people_item aniEl">
                             <div class="about-company__people_img">
                                 <img src="/view/static/img/company_people.png" alt="">
                             </div>
@@ -472,7 +478,7 @@ $transport_type_db = getDbDate('transport_type');
                                 CEO
                             </div>
                         </li>
-                        <li class="about-company__people_item">
+                        <li class="about-company__people_item aniEl">
                             <div class="about-company__people_img">
                                 <img src="/view/static/img/company_people_2.png" alt="">
                             </div>
@@ -483,7 +489,7 @@ $transport_type_db = getDbDate('transport_type');
                                 CEO
                             </div>
                         </li>
-                        <li class="about-company__people_item">
+                        <li class="about-company__people_item aniEl">
                             <div class="about-company__people_img">
                                 <img src="/view/static/img/company_people_3.png" alt="">
                             </div>
@@ -494,7 +500,7 @@ $transport_type_db = getDbDate('transport_type');
                                 CEO
                             </div>
                         </li>
-                        <li class="about-company__people_item">
+                        <li class="about-company__people_item aniEl">
                             <div class="about-company__people_img">
                                 <img src="/view/static/img/company_people_4.png" alt="">
                             </div>
@@ -510,10 +516,10 @@ $transport_type_db = getDbDate('transport_type');
             </section>
             <section class="frequent-questions">
                 <div class="container">
-                    <div class="frequent-questions__title section-title">
+                    <div class="frequent-questions__title section-title aniEl">
                         Частые вопросы
                     </div>
-                    <ul class="questions__list">
+                    <ul class="questions__list aniEl">
                         <li class="questions__item">
                             <div class="questions__item_question">
                                 <div class="questions__item_title">

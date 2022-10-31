@@ -38,3 +38,16 @@ function removeClass(elem, classHtml) {
 
     elem.classList.remove(classHtml)
 }
+
+function wordLast(string) {
+    string = string.split(',');
+    string = string[string.length - 1];
+    string = string.trim();
+    return string;
+}
+
+// function wordLast($string) {
+//     $string = substr($string, strrpos($string,','), strlen($string));
+//     $string = str_replace(',', '', $string);
+//     return trim($string);
+// }

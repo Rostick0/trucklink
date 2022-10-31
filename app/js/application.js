@@ -147,16 +147,20 @@ function getApplications(htmlContainer, htmlElem, queryParams = '') {
                 <td colspan=2>
                     <div class="application__route">
                         <div class="application__way">
-                            <div class="application__from" title="${elem?.from}">
-                                <img src="./view/static/img/flag.png" alt="${elem?.from}">
-                                ${stringMaxAndPoint(elem?.from)}
+                            <div class="application__from" data-title="${elem?.from}">
+                                <img class="application__flag" src="/view/static/img/flags/${wordLast(elem?.from)}.png" alt="${elem?.from}">
+                                <span>
+                                    ${stringMaxAndPoint(elem?.from)}    
+                                </span>
                             </div>
                             <span class="applicaton__arrow">
                                 →
                             </span>
-                            <div class="application__to" title="${elem?.to}">
-                                <img src="./view/static/img/flag.png" alt="${elem?.to}">
-                                ${stringMaxAndPoint(elem?.to)}
+                            <div class="application__to" data-title="${elem?.to}">
+                                <img class="application__flag" src="/view/static/img/flags/${wordLast(elem?.to)}.png" alt="${elem?.to}">
+                                <span>
+                                    ${stringMaxAndPoint(elem?.to)}
+                                </span>
                             </div>
                         </div>
                     </div>

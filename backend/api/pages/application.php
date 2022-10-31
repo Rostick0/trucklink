@@ -46,7 +46,7 @@ switch ($http_method) {
             $where_params .= "LIMIT $limit";
         
             if ($offset) {
-                $where_params .= "OFFSET $offset";
+                $where_params .= " OFFSET $offset";
             }
         }
         

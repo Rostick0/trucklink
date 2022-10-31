@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 
 <head>
     <? require_once __DIR__ . './../../components/meta.php' ?>
