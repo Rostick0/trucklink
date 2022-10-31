@@ -1,0 +1,193 @@
+2022-10-31 16:05:02 pid:1 Error: Cannot use object of type stdClass as array in C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php:38
+Stack trace:
+#0 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}()
+#1 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead()
+#2 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(2467): Workerman\Events\Select->loop()
+#3 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1453): Workerman\Worker->run()
+#4 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1396): Workerman\Worker::forkWorkersForWindows()
+#5 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#6 C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php(52): Workerman\Worker::runAll()
+#7 {main}
+2022-10-31 16:06:15 pid:1 Exception: You can't send(object) to client, you need to convert it to a string.  in C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Protocols\Websocket.php:230
+Stack trace:
+#0 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Connection\TcpConnection.php(321): Workerman\Protocols\Websocket::encode()
+#1 C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php(41): Workerman\Connection\TcpConnection->send()
+#2 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}()
+#3 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead()
+#4 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(2467): Workerman\Events\Select->loop()
+#5 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1453): Workerman\Worker->run()
+#6 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1396): Workerman\Worker::forkWorkersForWindows()
+#7 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#8 C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php(53): Workerman\Worker::runAll()
+#9 {main}
+2022-10-31 16:06:39 pid:1 Error: Cannot use object of type stdClass as array in C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php:38
+Stack trace:
+#0 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}()
+#1 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead()
+#2 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(2467): Workerman\Events\Select->loop()
+#3 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1453): Workerman\Worker->run()
+#4 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1396): Workerman\Worker::forkWorkersForWindows()
+#5 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#6 C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php(51): Workerman\Worker::runAll()
+#7 {main}
+2022-10-31 16:09:46 pid:1 Error: Cannot use object of type stdClass as array in C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php:37
+Stack trace:
+#0 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}()
+#1 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead()
+#2 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(2467): Workerman\Events\Select->loop()
+#3 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1453): Workerman\Worker->run()
+#4 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1396): Workerman\Worker::forkWorkersForWindows()
+#5 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#6 C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php(52): Workerman\Worker::runAll()
+#7 {main}
+2022-10-31 16:12:16 pid:1 Error: Cannot use object of type stdClass as array in C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php:39
+Stack trace:
+#0 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}()
+#1 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead()
+#2 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(2467): Workerman\Events\Select->loop()
+#3 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1453): Workerman\Worker->run()
+#4 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1396): Workerman\Worker::forkWorkersForWindows()
+#5 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#6 C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php(54): Workerman\Worker::runAll()
+#7 {main}
+2022-10-31 16:21:25 pid:1 Error: Cannot use object of type Workerman\Connection\TcpConnection as array in C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php:33
+Stack trace:
+#0 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}()
+#1 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead()
+#2 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(2467): Workerman\Events\Select->loop()
+#3 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1453): Workerman\Worker->run()
+#4 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1396): Workerman\Worker::forkWorkersForWindows()
+#5 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#6 C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php(52): Workerman\Worker::runAll()
+#7 {main}
+2022-10-31 16:24:36 pid:1 Error: Cannot use object of type Workerman\Connection\TcpConnection as array in C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php:33
+Stack trace:
+#0 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}()
+#1 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead()
+#2 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(2467): Workerman\Events\Select->loop()
+#3 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1453): Workerman\Worker->run()
+#4 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1396): Workerman\Worker::forkWorkersForWindows()
+#5 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#6 C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php(52): Workerman\Worker::runAll()
+#7 {main}
+2022-10-31 17:02:16 pid:1 Error: Call to a member function send() on null in C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php:34
+Stack trace:
+#0 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}()
+#1 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead()
+#2 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(2467): Workerman\Events\Select->loop()
+#3 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1453): Workerman\Worker->run()
+#4 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1396): Workerman\Worker::forkWorkersForWindows()
+#5 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#6 C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php(51): Workerman\Worker::runAll()
+#7 {main}
+2022-10-31 20:52:06 pid:1 Error: Call to a member function query() on null in C:\Users\irlnl\Desktop\trucklink\backend\model\online.php:7
+Stack trace:
+#0 C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php(22): Online::set()
+#1 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Protocols\Websocket.php(407): {closure}()
+#2 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Protocols\Websocket.php(57): Workerman\Protocols\Websocket::dealHandshake()
+#3 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Connection\TcpConnection.php(601): Workerman\Protocols\Websocket::input()
+#4 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead()
+#5 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(2467): Workerman\Events\Select->loop()
+#6 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1453): Workerman\Worker->run()
+#7 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1396): Workerman\Worker::forkWorkersForWindows()
+#8 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#9 C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php(49): Workerman\Worker::runAll()
+#10 {main}
+2022-10-31 20:52:06 pid:1 Error: Call to a member function query() on null in C:\Users\irlnl\Desktop\trucklink\backend\model\online.php:7
+Stack trace:
+#0 C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php(46): Online::set()
+#1 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Connection\TcpConnection.php(920): {closure}()
+#2 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Connection\TcpConnection.php(827): Workerman\Connection\TcpConnection->destroy()
+#3 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(2492): Workerman\Connection\TcpConnection->close()
+#4 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1901): Workerman\Worker->stop()
+#5 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Protocols\Websocket.php(411): Workerman\Worker::stopAll()
+#6 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Protocols\Websocket.php(57): Workerman\Protocols\Websocket::dealHandshake()
+#7 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Connection\TcpConnection.php(601): Workerman\Protocols\Websocket::input()
+#8 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead()
+#9 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(2467): Workerman\Events\Select->loop()
+#10 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1453): Workerman\Worker->run()
+#11 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1396): Workerman\Worker::forkWorkersForWindows()
+#12 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#13 C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php(49): Workerman\Worker::runAll()
+#14 {main}
+2022-10-31 20:53:17 pid:1 Error: Call to a member function query() on null in C:\Users\irlnl\Desktop\trucklink\backend\model\online.php:7
+Stack trace:
+#0 C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php(22): Online::set()
+#1 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Protocols\Websocket.php(407): {closure}()
+#2 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Protocols\Websocket.php(57): Workerman\Protocols\Websocket::dealHandshake()
+#3 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Connection\TcpConnection.php(601): Workerman\Protocols\Websocket::input()
+#4 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead()
+#5 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(2467): Workerman\Events\Select->loop()
+#6 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1453): Workerman\Worker->run()
+#7 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1396): Workerman\Worker::forkWorkersForWindows()
+#8 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#9 C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php(49): Workerman\Worker::runAll()
+#10 {main}
+2022-10-31 20:53:18 pid:1 Error: Call to a member function query() on null in C:\Users\irlnl\Desktop\trucklink\backend\model\online.php:7
+Stack trace:
+#0 C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php(46): Online::set()
+#1 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Connection\TcpConnection.php(920): {closure}()
+#2 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Connection\TcpConnection.php(827): Workerman\Connection\TcpConnection->destroy()
+#3 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(2492): Workerman\Connection\TcpConnection->close()
+#4 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1901): Workerman\Worker->stop()
+#5 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Protocols\Websocket.php(411): Workerman\Worker::stopAll()
+#6 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Protocols\Websocket.php(57): Workerman\Protocols\Websocket::dealHandshake()
+#7 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Connection\TcpConnection.php(601): Workerman\Protocols\Websocket::input()
+#8 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead()
+#9 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(2467): Workerman\Events\Select->loop()
+#10 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1453): Workerman\Worker->run()
+#11 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1396): Workerman\Worker::forkWorkersForWindows()
+#12 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#13 C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php(49): Workerman\Worker::runAll()
+#14 {main}
+2022-10-31 20:53:30 pid:1 Error: Call to a member function query() on null in C:\Users\irlnl\Desktop\trucklink\backend\model\online.php:7
+Stack trace:
+#0 C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php(22): Online::set()
+#1 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Protocols\Websocket.php(407): {closure}()
+#2 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Protocols\Websocket.php(57): Workerman\Protocols\Websocket::dealHandshake()
+#3 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Connection\TcpConnection.php(601): Workerman\Protocols\Websocket::input()
+#4 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead()
+#5 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(2467): Workerman\Events\Select->loop()
+#6 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1453): Workerman\Worker->run()
+#7 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1396): Workerman\Worker::forkWorkersForWindows()
+#8 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#9 C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php(49): Workerman\Worker::runAll()
+#10 {main}
+2022-10-31 20:53:30 pid:1 Error: Call to a member function query() on null in C:\Users\irlnl\Desktop\trucklink\backend\model\online.php:7
+Stack trace:
+#0 C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php(46): Online::set()
+#1 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Connection\TcpConnection.php(920): {closure}()
+#2 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Connection\TcpConnection.php(827): Workerman\Connection\TcpConnection->destroy()
+#3 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(2492): Workerman\Connection\TcpConnection->close()
+#4 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1901): Workerman\Worker->stop()
+#5 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Protocols\Websocket.php(411): Workerman\Worker::stopAll()
+#6 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Protocols\Websocket.php(57): Workerman\Protocols\Websocket::dealHandshake()
+#7 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Connection\TcpConnection.php(601): Workerman\Protocols\Websocket::input()
+#8 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead()
+#9 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(2467): Workerman\Events\Select->loop()
+#10 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1453): Workerman\Worker->run()
+#11 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1396): Workerman\Worker::forkWorkersForWindows()
+#12 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#13 C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php(49): Workerman\Worker::runAll()
+#14 {main}
+2022-10-31 23:41:49 pid:1 Error: Call to undefined function protectedData() in C:\Users\irlnl\Desktop\trucklink\backend\controller\message.php:5
+Stack trace:
+#0 C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php(37): MessageController::create()
+#1 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}()
+#2 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead()
+#3 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(2467): Workerman\Events\Select->loop()
+#4 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1453): Workerman\Worker->run()
+#5 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1396): Workerman\Worker::forkWorkersForWindows()
+#6 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#7 C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php(57): Workerman\Worker::runAll()
+#8 {main}
+2022-10-31 23:52:55 pid:1 Error: Call to a member function send() on null in C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php:40
+Stack trace:
+#0 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}()
+#1 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead()
+#2 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(2467): Workerman\Events\Select->loop()
+#3 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1453): Workerman\Worker->run()
+#4 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1396): Workerman\Worker::forkWorkersForWindows()
+#5 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#6 C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php(53): Workerman\Worker::runAll()
+#7 {main}

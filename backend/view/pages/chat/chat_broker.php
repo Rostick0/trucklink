@@ -1,7 +1,10 @@
 <?
 
-$user_id = (int) $_GET['id'];
+$application_id = (int) $_GET['application_id'];
 
+$application = getDbDate('application', 'application_id', $application_id)->fetch_assoc();
+
+$user_id = 3;
 $user = getDbDate('user', 'user_id', $user_id)->fetch_assoc();
 
 if (!$user) {
@@ -14,24 +17,24 @@ if (!$user) {
 <html lang="en">
 
 <head>
-    <? require_once __DIR__ . './../components/meta.php' ?>
-    <? require_once __DIR__ . './../components/style.php' ?>
+    <? require_once __DIR__ . './../../components/meta.php' ?>
+    <? require_once __DIR__ . './../../components/style.php' ?>
     <title>Чат</title>
 </head>
 
 <body>
     <div class="wrapper chat">
-        <? require_once __DIR__ . './../components/header.php'; ?>
+        <? require_once __DIR__ . './../../components/header.php'; ?>
         <main class="main">
             <div class="container">
                 <div class="chat__main_container">
                     <section class="user-info">
-                        <? require_once __DIR__ . './../components/profile_avatar.php'; ?>
+                        <? require_once __DIR__ . './../../components/profile_avatar.php'; ?>
                         <div class="user-info__user section-title">
                             <?= $user['name'] . " " . $user['surname'] ?>
                         </div>
                         <div class="user-info__greet">
-                            ID <?= $user['user_id'] ?>
+                            ID <?= $application_id ?>
                         </div>
                     </section>
                     <div class="application__buttons">
@@ -57,7 +60,7 @@ if (!$user) {
                     </div>
                     <section class="chat__block">
                         <div class="chat__block_top">
-                            <? require_once __DIR__ . './../components/chat_avatar.php'; ?>
+                            <? require_once __DIR__ . './../../components/chat_avatar.php'; ?>
                             <div class="chat__block_top_text">
                                 <div class="chat__user-fullname">
                                     <?= $user['name'] . " " . $user['surname'] ?>
@@ -77,33 +80,32 @@ if (!$user) {
                         </div>
                         <div class="chat__content">
                             <div class="chat__messages">
-                                <div class="chat__date">
-                                    сегодня
-                                </div>
-                                <div class="chat__message">
-                                    Then at 5 near the tower
-                                </div>
-                                <div class="chat__message _from-me">
-                                    We can meet? I am free
-                                </div>
+                                <? foreach ($messages as $message) : ?>
+                                    <div class="chat__message <?= $message['user_to'] === $user_id ? '_from-me' : '' ?>">
+                                        <?= $message['text'] ?>
+                                    </div>
+                                <? endforeach ?>
                             </div>
-                            <div class="chat__content_bottom">
+                            <form class="chat__content_bottom" method="POST" onsubmit="return false;">
                                 <textarea class="chat__textarea input _height-important"></textarea>
                                 <button class="chat__send button">
                                     <svg width="1.625rem" height="1.625rem" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M8.66685 13.0007L5.99547 20.8803C5.95589 20.9851 5.94773 21.0989 5.97196 21.2081C5.9962 21.3173 6.05181 21.4173 6.13219 21.4964C6.21258 21.5754 6.31435 21.6301 6.42541 21.6539C6.53648 21.6777 6.65216 21.6697 6.75872 21.6308L21.125 14.084L21.348 13.9668L21.5711 13.8496L21.7941 13.7325C21.7941 13.7325 22.2083 13.5423 22.2083 13.0007C22.2083 12.459 21.7941 12.2688 21.7941 12.2688L21.5711 12.1517L21.348 12.0345L21.125 11.9173L6.75872 4.37052C6.65216 4.3316 6.53647 4.32358 6.42541 4.3474C6.31435 4.37123 6.21258 4.42592 6.13219 4.50495C6.05181 4.58398 5.9962 4.68405 5.97196 4.79325C5.94773 4.90245 5.95589 5.01619 5.99547 5.12097L8.66685 13.0007ZM8.66685 13.0007H14.0833" stroke="#FAFAFA" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                 </button>
-                            </div>
+                            </form>
                         </div>
                     </section>
                 </div>
             </div>
         </main>
-        <? require_once __DIR__ . './../components/footer.php'; ?>
+        <? require_once __DIR__ . './../../components/footer.php'; ?>
     </div>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/autosize.js/3.0.15/autosize.min.js'></script>
-    <? require_once __DIR__ . './../components/script.php'; ?>
+    <script>
+        const userTo = 3;
+    </script>
+    <? require_once __DIR__ . './../../components/script.php'; ?>
 </body>
 
 </html>

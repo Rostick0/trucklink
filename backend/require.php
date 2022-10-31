@@ -24,6 +24,9 @@ require_once './controller/user.php';
 require_once './model/application.php';
 require_once './controller/application.php';
 
+require_once './model/message.php';
+require_once './controller/message.php';
+
 require_once './router.php';
 
 ?>

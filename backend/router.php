@@ -31,7 +31,7 @@ switch ($uri_short) {
         $path_page .= '/edit/application_edit.php';
         break;
     case '/chat':
-        $path_page .= '/chat.php';
+        $path_page .= '/chat/chat.php';
         break;
     case '/admin':
         $path_page .= '/admin/index.php';

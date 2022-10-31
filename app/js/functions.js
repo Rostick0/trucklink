@@ -45,9 +45,3 @@ function wordLast(string) {
     string = string.trim();
     return string;
 }
-
-// function wordLast($string) {
-//     $string = substr($string, strrpos($string,','), strlen($string));
-//     $string = str_replace(',', '', $string);
-//     return trim($string);
-// }
