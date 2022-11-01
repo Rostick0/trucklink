@@ -1,3 +1,7 @@
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
 CREATE TABLE `application` (
   `application_id` int(11) NOT NULL,
   `from` varchar(255) NOT NULL,
@@ -58,7 +62,7 @@ INSERT INTO `loading_method` (`loading_method_id`, `name`) VALUES
 
 CREATE TABLE `message` (
   `message_id` int(11) NOT NULL,
-  `text` text NOT NULL,
+  `text` text CHARACTER SET utf8mb4 NOT NULL,
   `is_read` tinyint(1) NOT NULL DEFAULT '0',
   `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `application_id` int(11) NOT NULL,
@@ -171,7 +175,7 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`user_id`, `email`, `telephone`, `password`, `name`, `surname`, `avatar`, `created`, `user_type_id`, `last_online`, `is_online`, `is_banned`) VALUES
 (1, 'rostik057@gmail.com', '79999999', '$2y$10$bsQTdXVTQ0Q46j8ljpKPXOfluHPuF3pXoS.BudiL0voc2GEX6SdqS', 'Ростислав', 'Фамилия', '16668247037096.jpeg', '2022-10-15 22:27:42', 1, '2022-11-01 00:10:48', 1, 0),
 (2, 'zajcevav30@gmail.com', '79999999999', '$2y$10$HPWufvrFTHNVH.iqJm3wb.p1KIgQK9Bx1RN2B0MrkpyBy3RestyTy', 'zajcevav301', 'zajcevav301', NULL, '2022-10-17 16:00:48', 2, '2022-10-17 16:00:48', 1, 0),
-(3, 'aideweb.host@gmail.com', '10101010000', '$2y$10$DaBxQhrLH7TKul6qUV5O8ua4cQiuQ5axoJ7eXZAH9/dBBUEaxgFE.', 'Sergey', 'Perekrestow', '16671550453621.png', '2022-10-30 18:11:18', 1, '2022-11-01 00:10:51', 1, 0);
+(3, 'aideweb.host@gmail.com', '10101010000', '$2y$10$DaBxQhrLH7TKul6qUV5O8ua4cQiuQ5axoJ7eXZAH9/dBBUEaxgFE.', 'Sergey', 'Perekrestow', '16673032141116.jpeg', '2022-10-30 18:11:18', 1, '2022-11-01 19:42:40', 1, 0);
 
 CREATE TABLE `user_session` (
   `user_session_id` int(11) NOT NULL,
