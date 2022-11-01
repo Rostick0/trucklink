@@ -21,10 +21,6 @@ CREATE TABLE `application` (
   `is_deleted` tinyint(1) NOT NULL DEFAULT '0'
 );
 
---
--- Дамп данных таблицы `application`
---
-
 INSERT INTO `application` (`application_id`, `from`, `to`, `date`, `date_created`, `date_edited`, `transport_type`, `user_fullname`, `user_telephone`, `user_email`, `user_id`, `status`, `loading_method`, `size`, `height`, `photo`, `mass`, `price`, `comment`, `is_deleted`) VALUES
 (1, 'Russia', 'Russia', '2022-10-20', '2022-10-21 13:06:37', '2022-10-21 13:06:37', 1, 'Ростислав Фамилия', 79999999, 'rostik057@gmail.com', 1, 1, 1, 1, 1, NULL, 1, 3221, NULL, 0),
 (2, 'Russia', 'Russia', '2022-10-07', '2022-10-23 12:26:36', '2022-10-23 12:26:36', 1, 'Ростислав Фамилия', 79999999, 'rostik057@gmail.com', 1, 1, NULL, NULL, NULL, '16665171969845.jpeg', NULL, NULL, 'Срочный заказ', 0),
@@ -35,40 +31,20 @@ INSERT INTO `application` (`application_id`, `from`, `to`, `date`, `date_created
 (9, 'Москва Сити, Russia', 'Москва, Russia', '2022-10-30', '2022-10-30 19:25:07', '2022-10-30 19:25:07', 12, 'Имя и Фамилия', 2147483647, 'test@test.com', NULL, 1, 2, 4, 2, NULL, NULL, 890, NULL, 0),
 (11, 'Москва, Russia', 'Санкт-Петербург, Russia', '2022-10-31', '2022-10-30 21:32:06', '2022-10-30 21:32:06', 2, 'Sergey Perekrestow', 2147483647, 'aideweb.host@gmail.com', 3, 1, 2, 3, 1, NULL, NULL, 12000, 'Проверка', 0);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `height`
---
-
 CREATE TABLE `height` (
   `height_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
 );
-
---
--- Дамп данных таблицы `height`
---
 
 INSERT INTO `height` (`height_id`, `name`) VALUES
 (1, '1.5'),
 (2, '2'),
 (3, '2.5');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `loading_method`
---
-
 CREATE TABLE `loading_method` (
   `loading_method_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
 );
-
---
--- Дамп данных таблицы `loading_method`
---
 
 INSERT INTO `loading_method` (`loading_method_id`, `name`) VALUES
 (1, 'With the removal of crossbars'),
@@ -80,12 +56,6 @@ INSERT INTO `loading_method` (`loading_method_id`, `name`) VALUES
 (7, 'With full rastentovka'),
 (8, 'Hydroboard');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `message`
---
-
 CREATE TABLE `message` (
   `message_id` int(11) NOT NULL,
   `text` text NOT NULL,
@@ -96,10 +66,6 @@ CREATE TABLE `message` (
   `user_to` int(11) NOT NULL
 );
 
---
--- Дамп данных таблицы `message`
---
-
 INSERT INTO `message` (`message_id`, `text`, `is_read`, `date_created`, `application_id`, `user_from`, `user_to`) VALUES
 (1, 'Привет', 0, '2022-10-31 20:50:39', 2, 3, 1),
 (2, 'Тест', 0, '2022-10-31 20:51:37', 2, 3, 1),
@@ -108,20 +74,10 @@ INSERT INTO `message` (`message_id`, `text`, `is_read`, `date_created`, `applica
 (5, 'Привки', 0, '2022-10-31 20:54:57', 2, 3, 1),
 (6, 'Ку', 0, '2022-10-31 20:55:05', 2, 3, 1);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `size`
---
-
 CREATE TABLE `size` (
   `size_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
 );
-
---
--- Дамп данных таблицы `size`
---
 
 INSERT INTO `size` (`size_id`, `name`) VALUES
 (1, '48 X 48'),
@@ -129,20 +85,10 @@ INSERT INTO `size` (`size_id`, `name`) VALUES
 (3, '48 X 40'),
 (4, 'Other');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `status`
---
-
 CREATE TABLE `status` (
   `status_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL
 );
-
---
--- Дамп данных таблицы `status`
---
 
 INSERT INTO `status` (`status_id`, `name`) VALUES
 (1, 'Posted'),
@@ -158,20 +104,10 @@ INSERT INTO `status` (`status_id`, `name`) VALUES
 (11, 'Awaiting quote'),
 (12, 'Quoted');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `transport_type`
---
-
 CREATE TABLE `transport_type` (
   `transport_type_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL
 );
-
---
--- Дамп данных таблицы `transport_type`
---
 
 INSERT INTO `transport_type` (`transport_type_id`, `name`) VALUES
 (1, 'Awning'),
@@ -217,12 +153,6 @@ INSERT INTO `transport_type` (`transport_type_id`, `name`) VALUES
 (41, 'Cement truck'),
 (42, 'Maslovoz');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `user`
---
-
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
   `email` varchar(63) NOT NULL,
@@ -238,20 +168,10 @@ CREATE TABLE `user` (
   `is_banned` int(11) NOT NULL DEFAULT '0'
 );
 
---
--- Дамп данных таблицы `user`
---
-
 INSERT INTO `user` (`user_id`, `email`, `telephone`, `password`, `name`, `surname`, `avatar`, `created`, `user_type_id`, `last_online`, `is_online`, `is_banned`) VALUES
 (1, 'rostik057@gmail.com', '79999999', '$2y$10$bsQTdXVTQ0Q46j8ljpKPXOfluHPuF3pXoS.BudiL0voc2GEX6SdqS', 'Ростислав', 'Фамилия', '16668247037096.jpeg', '2022-10-15 22:27:42', 1, '2022-11-01 00:10:48', 1, 0),
 (2, 'zajcevav30@gmail.com', '79999999999', '$2y$10$HPWufvrFTHNVH.iqJm3wb.p1KIgQK9Bx1RN2B0MrkpyBy3RestyTy', 'zajcevav301', 'zajcevav301', NULL, '2022-10-17 16:00:48', 2, '2022-10-17 16:00:48', 1, 0),
 (3, 'aideweb.host@gmail.com', '10101010000', '$2y$10$DaBxQhrLH7TKul6qUV5O8ua4cQiuQ5axoJ7eXZAH9/dBBUEaxgFE.', 'Sergey', 'Perekrestow', '16671550453621.png', '2022-10-30 18:11:18', 1, '2022-11-01 00:10:51', 1, 0);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `user_session`
---
 
 CREATE TABLE `user_session` (
   `user_session_id` int(11) NOT NULL,
@@ -260,20 +180,10 @@ CREATE TABLE `user_session` (
   `user_id` int(11) NOT NULL
 );
 
---
--- Дамп данных таблицы `user_session`
---
-
 INSERT INTO `user_session` (`user_session_id`, `token`, `date`, `user_id`) VALUES
 (1, 'b5365908c694777ed8292ffd99ac9049', '2022-10-15 22:27:42', 1),
 (2, 'e3c38c6c4e8e4e078a0b8646778edcda', '2022-10-17 16:00:48', 2),
 (3, 'e0d918d4f739ab89736fde72ebfa1eaf', '2022-10-30 18:11:18', 3);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `user_type`
---
 
 CREATE TABLE `user_type` (
   `user_type_id` int(11) NOT NULL,
@@ -281,22 +191,11 @@ CREATE TABLE `user_type` (
   `power` int(11) NOT NULL
 );
 
---
--- Дамп данных таблицы `user_type`
---
-
 INSERT INTO `user_type` (`user_type_id`, `name`, `power`) VALUES
 (1, 'user', 1),
 (2, 'moderator', 10),
 (3, 'admin', 25);
 
---
--- Индексы сохранённых таблиц
---
-
---
--- Индексы таблицы `application`
---
 ALTER TABLE `application`
   ADD PRIMARY KEY (`application_id`),
   ADD KEY `status` (`status`),
@@ -306,134 +205,66 @@ ALTER TABLE `application`
   ADD KEY `height` (`height`),
   ADD KEY `transport_type` (`transport_type`);
 
---
--- Индексы таблицы `height`
---
 ALTER TABLE `height`
   ADD PRIMARY KEY (`height_id`);
 
---
--- Индексы таблицы `loading_method`
---
 ALTER TABLE `loading_method`
   ADD PRIMARY KEY (`loading_method_id`);
 
---
--- Индексы таблицы `message`
---
 ALTER TABLE `message`
   ADD PRIMARY KEY (`message_id`),
   ADD KEY `application_id` (`application_id`),
   ADD KEY `user_id` (`user_from`);
 
---
--- Индексы таблицы `size`
---
 ALTER TABLE `size`
   ADD PRIMARY KEY (`size_id`);
 
---
--- Индексы таблицы `status`
---
 ALTER TABLE `status`
   ADD PRIMARY KEY (`status_id`);
 
---
--- Индексы таблицы `transport_type`
---
 ALTER TABLE `transport_type`
   ADD PRIMARY KEY (`transport_type_id`);
 
---
--- Индексы таблицы `user`
---
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`),
   ADD KEY `user_type_id` (`user_type_id`);
 
---
--- Индексы таблицы `user_session`
---
 ALTER TABLE `user_session`
   ADD PRIMARY KEY (`user_session_id`);
 
---
--- Индексы таблицы `user_type`
---
 ALTER TABLE `user_type`
   ADD PRIMARY KEY (`user_type_id`);
 
---
--- AUTO_INCREMENT для сохранённых таблиц
---
-
---
--- AUTO_INCREMENT для таблицы `application`
---
 ALTER TABLE `application`
   MODIFY `application_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
---
--- AUTO_INCREMENT для таблицы `height`
---
 ALTER TABLE `height`
   MODIFY `height_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
---
--- AUTO_INCREMENT для таблицы `loading_method`
---
 ALTER TABLE `loading_method`
   MODIFY `loading_method_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
---
--- AUTO_INCREMENT для таблицы `message`
---
 ALTER TABLE `message`
   MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
---
--- AUTO_INCREMENT для таблицы `size`
---
 ALTER TABLE `size`
   MODIFY `size_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
---
--- AUTO_INCREMENT для таблицы `status`
---
 ALTER TABLE `status`
   MODIFY `status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
---
--- AUTO_INCREMENT для таблицы `transport_type`
---
 ALTER TABLE `transport_type`
   MODIFY `transport_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
---
--- AUTO_INCREMENT для таблицы `user`
---
 ALTER TABLE `user`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
---
--- AUTO_INCREMENT для таблицы `user_session`
---
 ALTER TABLE `user_session`
   MODIFY `user_session_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
---
--- AUTO_INCREMENT для таблицы `user_type`
---
 ALTER TABLE `user_type`
   MODIFY `user_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
---
--- Ограничения внешнего ключа сохраненных таблиц
---
-
---
--- Ограничения внешнего ключа таблицы `application`
---
 ALTER TABLE `application`
   ADD CONSTRAINT `application_ibfk_1` FOREIGN KEY (`status`) REFERENCES `status` (`status_id`),
   ADD CONSTRAINT `application_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
@@ -442,16 +273,10 @@ ALTER TABLE `application`
   ADD CONSTRAINT `application_ibfk_5` FOREIGN KEY (`height`) REFERENCES `height` (`height_id`),
   ADD CONSTRAINT `application_ibfk_6` FOREIGN KEY (`transport_type`) REFERENCES `transport_type` (`transport_type_id`);
 
---
--- Ограничения внешнего ключа таблицы `message`
---
 ALTER TABLE `message`
   ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`application_id`) REFERENCES `application` (`application_id`),
   ADD CONSTRAINT `message_ibfk_2` FOREIGN KEY (`user_from`) REFERENCES `user` (`user_id`);
 
---
--- Ограничения внешнего ключа таблицы `user`
---
 ALTER TABLE `user`
   ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`user_type_id`) REFERENCES `user_type` (`user_type_id`);
 COMMIT;

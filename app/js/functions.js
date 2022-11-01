@@ -2,6 +2,8 @@ const params = new Proxy(new URLSearchParams(window.location.search), {
     get: (searchParams, prop) => searchParams.get(prop),
 });
 
+const QUERY_ID = params.id;
+
 function stringMaxAndPoint(string, len = 10) {
     if (string.length < len) return string;
     

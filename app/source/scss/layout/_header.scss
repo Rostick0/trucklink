@@ -1,4 +1,8 @@
 .header {
+    position: relative;
+
+    z-index: 100;
+
     &.header__main {
         background: url('../img/header-background.png');
         background-size: cover;

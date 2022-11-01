@@ -1,10 +1,11 @@
 <?
 
 class MessageController {
-    public static function create($text, $application_id, $user_id) {
+    public static function create($text, $application_id, $user_from, $user_to) {
         $text = protectedData($text);
         $application_id = (int) $application_id;
-        $user_id = (int) $user_id;
+        $user_from = (int) $user_from;
+        $user_to = (int) $user_to;
 
         $errors = [];
 
@@ -16,7 +17,11 @@ class MessageController {
             $errors[] = 'Не выбрана заявка';
         }
 
-        if (!$user_id) {
+        if (!$user_from) {
+            $errors[] = 'Не выбран пользователь';
+        }
+
+        if (!$user_to) {
             $errors[] = 'Не выбран пользователь';
         }
 
@@ -27,7 +32,7 @@ class MessageController {
             ];
         }
 
-        return Message::create($text, $application_id, $user_id);
+        return Message::create($text, $application_id, $user_from, $user_to);
     }
 }
 

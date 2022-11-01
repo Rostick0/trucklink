@@ -70,14 +70,14 @@ if (!$application) {
                             <div class="info__value">
                                 <div class="info__from-to">
                                     <span class="info__country">
-                                        <img src="./view/static/img/flag-ru.png" alt="Россия">
+                                        <img class="application__flag" src="./view/static/img/flags/<?= wordLast($application['from']) ?>.png" alt="<?= wordLast($application['from']) ?>">
                                         <span>
                                             <?= $application['from'] ?>
                                         </span>
                                     </span>
                                     <hr class="info__hr">
                                     <span class="info__country">
-                                        <img src="./view/static/img/flag-ru.png" alt="Россия">
+                                        <img class="application__flag" src="./view/static/img/flags/<?= wordLast($application['to']) ?>.png" alt="<?= wordLast($application['to']) ?>">
                                         <span>
                                             <?= $application['to'] ?>
                                         </span>
@@ -119,30 +119,32 @@ if (!$application) {
                                 <?= NormalizeView::checkPrice($application['price']) ?>
                             </div>
                         </li>
-                        <li class="info__item">
-                            <div class="info__title">
-                                Размеры груза:
-                            </div>
-                            <div class="info__value">
-                                <div class="info__flex">
-                                    <? if ($application['size']) : ?>
-                                        <span>
-                                            размера палета: <?= $application['size'] ?> <sup>м2</sup>
-                                        </span>
-                                    <? endif ?>
-                                    <? if ($application['mass']) : ?>
-                                        <span>
-                                            масса: <?= $application['mass'] ?> <sup>т</sup>
-                                        </span>
-                                    <? endif ?>
-                                    <? if ($application['height']) : ?>
-                                        <span>
-                                            высота: <?= $application['height'] ?> <sup>м</sup>
-                                        </span>
-                                    <? endif ?>
+                        <? if ($application['size'] || $application['mass'] || $application['height']): ?>
+                            <li class="info__item">
+                                <div class="info__title">
+                                    Размеры груза:
                                 </div>
-                            </div>
-                        </li>
+                                <div class="info__value">
+                                    <div class="info__flex">
+                                        <? if ($application['size']) : ?>
+                                            <span>
+                                                размера палета: <?= $application['size'] ?> <sup>м2</sup>
+                                            </span>
+                                        <? endif ?>
+                                        <? if ($application['mass']) : ?>
+                                            <span>
+                                                масса: <?= $application['mass'] ?> <sup>т</sup>
+                                            </span>
+                                        <? endif ?>
+                                        <? if ($application['height']) : ?>
+                                            <span>
+                                                высота: <?= $application['height'] ?> <sup>м</sup>
+                                            </span>
+                                        <? endif ?>
+                                    </div>
+                                </div>
+                            </li>
+                        <? endif; ?>
                         <? if ($application['comment']) : ?>
                             <li class="info__item">
                                 <div class="info__title">
@@ -168,7 +170,7 @@ if (!$application) {
                                     </span>
                                 </a>
                                 <div class="application-info__buttons application__buttons">
-                                    <a class="personal-applications_create button" href="/pages/">
+                                    <a class="personal-applications_create button" href="/chat?application_id=<?= $application_id ?>">
                                         <svg width="1.56rem" height="1.5rem" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M4.5 4H20.5C21.6 4 22.5 4.9 22.5 6V18C22.5 19.1 21.6 20 20.5 20H4.5C3.4 20 2.5 19.1 2.5 18V6C2.5 4.9 3.4 4 4.5 4Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                             <path d="M22.5 6L12.5 13L2.5 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />

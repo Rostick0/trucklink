@@ -5,7 +5,7 @@ const autoprefixer = require('gulp-autoprefixer');
 const babel = require('gulp-babel');
 const uglify = require('gulp-uglify');
 const concat = require('gulp-concat');
-const { init, watch, reload } = require('browser-sync').create();
+const { watch, reload } = require('browser-sync').create();
 
 function scss() {
     return src('app/source/scss/style.scss')
@@ -28,10 +28,6 @@ function js() {
 }
 
 function serve() {
-    init({
-        server: './dist'
-    })
-
     watch('app/source/scss/**', series(scss)).on('change', reload);
     watch('app/js/**', series(js)).on('change', reload);
 }

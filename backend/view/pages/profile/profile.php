@@ -8,7 +8,7 @@ if (!$user) {
     header('Location: ./');
 }
 
-$application_sql = "WHERE `is_deleted` = 0 AND `user_id` = '$user_id' ORDER BY `application_id` ASC LIMIT 10";
+$application_sql = "WHERE `is_deleted` = 0 AND `user_id` = '$user_id' ORDER BY `application_id` DESC LIMIT 10";
 
 $applications = Application::get($application_sql);
 $status_db = getDbDate('status');

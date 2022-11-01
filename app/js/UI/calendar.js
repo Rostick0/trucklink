@@ -89,8 +89,18 @@ class Calendar {
 
         this.day = day;
         this.inputHtml.value = `${day} ${this.monthShort[this.month]} ${this.year}`;
-        this.removeClass(this.calendarHtml, 'display-block');
+        this.hide();
         return this.render();
+    }
+
+    hide() {
+        this.removeClass(this.calendarHtml, 'display-block');
+    }
+
+    ClickOutside(event) {
+        if (!elem || elem.contains(event.target)) return;
+
+        this.hide();
     }
 
     show() {

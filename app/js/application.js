@@ -181,7 +181,7 @@ function getApplications(htmlContainer, htmlElem, queryParams = '') {
                     </div>
                 </td>
                 <td>
-                    <div class="application__flex justify-center">
+                    <a class="application__flex justify-center" href="chat?application_id=${elem?.application_id}">
                         <div class="application__chat">
                             <!-- <div class="application__chat_count">
                             0
@@ -191,7 +191,7 @@ function getApplications(htmlContainer, htmlElem, queryParams = '') {
                                 <path d="M22 6L12 13L2 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </div>
-                    </div>
+                    </a>
                 </td>
                 <td>
                     <div class="application__flex justify-center">
@@ -240,7 +240,7 @@ function getApplicationsFilter() {
         const transportType = [...document.getElementsByName('transport_type')].filter(elem => elem.checked)[0]?.value;
         const price = document.querySelector('.application-filter_select__input._price').value;
 
-        let queryParams = `?user_id=${SESSION_ID}`;
+        let queryParams = `?user_id=${QUERY_ID}`;
 
         const filterDate = [
             {
@@ -272,7 +272,7 @@ function getApplicationsFilter() {
         getApplications(applicationTableFilter, applicationItem, queryParams);
     }
 
-    getApplications(applicationTableFilter, null, `?user_id=${SESSION_ID}`);
+    getApplications(applicationTableFilter, null, `?user_id=${QUERY_ID}`);
 }
 
 if (applicationTableFilter) {

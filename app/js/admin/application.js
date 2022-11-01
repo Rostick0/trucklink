@@ -176,7 +176,7 @@ function getApplicationsAdmin(htmlContainer, htmlElem, queryParams = '') {
                         </div>
                     </td>
                     <td>
-                        <div class="application__flex justify-center">
+                        <a class="application__flex justify-center" href="chat?application_id=${elem?.application_id}">
                             <div class="application__chat">
                                 <!-- <div class="application__chat_count">
                                 0
@@ -186,7 +186,7 @@ function getApplicationsAdmin(htmlContainer, htmlElem, queryParams = '') {
                                     <path d="M22 6L12 13L2 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                             </div>
-                        </div>
+                        </a>
                     </td>
                     <td>
                         <div class="application__flex justify-center">

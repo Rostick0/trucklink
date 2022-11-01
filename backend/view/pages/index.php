@@ -11,7 +11,7 @@ if (isset($create_button)) {
    $query = ApplicationController::firstCreate($from, $to, $date, $transport_type);
 }
 
-$application_sql = "WHERE `is_deleted` = 0 ORDER BY `application_id` ASC LIMIT 10";
+$application_sql = "WHERE `is_deleted` = 0 ORDER BY `application_id` DESC LIMIT 10";
 
 $applications = Application::get($application_sql);
 $transport_type_db = getDbDate('transport_type');

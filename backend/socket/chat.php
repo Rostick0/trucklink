@@ -9,11 +9,6 @@ $users = [];
 $ws_worker = new Worker('websocket://0.0.0.0:2346');
 $ws_worker->count = 4;
 
-function connectUser($user_id)
-{
-    var_dump("Вошел в сети $user_id");
-}
-
 $ws_worker->onConnect = function ($connection) use (&$users) {
     $connection->onWebSocketConnect = function ($connection) use (&$users) {
         $user_id = (int) $_GET['user_id'];
@@ -30,9 +25,7 @@ $ws_worker->onMessage = function ($connection, $data) use ($ws_worker, &$users) 
             $user_from = $users[array_search($connection, $users)];
             $user_to = $users[$data->user_to];
 
-            var_dump($data);
-
-            $query = MessageController::create($data->text, $data->application_id, $user_from);
+            $query = MessageController::create($data->text, $data->application_id, $user_from, $user_to);
 
             if (!$query) break;
 
