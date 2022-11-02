@@ -1,5 +1,7 @@
 <?
 
+mb_internal_encoding("UTF-8");
+
 require_once './controller/session.php';
 
 require_once './include/connect.php';

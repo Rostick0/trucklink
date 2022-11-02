@@ -32,11 +32,15 @@ $price_select = [
     ],
     [
         'id' => 5,
-        'name' => '2000'
+        'name' => '5000'
     ],
     [
         'id' => 6,
-        'name' => '5000'
+        'name' => '10000'
+    ],
+    [
+        'id' => 6,
+        'name' => '15000'
     ]
 ];
 
@@ -87,21 +91,22 @@ $price_select = [
                             </span>
                         </a>
                     </div>
-                    <table class="application__table _filter-profile">
-                        <tbody>
-                            <tr class="application-filter filter">
-                                <td>
-                                    <div class="select application-filter_select">
-                                        <div class="select__content application-filter_select__content">
-                                            <div class="select-block application-filter_select-block">
-                                                <input class="select__input application-filter_select__input" type="text" placeholder="Select status:" readonly>
+
+                    <div class="tabless">
+                        <div class="filterss aniEl">
+                            <div class="status">
+                                <div class="select__content status__inner">
+                                    <div class="select">
+                                        <div class="select__content">
+                                            <div class="select-block">
+                                                <input class="select__input" placeholder="Payment status" type="text">
                                                 <div class="select-icon">
                                                     <svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M0.742422 0.276188C0.374922 0.632552 0.374922 1.2071 0.742422 1.56346L6.97492 7.6071C7.26742 7.89073 7.73992 7.89073 8.03242 7.6071L14.2649 1.56346C14.6324 1.2071 14.6324 0.632551 14.2649 0.276187C13.8974 -0.0801763 13.3049 -0.0801762 12.9374 0.276187L7.49992 5.54164L2.06242 0.268916C1.70242 -0.0801745 1.10242 -0.0801757 0.742422 0.276188Z" fill="#6E7B8B" />
                                                     </svg>
                                                 </div>
                                             </div>
-                                            <ul class="select__options application-filter_select__options">
+                                            <ul class="select__options">
                                                 <? foreach ($status_db as $value) : ?>
                                                     <li class="select__option application-filter_select__option">
                                                         <label for="<?= "status_" . $value['status_id'] ?>">
@@ -113,191 +118,187 @@ $price_select = [
                                             </ul>
                                         </div>
                                     </div>
-                                </td>
-                                <td>
-                                    <label class="application-filter_input__block" for="from">
+                                </div>
+                            </div>
+                            <div class="city__from">
+                                <div class="city__inner">
+                                    <div class="cit_from">
                                         <svg width="1.125rem" height="1.125rem" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M2.25 8.25L16.5 1.5L9.75 15.75L8.25 9.75L2.25 8.25Z" stroke="#6E7B8B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
-                                        <input class="application-filter_input _city addres-search _from_text" placeholder="Enter sending city" type="text" id="from">
+                                        <input class="input__city _city addres-search _from_text" placeholder="Sending city" type="text">
                                         <input class="input-block__input addres-search _from" type="text" name="from" hidden>
-                                    </label>
-                                </td>
-                                <td>
-                                    <label class="application-filter_input__block" for="to">
+                                    </div>
+                                    <span>&#8594;</span>
+                                    <div class="cit_to">
                                         <svg width="1.125rem" height="1.125rem" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M2.25 8.25L16.5 1.5L9.75 15.75L8.25 9.75L2.25 8.25Z" stroke="#6E7B8B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
-                                        <input class="addres-search _to_text application-filter_input _city" placeholder="Enter delivery city" type="text" id="to">
+                                        <input class="input__city1 addres-search _to_text _city" placeholder="Delivery city" type="text">
                                         <input class="addres-search _to" type="text" name="to" hidden>
-                                    </label>
-                                </td>
-                                <td>
-                                    <div class="input__block">
-                                        <div class="input-block__content">
-                                            <div class="calendar-form">
-                                                <div class="calendar-from__active">
-                                                    <input class="input application-filter_input input-block__input" type="text" placeholder="select date" name="date" value="<?= $date ?>" readonly>
-                                                </div>
-                                                <div class="calendar">
-                                                    <div class="calendar__month">
-                                                        <div class="calendar__arrow_left calendar__month_left">
-                                                            <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M7 12L2 6.49997L7 1" stroke="#2D2D41" stroke-width="2" stroke-linecap="round" />
-                                                            </svg>
-                                                        </div>
-                                                        <div class="calendar__month_text calendar__text"></div>
-                                                        <div class="calendar__arrow_right calendar__month_right">
-                                                            <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M1 12L6 6.49997L1 1" stroke="#2D2D41" stroke-width="2" stroke-linecap="round" />
-                                                            </svg>
-                                                        </div>
-                                                    </div>
-                                                    <ul class="calendar__weekday">
-                                                        <li class="calendar__weekday_item">
-                                                            пн
-                                                        </li>
-                                                        <li class="calendar__weekday_item">
-                                                            вт
-                                                        </li>
-                                                        <li class="calendar__weekday_item">
-                                                            ср
-                                                        </li>
-                                                        <li class="calendar__weekday_item">
-                                                            чт
-                                                        </li>
-                                                        <li class="calendar__weekday_item">
-                                                            пт
-                                                        </li>
-                                                        <li class="calendar__weekday_item">
-                                                            сб
-                                                        </li>
-                                                        <li class="calendar__weekday_item">
-                                                            вс
-                                                        </li>
-                                                    </ul>
-                                                    <ul class="calendar__day">
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                        <li class="calendar__day_item"></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
-                                </td>
-                                <td>
-                                    <div class="select application-filter_select">
-                                        <div class="select__content application-filter_select__content">
-                                            <div class="select-block application-filter_select-block">
-                                                <input class="select__input application-filter_select__input" type="text" placeholder="Сhoose car body type:" readonly>
-                                                <div class="select-icon">
-                                                    <svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0.742422 0.276188C0.374922 0.632552 0.374922 1.2071 0.742422 1.56346L6.97492 7.6071C7.26742 7.89073 7.73992 7.89073 8.03242 7.6071L14.2649 1.56346C14.6324 1.2071 14.6324 0.632551 14.2649 0.276187C13.8974 -0.0801763 13.3049 -0.0801762 12.9374 0.276187L7.49992 5.54164L2.06242 0.268916C1.70242 -0.0801745 1.10242 -0.0801757 0.742422 0.276188Z" fill="#6E7B8B" />
+                                </div>
+                            </div>
+                            <div class="select__dates">
+                                <div class="dates__inner">
+                                    <svg width="1.5rem" height="1.5rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.9736 3.75C15.9736 3.33579 15.6378 3 15.2236 3C14.8094 3 14.4736 3.33579 14.4736 3.75V4.4501H9.52832V3.75C9.52832 3.33579 9.19253 3 8.77832 3C8.36411 3 8.02832 3.33579 8.02832 3.75V4.4501H6.36133C5.13352 4.4501 4 5.36273 4 6.65024V9.55058V16.8012C4 18.0887 5.13352 19.0013 6.36133 19.0013H17.6406C18.8684 19.0013 20.002 18.0887 20.002 16.8012V9.55058V6.65024C20.002 5.36273 18.8684 4.4501 17.6406 4.4501H15.9736V3.75ZM18.502 8.80058V6.65024C18.502 6.33596 18.1927 5.9501 17.6406 5.9501H15.9736V6.65027C15.9736 7.06449 15.6378 7.40027 15.2236 7.40027C14.8094 7.40027 14.4736 7.06449 14.4736 6.65027V5.9501H9.52832V6.65027C9.52832 7.06449 9.19253 7.40027 8.77832 7.40027C8.36411 7.40027 8.02832 7.06449 8.02832 6.65027V5.9501H6.36133C5.80932 5.9501 5.5 6.33596 5.5 6.65024V8.80058H18.502ZM5.5 10.3006H18.502V16.8012C18.502 17.1155 18.1927 17.5013 17.6406 17.5013H6.36133C5.80932 17.5013 5.5 17.1155 5.5 16.8012V10.3006Z" fill="white" />
+                                    </svg>
+                                    <div class="calendar-form">
+                                        <div class="calendar-from__active">
+                                            <input class="input input_dates" type="text" placeholder="6 октября 2022" name="date" value="<?= $date ?>" readonly>
+                                        </div>
+                                        <div class="calendar">
+                                            <div class="calendar__month">
+                                                <div class="calendar__arrow_left calendar__month_left">
+                                                    <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M7 12L2 6.49997L7 1" stroke="#2D2D41" stroke-width="2" stroke-linecap="round" />
+                                                    </svg>
+                                                </div>
+                                                <div class="calendar__month_text calendar__text"></div>
+                                                <div class="calendar__arrow_right calendar__month_right">
+                                                    <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M1 12L6 6.49997L1 1" stroke="#2D2D41" stroke-width="2" stroke-linecap="round" />
                                                     </svg>
                                                 </div>
                                             </div>
-                                            <ul class="select__options application-filter_select__options">
-                                                <? foreach ($transport_type_db as $value) : ?>
-                                                    <li class="select__option application-filter_select__option">
-                                                        <label for="<?= "transport_type_" . $value['transport_type_id'] ?>">
-                                                            <?= $value['name'] ?>
-                                                        </label>
-                                                        <input type="radio" name="transport_type" id="<?= "transport_type_" . $value['transport_type_id'] ?>" value="<?= $value['transport_type_id'] ?>" hidden>
-                                                    </li>
-                                                <? endforeach ?>
+                                            <ul class="calendar__weekday">
+                                                <li class="calendar__weekday_item">
+                                                    пн
+                                                </li>
+                                                <li class="calendar__weekday_item">
+                                                    вт
+                                                </li>
+                                                <li class="calendar__weekday_item">
+                                                    ср
+                                                </li>
+                                                <li class="calendar__weekday_item">
+                                                    чт
+                                                </li>
+                                                <li class="calendar__weekday_item">
+                                                    пт
+                                                </li>
+                                                <li class="calendar__weekday_item">
+                                                    сб
+                                                </li>
+                                                <li class="calendar__weekday_item">
+                                                    вс
+                                                </li>
+                                            </ul>
+                                            <ul class="calendar__day">
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
+                                                <li class="calendar__day_item"></li>
                                             </ul>
                                         </div>
                                     </div>
-                                </td>
-                                <td colspan=2>
-                                    <div class="select application-filter_select">
-                                        <div class="select__content application-filter_select__content">
-                                            <div class="select-block application-filter_select-block">
-                                                <input class="select__input application-filter_select__input _price" type="text" placeholder="Payment status:" readonly>
-                                                <div class="select-icon">
-                                                    <svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0.742422 0.276188C0.374922 0.632552 0.374922 1.2071 0.742422 1.56346L6.97492 7.6071C7.26742 7.89073 7.73992 7.89073 8.03242 7.6071L14.2649 1.56346C14.6324 1.2071 14.6324 0.632551 14.2649 0.276187C13.8974 -0.0801763 13.3049 -0.0801762 12.9374 0.276187L7.49992 5.54164L2.06242 0.268916C1.70242 -0.0801745 1.10242 -0.0801757 0.742422 0.276188Z" fill="#6E7B8B" />
-                                                    </svg>
-                                                </div>
+                                </div>
+                            </div>
+                            <div class="select__cars">
+                                <div class="select">
+                                    <div class="select__content">
+                                        <div class="select-block">
+                                            <input class="select__input" type="text" placeholder="Car body type">
+                                            <div class="select-icon">
+                                                <svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.742422 0.276188C0.374922 0.632552 0.374922 1.2071 0.742422 1.56346L6.97492 7.6071C7.26742 7.89073 7.73992 7.89073 8.03242 7.6071L14.2649 1.56346C14.6324 1.2071 14.6324 0.632551 14.2649 0.276187C13.8974 -0.0801763 13.3049 -0.0801762 12.9374 0.276187L7.49992 5.54164L2.06242 0.268916C1.70242 -0.0801745 1.10242 -0.0801757 0.742422 0.276188Z" fill="#6E7B8B" />
+                                                </svg>
                                             </div>
-                                            <ul class="select__options application-filter_select__options">
+                                        </div>
+                                        <ul class="select__options">
+                                            <? foreach ($transport_type_db as $value) : ?>
+                                                <li class="select__option application-filter_select__option">
+                                                    <label for="<?= "transport_type_" . $value['transport_type_id'] ?>">
+                                                        <?= $value['name'] ?>
+                                                    </label>
+                                                    <input type="radio" name="transport_type" id="<?= "transport_type_" . $value['transport_type_id'] ?>" value="<?= $value['transport_type_id'] ?>" hidden>
+                                                </li>
+                                            <? endforeach ?>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="payments_filter">
+                                <div class="select">
+                                    <div class="select__content">
+                                        <div class="select-block">
+                                            <input class="select__input _price" type="text" placeholder="Payment status">
+                                            <div class="select-icon">
+                                                <svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.742422 0.276188C0.374922 0.632552 0.374922 1.2071 0.742422 1.56346L6.97492 7.6071C7.26742 7.89073 7.73992 7.89073 8.03242 7.6071L14.2649 1.56346C14.6324 1.2071 14.6324 0.632551 14.2649 0.276187C13.8974 -0.0801763 13.3049 -0.0801762 12.9374 0.276187L7.49992 5.54164L2.06242 0.268916C1.70242 -0.0801745 1.10242 -0.0801757 0.742422 0.276188Z" fill="#6E7B8B" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <ul class="select__options">
+                                            <? foreach ($price_select as $value) : ?>
                                                 <? foreach ($price_select as $value) : ?>
-                                                    <li class="select__option application-filter_select__option">
+                                                    <li class="select__option">
                                                         <label for="<?= "price_" . $value['id'] ?>">
                                                             <?= $value['name'] ?>
                                                         </label>
                                                         <input type="radio" name="price" id="<?= "price_" . $value['id'] ?>" value="<?= $value['id'] ?>" hidden>
                                                     </li>
                                                 <? endforeach ?>
-                                            </ul>
-                                        </div>
+                                            <? endforeach ?>
+                                        </ul>
                                     </div>
-                                </td>
-                                <td>
-                                    <div class="filter__all">
-                                        All filters
-                                    </div>
-                                </td>
-                                <td colspan=2>
-                                    <button class="button application-filter__button">
-                                        <svg width="1.25rem" height="1.31rem" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M17.5 10.0837C17.5 14.4587 13.9584 18.0003 9.58335 18.0003C5.20835 18.0003 1.66669 14.4587 1.66669 10.0837C1.66669 5.70866 5.20835 2.16699 9.58335 2.16699" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M18.3334 18.8337L16.6667 17.167" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M12.0833 5.60824C11.7917 4.69157 12.1333 3.5499 13.1 3.24157C13.6083 3.0749 14.2333 3.21657 14.5917 3.70824C14.925 3.1999 15.575 3.08324 16.075 3.24157C17.0417 3.5499 17.3833 4.69157 17.0917 5.60824C16.6333 7.06657 15.0333 7.8249 14.5917 7.8249C14.1417 7.8249 12.5583 7.08324 12.0833 5.60824Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                        <span>
-                                            Apply
-                                        </span>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <!-- <td colspan="11">
-                                    Нет заявок
-                                </td> -->
-                            </tr>
-                        </tbody>
-                    </table>
+                                </div>
+                            </div>
+                            <div class="searches_filter">
+                                <input type="text" class='input_payment' placeholder="All filters">
+                            </div>
+                            <button class="button__filter button">
+                                <div class="button_fil_inner">
+                                    <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M17.4998 10.0837C17.4998 14.4587 13.9582 18.0003 9.58317 18.0003C5.20817 18.0003 1.6665 14.4587 1.6665 10.0837C1.6665 5.70866 5.20817 2.16699 9.58317 2.16699" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M18.3332 18.8337L16.6665 17.167" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M12.0833 5.60824C11.7916 4.69157 12.1333 3.5499 13.0999 3.24157C13.6083 3.0749 14.2333 3.21657 14.5916 3.70824C14.9249 3.1999 15.5749 3.08324 16.0749 3.24157C17.0416 3.5499 17.3833 4.69157 17.0916 5.60824C16.6333 7.06657 15.0333 7.8249 14.5916 7.8249C14.1416 7.8249 12.5583 7.08324 12.0833 5.60824Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                    <span>Apply</span>
+                                </div>
+                                </и>
+                        </div>
+                        <div class="orders_table"></div>
+                    </div>
                 </div>
             </div>
         </main>

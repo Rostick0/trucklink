@@ -1,5 +1,7 @@
 <?
 
+mb_internal_encoding("UTF-8");
+
 require_once __DIR__ . '/../include/connect.php';
 
 require_once __DIR__ . '/../global/functions.php';
