@@ -111,7 +111,7 @@ if (isset($button_save)) {
                                 </svg>
                                 <div class="calendar-form">
                                     <div class="calendar-from__active">
-                                        <input type="text" class="input" placeholder="Выберите дату" id="date" name="date" value="<?= DateView::normalizeDate($application['date'], true)?>" readonly>
+                                        <input type="text" class="input" placeholder="Выберите дату" id="date" name="date" value="<?= DateView::normalizeDate($application['date'], true) ?>" readonly>
                                     </div>
                                     <div class="calendar">
                                         <div class="calendar__month">
@@ -129,25 +129,25 @@ if (isset($button_save)) {
                                         </div>
                                         <ul class="calendar__weekday">
                                             <li class="calendar__weekday_item">
-                                                пн
+                                                mn
                                             </li>
                                             <li class="calendar__weekday_item">
-                                                вт
+                                                ts
                                             </li>
                                             <li class="calendar__weekday_item">
-                                                ср
+                                                wd
                                             </li>
                                             <li class="calendar__weekday_item">
-                                                чт
+                                                th
                                             </li>
                                             <li class="calendar__weekday_item">
-                                                пт
+                                                fr
                                             </li>
                                             <li class="calendar__weekday_item">
-                                                сб
+                                                st
                                             </li>
                                             <li class="calendar__weekday_item">
-                                                вс
+                                                sn
                                             </li>
                                         </ul>
                                         <ul class="calendar__day">

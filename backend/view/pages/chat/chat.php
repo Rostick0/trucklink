@@ -91,7 +91,7 @@ if (!$user) {
                                     сегодня
                                 </div> -->
                                 <? foreach ($messages as $message) : ?>
-                                    <div class="chat__message <?= $message['user_to'] === $user_id ? '_from-me' : '' ?>">
+                                    <div class="chat__message <?= $message['user_to'] == $user_id ? '_from-me' : '' ?>">
                                         <?= $message['text'] ?>
                                     </div>
                                 <? endforeach ?>

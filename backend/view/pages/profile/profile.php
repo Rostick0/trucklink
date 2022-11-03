@@ -99,7 +99,7 @@ $price_select = [
                                     <div class="select">
                                         <div class="select__content">
                                             <div class="select-block">
-                                                <input class="select__input" placeholder="Payment status" type="text">
+                                                <input class="select__input select__input_filter" placeholder="Status" type="text" readonly>
                                                 <div class="select-icon">
                                                     <svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M0.742422 0.276188C0.374922 0.632552 0.374922 1.2071 0.742422 1.56346L6.97492 7.6071C7.26742 7.89073 7.73992 7.89073 8.03242 7.6071L14.2649 1.56346C14.6324 1.2071 14.6324 0.632551 14.2649 0.276187C13.8974 -0.0801763 13.3049 -0.0801762 12.9374 0.276187L7.49992 5.54164L2.06242 0.268916C1.70242 -0.0801745 1.10242 -0.0801757 0.742422 0.276188Z" fill="#6E7B8B" />
@@ -146,7 +146,7 @@ $price_select = [
                                     </svg>
                                     <div class="calendar-form">
                                         <div class="calendar-from__active">
-                                            <input class="input input_dates" type="text" placeholder="6 октября 2022" name="date" value="<?= $date ?>" readonly>
+                                            <input class="input input_dates" type="text" placeholder="6 october 2022" name="date" value="<?= $date ?>" readonly>
                                         </div>
                                         <div class="calendar">
                                             <div class="calendar__month">
@@ -164,25 +164,25 @@ $price_select = [
                                             </div>
                                             <ul class="calendar__weekday">
                                                 <li class="calendar__weekday_item">
-                                                    пн
+                                                    mn
                                                 </li>
                                                 <li class="calendar__weekday_item">
-                                                    вт
+                                                    ts
                                                 </li>
                                                 <li class="calendar__weekday_item">
-                                                    ср
+                                                    wd
                                                 </li>
                                                 <li class="calendar__weekday_item">
-                                                    чт
+                                                    th
                                                 </li>
                                                 <li class="calendar__weekday_item">
-                                                    пт
+                                                    fr
                                                 </li>
                                                 <li class="calendar__weekday_item">
-                                                    сб
+                                                   st
                                                 </li>
                                                 <li class="calendar__weekday_item">
-                                                    вс
+                                                    sn
                                                 </li>
                                             </ul>
                                             <ul class="calendar__day">
@@ -237,7 +237,7 @@ $price_select = [
                                 <div class="select">
                                     <div class="select__content">
                                         <div class="select-block">
-                                            <input class="select__input" type="text" placeholder="Car body type">
+                                            <input class="select__input select__input_filter" type="text" placeholder="Car body type" readonly>
                                             <div class="select-icon">
                                                 <svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M0.742422 0.276188C0.374922 0.632552 0.374922 1.2071 0.742422 1.56346L6.97492 7.6071C7.26742 7.89073 7.73992 7.89073 8.03242 7.6071L14.2649 1.56346C14.6324 1.2071 14.6324 0.632551 14.2649 0.276187C13.8974 -0.0801763 13.3049 -0.0801762 12.9374 0.276187L7.49992 5.54164L2.06242 0.268916C1.70242 -0.0801745 1.10242 -0.0801757 0.742422 0.276188Z" fill="#6E7B8B" />
@@ -261,7 +261,7 @@ $price_select = [
                                 <div class="select">
                                     <div class="select__content">
                                         <div class="select-block">
-                                            <input class="select__input _price" type="text" placeholder="Payment status">
+                                            <input class="select__input select__input_filter _price" type="text" placeholder="Status" readonly>
                                             <div class="select-icon">
                                                 <svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M0.742422 0.276188C0.374922 0.632552 0.374922 1.2071 0.742422 1.56346L6.97492 7.6071C7.26742 7.89073 7.73992 7.89073 8.03242 7.6071L14.2649 1.56346C14.6324 1.2071 14.6324 0.632551 14.2649 0.276187C13.8974 -0.0801763 13.3049 -0.0801762 12.9374 0.276187L7.49992 5.54164L2.06242 0.268916C1.70242 -0.0801745 1.10242 -0.0801757 0.742422 0.276188Z" fill="#6E7B8B" />

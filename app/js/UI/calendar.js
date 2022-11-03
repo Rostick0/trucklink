@@ -8,23 +8,23 @@ class Calendar {
         this.inputHtml = buttonShow.querySelector('.input');
         this.buttonShow = buttonShow;
         this.day = new Date().getDate();
-        this.months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+        this.months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         this.month = new Date().getMonth();
         this.year = new Date().getFullYear();
         this.today = new Date(`${new Date().getMonth()} ${new Date().getDate()} ${new Date().getFullYear()}`)
         this.monthShort = [
-            'янв',
-            'фев',
-            'мар',
-            'апр',
-            'май',
-            'июн',
-            'июл',
-            'авг',
-            'сен',
-            'окт',
-            'ноя',
-            'дек'
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec'
         ];
         this.previousDays = false;
     }

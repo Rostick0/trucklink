@@ -61,7 +61,7 @@ function getApplications(htmlContainer, htmlElem, queryParams = '') {
             }
 
             res.forEach(elem => htmlContainer.insertAdjacentHTML('beforeend',
-                    `<div class="string_orders">
+                `<div class="string_orders">
                             <div class="order_status">
                                 <div class="status_icon"></div>
                                 <div class="status_word">
@@ -69,21 +69,21 @@ function getApplications(htmlContainer, htmlElem, queryParams = '') {
                                 </div>
                             </div>
                             <div class="info_delivery">
-                                <div class="delivery_from">
+                                <div class="delivery_from" title="${elem?.from}">
                                     <div class="flag_from">
                                         <img class="application__flag" src="/view/static/img/flags/${wordLast(elem?.from)}.png" alt="${wordLast(elem?.from)}">
                                     </div>
                                     <div class="city__delivery_from">
-                                        ${elem?.from}
+                                        ${stringMaxAndPoint(elem?.from)}
                                     </div>
                                 </div>
                                 <span>&#8594;</span>
-                                <div class="delivery_to">
+                                <div class="delivery_to" title="${elem?.to}">
                                     <div class="flag_from">
                                         <img class="application__flag" src="/view/static/img/flags/${wordLast(elem?.to)}.png" alt="${wordLast(elem?.to)}">
                                     </div>
                                     <div class="city__delivery_from">
-                                        ${elem?.to}
+                                        ${stringMaxAndPoint(elem?.to)}
                                     </div>
                                 </div>
                             </div>
@@ -97,12 +97,12 @@ function getApplications(htmlContainer, htmlElem, queryParams = '') {
                                 <div class="info_price">
                                     ${elem?.price}
                                 </div>
-                                <div class="info_message">
+                                <a class="info_message" href="/chat?application_id=${elem?.application_id}">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                         <path d="M22 6L12 13L2 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
-                                </div>
+                                </a>
                             </div>
                             <div class="info_last">
                                 <div class="info_pay_order">
@@ -118,19 +118,11 @@ function getApplications(htmlContainer, htmlElem, queryParams = '') {
                                         <path d="M3 11L22 2L13 21L11 13L3 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                 </div>
-                                <a class="info_options" href="/application_edit?id=${elem?.application_id}">
-                                    <svg height="1.5rem" width="1.5rem" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-                                        <g>
-                                            <path d="M466.895,305.126c-26.862-46.526-10.708-106.152,36.076-133.244l-50.312-87.146c-14.375,8.427-31.088,13.259-48.923,13.259
-                                            c-53.769,0-97.354-43.873-97.354-97.995h-100.63c0.133,16.705-4.037,33.641-12.979,49.126
-                                            c-26.862,46.528-86.578,62.351-133.431,35.379L9.029,171.651c14.485,8.236,27.025,20.294,35.943,35.739
-                                            C71.792,253.844,55.729,313.35,9.119,340.502l50.313,87.146c14.325-8.348,30.958-13.126,48.7-13.126
-                                            c53.598,0,97.072,43.597,97.35,97.479h100.627c-0.043-16.537,4.136-33.285,12.982-48.609
-                                            c26.817-46.453,86.389-62.297,133.207-35.506l50.312-87.146C488.222,332.507,475.766,320.491,466.895,305.126z M256,359.667
-                                            c-57.254,0-103.668-46.412-103.668-103.667c0-57.254,46.413-103.667,103.668-103.667c57.254,0,103.667,46.413,103.667,103.667
-                                            C359.664,313.255,313.254,359.667,256,359.667z" fill="white" />
-                                        </g>
-                                    </svg>
+                                <a class="info_options" href="/application?id=${elem?.application_id}">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>                                
                                 </a>
                             </div>
                         </div>`

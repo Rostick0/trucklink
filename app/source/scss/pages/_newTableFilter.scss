@@ -130,8 +130,13 @@
     }
 
     svg {
+        flex-shrink: 0;
+
         position: relative;
         margin-right: 0.3rem;
+
+        width: 1.5rem;
+        height: 1.5rem;
     }
 
     input {
@@ -244,6 +249,37 @@
     }
 }
 
+.tabless {
+
+    .input_dates {
+        border: 1px solid transparent;
+
+        padding: 0.25rem;
+    }
+
+    .select__input_filter {
+        background: transparent;
+
+        margin-right: 0;
+
+        &::placeholder {
+            border: 0;
+
+            text-align: center;
+
+            text-decoration: none;
+        }
+    }
+
+    .select__option {
+        background: #131a24;
+
+        &:hover {
+            background: #17212b;
+        }
+    }
+}
+
 /******************************* Строка заказа **************************************/
 
 .string_orders {
@@ -257,7 +293,7 @@
 .order_status {
     height: 100%;
     display: flex;
-    justify-content: left;
+    justify-content: center;
     align-items: center;
     height: 4rem;
     width: 10rem;

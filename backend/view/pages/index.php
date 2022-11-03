@@ -8,7 +8,7 @@ $transport_type = $_REQUEST['transport_type'];
 $create_button = $_REQUEST['create_button'];
 
 if (isset($create_button)) {
-   $query = ApplicationController::firstCreate($from, $to, $date, $transport_type);
+    $query = ApplicationController::firstCreate($from, $to, $date, $transport_type);
 }
 
 $application_sql = "WHERE `is_deleted` = 0 ORDER BY `application_id` DESC LIMIT 10";
@@ -169,7 +169,7 @@ $transport_type_db = getDbDate('transport_type');
                                                     </svg>
                                                     <div class="calendar-form">
                                                         <div class="calendar-from__active">
-                                                        <input class="input input-block__input" type="text" placeholder="6 октября 2022" name="date" value="<?= $date ?>" readonly>
+                                                            <input class="input input-block__input" type="text" placeholder="6 октября 2022" name="date" value="<?= $date ?>" readonly>
                                                         </div>
                                                         <div class="calendar">
                                                             <div class="calendar__month">
@@ -187,25 +187,25 @@ $transport_type_db = getDbDate('transport_type');
                                                             </div>
                                                             <ul class="calendar__weekday">
                                                                 <li class="calendar__weekday_item">
-                                                                    пн
+                                                                    mn
                                                                 </li>
                                                                 <li class="calendar__weekday_item">
-                                                                    вт
+                                                                    ts
                                                                 </li>
                                                                 <li class="calendar__weekday_item">
-                                                                    ср
+                                                                    wd
                                                                 </li>
                                                                 <li class="calendar__weekday_item">
-                                                                    чт
+                                                                    th
                                                                 </li>
                                                                 <li class="calendar__weekday_item">
-                                                                    пт
+                                                                    fr
                                                                 </li>
                                                                 <li class="calendar__weekday_item">
-                                                                    сб
+                                                                    st
                                                                 </li>
                                                                 <li class="calendar__weekday_item">
-                                                                    вс
+                                                                    sn
                                                                 </li>
                                                             </ul>
                                                             <ul class="calendar__day">
@@ -273,13 +273,13 @@ $transport_type_db = getDbDate('transport_type');
                                                     </svg>
                                                     <input class="input-block__input input-search" type="text" placeholder="Специальная техника">
                                                     <ul class="input-search__list">
-                                                        <? foreach ($transport_type_db as $value): ?>
-                                                        <li class="input-search__item">
-                                                            <label for="transport_type_<?= $value['transport_type_id'] ?>">
-                                                                <?= $value['name'] ?>
-                                                            </label>
-                                                            <input type="radio" id="transport_type_<?= $value['transport_type_id'] ?>" value="<?= $value['transport_type_id'] ?>" name="transport_type">
-                                                        </li>
+                                                        <? foreach ($transport_type_db as $value) : ?>
+                                                            <li class="input-search__item">
+                                                                <label for="transport_type_<?= $value['transport_type_id'] ?>">
+                                                                    <?= $value['name'] ?>
+                                                                </label>
+                                                                <input type="radio" id="transport_type_<?= $value['transport_type_id'] ?>" value="<?= $value['transport_type_id'] ?>" name="transport_type">
+                                                            </li>
                                                         <? endforeach ?>
                                                     </ul>
                                                 </div>

@@ -53,7 +53,6 @@
     .chat__messages {
         display: flex;
         align-items: flex-start;
-        justify-content: flex-end;
         flex-direction: column;
 
         padding: 2.75rem 0;
@@ -61,6 +60,7 @@
         overflow-y: auto;
 
         min-height: 30rem;
+        max-height: 30rem;
     }
 
     .chat__date {

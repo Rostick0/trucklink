@@ -191,3 +191,33 @@ Stack trace:
 #5 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
 #6 C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php(53): Workerman\Worker::runAll()
 #7 {main}
+2022-11-03 02:09:32 pid:1 Error: Call to a member function send() on int in C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php:39
+Stack trace:
+#0 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}()
+#1 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead()
+#2 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(2467): Workerman\Events\Select->loop()
+#3 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1453): Workerman\Worker->run()
+#4 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1396): Workerman\Worker::forkWorkersForWindows()
+#5 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#6 C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php(52): Workerman\Worker::runAll()
+#7 {main}
+2022-11-03 02:10:05 pid:1 Error: Call to a member function send() on int in C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php:39
+Stack trace:
+#0 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}()
+#1 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead()
+#2 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(2467): Workerman\Events\Select->loop()
+#3 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1453): Workerman\Worker->run()
+#4 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1396): Workerman\Worker::forkWorkersForWindows()
+#5 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#6 C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php(52): Workerman\Worker::runAll()
+#7 {main}
+2022-11-03 02:10:22 pid:1 Error: Call to a member function send() on int in C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php:39
+Stack trace:
+#0 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Connection\TcpConnection.php(638): {closure}()
+#1 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Events\Select.php(311): Workerman\Connection\TcpConnection->baseRead()
+#2 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(2467): Workerman\Events\Select->loop()
+#3 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1453): Workerman\Worker->run()
+#4 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(1396): Workerman\Worker::forkWorkersForWindows()
+#5 C:\Users\irlnl\Desktop\trucklink\backend\vendor\workerman\workerman\Worker.php(560): Workerman\Worker::forkWorkers()
+#6 C:\Users\irlnl\Desktop\trucklink\backend\socket\chat.php(52): Workerman\Worker::runAll()
+#7 {main}

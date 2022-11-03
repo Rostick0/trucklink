@@ -1,4 +1,4 @@
-<?
+<?php
 
 use Workerman\Worker;
 
@@ -14,6 +14,7 @@ $ws_worker->onConnect = function ($connection) use (&$users) {
         $user_id = (int) $_GET['user_id'];
         $users[$user_id] = $connection;
         Online::set($user_id, 1);
+        var_dump($user_id);
     };
 };
 
@@ -22,14 +23,16 @@ $ws_worker->onMessage = function ($connection, $data) use ($ws_worker, &$users) 
 
     switch ($data->type) {
         case "message":
-            $user_from = $users[array_search($connection, $users)];
+            var_dump($data);
+            $user_from = array_search($connection, $users);
             $user_to = $users[$data->user_to];
+            $user_to_send = $user_to ? $user_to : $data->user_to;
 
-            $query = MessageController::create($data->text, $data->application_id, $user_from, $user_to);
+            $query = MessageController::create($data->text, $data->application_id, $user_from, $user_to_send);
 
             if (!$query) break;
 
-            $user_from->send(json_encode($data));
+            $connection->send(json_encode($data));
 
             if (!$user_to) break;
 
@@ -43,6 +46,9 @@ $ws_worker->onClose = function ($connection) use (&$users) {
     $user_id = array_search($connection, $users);
     unset($users[$user_id]);
     Online::set($user_id, 0);
+    var_dump($user_id);
 };
 
 Worker::runAll();
+
+?>
