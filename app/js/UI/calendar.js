@@ -98,7 +98,7 @@ class Calendar {
     }
 
     ClickOutside(event) {
-        if (!elem || elem.contains(event.target)) return;
+        if ((!this.calendarHtml || this.calendarHtml.contains(event.target) ) || (!this.buttonShow || this.buttonShow.contains(event.target) ) )return;
 
         this.hide();
     }
@@ -172,4 +172,7 @@ const calendarFromActive = document.querySelector('.calendar-from__active');
 if (calendarFirst) {
     const calendarStart = new Calendar(calendarFirst, calendarFromActive);
     calendarStart.start();
+    document.addEventListener('click', function(event){
+        calendarStart.ClickOutside(event);
+    });
 }
