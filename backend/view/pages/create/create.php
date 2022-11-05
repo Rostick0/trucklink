@@ -70,7 +70,7 @@ if (isset($button_create)) {
                             <label class="input__title" for="user_telephone">
                                 Номер телефона:
                             </label>
-                            <input class="input input-tel<?= $query['data']['telephone'] ? ' _error' : null ?>" type="tel" value="<?= $_SESSION['user']['telephone'] ?>" value="<?= $user_telephone ? $user_telephone : $_SESSION['user']['telephone'] ?>" id="user_telephone" placeholder="+1(ххх)ххх-хх-хх" name="user_telephone">
+                            <input class="input input-tel<?= $query['data']['telephone'] ? ' _error' : null ?>" type="tel" value="<?= $_SESSION['user']['telephone'] ?>" value="<?= $user_telephone ? $user_telephone : $_SESSION['user']['telephone'] ?>" id="user_telephone" placeholder="+1 (ххх) ххх-хх-хх" name="user_telephone">
                             <? if ($query['data']['telephone']) : ?>
                                 <div class="_color-error">
                                     <?= $query['data']['telephone'] ?>
