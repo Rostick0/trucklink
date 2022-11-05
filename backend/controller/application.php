@@ -73,7 +73,7 @@ class ApplicationController {
         header('Location: ./create?page=2');
     }
 
-    public static function thirdCreate($loading_method,  $size, $height, $photo, $mass, $price, $comment) {
+    public static function thirdCreate($loading_method,  $size, $height, $photo, $mass, $price, $comment, $price_type) {
         global $ALLOWED_IMAGE_TYPES;
 
         $loading_method = (int) $loading_method;
@@ -82,6 +82,10 @@ class ApplicationController {
         $mass = (float) $mass;
         $price = (float) $price;
         $comment = protectedData($comment);
+        $price_type = (bool)$price_type;
+        if(!$price_type){
+            $price = 0;
+        }
 
         $errors = [];
 
@@ -106,7 +110,6 @@ class ApplicationController {
         $user_id = $_SESSION['user']['user_id'];
         $telephone = $_SESSION['application']['telephone'];
         $email = $_SESSION['application']['email'];
-
         $query = Application::create($from, $to, $date, $transport_type, $fullname, $telephone, $email, $user_id, $loading_method, $size, $height, $photo, $mass, $price, $comment);
 
         if ($query) {

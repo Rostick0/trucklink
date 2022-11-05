@@ -189,3 +189,42 @@ if (applicationTableFilter) {
 
     getApplicationsFilter();
 }
+const mass = document.getElementById('mass');
+if(mass){
+    let keyCode;
+    function massInput(event) {
+        event.keyCode && (keyCode = event.keyCode);
+        let pos = this.selectionStart;
+        if (pos < 1) event.preventDefault();
+        let val = parseFloat(this.value.replace(/[^0-9\.]/g,''))||0;
+        if(event.inputType == 'deleteContentBackward'){
+            val = parseFloat(val.toString().slice(0, -1))||0;
+        }
+        this.value = val + ' т';
+        this.selectionStart = this.value.length - 2;
+        this.selectionEnd = this.value.length - 2;
+    }
+    mass.addEventListener('input', massInput, false);
+    mass.addEventListener('blur', massInput, false);
+}
+const priceBlock = document.getElementById('price__block');
+if(priceBlock){
+    const price = document.getElementById('price');
+    const priceType = document.getElementById('price_type');
+    const selectOption = priceType.querySelectorAll('.select__option');
+    priceBlock.onclick = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+    };
+    selectOption.forEach(option => {
+        option.addEventListener('click', (e) => {
+            if(option.querySelector('#price_type_0')){
+                priceBlock.classList.remove('show');
+                price.value = 0;
+            }else{
+                priceBlock.classList.add('show');
+                price.value = '';
+            }
+        }, false);
+    });
+}

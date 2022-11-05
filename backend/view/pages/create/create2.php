@@ -1,6 +1,5 @@
 <?
-
-$body_type_db = getDbDate('body_type');
+#$body_type_db = getDbDate('body_type');
 $loading_method_db = getDbDate('loading_method');
 $size_db = getDbDate('size');
 $height_db = getDbDate('height');
@@ -10,13 +9,14 @@ $size = $_REQUEST['size'];
 $height = $_REQUEST['height'];
 $photo = $_FILES['photo'];
 $mass = $_REQUEST['mass'];
+$price_type = $_REQUEST['price_type'];
 $price = $_REQUEST['price'];
 $comment = $_REQUEST['comment'];
 
 $button_create = $_REQUEST['button_create'];
 
 if (isset($button_create)) {
-    $query = ApplicationController::thirdCreate($loading_method,  $size, $height, $photo, $mass, $price, $comment);
+    $query = ApplicationController::thirdCreate($loading_method,  $size, $height, $photo, $mass, $price, $comment, $price_type);
 }
 
 ?>
@@ -132,7 +132,7 @@ if (isset($button_create)) {
                                     <? foreach ($height_db as $value) : ?>
                                         <li class="select__option">
                                             <label for="<?= "height_" . $value['height_id'] ?>">
-                                                <?= $value['name'] ?>
+                                                до <?= $value['name'] ?> м
                                             </label>
                                             <input type="radio" name="height" id="<?= "height_" . $value['height_id'] ?>" value="<?= $value['height_id'] ?>" hidden>
                                         </li>
@@ -165,13 +165,42 @@ if (isset($button_create)) {
                             <label class="input__title" for="mass">
                                 Общая масса груза (тонн):
                             </label>
-                            <input class="input" type="number" id="mass" placeholder="Введите массу груза">
+                            <input class="input" type="text" id="mass" placeholder="Введите массу груза">
                         </div>
-                        <div class="input__block">
-                            <label class="input__title" for="amount">
+                        <div class="select">
+                            <div class="select__title">
                                 Стоимость:
-                            </label>
-                            <input class="input" type="number" id="amount" placeholder="Введите стоимость" name="price">
+                            </div>
+                            <div id="price_type" class="select__content">
+                                <div class="select-block">
+                                    <input class="select__input" type="text" placeholder="Выберите" readonly>
+                                    <div class="select-icon">
+                                        <svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.742422 0.276188C0.374922 0.632552 0.374922 1.2071 0.742422 1.56346L6.97492 7.6071C7.26742 7.89073 7.73992 7.89073 8.03242 7.6071L14.2649 1.56346C14.6324 1.2071 14.6324 0.632551 14.2649 0.276187C13.8974 -0.0801763 13.3049 -0.0801762 12.9374 0.276187L7.49992 5.54164L2.06242 0.268916C1.70242 -0.0801745 1.10242 -0.0801757 0.742422 0.276188Z" fill="#6E7B8B" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <ul class="select__options">
+                                    <li class="select__option">
+                                        <label for="price_type_0">
+                                                Find price
+                                        </label>
+                                        <input type="radio" name="price_type" id="price_type_0" value="0" hidden>
+                                    </li>
+                                    <li class="select__option">
+                                        <label for="price_type_1">
+                                            Find out price
+                                        </label>
+                                        <input type="radio" name="price_type" id="price_type_1" value="1" hidden>
+                                    </li>
+                                </ul>
+                                <div id="price__block" class="input__block">
+                                    <div class="input__title">
+                                        Введите стоимость:
+                                    </div>
+                                    <input class="input" type="number" id="price" placeholder="Введите стоимость" name="price">
+                                </div>
+                            </div>
                         </div>
                         <div class="input__block input__block_comment">
                             <label class="input__title" for="comment">
